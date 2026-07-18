@@ -1,0 +1,798 @@
+/* ==========================================================================
+   CSS สำหรับหน้าแรกคลังความรู้ฟิสิกส์ "Gemini Antigravity" - จารย์เปา
+   สไตล์: Modern, Clean, Minimalist (ฟอนต์ Prompt ไม่มีหัว, เล่นเงา Soft Shadow)
+   ระบบ Responsive สนับสนุน Desktop, Tablet, และ Mobile
+   ========================================================================== */
+
+/* 1. ตัวแปรโทนสีและดีไซน์ (CSS Custom Properties) */
+:root {
+    /* สีพื้นฐาน */
+    --color-bg-white: #ffffff;
+    --color-bg-light: #f8fafc;
+    --color-text-dark: #0f172a;
+    --color-text-muted: #475569;
+    
+    /* สีหลักสำหรับธีมฟิสิกส์จารย์เปา */
+    --color-primary: #2563eb;          /* Royal Blue */
+    --color-primary-hover: #1d4ed8;    /* Royal Blue Hover */
+    --color-secondary: #3b82f6;        /* Light Blue */
+    --color-gold: #eab308;             /* Yellow Gold */
+    --color-gold-light: #fef9c3;       /* Gold Tag BG */
+    --color-deep-navy: #0b132b;        /* Deep Navy Blue for Footer */
+    
+    /* สีพาสเทลเฉพาะการ์ดบทเรียน */
+    --color-card-pink: #f43f5e;
+    --color-card-pink-bg: #fff1f2;
+    --color-card-blue: #3b82f6;
+    --color-card-blue-bg: #eff6ff;
+    --color-card-mint: #10b981;
+    --color-card-mint-bg: #ecfdf5;
+    --color-card-gold: #f59e0b;
+    --color-card-gold-bg: #fffbeb;
+    --color-card-purple: #8b5cf6;
+    --color-card-purple-bg: #f5f3ff;
+
+    /* สีลิงก์ส่วนท้าย */
+    --shortcut-orange: #f97316;
+    --shortcut-green: #10b981;
+    --shortcut-pink: #ec4899;
+
+    /* เงาและขอบโค้ง */
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 15px 35px rgba(37, 99, 235, 0.1);
+    --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.08);
+    --border-radius-sm: 8px;
+    --border-radius-md: 16px;
+    --border-radius-lg: 24px;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. รีเซ็ตและค่าเริ่มต้น (CSS Reset & Base) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Prompt', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--color-bg-white);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-smooth);
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* คอนเทนเนอร์เนื้อหาหลัก */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* ==========================================================================
+   3. แถบเมนูบนสุด (Navigation Bar)
+   ========================================================================== */
+.navbar-container {
+    background-color: var(--color-bg-white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.navbar-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+}
+
+/* โลโก้ */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-icon {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+    animation: pulseAtom 4s infinite linear;
+}
+
+@keyframes pulseAtom {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--color-text-dark);
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-subtext {
+    font-size: 0.65rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-top: -2px;
+}
+
+/* ลิงก์เมนูหลัก */
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--color-primary);
+    transition: var(--transition-smooth);
+    border-radius: 2px;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--color-primary);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* ปุ่มเมนูสำหรับแสดงผลบนมือถือ */
+.mobile-menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--color-text-dark);
+}
+
+/* ==========================================================================
+   4. ส่วนต้อนรับด้านบน (Hero Section)
+   ========================================================================== */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    margin: 4rem 0;
+}
+
+/* ฝั่งซ้าย: ข้อความรายละเอียด */
+.hero-content {
+    flex: 1.2;
+}
+
+.gold-badge {
+    background-color: var(--color-gold-light);
+    color: #854d0e; /* สีเหลืองเข้มข้น */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.badge-icon {
+    font-size: 0.95rem;
+}
+
+.hero-title {
+    font-size: 3rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 1.5rem;
+}
+
+.highlight-blue {
+    color: var(--color-primary);
+    background: linear-gradient(120deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    max-width: 540px;
+}
+
+/* ปุ่มสีน้ำเงินสด */
+.cta-button {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.35);
+    filter: brightness(1.05);
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+/* ฝั่งขวา: รูปครูในการ์ดโค้งมน */
+.hero-image-area {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+}
+
+.teacher-card-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    /* ไล่เฉดสีขอบฟ้า-น้ำเงินด้วยการใช้พื้นหลังและการทำไล่ระดับสี */
+    background: linear-gradient(135deg, #60a5fa, #1d4ed8);
+    padding: 6px; /* ขอบเฉดสีรอบรูปภาพ */
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+    transition: var(--transition-smooth);
+}
+
+.teacher-card-wrapper:hover {
+    transform: translateY(-5px) rotate(1deg);
+    box-shadow: 0 25px 50px rgba(37, 99, 235, 0.25);
+}
+
+.teacher-image-container {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: calc(var(--border-radius-lg) - 4px);
+    overflow: hidden;
+    background-color: var(--color-deep-navy);
+}
+
+.teacher-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%; /* โฟกัสไปที่ใบหน้าด้านบนของภาพ */
+    transition: var(--transition-smooth);
+}
+
+.teacher-card-wrapper:hover .teacher-img {
+    transform: scale(1.05);
+}
+
+/* แถบข้อความโปร่งแสงด้านล่าง */
+.teacher-caption-bar {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-radius: 0 0 calc(var(--border-radius-lg) - 4px) calc(var(--border-radius-lg) - 4px);
+    padding: 1rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.caption-text {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   5. โซนปุ่มเลือกบทเรียน (Grid Course Selection)
+   ========================================================================== */
+.course-selection-section {
+    margin: 6rem 0;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--color-primary);
+    border-radius: 20px;
+}
+
+/* จัดเรียงแถวละ 4 กล่อง และกล่องสุดท้ายจะลงมาอยู่แถวถัดไปตรงกลาง */
+.course-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+/* โครงสร้างการ์ดบทเรียน */
+.course-card {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-md);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    border: 2px solid transparent;
+    transition: var(--transition-smooth);
+    width: calc(25% - 1.125rem); /* แถวละ 4 กล่อง (ลบ gap ส่วนเกิน) */
+}
+
+/* ไอคอนการ์ด */
+.card-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 1.25rem;
+    transition: var(--transition-smooth);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.card-subtitle {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* 5.1 ขอบการ์ดตามระดับชั้นและสีภูมิหลังไอคอน (Pastel Borders) */
+.border-pink {
+    border-color: rgba(244, 63, 94, 0.2);
+}
+.bg-pink-light { background-color: var(--color-card-pink-bg); }
+.text-pink { color: var(--color-card-pink); }
+
+.border-blue {
+    border-color: rgba(59, 130, 246, 0.2);
+}
+.bg-blue-light { background-color: var(--color-card-blue-bg); }
+.text-blue { color: var(--color-card-blue); }
+
+.border-mint {
+    border-color: rgba(16, 185, 129, 0.2);
+}
+.bg-mint-light { background-color: var(--color-card-mint-bg); }
+.text-mint { color: var(--color-card-mint); }
+
+.border-gold {
+    border-color: rgba(245, 158, 11, 0.2);
+}
+.bg-gold-light { background-color: var(--color-card-gold-bg); }
+.text-gold { color: var(--color-card-gold); }
+
+.border-purple {
+    border-color: rgba(139, 92, 246, 0.2);
+}
+.bg-purple-light { background-color: var(--color-card-purple-bg); }
+.text-purple { color: var(--color-card-purple); }
+
+/* สไตล์การ์ดเกมส์สีชมพูส้มสดใส */
+.border-pink-orange {
+    border-color: rgba(244, 63, 94, 0.25);
+}
+.bg-pink-orange-light {
+    background-color: var(--color-card-pink-bg);
+}
+.text-pink-orange {
+    color: var(--color-card-pink);
+}
+
+/* เอฟเฟกต์ Hover การ์ดบทเรียน */
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.course-card.border-pink:hover { border-color: var(--color-card-pink); }
+.course-card.border-blue:hover { border-color: var(--color-card-blue); }
+.course-card.border-mint:hover { border-color: var(--color-card-mint); }
+.course-card.border-gold:hover { border-color: var(--color-card-gold); }
+.course-card.border-purple:hover { border-color: var(--color-card-purple); }
+.course-card.border-pink-orange:hover { border-color: var(--color-card-pink); }
+
+.course-card:hover .card-icon-wrapper {
+    transform: scale(1.1);
+}
+
+/* ==========================================================================
+   5.2 สไตล์พิเศษสำหรับการ์ดเด่นด้านล่าง (การทดลอง & เกมส์)
+   ========================================================================== */
+.special-card {
+    position: relative;
+    background: linear-gradient(135deg, var(--color-bg-white) 0%, #f8fafc 100%);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.04);
+    /* ใส่ขอบเรืองแสงจางๆ */
+    border-width: 2px;
+}
+
+/* แอนิเมชันปุ่มพิเศษเมื่อ Hover */
+.special-card::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-gold));
+    border-radius: calc(var(--border-radius-md) + 3px);
+    z-index: -1;
+    opacity: 0.15;
+    transition: var(--transition-smooth);
+}
+
+.special-card:hover::after {
+    opacity: 0.8;
+}
+
+.special-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 45px rgba(37, 99, 235, 0.18);
+    background: var(--color-bg-white);
+}
+
+/* ป้าย Badge เล็กๆ มุมบนขวา */
+.special-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* ==========================================================================
+   6. ส่วนท้ายดีไซน์สีเข้ม (Deep Footer Card)
+   ========================================================================== */
+.deep-footer-card {
+    background-color: var(--color-deep-navy);
+    border-radius: var(--border-radius-lg);
+    padding: 3.5rem 3rem 2rem;
+    color: white;
+    box-shadow: 0 25px 60px rgba(11, 19, 43, 0.2);
+    margin-bottom: 2rem;
+}
+
+.footer-layout {
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ฝั่งซ้าย: รูปโปรไฟล์ครู */
+.footer-profile-area {
+    flex: 0.6;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-profile-wrapper {
+    width: 160px;
+    height: 160px;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.footer-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 10%;
+}
+
+/* ฝั่งขวา: ข้อความและเมนู */
+.footer-info-area {
+    flex: 2.4;
+}
+
+.footer-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.75rem;
+}
+
+.footer-quote {
+    font-size: 1.05rem;
+    color: #cbd5e1; /* สีเทาอ่อน */
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.footer-quote::before {
+    content: '“';
+    position: absolute;
+    left: 0;
+    top: -5px;
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+/* เมนูลิงก์ทางลัด 3 เมนู */
+.footer-shortcuts {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.shortcut-item {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: var(--transition-smooth);
+}
+
+.shortcut-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.shortcut-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+}
+
+.shortcut-text {
+    font-size: 0.95rem;
+    color: white;
+    font-weight: 500;
+}
+
+/* เน้นสีพาสเทลเฉพาะสำหรับหัวข้อทางลัด */
+.color-orange {
+    background-color: rgba(249, 115, 22, 0.15);
+    color: var(--shortcut-orange);
+}
+
+.color-green {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--shortcut-green);
+}
+
+.color-pink {
+    background-color: rgba(236, 72, 153, 0.15);
+    color: var(--shortcut-pink);
+}
+
+/* ด้านล่างสุด */
+.footer-bottom-text {
+    padding-top: 1.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* ==========================================================================
+   7. ระบบตอบสนองตามขนาดหน้าจอ (Responsive System)
+   ========================================================================== */
+
+/* หน้าจอขนาดกึ่งกลาง (แท็บเล็ตและคอมพิวเตอร์ขนาดเล็ก) */
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .course-card {
+        width: calc(33.333% - 1rem); /* แถวละ 3 กล่อง */
+    }
+    
+    .footer-layout {
+        gap: 2.5rem;
+    }
+}
+
+/* หน้าจอแท็บเล็ต (Tablet) */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1.5rem 1rem;
+    }
+
+    /* สลับเปิดเมนูปุ่มมือถือ */
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--color-bg-white);
+        padding: 1.5rem;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        gap: 1.25rem;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-link {
+        width: max-content;
+    }
+
+    /* จัดสไตล์ Hero Section ใหม่ */
+    .hero-section {
+        flex-direction: column-reverse;
+        gap: 2.5rem;
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    .hero-description {
+        margin: 0 auto 2rem;
+    }
+
+    .hero-image-area {
+        width: 100%;
+    }
+
+    .teacher-card-wrapper {
+        max-width: 320px;
+    }
+
+    /* ปรับแต่งการ์ดบทเรียน */
+    .course-card {
+        width: calc(50% - 0.625rem); /* แถวละ 2 กล่อง */
+    }
+
+    /* ปรับแต่ง Footer */
+    .footer-layout {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .footer-profile-area {
+        flex: 1;
+    }
+
+    .footer-info-area {
+        flex: 1;
+    }
+
+    .footer-quote {
+        padding-left: 0;
+    }
+
+    .footer-quote::before {
+        display: none;
+    }
+
+    .footer-shortcuts {
+        justify-content: center;
+    }
+}
+
+/* หน้าจอมือถือขนาดเล็ก (Mobile) */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .course-card {
+        width: 100%; /* แถวละ 1 กล่องเต็มจอ */
+    }
+
+    .cta-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .deep-footer-card {
+        padding: 2.5rem 1.5rem 1.5rem;
+    }
+
+    .footer-shortcuts {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .shortcut-item {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟิสิกส์ จารย์เปา | VISUAL EDUCATION HUB</title>
+    <!-- โหลดฟอนต์ Prompt (สำหรับภาษาไทยไม่มีหัวแนวโมเดิร์น) และ Inter (สำหรับภาษาอังกฤษและตัวเลข) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- โหลด FontAwesome สำหรับไอคอนตกแต่ง -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- เชื่อมโยงไฟล์ตกแต่ง CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. แถบเมนูบนสุด (Navigation Bar) -->
+    <header class="navbar-container">
+        <div class="navbar-wrapper">
+            <!-- ส่วนโลโก้และชื่อเว็บด้านซ้าย -->
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-atom"></i>
+                </div>
+                <span class="logo-text">ฟิสิกส์ จารย์เปา <span class="logo-subtext">VISUAL EDUCATION HUB</span></span>
+            </div>
+            
+            <!-- เมนูนำทางด้านขวา -->
+            <nav class="nav-links">
+                <a href="#" class="nav-link active">HOME</a>
+                <a href="#" class="nav-link">บทเรียน</a>
+                <a href="#" class="nav-link">นวัตกรรม</a>
+                <a href="#" class="nav-link">ข้อสอบ</a>
+            </nav>
+            
+            <!-- เมนูสำหรับแสดงผลบนมือถือ (Hamburger menu) -->
+            <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- คอนเทนเนอร์หลักสำหรับจัดหน้า -->
+    <main class="main-content">
+
+        <!-- 2. ส่วนต้อนรับด้านบน (Hero Section) -->
+        <section class="hero-section">
+            <!-- ฝั่งซ้าย: ข้อความและปุ่ม Call-to-Action -->
+            <div class="hero-content">
+                <div class="gold-badge">
+                    <span class="badge-icon">⭐</span> ครูฟิสิกส์ยุคใหม่ @ ฟิสิกส์จารย์เปา
+                </div>
+                <h1 class="hero-title">เปิดโลกฟิสิกส์<br><span class="highlight-blue">ม.ต้น - ม.ปลาย</span></h1>
+                <p class="hero-description">
+                    ยินดีต้อนรับสู่คลังสื่อการสอน ฟิสิกส์จารย์เปา (ครูพิชิต เห็มนุช) รวบรวมความรู้ตั้งแต่พื้นฐาน ม.ต้น จนถึงเนื้อหาเข้มข้น ม.ปลาย ครบจบในที่เดียว เพื่อสร้างความเข้าใจที่เห็นภาพจริงและยั่งยืน
+                </p>
+                <a href="#" class="cta-button">
+                    <i class="fa-solid fa-book-open btn-icon"></i>
+                    <span>เข้าสู่คลังบทเรียน</span>
+                </a>
+            </div>
+
+            <!-- ฝั่งขวา: การ์ดรูปภาพครู -->
+            <div class="hero-image-area">
+                <div class="teacher-card-wrapper">
+                    <!-- รูปจารย์เปาพร้อมพื้นหลังไล่เฉดสีฟ้า-น้ำเงิน -->
+                    <div class="teacher-image-container">
+                        <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช จารย์เปา" class="teacher-img">
+                    </div>
+                    <!-- แถบข้อความโปร่งแสงด้านล่างรูปภาพ -->
+                    <div class="teacher-caption-bar">
+                        <p class="caption-text">ครูพิชิต เห็มนุช จารย์เปา @ ฟิสิกส์จารย์เปา</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. โซนปุ่มเลือกบทเรียน (Grid Course Selection) -->
+        <section class="course-selection-section">
+            <h2 class="section-title">เลือกตามระดับชั้นและการเรียนรู้</h2>
+            <div class="course-grid">
+                <!-- กล่องที่ 1 (ขอบสีชมพู/แดง): ม.ต้น -->
+                <a href="#" class="course-card border-pink">
+                    <div class="card-icon-wrapper bg-pink-light text-pink">
+                        <i class="fa-solid fa-flask-vial"></i>
+                    </div>
+                    <h3 class="card-title">ม.ต้น</h3>
+                    <p class="card-subtitle">พื้นฐานวิทย์</p>
+                </a>
+
+                <!-- กล่องที่ 2 (ขอบสีฟ้า): ม.4 -->
+                <a href="m4-mechanics.html" class="course-card border-blue">
+                    <div class="card-icon-wrapper bg-blue-light text-blue">
+                        <i class="fa-solid fa-arrow-up-1-9"></i>
+                    </div>
+                    <h3 class="card-title">ม.4</h3>
+                    <p class="card-subtitle">กลศาสตร์</p>
+                </a>
+
+                <!-- กล่องที่ 3 (ขอบสีเขียวมินต์): ม.5 -->
+                <a href="#" class="course-card border-mint">
+                    <div class="card-icon-wrapper bg-mint-light text-mint">
+                        <i class="fa-solid fa-wave-square"></i>
+                    </div>
+                    <h3 class="card-title">ม.5</h3>
+                    <p class="card-subtitle">คลื่น</p>
+                </a>
+
+                <!-- กล่องที่ 4 (ขอบสีส้มทอง): ม.6 -->
+                <a href="#" class="course-card border-gold">
+                    <div class="card-icon-wrapper bg-gold-light text-gold">
+                        <i class="fa-solid fa-bolt-lightning"></i>
+                    </div>
+                    <h3 class="card-title">ม.6</h3>
+                    <p class="card-subtitle">ไฟฟ้า</p>
+                </a>
+
+                <!-- กล่องที่ 5 (พิเศษ - การทดลอง): การทดลอง -->
+                <a href="#" class="course-card special-card border-purple">
+                    <span class="special-badge bg-purple-light text-purple">LAB</span>
+                    <div class="card-icon-wrapper bg-purple-light text-purple">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="card-title">การทดลอง</h3>
+                    <p class="card-subtitle">INTERACTIVE</p>
+                </a>
+
+                <!-- กล่องที่ 6 (พิเศษ - เกมส์): เกมส์ -->
+                <a href="#" class="course-card special-card border-pink-orange">
+                    <span class="special-badge bg-pink-orange-light text-pink-orange">GAME</span>
+                    <div class="card-icon-wrapper bg-pink-orange-light text-pink-orange">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3 class="card-title">เกมส์</h3>
+                    <p class="card-subtitle">PHYSICS GAMES</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- 4. ส่วนท้ายดีไซน์สีเข้ม (Deep Footer Card) -->
+        <footer class="deep-footer-card">
+            <div class="footer-layout">
+                <!-- ฝั่งซ้าย: รูปโปรไฟล์ครู -->
+                <div class="footer-profile-area">
+                    <div class="footer-profile-wrapper">
+                        <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช" class="footer-profile-img">
+                    </div>
+                </div>
+
+                <!-- ฝั่งขวา: ข้อความและเมนูทางลัด -->
+                <div class="footer-info-area">
+                    <h3 class="footer-title">คุยกับ จารย์เปา</h3>
+                    <blockquote class="footer-quote">
+                        "มุ่งเน้นการปูพื้นฐานวิทยาศาสตร์ฟิสิกส์ให้เข้มแข็งตั้งแต่ระดับ ม.ต้น เพื่อให้พร้อมสำหรับการต่อยอดในระดับที่สูงขึ้น ผมเชื่อว่าการเรียนที่เห็นภาพจริงคือหัวใจสำคัญของการเข้าใจฟิสิกส์อย่างยั่งยืนครับ"
+                    </blockquote>
+                    
+                    <!-- เมนูทางลัด 3 เมนูย่อย -->
+                    <div class="footer-shortcuts">
+                        <a href="#" class="shortcut-item">
+                            <span class="shortcut-label color-orange">บทเรียน</span>
+                            <span class="shortcut-text">คลังบทเรียน</span>
+                        </a>
+                        <a href="#" class="shortcut-item">
+                            <span class="shortcut-label color-green">สื่อและนวัตกรรม</span>
+                            <span class="shortcut-text">คลังสื่อ</span>
+                        </a>
+                        <a href="#" class="shortcut-item">
+                            <span class="shortcut-label color-pink">แนวข้อสอบ</span>
+                            <span class="shortcut-text">คลังข้อสอบ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom-text">
+                <p>&copy; 2026 Gemini Antigravity - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- สคริปต์สลับเปิด-ปิดเมนูบนอุปกรณ์พกพา -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // เปลี่ยนไอคอนระหว่างแฮมเบอร์เกอร์กับกากบาท
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+</html>

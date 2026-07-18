@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปเนื้อหา บทที่ 01: บทนำ | ฟิสิกส์ จารย์เปา</title>
+    <!-- โหลดฟอนต์ Prompt (สำหรับภาษาไทยไม่มีหัวแนวโมเดิร์น) และ Inter (สำหรับภาษาอังกฤษและตัวเลข) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- โหลด FontAwesome สำหรับไอคอนตกแต่ง -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- โหลด Tailwind CSS ผ่าน CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Inter', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 8s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- โหลด KaTeX สำหรับการแสดงผลสูตรฟิสิกส์ที่คมชัด -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\[', display: true}
+            ],
+            throwOnError : false
+        });"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- 1. แถบเมนูบนสุด (Navigation Bar) -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- ส่วนโลโก้และชื่อเว็บด้านซ้าย -->
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-lg shadow-blue-500/20 animate-spin-slow">
+                    <i class="fa-solid fa-atom"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.65rem] tracking-[2px] font-inter text-blue-600 -mt-1">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            
+            <!-- เมนูนำทางด้านขวา -->
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">HOME</a>
+                <a href="m4-mechanics.html" class="font-medium text-sm text-blue-600 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-blue-600 after:rounded-full">บทเรียน</a>
+                <a href="#" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">นวัตกรรม</a>
+                <a href="#" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">ข้อสอบ</a>
+            </nav>
+            
+            <!-- เมนูสำหรับแสดงผลบนมือถือ (Hamburger menu) -->
+            <button class="md:hidden text-2xl text-slate-800 p-2 focus:outline-none" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- เมนูมือถือแบบ Dropdown -->
+        <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-4 shadow-inner" id="mobile-menu">
+            <a href="index.html" class="font-medium text-slate-600 hover:text-blue-600 py-1 border-b border-slate-100">HOME</a>
+            <a href="m4-mechanics.html" class="font-semibold text-blue-600 py-1 border-b border-slate-100">บทเรียน</a>
+            <a href="#" class="font-medium text-slate-600 hover:text-blue-600 py-1 border-b border-slate-100">นวัตกรรม</a>
+            <a href="#" class="font-medium text-slate-600 hover:text-blue-600 py-1">ข้อสอบ</a>
+        </div>
+    </header>
+
+    <!-- คอนเทนเนอร์หลักสำหรับจัดหน้า -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+        
+        <!-- ปุ่มย้อนกลับ -->
+        <a href="m4-mechanics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 mb-6 transition-colors">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้าวิชากลศาสตร์ ม.4
+        </a>
+
+        <!-- ส่วนหัวข้อสรุปเนื้อหา -->
+        <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900 text-white rounded-3xl p-8 mb-10 shadow-lg relative overflow-hidden">
+            <div class="absolute w-64 h-64 bg-blue-500/10 rounded-full -top-12 -right-12 blur-3xl"></div>
+            <div class="relative z-10">
+                <span class="bg-blue-500/20 text-blue-200 px-3 py-1 rounded-full text-xs font-semibold inline-block mb-3 border border-blue-400/20">
+                    สรุปเนื้อหาฟิสิกส์ ม.4
+                </span>
+                <h1 class="text-2xl md:text-3xl font-extrabold mb-2">บทที่ 01: บทนำ</h1>
+                <p class="text-blue-100 text-sm md:text-base leading-relaxed">
+                    เจาะลึกเนื้อหาพื้นฐานทางกายภาพ ระบบหน่วยวัด SI คำนำหน้าหน่วย สัญกรณ์วิทยาศาสตร์ เลขนัยสำคัญ และความคลาดเคลื่อนในการวัด
+                </p>
+            </div>
+        </div>
+
+        <!-- 3. ส่วนเนื้อหาหลัก (Main Content) -->
+        <div class="space-y-12 mb-16">
+            
+            <!-- หัวข้อที่ 1: ปริมาณทางฟิสิกส์และระบบหน่วย -->
+            <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-6 pb-3 border-b border-slate-100">
+                    <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-800">หัวข้อที่ 1: ปริมาณทางฟิสิกส์และระบบหน่วย</h2>
+                </div>
+                
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    ฟิสิกส์เป็นวิชาที่อธิบายปรากฏการณ์ธรรมชาติด้วยข้อมูลเชิงปริมาณ ซึ่งได้จากการวัด ปริมาณทางกายภาพจึงแบ่งออกเป็นหน่วยระบบระหว่างชาติ (SI Units) ประกอบด้วย <strong>ปริมาณฐาน (Base Quantities)</strong> และ <strong>ปริมาณอนุพัทธ์ (Derived Quantities)</strong> รวมถึงหน่วยเสริม
+                </p>
+
+                <!-- ตารางสรุปปริมาณฐาน 7 ปริมาณ -->
+                <div class="mb-8">
+                    <h3 class="text-sm font-bold text-slate-500 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-list-ol"></i> ปริมาณฐานทั้ง 7 ปริมาณในระบบ SI
+                    </h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                        <table class="min-w-full divide-y divide-slate-200 text-sm">
+                            <thead class="bg-slate-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left font-bold text-slate-700">ปริมาณฐาน</th>
+                                    <th class="px-4 py-3 text-left font-bold text-slate-700 font-inter">Base Quantity</th>
+                                    <th class="px-4 py-3 text-left font-bold text-slate-700">ชื่อหน่วย SI</th>
+                                    <th class="px-4 py-3 text-center font-bold text-slate-700">สัญลักษณ์หน่วย</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 bg-white">
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-800">ความยาว</td>
+                                    <td class="px-4 py-3 text-slate-500 font-inter">Length</td>
+                                    <td class="px-4 py-3 text-slate-600">เมตร</td>
+                                    <td class="px-4 py-3 text-center font-inter font-semibold text-blue-600">$\text{m}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-800">มวล</td>
+                                    <td class="px-4 py-3 text-slate-500 font-inter">Mass</td>
+                                    <td class="px-4 py-3 text-slate-600">กิโลกรัม</td>
+                                    <td class="px-4 py-3 text-center font-inter font-semibold text-blue-600">$\text{kg}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-800">เวลา</td>
+                                    <td class="px-4 py-3 text-slate-500 font-inter">Time</td>
+                                    <td class="px-4 py-3 text-slate-600">วินาที</td>
+                                    <td class="px-4 py-3 text-center font-inter font-semibold text-blue-600">$\text{s}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-800">กระแสไฟฟ้า</td>
+                                    <td class="px-4 py-3 text-slate-500 font-inter">Electric Current</td>
+                                    <td class="px-4 py-3 text-slate-600">แอมแปร์</td>
+                                    <td class="px-4 py-3 text-center font-inter font-semibold text-blue-600">$\text{A}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-800">อุณหภูมิอุณหพลวัต</td>
+                                    <td class="px-4 py-3 text-slate-500 font-inter">Thermodynamic Temperature</td>
+                                    <td class="px-4 py-3 text-slate-600">เคลวิน</td>
+                                    <td class="px-4 py-3 text-center font-inter font-semibold text-blue-600">$\text{K}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-800">ความเข้มของการส่องสว่าง</td>
+                                    <td class="px-4 py-3 text-slate-500 font-inter">Luminous Intensity</td>
+                                    <td class="px-4 py-3 text-slate-600">แคนเดลา</td>
+                                    <td class="px-4 py-3 text-center font-inter font-semibold text-blue-600">$\text{cd}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-slate-800">ปริมาณของสาร</td>
+                                    <td class="px-4 py-3 text-slate-500 font-inter">Amount of Substance</td>
+                                    <td class="px-4 py-3 text-slate-600">โมล</td>
+                                    <td class="px-4 py-3 text-center font-inter font-semibold text-blue-600">$\text{mol}$</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- กล่องข้อความไฮไลต์ปริมาณเสริม เวกเตอร์ และสเกลาร์ -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4">
+                        <h4 class="font-bold text-blue-900 text-sm mb-1">📐 หน่วยเสริม (Supplementary Units)</h4>
+                        <p class="text-xs text-blue-800 leading-relaxed">
+                            ใช้สำหรับวัดมุมระนาบ ได้แก่ <strong>เรเดียน (Radian: $\text{rad}$)</strong> ซึ่งเป็นมุมรอบวงกลมที่มีค่าเท่ากับ $2\pi\text{ rad} = 360^\circ$ และหน่วยวัดมุมตัน สเตอเรเดียน ($\text{sr}$)
+                        </p>
+                    </div>
+
+                    <div class="bg-indigo-50 border-l-4 border-indigo-500 rounded-r-xl p-4">
+                        <h4 class="font-bold text-indigo-900 text-sm mb-1">⚖️ สเกลาร์ VS เวกเตอร์</h4>
+                        <p class="text-xs text-indigo-800 leading-relaxed">
+                            • <strong>ปริมาณสเกลาร์:</strong> บอกเฉพาะขนาด เช่น เวลา มวล ระยะทาง งาน พลังงาน<br>
+                            • <strong>ปริมาณเวกเตอร์:</strong> ต้องบอกทั้งขนาดและทิศทาง เช่น การกระจัด ความเร็ว แรง โมเมนตัม
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- หัวข้อที่ 2: คำนำหน้าหน่วย (Prefixes) และสัญกรณ์วิทยาศาสตร์ -->
+            <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-6 pb-3 border-b border-slate-100">
+                    <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-800">หัวข้อที่ 2: คำนำหน้าหน่วย (Prefixes) และสัญกรณ์วิทยาศาสตร์</h2>
+                </div>
+
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    เพื่อให้อ่านค่าการวัดที่มีขนาดใหญ่มากหรือเล็กมากๆ ได้สะดวก เราจะใช้ <strong>สัญกรณ์วิทยาศาสตร์ (Scientific Notation)</strong> ในรูป $A \times 10^n$ (โดยที่ $1 \le A < 10$ และ $n$ เป็นเลขจำนวนเต็ม) ควบคู่กับ <strong>คำนำหน้าหน่วย (คำอุปสรรค)</strong>
+                </p>
+
+                <!-- ตารางสรุปคำอุปสรรคฟิสิกส์ ม.4 -->
+                <div class="mb-6">
+                    <h3 class="text-sm font-bold text-slate-500 mb-3">ตารางคำอุปสรรคที่ใช้บ่อย</h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="min-w-full divide-y divide-slate-200 text-sm">
+                            <thead class="bg-slate-50">
+                                <tr>
+                                    <th class="px-4 py-2.5 text-left font-bold text-slate-700">คำอุปสรรค</th>
+                                    <th class="px-4 py-2.5 text-center font-bold text-slate-700">สัญลักษณ์</th>
+                                    <th class="px-4 py-2.5 text-left font-bold text-slate-700">ตัวคูณ (เลขยกกำลัง)</th>
+                                    <th class="px-4 py-2.5 text-left font-bold text-slate-700">ตัวอย่าง</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 bg-white">
+                                <tr>
+                                    <td class="px-4 py-2.5 font-semibold">เมกะ (Mega)</td>
+                                    <td class="px-4 py-2.5 text-center font-inter font-bold text-indigo-600">$\text{M}$</td>
+                                    <td class="px-4 py-2.5 font-inter">$10^6$</td>
+                                    <td class="px-4 py-2.5 text-xs">$1 \text{ MHz} = 10^6 \text{ Hz}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2.5 font-semibold">กิโล (Kilo)</td>
+                                    <td class="px-4 py-2.5 text-center font-inter font-bold text-indigo-600">$\text{k}$</td>
+                                    <td class="px-4 py-2.5 font-inter">$10^3$</td>
+                                    <td class="px-4 py-2.5 text-xs">$1 \text{ km} = 10^3 \text{ m}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2.5 font-semibold">เซนติ (Centi)</td>
+                                    <td class="px-4 py-2.5 text-center font-inter font-bold text-indigo-600">$\text{c}$</td>
+                                    <td class="px-4 py-2.5 font-inter">$10^{-2}$</td>
+                                    <td class="px-4 py-2.5 text-xs">$1 \text{ cm} = 10^{-2} \text{ m}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2.5 font-semibold">มิลลิ (Milli)</td>
+                                    <td class="px-4 py-2.5 text-center font-inter font-bold text-indigo-600">$\text{m}$</td>
+                                    <td class="px-4 py-2.5 font-inter">$10^{-3}$</td>
+                                    <td class="px-4 py-2.5 text-xs">$1 \text{ mm} = 10^{-3} \text{ m}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2.5 font-semibold">ไมโคร (Micro)</td>
+                                    <td class="px-4 py-2.5 text-center font-inter font-bold text-indigo-600">$\mu$</td>
+                                    <td class="px-4 py-2.5 font-inter">$10^{-6}$</td>
+                                    <td class="px-4 py-2.5 text-xs">$1 \ \mu\text{m} = 10^{-6} \text{ m}$</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2.5 font-semibold">นาโน (Nano)</td>
+                                    <td class="px-4 py-2.5 text-center font-inter font-bold text-indigo-600">$\text{n}$</td>
+                                    <td class="px-4 py-2.5 font-inter">$10^{-9}$</td>
+                                    <td class="px-4 py-2.5 text-xs">$1 \text{ nm} = 10^{-9} \text{ m}$</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- กล่องเทคนิคการแปลงหน่วย -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i> เทคนิคการแปลงหน่วยอุปสรรคอย่างง่าย
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        สูตรคำนวณแปลงหน่วย: <strong>ค่าที่วัดได้ $\times$ (ตัวคูณหน่วยเดิม / ตัวคูณหน่วยใหม่)</strong>
+                    </p>
+                    <div class="bg-white rounded-lg p-3 border border-slate-100 text-xs font-mono text-slate-700">
+                        ตัวอย่าง: ต้องการแปลงระยะทาง $5 \text{ km}$ ให้เป็นหน่วย $\text{cm}$<br>
+                        • ตัวคูณหน่วยเดิม (กิโล: k) = $10^3$<br>
+                        • ตัวคูณหน่วยใหม่ (เซนติ: c) = $10^{-2}$<br>
+                        • วิธีทำ: $5 \times \left( \frac{10^3}{10^{-2}} \right) = 5 \times 10^5 \text{ cm}$
+                    </div>
+                </div>
+            </section>
+
+            <!-- หัวข้อที่ 3: เลขนัยสำคัญ -->
+            <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-6 pb-3 border-b border-slate-100">
+                    <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-800">หัวข้อที่ 3: เลขนัยสำคัญ (Significant Figures)</h2>
+                </div>
+
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    <strong>เลขนัยสำคัญ</strong> คือ จำนวนตัวเลขที่แสดงความน่าเชื่อถือหรือความเที่ยงตรงของค่าจากการวัดจริง โดยรวมตัวเลขที่วัดได้แน่นอนบวกกับตัวเลขที่ประมาณสายตาตัวสุดท้ายอีก 1 ตัว
+                </p>
+
+                <!-- กฎการนับเลขนัยสำคัญ -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-emerald-50/50 rounded-xl p-5 border border-emerald-100">
+                        <h4 class="font-bold text-emerald-950 text-sm mb-3">📝 กฎการนับจำนวนเลขนัยสำคัญ</h4>
+                        <ul class="text-xs text-emerald-800 space-y-2 list-disc pl-4">
+                            <li>ตัวเลขที่ไม่ใช่ศูนย์ ($1-9$) ทั้งหมด นับเป็นเลขนัยสำคัญ เช่น $5.32$ มี 3 ตัว</li>
+                            <li>เลขศูนย์ที่อยู่ระหว่างตัวเลขอื่นๆ นับเป็นเลขนัยสำคัญ เช่น $405$ มี 3 ตัว</li>
+                            <li>เลขศูนย์ที่อยู่หน้าเลขอื่นทั้งหมด <strong>ไม่นับ</strong> เช่น $0.0025$ มี 2 ตัว</li>
+                            <li>เลขศูนย์ที่อยู่ท้ายเลขหลังทศนิยมกนับ เช่น $7.50$ มี 3 ตัว</li>
+                            <li>เลขศูนย์หลังจำนวนเต็มไม่มีทศนิยมถือเป็นข้อยกเว้น นิยมเขียนเป็นสัญกรณ์วิทยาศาสตร์เพื่อระบุให้ชัดเจน เช่น $2000$ อาจมี 1-4 ตัว</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-rose-50/50 rounded-xl p-5 border border-rose-100">
+                        <h4 class="font-bold text-rose-950 text-sm mb-3">➕ กฎการดำเนินการทางคณิตศาสตร์</h4>
+                        <div class="space-y-3 text-xs text-rose-800">
+                            <div>
+                                <span class="font-semibold block">1. การบวก และ การลบ:</span>
+                                คำตอบจะมี<strong>จำนวนทศนิยม</strong>เท่ากับปริมาณที่มีทศนิยมน้อยที่สุด เช่น $1.25\text{ (ทศนิยม 2 ตำแหน่ง)} + 2.1\text{ (ทศนิยม 1 ตำแหน่ง)} = 3.35 \rightarrow 3.4\text{ (ทศนิยม 1 ตำแหน่ง)}$
+                            </div>
+                            <div>
+                                <span class="font-semibold block">2. การคูณ และ การหาร:</span>
+                                คำตอบจะมี<strong>เลขนัยสำคัญ</strong>เท่ากับจำนวนที่มีเลขนัยสำคัญน้อยที่สุด เช่น $2.0\text{ (นัยสำคัญ 2 ตัว)} \times 1.55\text{ (นัยสำคัญ 3 ตัว)} = 3.10 \rightarrow 3.1\text{ (นัยสำคัญ 2 ตัว)}$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ค่าความคลาดเคลื่อน -->
+                <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-4">
+                    <h4 class="font-bold text-amber-900 text-sm mb-1.5">⚠️ ค่าความคลาดเคลื่อนในการวัด (Measurement Uncertainty)</h4>
+                    <p class="text-xs text-amber-800 leading-relaxed mb-3">
+                        เครื่องมือวัดแต่ละชนิดมีความคลาดเคลื่อน ค่าที่ได้จากการวัดจริงจะรายงานผลในรูปแบบ: <strong>$x \pm \Delta x$</strong> (เช่น ความยาววัดได้ $15.5 \pm 0.1\text{ cm}$)
+                    </p>
+                    <div class="bg-white rounded-lg p-3 border border-amber-100 text-xs">
+                        <span class="font-semibold block text-slate-800 mb-1">สูตรคำนวณความคลาดเคลื่อนของการคำนวณผลลัพธ์:</span>
+                        • ผลบวก/ผลต่าง ($y = a + b$ หรือ $y = a - b$): $\Delta y = \Delta a + \Delta b$<br>
+                        • ผลคูณ/ผลหาร ($y = ab$ หรือ $y = \frac{a}{b}$): $\frac{\Delta y}{y} = \frac{\Delta a}{a} + \frac{\Delta b}{b}$
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- 4. ส่วนท้ายของเนื้อหา (ปุ่มนำทางไปทำแบบทดสอบ) -->
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-12">
+            <div class="text-center sm:text-left">
+                <h4 class="font-bold text-slate-800 text-base">สรุปเนื้อหาบทที่ 1 ครบถ้วนแล้ว!</h4>
+                <p class="text-sm text-slate-500">ทดสอบทักษะและความเข้าใจเลขนัยสำคัญและแปลงหน่วยอุปสรรค</p>
+            </div>
+            <a href="m4-ch01-quiz.html" class="w-full sm:w-auto py-3 px-6 bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-750 hover:to-sky-600 text-white rounded-xl font-bold text-center text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-file-signature"></i> ตะลุยโจทย์ บทที่ 1
+            </a>
+        </div>
+
+        <!-- ส่วนท้ายดีไซน์สีเข้ม (Deep Footer Card) -->
+        <footer class="bg-slate-950 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div class="absolute w-96 h-96 bg-blue-600/5 rounded-full -top-32 -left-32 blur-3xl"></div>
+            
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 pb-8 border-b border-slate-800">
+                    <!-- ฝั่งซ้าย: รูปโปรไฟล์ครู -->
+                    <div class="flex-shrink-0 w-36 h-36 rounded-2xl overflow-hidden border-2 border-slate-800 shadow-xl bg-slate-900">
+                        <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช" class="w-full h-full object-cover object-center scale-110">
+                    </div>
+
+                    <!-- ฝั่งขวา: ข้อความและปุ่มทางลัด -->
+                    <div class="flex-grow text-center md:text-left">
+                        <h3 class="text-xl font-bold mb-3 text-white">คุยกับ จารย์เปา</h3>
+                        <blockquote class="text-slate-300 italic text-sm md:text-base mb-6 max-w-3xl pl-4 border-l-4 border-blue-500/80 mx-auto md:mx-0">
+                            "มุ่งเน้นการปูพื้นฐานวิทยาศาสตร์ฟิสิกส์ให้เข้มแข็งตั้งแต่ระดับ ม.ต้น เพื่อให้พร้อมสำหรับการต่อยอดในระดับที่สูงขึ้น ผมเชื่อว่าการเรียนที่เห็นภาพจริงคือหัวใจสำคัญของการเข้าใจฟิสิกส์อย่างยั่งยืนครับ"
+                        </blockquote>
+                        
+                        <!-- เมนูทางลัด 3 เมนูย่อย -->
+                        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
+                                <span class="bg-orange-500/10 text-orange-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">บทเรียน</span>
+                                <span class="text-sm font-semibold text-white">คลังบทเรียน</span>
+                            </a>
+                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
+                                <span class="bg-emerald-500/10 text-emerald-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">สื่อและนวัตกรรม</span>
+                                <span class="text-sm font-semibold text-white">คลังสื่อ</span>
+                            </a>
+                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
+                                <span class="bg-pink-500/10 text-pink-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">แนวข้อสอบ</span>
+                                <span class="text-sm font-semibold text-white">คลังข้อสอบ</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-6 text-center text-slate-500 text-xs">
+                    <p>&copy; 2026 Gemini Antigravity - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- สคริปต์สลับเปิด-ปิดเมนูบนอุปกรณ์พกพา -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            // สลับไอคอนระหว่างแฮมเบอร์เกอร์กับกากบาท
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+</html>
