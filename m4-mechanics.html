@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ฟิสิกส์ ม.4 กลศาสตร์ | ฟิสิกส์ จารย์เปา</title>
-    <!-- โหลดฟอนต์ Prompt (สำหรับภาษาไทยไม่มีหัวแนวโมเดิร์น) และ Inter (สำหรับภาษาอังกฤษและตัวเลข) -->
+    <!-- โหลดฟอนต์ Prompt และ Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- โหลด FontAwesome สำหรับไอคอนตกแต่ง -->
+    <!-- โหลด FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- โหลด Tailwind CSS ผ่าน CDN -->
+    <!-- โหลด Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -27,7 +27,7 @@
             }
         }
     </script>
-    <!-- โหลด KaTeX สำหรับการแสดงผลสูตรฟิสิกส์ที่คมชัด -->
+    <!-- โหลด KaTeX -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
@@ -43,10 +43,9 @@
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
 
-    <!-- 1. แถบเมนูบนสุด (Navigation Bar) -->
+    <!-- 1. Navigation Bar -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <!-- ส่วนโลโก้และชื่อเว็บด้านซ้าย -->
             <div class="flex items-center gap-3">
                 <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-lg shadow-blue-500/20 animate-spin-slow">
                     <i class="fa-solid fa-atom"></i>
@@ -57,22 +56,18 @@
                 </span>
             </div>
             
-            <!-- เมนูนำทางด้านขวา -->
             <nav class="hidden md:flex gap-8 items-center">
                 <a href="index.html" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">HOME</a>
-                <!-- ลิงก์ active มีเส้นใต้ดีไซน์โมเดิร์น -->
                 <a href="#" class="font-medium text-sm text-blue-600 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-blue-600 after:rounded-full">บทเรียน</a>
                 <a href="#" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">นวัตกรรม</a>
                 <a href="#" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">ข้อสอบ</a>
             </nav>
             
-            <!-- เมนูสำหรับแสดงผลบนมือถือ (Hamburger menu) -->
             <button class="md:hidden text-2xl text-slate-800 p-2 focus:outline-none" id="mobile-menu-btn" aria-label="Toggle Menu">
                 <i class="fa-solid fa-bars" id="menu-icon"></i>
             </button>
         </div>
 
-        <!-- เมนูมือถือแบบ Dropdown -->
         <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-4 shadow-inner" id="mobile-menu">
             <a href="index.html" class="font-medium text-slate-600 hover:text-blue-600 py-1 border-b border-slate-100">HOME</a>
             <a href="#" class="font-semibold text-blue-600 py-1 border-b border-slate-100">บทเรียน</a>
@@ -81,12 +76,10 @@
         </div>
     </header>
 
-    <!-- คอนเทนเนอร์หลักสำหรับจัดหน้า -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
         
-        <!-- ส่วนหัวข้อบทเรียนใหญ่ (Hero Section) -->
+        <!-- Hero Section -->
         <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900 text-white rounded-3xl p-8 md:p-12 mb-12 shadow-xl relative overflow-hidden">
-            <!-- เอฟเฟกต์วงกลมตกแต่งเบื้องหลัง -->
             <div class="absolute w-64 h-64 bg-blue-500/10 rounded-full -top-12 -right-12 blur-3xl"></div>
             <div class="absolute w-48 h-48 bg-sky-500/10 rounded-full -bottom-10 right-1/4 blur-2xl"></div>
             
@@ -101,7 +94,7 @@
             </div>
         </div>
 
-        <!-- 3. ส่วนเนื้อหาหลัก (Main Content - Chapters Grid) -->
+        <!-- Chapters Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             
             <!-- บทที่ 01: บทนำ -->
@@ -117,7 +110,6 @@
                     <p class="text-sm text-slate-500 mb-4 leading-relaxed">
                         ปูพื้นฐานกระบวนการวัดฟิสิกส์ ระบบหน่วยระหว่างชาติ (หน่วย SI) เลขนัยสำคัญ และการวิเคราะห์ความคลาดเคลื่อนข้อมูลทดลอง
                     </p>
-                    <!-- ตัวอย่างสูตร/เนื้อหาสำคัญ -->
                     <div class="bg-slate-50 rounded-xl p-3 mb-6 border border-slate-100">
                         <span class="text-[0.7rem] uppercase font-bold text-slate-400 block mb-1">หัวข้อเด่น & สูตร</span>
                         <p class="text-xs text-slate-600 font-medium">
@@ -126,7 +118,6 @@
                         </p>
                     </div>
                 </div>
-                <!-- ปุ่มแอคชั่นฟังก์ชันภายในบทเรียน -->
                 <div class="space-y-3">
                     <div class="flex gap-3">
                         <a href="m4-ch01-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
@@ -136,14 +127,13 @@
                             ตะลุยโจทย์
                         </a>
                     </div>
-                    <!-- ใส่ลิงก์ Google Drive ของ บทที่-01 ตรงนี้ -->
                     <a href="https://drive.google.com/file/d/1MzsV24QU3LEFfv7sd05CEIPYcqaVLxhl/view?usp=sharing" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
                         <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
                     </a>
                 </div>
             </div>
 
-            <!-- บทที่ 02: การเคลื่อนที่แนวเส้นตรง -->
+            <!-- บทที่ 02: การเคลื่อนที่แนวเส้นตรง (แก้ไขลิงก์ตรงนี้แล้ว) -->
             <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-6 flex flex-col justify-between group">
                 <div>
                     <div class="flex justify-between items-center mb-4">
@@ -166,14 +156,10 @@
                 </div>
                 <div class="space-y-3">
                     <div class="flex gap-3">
-                        <a href="lesson2-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
-                            สรุปเนื้อหา
-                        </a>
-                        <a href="lesson2-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
-                            ตะลุยโจทย์
+                        <a href="lesson2-summary.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            ตะลุยโจทย์ (ข้อสอบ)
                         </a>
                     </div>
-                    <!-- ใส่ลิงก์ Google Drive ของ บทที่-02 ตรงนี้ -->
                     <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
                         <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
                     </a>
@@ -203,14 +189,13 @@
                 </div>
                 <div class="space-y-3">
                     <div class="flex gap-3">
-                        <a href="m4-mechanics/lesson3-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson3-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             สรุปเนื้อหา
                         </a>
-                        <a href="m4-mechanics/lesson3-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson3-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             ตะลุยโจทย์
                         </a>
                     </div>
-                    <!-- ใส่ลิงก์ Google Drive ของ บทที่-03 ตรงนี้ -->
                     <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
                         <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
                     </a>
@@ -240,14 +225,13 @@
                 </div>
                 <div class="space-y-3">
                     <div class="flex gap-3">
-                        <a href="m4-mechanics/lesson4-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson4-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             สรุปเนื้อหา
                         </a>
-                        <a href="m4-mechanics/lesson4-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson4-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             ตะลุยโจทย์
                         </a>
                     </div>
-                    <!-- ใส่ลิงก์ Google Drive ของ บทที่-04 ตรงนี้ -->
                     <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
                         <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
                     </a>
@@ -277,14 +261,13 @@
                 </div>
                 <div class="space-y-3">
                     <div class="flex gap-3">
-                        <a href="m4-mechanics/lesson5-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson5-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             สรุปเนื้อหา
                         </a>
-                        <a href="m4-mechanics/lesson5-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson5-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             ตะลุยโจทย์
                         </a>
                     </div>
-                    <!-- ใส่ลิงก์ Google Drive ของ บทที่-05 ตรงนี้ -->
                     <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
                         <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
                     </a>
@@ -314,14 +297,13 @@
                 </div>
                 <div class="space-y-3">
                     <div class="flex gap-3">
-                        <a href="m4-mechanics/lesson6-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson6-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             สรุปเนื้อหา
                         </a>
-                        <a href="m4-mechanics/lesson6-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson6-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             ตะลุยโจทย์
                         </a>
                     </div>
-                    <!-- ใส่ลิงก์ Google Drive ของ บทที่-06 ตรงนี้ -->
                     <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
                         <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
                     </a>
@@ -351,14 +333,13 @@
                 </div>
                 <div class="space-y-3">
                     <div class="flex gap-3">
-                        <a href="m4-mechanics/lesson7-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson7-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             สรุปเนื้อหา
                         </a>
-                        <a href="m4-mechanics/lesson7-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson7-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             ตะลุยโจทย์
                         </a>
                     </div>
-                    <!-- ใส่ลิงก์ Google Drive ของ บทที่-07 ตรงนี้ -->
                     <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
                         <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
                     </a>
@@ -388,14 +369,13 @@
                 </div>
                 <div class="space-y-3">
                     <div class="flex gap-3">
-                        <a href="m4-mechanics/lesson8-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson8-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             สรุปเนื้อหา
                         </a>
-                        <a href="m4-mechanics/lesson8-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                        <a href="lesson8-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
                             ตะลุยโจทย์
                         </a>
                     </div>
-                    <!-- ใส่ลิงก์ Google Drive ของ บทที่-08 ตรงนี้ -->
                     <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
                         <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
                     </a>
@@ -404,26 +384,22 @@
 
         </div>
 
-        <!-- 4. ส่วนท้ายดีไซน์สีเข้ม (Deep Footer Card) -->
+        <!-- Footer Card -->
         <footer class="bg-slate-950 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
-            <!-- ตกแต่งพื้นหลังลวดลายจางๆ -->
             <div class="absolute w-96 h-96 bg-blue-600/5 rounded-full -top-32 -left-32 blur-3xl"></div>
             
             <div class="relative z-10">
                 <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 pb-8 border-b border-slate-800">
-                    <!-- ฝั่งซ้าย: รูปโปรไฟล์ครู -->
                     <div class="flex-shrink-0 w-36 h-36 rounded-2xl overflow-hidden border-2 border-slate-800 shadow-xl bg-slate-900">
                         <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช" class="w-full h-full object-cover object-center scale-110">
                     </div>
 
-                    <!-- ฝั่งขวา: ข้อความและปุ่มทางลัด -->
                     <div class="flex-grow text-center md:text-left">
                         <h3 class="text-xl font-bold mb-3 text-white">คุยกับ จารย์เปา</h3>
                         <blockquote class="text-slate-300 italic text-sm md:text-base mb-6 max-w-3xl pl-4 border-l-4 border-blue-500/80 mx-auto md:mx-0">
                             "มุ่งเน้นการปูพื้นฐานวิทยาศาสตร์ฟิสิกส์ให้เข้มแข็งตั้งแต่ระดับ ม.ต้น เพื่อให้พร้อมสำหรับการต่อยอดในระดับที่สูงขึ้น ผมเชื่อว่าการเรียนที่เห็นภาพจริงคือหัวใจสำคัญของการเข้าใจฟิสิกส์อย่างยั่งยืนครับ"
                         </blockquote>
                         
-                        <!-- เมนูทางลัด 3 เมนูย่อย -->
                         <div class="flex flex-wrap gap-4 justify-center md:justify-start">
                             <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
                                 <span class="bg-orange-500/10 text-orange-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">บทเรียน</span>
@@ -442,14 +418,13 @@
                 </div>
                 
                 <div class="pt-6 text-center text-slate-500 text-xs">
-                    <p>&copy; 2026 Gemini Antigravity - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
+                    <p>&copy; 2026 PhysicsHub - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
                 </div>
             </div>
         </footer>
 
     </main>
 
-    <!-- สคริปต์สลับเปิด-ปิดเมนูบนอุปกรณ์พกพา -->
     <script>
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -457,7 +432,6 @@
         
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            // สลับไอคอนระหว่างแฮมเบอร์เกอร์กับกากบาท
             if (mobileMenu.classList.contains('hidden')) {
                 menuIcon.classList.remove('fa-xmark');
                 menuIcon.classList.add('fa-bars');
