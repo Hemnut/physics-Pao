@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตะลุยโจทย์ บทที่ 2: การเคลื่อนที่แนวเส้นตรง - PhysicsHub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax CDN สำหรับแสดงผลสมการฟิสิกส์ -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 font-bold text-xl text-blue-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                <span>PhysicsHub</span>
+            </a>
+            <nav class="flex items-center gap-4 font-medium text-sm sm:text-base">
+                <a href="m4-mechanics.html" class="text-slate-600 hover:text-blue-600 transition">← กลับหน้ากลศาสตร์</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-4xl w-full px-4 sm:px-6 lg:px-8 mx-auto py-8">
+        
+        <!-- Header ส่วนบทเรียน -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider">แบบฝึกหัด Interactive</span>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">บทที่ 02: การเคลื่อนที่แนวเส้นตรง</h1>
+                <p class="text-slate-600 text-sm mt-1">วัดความรู้เรื่องปริมาณการเคลื่อนที่ 5 สูตรหลัก กราฟ และการตกแบบเสรี</p>
+            </div>
+            <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center min-w-[140px]">
+                <div class="text-xs font-semibold text-blue-600">คะแนนปรนัย</div>
+                <div class="text-2xl font-black text-blue-700 mt-1"><span id="score-display">0</span> / 20</div>
+            </div>
+        </div>
+
+        <!-- แท็บเมนูแบ่งส่วน -->
+        <div class="flex border-b border-slate-200 mb-6 space-x-2 overflow-x-auto">
+            <button class="py-2.5 px-4 font-semibold text-sm border-b-2 border-blue-600 text-blue-600 whitespace-nowrap">ส่วนที่ 1: ปรนัย (20 ข้อ)</button>
+            <button class="py-2.5 px-4 font-semibold text-sm text-slate-400 hover:text-slate-600 whitespace-nowrap cursor-not-allowed" title="รอต่อเติมในเฟสถัดไป">ส่วนที่ 2: จับคู่ (เร็วๆ นี้)</button>
+            <button class="py-2.5 px-4 font-semibold text-sm text-slate-400 hover:text-slate-600 whitespace-nowrap cursor-not-allowed" title="รอต่อเติมในเฟสถัดไป">ส่วนที่ 3: เติมคำ (เร็วๆ นี้)</button>
+            <button class="py-2.5 px-4 font-semibold text-sm text-slate-400 hover:text-slate-600 whitespace-nowrap cursor-not-allowed" title="รอต่อเติมในเฟสถัดไป">ส่วนที่ 4: อัตนัย (เร็วๆ นี้)</button>
+        </div>
+
+        <!-- รายการโจทย์ข้อสอบปรนัย 20 ข้อ -->
+        <form id="quiz-form" class="space-y-6">
+            <div id="questions-container" class="space-y-6">
+                <!-- โจทย์จะถูกสร้างผ่าน JavaScript -->
+            </div>
+
+            <!-- ปุ่มส่งคำตอบ -->
+            <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row gap-4 justify-between items-center">
+                <a href="m4-mechanics.html" class="w-full sm:w-auto text-center px-6 py-3 border border-slate-300 rounded-xl font-semibold text-slate-700 hover:bg-slate-100 transition">
+                    กลับหน้าหลักกลศาสตร์
+                </a>
+                <button type="button" onclick="checkAnswers()" class="w-full sm:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition">
+                    ส่งคำตอบและตรวจคะแนน
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-500 mt-12">
+        <div class="max-w-7xl mx-auto px-4">&copy; 2026 PhysicsHub. ระบบข้อสอบฟิสิกส์ออนไลน์ ม.4</div>
+    </footer>
+
+    <!-- JAVASCRIPT QUIZ ENGINE -->
+    <script>
+        const quizData = [
+            {
+                q: "1. ปริมาณใดต่อไปนี้จัดเป็นปริมาณเวกเตอร์ทั้งหมด?",
+                options: ["1) ระยะทาง, อัตราเร็ว, ความเร่ง", "2) การกระจัด, ความเร็ว, ความเร่ง", "3) ระยะทาง, ความเร็ว, เวลา", "4) การกระจัด, อัตราเร็ว, เวลา"],
+                ans: 2,
+                exp: "การกระจัด ความเร็ว และความเร่ง เป็นปริมาณเวกเตอร์เพราะต้องระบุทั้งขนาดและทิศทาง"
+            },
+            {
+                q: "2. วัตถุเคลื่อนที่เป็นวงกลมรัศมี 7 เมตร เมื่อเคลื่อนที่ครบหนึ่งรอบพอดี ระยะทางและการกระจัดเป็นเท่าใดตามลำดับ?",
+                options: ["1) 0 m, 44 m", "2) 44 m, 0 m", "3) 22 m, 7 m", "4) 44 m, 14 m"],
+                ans: 2,
+                exp: "ระยะทาง = $2\\pi r = 2 \\times \\frac{22}{7} \\times 7 = 44$ m ส่วนการกระจัดเป็น 0 m เนื่องจากจุดเริ่มต้นและจุดสุดท้ายอยู่ที่เดียวกัน"
+            },
+            {
+                q: "3. รถยนต์คันหนึ่งวิ่งด้วยอัตราเร็ว 72 km/h คิดเป็นกี่เมตรต่อวินาที (m/s)?",
+                options: ["1) 15 m/s", "2) 20 m/s", "3) 25 m/s", "4) 30 m/s"],
+                ans: 2,
+                exp: "แปลงหน่วยโดยคูณ $\\frac{5}{18}$: $72 \\times \\frac{5}{18} = 20$ m/s"
+            },
+            {
+                q: "4. วัตถุเริ่มเคลื่อนที่จากหยุดนิ่งด้วยความเร่งสม่ำเสมอ $2\\text{ m/s}^2$ เมื่อเวลาผ่านไป 5 วินาที วัตถุจะมีมีความเร็วเท่าใด?",
+                options: ["1) 5 m/s", "2) 10 m/s", "3) 15 m/s", "4) 20 m/s"],
+                ans: 2,
+                exp: "ใช้สูตร $v = u + at = 0 + (2)(5) = 10$ m/s"
+            },
+            {
+                q: "5. อนุภาคเคลื่อนที่แนวเส้นตรงด้วยความเร็วต้น 10 m/s และมีความเร่งคงที่ $3\\text{ m/s}^2$ ในเวลา 4 วินาที จะได้ระยะทางเท่าใด?",
+                options: ["1) 40 m", "2) 54 m", "3) 64 m", "4) 70 m"],
+                ans: 2,
+                exp: "ใช้สูตร $s = ut + \\frac{1}{2}at^2 = (10)(4) + \\frac{1}{2}(3)(4^2) = 40 + 24 = 64$ m (ข้อนี้ตอบข้อ 3)"
+            },
+            {
+                q: "6. รถยนต์เบรกอย่างกะทันหันขณะมีความเร็ว 20 m/s จนกระทั่งหยุดนิ่งในระยะทาง 40 เมตร ความเร่งของรถยนต์มีค่าเท่าใด?",
+                options: ["1) $-5\\text{ m/s}^2$", "2) $-2.5\\text{ m/s}^2$", "3) $-10\\text{ m/s}^2$", "4) $-1.25\\text{ m/s}^2$"],
+                ans: 1,
+                exp: "ใช้สูตร $v^2 = u^2 + 2as \\rightarrow 0^2 = 20^2 + 2(a)(40) \\rightarrow 80a = -400 \\rightarrow a = -5\\text{ m/s}^2$"
+            },
+            {
+                q: "7. ความชัน (Slope) ของกราฟความสัมพันธ์ระหว่างการกระจัดกับเวลา ($s-t$) แสดงถึงปริมาณใด?",
+                options: ["1) ความเร่ง", "2) ความเร็ว", "3) ระยะทาง", "4) การกระจัดรวม"],
+                ans: 2,
+                exp: "ความชันของกราฟ $s-t$ คือ $\\frac{\\Delta s}{\\Delta t}$ ซึ่งตรงกับความเร็ว ($v$)"
+            },
+            {
+                q: "8. พื้นที่ใต้กราฟความสัมพันธ์ระหว่างความเร็วกับเวลา ($v-t$) แสดงถึงปริมาณใด?",
+                options: ["1) ความเร่ง", "2) ความเร็วเฉลี่ย", "3) การกระจัด", "4) แรงลัพธ์"],
+                ans: 3,
+                exp: "พื้นที่ใต้กราฟ $v-t$ คือผลคูณ $v \\times t$ ซึ่งแสดงถึงการกระจัด ($s$)"
+            },
+            {
+                q: "9. กราฟ $v-t$ เป็นเส้นตรงขนานกับแกนเวลา (แกนนอน) แสดงว่าวัตถุมีการเคลื่อนที่อย่างไร?",
+                options: ["1) หยุดนิ่ง", "2) เคลื่อนที่ด้วยความเร็วคงตัว", "3) เคลื่อนที่ด้วยความเร่งคงตัว", "4) เคลื่อนที่ด้วยความเร่งเพิ่มขึ้น"],
+                ans: 2,
+                exp: "เส้นตรงขนานแกนเวลาหมายถึงค่าความเร็ว $v$ ไม่เปลี่ยนแปลงตามเวลา จึงมีความเร็วคงตัว (ความเร่งเป็นศูนย์)"
+            },
+            {
+                q: "10. ปล่อยวัตถุให้ตกแบบเสรีจากที่สูงภายใต้แรงโน้มถ่วงของโลก (กำหนด $g = 10\\text{ m/s}^2$) เมื่อเวลาผ่านไป 3 วินาที วัตถุตกลงมาได้ระยะทางเท่าใด?",
+                options: ["1) 15 m", "2) 30 m", "3) 45 m", "4) 90 m"],
+                ans: 3,
+                exp: "ปล่อยตก $u = 0$, ใช้สูตร $s = ut + \\frac{1}{2}gt^2 = 0 + \\frac{1}{2}(10)(3^2) = 45$ m"
+            },
+            {
+                q: "11.โยนก้อนหินขึ้นในแนวดีดด้วยความเร็วต้น 30 m/s ก้อนหินจะใช้เวลานานเท่าใดจึงจะขึ้นไปถึงจุดสูงสุด ($g = 10\\text{ m/s}^2$)?",
+                options: ["1) 2 วินาที", "2) 3 วินาที", "3) 4 วินาที", "4) 6 วินาที"],
+                ans: 2,
+                exp: "ที่จุดสูงสุด $v = 0$, โยนขึ้น $g = -10\\text{ m/s}^2$: $v = u + gt \\rightarrow 0 = 30 - 10t \\rightarrow t = 3$ วินาที"
+            },
+            {
+                q: "12. จากข้อ 11 ก้อนหินขึ้นไปได้สูงสุดจากจุดโยนเป็นระยะทางกี่เมตร?",
+                options: ["1) 30 m", "2) 45 m", "3) 60 m", "4) 90 m"],
+                ans: 2,
+                exp: "ใช้สูตร $v^2 = u^2 + 2gs \\rightarrow 0 = 30^2 + 2(-10)s \\rightarrow 20s = 900 \\rightarrow s = 45$ m"
+            },
+            {
+                q: "13. ขว้างลูกบอลลงมาจากหน้าผาด้วยความเร็วต้น 5 m/s เมื่อเวลาผ่านไป 2 วินาที ลูกบอลจะมีความเร็วเท่าใด ($g = 10\\text{ m/s}^2$)?",
+                options: ["1) 15 m/s", "2) 20 m/s", "3) 25 m/s", "4) 30 m/s"],
+                ans: 3,
+                exp: "ขว้างลง $u = +5$ m/s, $g = +10\\text{ m/s}^2$: $v = u + gt = 5 + (10)(2) = 25$ m/s"
+            },
+            {
+                q: "14. วัตถุ A และ B มีมวล $m$ และ $2m$ ตามลำดับ ถูกปล่อยให้ตกจากที่สูงเท่ากันในสุญญากาศ ข้อใดถูกต้อง?",
+                options: ["1) วัตถุ B ตกถึงพื้นก่อนเพราะหนักกว่า", "2) วัตถุ A ตกถึงพื้นก่อนเพราะมวลน้อยกว่า", "3) ทั้งสองวัตถุตกถึงพื้นพร้อมกันด้วยความเร็วเท่ากัน", "4) วัตถุ B จะมีความเร่งมากกว่าวัตถุ A สองเท่า"],
+                ans: 3,
+                exp: "ในสุญญากาศ การตกแบบเสรีไม่ขึ้นกับมวลของวัตถุ วัตถุทั้งสองมีความเร่ง $g$ เท่ากัน จึงถึงพื้นพร้อมกัน"
+            },
+            {
+                q: "15. วัตถุเคลื่อนที่ด้วยความเร็วคงที่ 15 m/s เป็นเวลา 12 วินาที จะได้ระยะทางทั้งหมดเท่าใด?",
+                options: ["1) 120 m", "2) 150 m", "3) 180 m", "4) 200 m"],
+                ans: 3,
+                exp: "ความเร็วคงที่ใช้ $s = vt = 15 \\times 12 = 180$ m"
+            },
+            {
+                q: "16. รถจักรยานยนต์เคลื่อนที่ชะลอความเร็วจาก 25 m/s จนหยุดนิ่ง ใช้เวลา 5 วินาที ขนาดความเร่งเฉลี่ยมีค่าเท่าใด?",
+                options: ["1) $5\\text{ m/s}^2$", "2) $4\\text{ m/s}^2$", "3) $3\\text{ m/s}^2$", "4) $2\\text{ m/s}^2$"],
+                ans: 1,
+                exp: "ขนาดของความเร่ง $a = \\frac{|v - u|}{t} = \\frac{|0 - 25|}{5} = 5\\text{ m/s}^2$"
+            },
+            {
+                q: "17. หากความชันของกราฟความเร่งกับเวลา ($a-t$) มีค่าเป็นศูนย์ แสดงว่าวัตถุมีความเร่งอย่างไร?",
+                options: ["1) ความเร่งเป็นศูนย์", "2) ความเร่งคงตัว", "3) ความเร็วคงตัว", "4) วัตถุหยุดนิ่ง"],
+                ans: 2,
+                exp: "ความชันกราฟ $a-t$ เป็นศูนย์ หมายความว่าค่าความเร่ง $a$ มีค่าคงที่ไม่เปลี่ยนแปลง"
+            },
+            {
+                q: "18. โยนวัตถุขึ้นในแนวดิ่ง ณ จุดสูงสุดของการเคลื่อนที่ ปริมาณใดต่อไปนี้ไม่เป็นศูนย์?",
+                options: ["1) ความเร็ว", "2) การกระจัดจากจุดเริ่มต้น", "3) ความเร่ง", "4) ทั้งความเร็วและความเร่ง"],
+                ans: 3,
+                exp: "ณ จุดสูงสุด ความเร็ว $v = 0$ แต่ความเร่งยังมีค่าเท่ากับความเร่งเนื่องจากแรงโน้มถ่วง ($g \\approx 9.8$ หรือ $10\\text{ m/s}^2$) ชี้ลงเสมอ"
+            },
+            {
+                q: "19. วัตถุเริ่มเคลื่อนที่จากหยุดนิ่ง ด้วยความเร่งคงตัว ในช่วงเวลา $t$ ได้ระยะทาง $S$ ถ้าเวลาผ่านไปเป็น $2t$ จะได้ระยะทางเป็นกี่เท่าของ $S$?",
+                options: ["1) 2 เท่า", "2) 3 เท่า", "3) 4 เท่า", "4) 8 เท่า"],
+                ans: 3,
+                exp: "จาก $s = \\frac{1}{2}at^2$ ระยะทางแปรผันตรงกับ $t^2$ ดังนั้นเมื่อเวลาเป็น $2t$ ระยะทางจะเป็น $(2)^2 = 4$ เท่า"
+            },
+            {
+                q: "20. รถยนต์คันหนึ่งเคลื่อนที่ได้ระยะทาง 100 เมตร ในเวลา 5 วินาที แล้วเคลื่อนที่ต่อได้อีก 200 เมตร ในเวลา 10 วินาที อัตราเร็วเฉลี่ยตลอดการเคลื่อนที่เป็นเท่าใด?",
+                options: ["1) 15 m/s", "2) 20 m/s", "3) 25 m/s", "4) 30 m/s"],
+                ans: 2,
+                exp: "อัตราเร็วเฉลี่ย $v_{avg} = \\frac{\\text{ระยะทางรวม}}{\\text{เวลารวม}} = \\frac{100 + 200}{5 + 10} = \\frac{300}{15} = 20$ m/s"
+            }
+        ];
+
+        // แก้ไขคำตอบข้อ 5 ให้ตรงกับ Index ที่ถูกต้อง
+        quizData[4].ans = 3;
+
+        // ฟังก์ชันสร้างโจทย์ HTML
+        function renderQuiz() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            quizData.forEach((q, idx) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition';
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, oIdx) => {
+                    const optNum = oIdx + 1;
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 hover:bg-blue-50/50 cursor-pointer transition">
+                            <input type="radio" name="q${idx}" value="${optNum}" class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                            <span class="text-slate-700 text-sm font-medium">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                qCard.innerHTML = `
+                    <h3 class="font-bold text-slate-900 mb-4 text-base sm:text-lg">${q.q}</h3>
+                    <div class="space-y-2 mb-4">${optionsHTML}</div>
+                    <div id="exp-${idx}" class="hidden mt-4 p-4 rounded-xl text-sm border"></div>
+                `;
+                container.appendChild(qCard);
+            });
+
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // ฟังก์ชันตรวจคะแนน
+        function checkAnswers() {
+            let score = 0;
+
+            quizData.forEach((q, idx) => {
+                const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+                const expBox = document.getElementById(`exp-${idx}`);
+                expBox.classList.remove('hidden');
+
+                if (selected && parseInt(selected.value) === q.ans) {
+                    score++;
+                    expBox.className = "mt-4 p-4 rounded-xl text-sm border bg-emerald-50 border-emerald-200 text-emerald-800";
+                    expBox.innerHTML = `<strong>✓ ถูกต้อง!</strong> ${q.exp}`;
+                } else {
+                    expBox.className = "mt-4 p-4 rounded-xl text-sm border bg-rose-50 border-rose-200 text-rose-800";
+                    expBox.innerHTML = `<strong>✕ ยังไม่ถูกต้อง (ตอบข้อ ${q.ans})</strong><br>${q.exp}`;
+                }
+            });
+
+            document.getElementById('score-display').innerText = score;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // เรียกใช้งานเมื่อโหลดหน้าเว็บ
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>
