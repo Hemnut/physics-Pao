@@ -1,1 +1,449 @@
 
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟิสิกส์ ม.4 กลศาสตร์ | ฟิสิกส์ จารย์เปา</title>
+    <!-- โหลดฟอนต์ Prompt และ Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- โหลด FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Inter', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 8s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- โหลด KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\[', display: true}
+            ],
+            throwOnError : false
+        });"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- 1. Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-lg shadow-blue-500/20 animate-spin-slow">
+                    <i class="fa-solid fa-atom"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.65rem] tracking-[2px] font-inter text-blue-600 -mt-1">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">HOME</a>
+                <a href="#" class="font-medium text-sm text-blue-600 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-blue-600 after:rounded-full">บทเรียน</a>
+                <a href="#" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">นวัตกรรม</a>
+                <a href="#" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">ข้อสอบ</a>
+            </nav>
+            
+            <button class="md:hidden text-2xl text-slate-800 p-2 focus:outline-none" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-4 shadow-inner" id="mobile-menu">
+            <a href="index.html" class="font-medium text-slate-600 hover:text-blue-600 py-1 border-b border-slate-100">HOME</a>
+            <a href="#" class="font-semibold text-blue-600 py-1 border-b border-slate-100">บทเรียน</a>
+            <a href="#" class="font-medium text-slate-600 hover:text-blue-600 py-1 border-b border-slate-100">นวัตกรรม</a>
+            <a href="#" class="font-medium text-slate-600 hover:text-blue-600 py-1">ข้อสอบ</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+        
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900 text-white rounded-3xl p-8 md:p-12 mb-12 shadow-xl relative overflow-hidden">
+            <div class="absolute w-64 h-64 bg-blue-500/10 rounded-full -top-12 -right-12 blur-3xl"></div>
+            <div class="absolute w-48 h-48 bg-sky-500/10 rounded-full -bottom-10 right-1/4 blur-2xl"></div>
+            
+            <div class="relative z-10">
+                <span class="bg-blue-500/20 text-blue-200 px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4 border border-blue-400/20">
+                    ฟิสิกส์ ม.4 (กลศาสตร์ 8 บทเรียนหลัก)
+                </span>
+                <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">ฟิสิกส์ ม.4: กลศาสตร์</h1>
+                <p class="text-blue-100 max-w-2xl text-base md:text-lg leading-relaxed">
+                    เจาะลึกเนื้อหากลศาสตร์ฟิสิกส์พื้นฐาน ม.4 ปูรากฐานสำคัญตั้งแต่ปริมาณทางกายภาพ กฎนิวตัน สมดุล งานและพลังงาน ไปจนถึงการเคลื่อนที่ในแบบต่างๆ เน้นการเรียนรู้แบบเห็นภาพจริง (Visual) เพื่อเข้าใจสูตรฟิสิกส์อย่างยั่งยืน
+                </p>
+            </div>
+        </div>
+
+        <!-- Chapters Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            
+            <!-- บทที่ 01: บทนำ -->
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-6 flex flex-col justify-between group">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold text-rose-500 bg-rose-50 px-2.5 py-1 rounded-full font-inter">บทที่ 01</span>
+                        <div class="w-10 h-10 bg-rose-50 text-rose-500 rounded-full flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">บทนำ</h3>
+                    <p class="text-sm text-slate-500 mb-4 leading-relaxed">
+                        ปูพื้นฐานกระบวนการวัดฟิสิกส์ ระบบหน่วยระหว่างชาติ (หน่วย SI) เลขนัยสำคัญ และการวิเคราะห์ความคลาดเคลื่อนข้อมูลทดลอง
+                    </p>
+                    <div class="bg-slate-50 rounded-xl p-3 mb-6 border border-slate-100">
+                        <span class="text-[0.7rem] uppercase font-bold text-slate-400 block mb-1">หัวข้อเด่น & สูตร</span>
+                        <p class="text-xs text-slate-600 font-medium">
+                            • เลขนัยสำคัญและการบวก ลบ คูณ หาร<br>
+                            • คำอุปสรรคและหน่วย SI: $1\text{ nm} = 10^{-9}\text{ m}$
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <a href="m4-ch01-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            สรุปเนื้อหา
+                        </a>
+                        <a href="m4-ch01-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            ตะลุยโจทย์
+                        </a>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1MzsV24QU3LEFfv7sd05CEIPYcqaVLxhl/view?usp=sharing" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                        <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
+                    </a>
+                </div>
+            </div>
+
+            <!-- บทที่ 02: การเคลื่อนที่แนวเส้นตรง (แก้ไขให้ปุ่มคู่เหมือนบทที่ 1 เรียบร้อย) -->
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-6 flex flex-col justify-between group">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold text-blue-500 bg-blue-50 px-2.5 py-1 rounded-full font-inter">บทที่ 02</span>
+                        <div class="w-10 h-10 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-person-running"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">การเคลื่อนที่แนวเส้นตรง</h3>
+                    <p class="text-sm text-slate-500 mb-4 leading-relaxed">
+                        การวิเคราะห์การเคลื่อนที่ 1 มิติด้วยความเร่งคงที่ ปริมาณเวกเตอร์การเคลื่อนที่ และกราฟความสัมพันธ์ระยะทาง ความเร็ว ความเร่ง
+                    </p>
+                    <div class="bg-slate-50 rounded-xl p-3 mb-6 border border-slate-100">
+                        <span class="text-[0.7rem] uppercase font-bold text-slate-400 block mb-1">หัวข้อเด่น & สูตร</span>
+                        <p class="text-xs text-slate-600 font-medium">
+                            • 5 สูตรหลัก: $v = u + at$ และ $s = ut + \frac{1}{2}at^2$<br>
+                            • ความชันกราฟ $s-t$ คือความเร็ว $v$ และพื้นที่ใต้กราฟ $v-t$ คือระยะทาง $s$
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <a href="m4-ch02-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            สรุปเนื้อหา
+                        </a>
+                        <a href="m4-ch02-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            ตะลุยโจทย์
+                        </a>
+                    </div>
+                    <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                        <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
+                    </a>
+                </div>
+            </div>
+
+            <!-- บทที่ 03: แรงกฎการเคลื่อนที่ -->
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-6 flex flex-col justify-between group">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold text-emerald-500 bg-emerald-50 px-2.5 py-1 rounded-full font-inter">บทที่ 03</span>
+                        <div class="w-10 h-10 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-weight-hanging"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">แรงกฎการเคลื่อนที่</h3>
+                    <p class="text-sm text-slate-500 mb-4 leading-relaxed">
+                        ศึกษากฎการเคลื่อนที่สามข้อของนิวตัน แรงเสียดทานสถิตและจลน์ และแรงดึงดูดระหว่างมวลของนิวตัน
+                    </p>
+                    <div class="bg-slate-50 rounded-xl p-3 mb-6 border border-slate-100">
+                        <span class="text-[0.7rem] uppercase font-bold text-slate-400 block mb-1">หัวข้อเด่น & สูตร</span>
+                        <p class="text-xs text-slate-600 font-medium">
+                            • กฎการเคลื่อนที่ข้อ 2: $\sum \vec{F} = m\vec{a}$<br>
+                            • แรงเสียดทาน: $f \le \mu N$ | แรงดึงดูดระหว่างมวล: $F_g = G\frac{m_1 m_2}{r^2}$
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <a href="m4-ch03-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            สรุปเนื้อหา
+                        </a>
+                        <a href="m4-ch03-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            ตะลุยโจทย์
+                        </a>
+                    </div>
+                    <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                        <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
+                    </a>
+                </div>
+            </div>
+
+            <!-- บทที่ 04: การเคลื่อนที่แบบต่างๆ -->
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-6 flex flex-col justify-between group">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold text-indigo-500 bg-indigo-50 px-2.5 py-1 rounded-full font-inter">บทที่ 04</span>
+                        <div class="w-10 h-10 bg-indigo-50 text-indigo-500 rounded-full flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-circle-notch"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">การเคลื่อนที่แบบต่างๆ</h3>
+                    <p class="text-sm text-slate-500 mb-4 leading-relaxed">
+                        การวิเคราะห์การเคลื่อนที่ 2 มิติวิถีโค้งพาราโบลา (Projectile Motion) การเคลื่อนที่แบบวงกลม และการแกว่งฮาร์มอนิกอย่างง่าย (SHM)
+                    </p>
+                    <div class="bg-slate-50 rounded-xl p-3 mb-6 border border-slate-100">
+                        <span class="text-[0.7rem] uppercase font-bold text-slate-400 block mb-1">หัวข้อเด่น & สูตร</span>
+                        <p class="text-xs text-slate-600 font-medium">
+                            • โพรเจกไทล์: $s_x = u_x t$ และ $v_y = u_y + g t$<br>
+                            • แรงสู่ศูนย์กลาง: $F_c = \frac{mv^2}{r}$ | คาบ SHM: $T = 2\pi\sqrt{\frac{L}{g}}$
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <a href="m4-ch04-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            สรุปเนื้อหา
+                        </a>
+                        <a href="m4-ch04-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            ตะลุยโจทย์
+                        </a>
+                    </div>
+                    <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                        <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
+                    </a>
+                </div>
+            </div>
+
+            <!-- บทที่ 05: งานและพลังงาน -->
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-6 flex flex-col justify-between group">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold text-sky-500 bg-sky-50 px-2.5 py-1 rounded-full font-inter">บทที่ 05</span>
+                        <div class="w-10 h-10 bg-sky-50 text-sky-500 rounded-full flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">งานและพลังงาน</h3>
+                    <p class="text-sm text-slate-500 mb-4 leading-relaxed">
+                        การคำนวณงานที่เกิดจากแรงคงที่และไม่คงที่ พลังงานจลน์ พลังงานศักย์โน้มถ่วง/ศักย์ยืดหยุ่น และกฎการอนุรักษ์พลังงานกล
+                    </p>
+                    <div class="bg-slate-50 rounded-xl p-3 mb-6 border border-slate-100">
+                        <span class="text-[0.7rem] uppercase font-bold text-slate-400 block mb-1">หัวข้อเด่น & สูตร</span>
+                        <p class="text-xs text-slate-600 font-medium">
+                            • การคำนวณงาน: $W = Fs \cos\theta$ หรือพื้นที่ใต้กราฟ $F-s$<br>
+                            • พลังงานศักย์ยืดหยุ่น: $E_p = \frac{1}{2}kx^2$ | กฎอนุรักษ์: $\sum E_1 = \sum E_2$
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <a href="m4-ch05-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            สรุปเนื้อหา
+                        </a>
+                        <a href="m4-ch05-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            ตะลุยโจทย์
+                        </a>
+                    </div>
+                    <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                        <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
+                    </a>
+                </div>
+            </div>
+
+            <!-- บทที่ 06: โมเมนตัมและการชน -->
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-6 flex flex-col justify-between group">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold text-purple-500 bg-purple-50 px-2.5 py-1 rounded-full font-inter">บทที่ 06</span>
+                        <div class="w-10 h-10 bg-purple-50 text-purple-500 rounded-full flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-burst"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">โมเมนตัมและการชน</h3>
+                    <p class="text-sm text-slate-500 mb-4 leading-relaxed">
+                        ปริมาณโมเมนตัม การดลของแรง แรงดลชั่วขณะ กฎการอนุรักษ์โมเมนตัม และการชนแบบยืดหยุ่นและไม่ยืดหยุ่น
+                    </p>
+                    <div class="bg-slate-50 rounded-xl p-3 mb-6 border border-slate-100">
+                        <span class="text-[0.7rem] uppercase font-bold text-slate-400 block mb-1">หัวข้อเด่น & สูตร</span>
+                        <p class="text-xs text-slate-600 font-medium">
+                            • การดล: $\vec{I} = m\vec{v} - m\vec{u}$ หรือพื้นที่ใต้กราฟ $F-t$<br>
+                            • อนุรักษ์โมเมนตัม: $\sum m\vec{u} = \sum m\vec{v}$
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <a href="m4-ch06-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            สรุปเนื้อหา
+                        </a>
+                        <a href="m4-ch06-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            ตะลุยโจทย์
+                        </a>
+                    </div>
+                    <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                        <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
+                    </a>
+                </div>
+            </div>
+
+            <!-- บทที่ 07: การเคลื่อนที่แบบหมุน -->
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-6 flex flex-col justify-between group">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold text-orange-500 bg-orange-50 px-2.5 py-1 rounded-full font-inter">บทที่ 07</span>
+                        <div class="w-10 h-10 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-rotate"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">การเคลื่อนที่แบบหมุน</h3>
+                    <p class="text-sm text-slate-500 mb-4 leading-relaxed">
+                        การหมุนของวัตถุเกร็ง ทอร์ค (Torque) โมเมนต์ความเฉื่อยเชิงปริมาตร โมเมนตัมเชิงมุม และพลังงานจลน์การหมุนวัตถุ
+                    </p>
+                    <div class="bg-slate-50 rounded-xl p-3 mb-6 border border-slate-100">
+                        <span class="text-[0.7rem] uppercase font-bold text-slate-400 block mb-1">หัวข้อเด่น & สูตร</span>
+                        <p class="text-xs text-slate-600 font-medium">
+                            • ทอร์ก: $\tau = I\alpha$ | โมเมนตัมเชิงมุม: $L = I\omega$<br>
+                            • พลังงานจลน์การหมุน: $E_{k,\text{rot}} = \frac{1}{2}I\omega^2$
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <a href="m4-ch07-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            สรุปเนื้อหา
+                        </a>
+                        <a href="m4-ch07-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            ตะลุยโจทย์
+                        </a>
+                    </div>
+                    <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                        <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
+                    </a>
+                </div>
+            </div>
+
+            <!-- บทที่ 08: สมดุลกลและสภาพยืดหยุ่น -->
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-6 flex flex-col justify-between group">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold text-amber-500 bg-amber-50 px-2.5 py-1 rounded-full font-inter">บทที่ 08</span>
+                        <div class="w-10 h-10 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">สมดุลกลและสภาพยืดหยุ่น</h3>
+                    <p class="text-sm text-slate-500 mb-4 leading-relaxed">
+                        สมดุลสมบูรณ์ ความเค้น ความเครียด สภาพความยืดหยุ่นวัตถุ และมอดุลัสของยัง (Young's Modulus) ของวัสดุ
+                    </p>
+                    <div class="bg-slate-50 rounded-xl p-3 mb-6 border border-slate-100">
+                        <span class="text-[0.7rem] uppercase font-bold text-slate-400 block mb-1">หัวข้อเด่น & สูตร</span>
+                        <p class="text-xs text-slate-600 font-medium">
+                            • สมดุลกล: $\sum \vec{F} = 0, \sum \vec{\tau} = 0$<br>
+                            • มอดุลัสของยัง: $Y = \frac{\text{Stress}}{\text{Strain}} = \frac{F/A}{\Delta L/L_0}$
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <a href="m4-ch08-summary.html" class="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            สรุปเนื้อหา
+                        </a>
+                        <a href="m4-ch08-quiz.html" class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl text-center text-xs font-semibold transition-colors duration-200">
+                            ตะลุยโจทย์
+                        </a>
+                    </div>
+                    <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-850 hover:bg-slate-900 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                        <i class="fa-solid fa-download"></i> ดาวน์โหลดเอกสาร
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Card -->
+        <footer class="bg-slate-950 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div class="absolute w-96 h-96 bg-blue-600/5 rounded-full -top-32 -left-32 blur-3xl"></div>
+            
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 pb-8 border-b border-slate-800">
+                    <div class="flex-shrink-0 w-36 h-36 rounded-2xl overflow-hidden border-2 border-slate-800 shadow-xl bg-slate-900">
+                        <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช" class="w-full h-full object-cover object-center scale-110">
+                    </div>
+
+                    <div class="flex-grow text-center md:text-left">
+                        <h3 class="text-xl font-bold mb-3 text-white">คุยกับ จารย์เปา</h3>
+                        <blockquote class="text-slate-300 italic text-sm md:text-base mb-6 max-w-3xl pl-4 border-l-4 border-blue-500/80 mx-auto md:mx-0">
+                            "มุ่งเน้นการปูพื้นฐานวิทยาศาสตร์ฟิสิกส์ให้เข้มแข็งตั้งแต่ระดับ ม.ต้น เพื่อให้พร้อมสำหรับการต่อยอดในระดับที่สูงขึ้น ผมเชื่อว่าการเรียนที่เห็นภาพจริงคือหัวใจสำคัญของการเข้าใจฟิสิกส์อย่างยั่งยืนครับ"
+                        </blockquote>
+                        
+                        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
+                                <span class="bg-orange-500/10 text-orange-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">บทเรียน</span>
+                                <span class="text-sm font-semibold text-white">คลังบทเรียน</span>
+                            </a>
+                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
+                                <span class="bg-emerald-500/10 text-emerald-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">สื่อและนวัตกรรม</span>
+                                <span class="text-sm font-semibold text-white">คลังสื่อ</span>
+                            </a>
+                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
+                                <span class="bg-pink-500/10 text-pink-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">แนวข้อสอบ</span>
+                                <span class="text-sm font-semibold text-white">คลังข้อสอบ</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-6 text-center text-slate-500 text-xs">
+                    <p>&copy; 2026 PhysicsHub - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+    </script>
+</body>
+</html>
