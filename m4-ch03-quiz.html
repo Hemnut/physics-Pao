@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 03: แรงและกฎการเคลื่อนที่ | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Prompt','Inter','sans-serif'], inter: ['Inter','sans-serif'] } } } }</script>
+    <style>
+        .tab-btn { transition: all 0.2s; }
+        .tab-btn.active { background: #2563eb; color: white; box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .choice-btn { transition: all 0.2s; cursor: pointer; border: 2px solid #e2e8f0; }
+        .choice-btn:hover { border-color: #93c5fd; background: #eff6ff; }
+        .choice-btn.selected { border-color: #2563eb; background: #eff6ff; color: #1d4ed8; }
+        .choice-btn.correct { border-color: #10b981 !important; background: #ecfdf5 !important; color: #065f46 !important; }
+        .choice-btn.wrong { border-color: #ef4444 !important; background: #fef2f2 !important; color: #991b1b !important; }
+        .match-select { border: 2px solid #e2e8f0; border-radius: 0.5rem; padding: 0.4rem 0.6rem; font-size: 0.8rem; width: 100%; }
+        .match-select.correct { border-color: #10b981; background: #ecfdf5; }
+        .match-select.wrong { border-color: #ef4444; background: #fef2f2; }
+        .fill-input { border: 2px solid #e2e8f0; border-radius: 0.5rem; padding: 0.4rem 0.6rem; font-size: 0.9rem; }
+        .fill-input.correct { border-color: #10b981; background: #ecfdf5; }
+        .fill-input.wrong { border-color: #ef4444; background: #fef2f2; }
+        .answer-key { display: none; }
+        .answer-key.show { display: block; }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-overlay.show { display: flex; }
+        .fraction { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 2px; font-size: 0.85em; }
+        .fraction .num { border-bottom: 1.5px solid currentColor; padding: 0 3px; }
+        .fraction .den { padding: 0 3px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+<!-- HEADER -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                <i class="fa-solid fa-atom"></i>
+            </div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                ฟิสิกส์ จารย์เปา
+                <span class="text-[0.6rem] tracking-widest font-inter text-blue-600">VISUAL EDUCATION HUB</span>
+            </span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">HOME</a>
+            <a href="m4-mechanics.html" class="text-sm font-semibold text-blue-600 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[3px] after:bg-blue-600 after:rounded-full">บทเรียน</a>
+            <a href="#" class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">นวัตกรรม</a>
+            <a href="#" class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">ข้อสอบ</a>
+        </nav>
+        <button class="md:hidden text-2xl text-slate-800 p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars" id="menu-icon"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">HOME</a>
+        <a href="m4-mechanics.html" class="text-blue-600 font-semibold py-1 border-b border-slate-100">บทเรียน</a>
+        <a href="#" class="text-slate-600 font-medium py-1">ข้อสอบ</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Breadcrumb -->
+    <div class="flex items-center justify-between mb-6">
+        <a href="m4-mechanics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับ
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CH03 QUIZ ENGINE</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="bg-gradient-to-r from-blue-900 via-indigo-800 to-slate-900 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+        <div class="absolute w-72 h-72 bg-indigo-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                <i class="fa-solid fa-weight-hanging"></i> บทที่ 03 — ฟิสิกส์ ม.4 กลศาสตร์
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด: แรงและกฎการเคลื่อนที่</h1>
+            <p class="text-indigo-100 text-sm max-w-2xl leading-relaxed">กฎนิวตัน 3 ข้อ | ระบบมวลและรอก | แรงเสียดทาน | กฎความโน้มถ่วงสากล<br>
+            ส่วนที่ 1: ปรนัย 20 ข้อ | ส่วนที่ 2: จับคู่ 10 ข้อ | ส่วนที่ 3: เติมคำ 5 ข้อ | ส่วนที่ 4: อัตนัย 5 ข้อ &nbsp;|&nbsp; <strong>คะแนนเต็ม 35 คะแนน</strong></p>
+        </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+        <button onclick="showTab(1)" class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-1">
+            <i class="fa-solid fa-circle-dot mr-1"></i> ส่วนที่ 1 ปรนัย (20)
+        </button>
+        <button onclick="showTab(2)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-2">
+            <i class="fa-solid fa-link mr-1"></i> ส่วนที่ 2 จับคู่ (10)
+        </button>
+        <button onclick="showTab(3)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-3">
+            <i class="fa-solid fa-pen-to-square mr-1"></i> ส่วนที่ 3 เติมคำ (5)
+        </button>
+        <button onclick="showTab(4)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-4">
+            <i class="fa-solid fa-file-pen mr-1"></i> ส่วนที่ 4 อัตนัย (5)
+        </button>
+    </div>
+
+    <!-- TAB 1: MULTIPLE CHOICE -->
+    <div id="tab-1" class="tab-content active space-y-5">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <h2 class="font-bold text-blue-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย</h2>
+            <p class="text-xs text-slate-500 mb-4">จำนวน 20 ข้อ ข้อละ 1 คะแนน | เลือกตัวเลือกที่ถูกต้องที่สุด</p>
+            <div id="mc-questions" class="space-y-6"></div>
+        </div>
+    </div>
+
+    <!-- TAB 2: MATCHING -->
+    <div id="tab-2" class="tab-content space-y-5">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <h2 class="font-bold text-blue-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่</h2>
+            <p class="text-xs text-slate-500 mb-4">จำนวน 10 ข้อ ข้อละ 1 คะแนน | เลือกคำตอบจาก Dropdown ให้ตรงกับคำถามฝั่งซ้าย</p>
+            <div id="match-questions" class="space-y-3"></div>
+        </div>
+    </div>
+
+    <!-- TAB 3: FILL IN THE BLANK -->
+    <div id="tab-3" class="tab-content space-y-5">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <h2 class="font-bold text-blue-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำในช่องว่าง</h2>
+            <p class="text-xs text-slate-500 mb-4">จำนวน 5 ข้อ ข้อละ 1 คะแนน | กรอกตัวเลขหรือคำตอบสั้นๆ ลงในช่อง</p>
+            <div id="fill-questions" class="space-y-6"></div>
+        </div>
+    </div>
+
+    <!-- TAB 4: SUBJECTIVE -->
+    <div id="tab-4" class="tab-content space-y-5">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <h2 class="font-bold text-blue-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย</h2>
+            <p class="text-xs text-slate-500 mb-4">จำนวน 5 ข้อ | เขียนวิธีทำและคำอธิบายให้ครบถ้วน จากนั้นกดดูเฉลยเพื่อตรวจสอบ</p>
+            <div id="subj-questions" class="space-y-6"></div>
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="submitAll()" class="py-4 px-10 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2">
+            <i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม
+        </button>
+        <a href="m4-mechanics.html" class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+            <i class="fa-solid fa-list"></i> กลับหน้าหลักกลศาสตร์
+        </a>
+    </div>
+</main>
+
+<!-- Score Modal -->
+<div class="modal-overlay" id="score-modal">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white text-center">
+            <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+            <h2 class="text-2xl font-extrabold">ผลการทำแบบฝึกหัด</h2>
+            <p class="text-blue-100 text-sm mt-1">บทที่ 03: แรงและกฎการเคลื่อนที่</p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                <span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20 คะแนน)</span>
+                <span class="font-bold text-blue-700" id="modal-p1">-</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                <span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (10 คะแนน)</span>
+                <span class="font-bold text-blue-700" id="modal-p2">-</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                <span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5 คะแนน)</span>
+                <span class="font-bold text-blue-700" id="modal-p3">-</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                <span class="text-sm text-slate-500 text-xs">ส่วนที่ 4 อัตนัย (ตรวจเอง)</span>
+                <span class="text-xs text-slate-400">ตรวจสอบด้วยตนเอง</span>
+            </div>
+            <div class="bg-blue-50 rounded-xl p-4 text-center mt-2">
+                <p class="text-xs text-blue-600 font-semibold mb-1">คะแนนรวม (ส่วนที่ 1-3)</p>
+                <p class="text-4xl font-extrabold text-blue-700" id="modal-total">0/35</p>
+                <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+            </div>
+        </div>
+        <div class="px-6 pb-6 flex gap-3">
+            <button onclick="closeModal()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors">
+                ดูเฉลยละเอียด
+            </button>
+            <a href="m4-mechanics.html" class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300 transition-colors">
+                กลับหน้าหลัก
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+// ===== DATA =====
+const mcData = [
+    { q: "แรงสองแรงตั้งฉากกัน ขนาด 3 N และ 4 N แรงลัพธ์มีขนาดกี่นิวตัน?", choices:["5","7","12","1"], ans: 0 },
+    { q: "กฎความเฉื่อยของนิวตัน (กฎข้อที่ 1) กล่าวว่าอย่างไร?", choices:["วัตถุมีแรงกระทำเสมอ","วัตถุจะรักษาสภาพการเคลื่อนที่เดิมถ้าแรงลัพธ์เป็นศูนย์","แรงกิริยาเท่ากับแรงปฏิกิริยา","แรงเท่ากับมวลคูณความเร่ง"], ans: 1 },
+    { q: "วัตถุมวล 5 kg ออกแรง 20 N ไม่มีแรงเสียดทาน ความเร่งของวัตถุเท่ากับเท่าไร?", choices:["4 m/s²","25 m/s²","100 m/s²","15 m/s²"], ans: 0 },
+    { q: "กฎข้อที่ 3 ของนิวตันคือ?", choices:["F = ma","แรงลัพธ์เป็นศูนย์","ทุกแรงกิริยามีแรงปฏิกิริยาที่เท่ากันและทิศตรงข้าม","แรงสัมพันธ์กับระยะทาง"], ans: 2 },
+    { q: "ระบบมวล 2 ก้อน m₁=3 kg, m₂=7 kg เชื่อมเชือกบนพื้นไม่มีแรงเสียดทาน ออกแรง 50 N ที่ m₁ แรงตึงเชือกระหว่าง m₁ กับ m₂ เท่ากับเท่าไร?", choices:["35 N","15 N","50 N","5 N"], ans: 0 },
+    { q: "ลิฟต์เคลื่อนที่ขึ้นด้วยความเร่ง 2 m/s² มวล 60 kg น้ำหนักที่ชั่งได้ในลิฟต์เท่ากับเท่าไร?", choices:["720 N","600 N","480 N","708 N"], ans: 0 },
+    { q: "วัตถุมวล 10 kg วางบนพื้น μs = 0.4 แรงเสียดทานสถิตสูงสุดเท่ากับเท่าไร? (g = 10 m/s²)", choices:["40 N","4 N","100 N","0.4 N"], ans: 0 },
+    { q: "แรงเสียดทานจลน์แตกต่างจากแรงเสียดทานสถิตอย่างไร?", choices:["แรงเสียดทานจลน์มีค่ามากกว่าเสมอ","แรงเสียดทานจลน์เกิดเมื่อวัตถุหยุดนิ่ง","แรงเสียดทานจลน์เกิดเมื่อวัตถุกำลังเคลื่อนที่และมีค่าคงตัว","แรงเสียดทานจลน์ขึ้นกับความเร็ว"], ans: 2 },
+    { q: "กฎความโน้มถ่วงสากล: ถ้าระยะห่างระหว่างวัตถุสองก้อนเพิ่มขึ้นเป็น 2 เท่า แรงดึงดูดจะเป็นเท่าไรของเดิม?", choices:["1/4 เท่า","1/2 เท่า","2 เท่า","4 เท่า"], ans: 0 },
+    { q: "แรง F₁=10 N และ F₂=10 N ทำมุม 60° ต่อกัน แรงลัพธ์มีขนาดกี่นิวตัน?", choices:["10√3 N","20 N","0 N","10 N"], ans: 0 },
+    { q: "วัตถุวางนิ่งบนพื้นเอียง แรงปฏิกิริยาจากพื้นเอียง (แรงปกติ N) มีทิศทางอย่างไร?", choices:["ตั้งฉากกับพื้นเอียงชี้ออก","ขนานกับพื้นเอียงชี้ขึ้น","ในแนวดิ่งขึ้น","ขนานกับพื้นราบ"], ans: 0 },
+    { q: "ระบบรอก Atwood: m₁=6 kg, m₂=4 kg แขวนผ่านรอก ความเร่งของระบบเท่ากับเท่าไร? (g=10 m/s²)", choices:["2 m/s²","5 m/s²","10 m/s²","1 m/s²"], ans: 0 },
+    { q: "น้ำหนักของวัตถุบนดาวที่มีค่า g = g_earth/6 เทียบกับบนโลก จะเป็นเท่าไร?", choices:["1/6 เท่า","6 เท่า","เท่ากัน","1/3 เท่า"], ans: 0 },
+    { q: "มวล (Mass) และน้ำหนัก (Weight) ต่างกันอย่างไร?", choices:["มวลเป็นเวกเตอร์ น้ำหนักเป็นสเกลาร์","มวลเปลี่ยนตามตำแหน่ง น้ำหนักคงที่","มวลเป็นสเกลาร์คงที่ น้ำหนักขึ้นกับ g ณ ตำแหน่งนั้น","ทั้งสองอย่างเหมือนกัน"], ans: 2 },
+    { q: "สัมประสิทธิ์ความเสียดทานสถิต (μs) และจลน์ (μk) มีความสัมพันธ์กันอย่างไร?", choices:["μs < μk เสมอ","μs = μk เสมอ","μs ≥ μk เสมอ","ไม่มีความสัมพันธ์กัน"], ans: 2 },
+    { q: "ลิฟต์เคลื่อนที่ขึ้นด้วยความเร็วคงที่ แรงปฏิกิริยาจากพื้นลิฟต์ต่อผู้โดยสารเป็นอย่างไร?", choices:["มากกว่าน้ำหนัก","น้อยกว่าน้ำหนัก","เท่ากับน้ำหนัก","เป็นศูนย์"], ans: 2 },
+    { q: "สามารถหาสัมประสิทธิ์ความเสียดทานจลน์ (μk) จากกราฟแบบใดได้?", choices:["กราฟ v-t","กราฟ F-N (แรงเสียดทานต่อแรงปกติ)","กราฟ s-t","กราฟ F-t"], ans: 1 },
+    { q: "ถ้าระยะห่างระหว่างดาวสองดวงลดลงเหลือครึ่งหนึ่ง แรงดึงดูดกลายเป็นกี่เท่าของเดิม?", choices:["4 เท่า","2 เท่า","1/2 เท่า","1/4 เท่า"], ans: 0 },
+    { q: "วัตถุ 2 ก้อน (m₁=4 kg, m₂=6 kg) ผูกเชือกกันบนพื้นราบ μk=0.2 ออกแรง F=40 N ที่ m₁ ความเร่งของระบบเท่าไร? (g=10)", choices:["2 m/s²","1 m/s²","4 m/s²","0 m/s²"], ans: 0 },
+    { q: "การประยุกต์กฎข้อ 2 ของนิวตัน: วัตถุมวล 2 kg เคลื่อนที่บนพื้นเสียดทาน μk=0.3 ด้วยความเร็วคงที่ต้องออกแรงเท่าไร? (g=10)", choices:["6 N","20 N","2 N","0 N"], ans: 0 },
+];
+
+const matchData = [
+    { left: "กฎความเฉื่อย (นิวตัน ข้อ 1)", right: "ΣF = 0" },
+    { left: "กฎความเร่ง (นิวตัน ข้อ 2)", right: "ΣF = ma" },
+    { left: "กฎปฏิกิริยา (นิวตัน ข้อ 3)", right: "F₃ = −F₁" },
+    { left: "แรงเสียดทานจลน์", right: "fₖ = μₖN" },
+    { left: "น้ำหนักของวัตถุ", right: "W = mg" },
+    { left: "มวล (Mass)", right: "ปริมาณสเกลาร์บอกความเฉื่อย" },
+    { left: "แรงโน้มถ่วงสากล", right: "F = Gm₁m₂/r²" },
+    { left: "สัมประสิทธิ์ความเสียดทาน", right: "อัตราส่วน f/N" },
+    { left: "แรงตึงเชือก (Tension)", right: "แรงดึงในเส้นเชือก" },
+    { left: "แรงลัพธ์ (Resultant)", right: "ผลรวมเวกเตอร์ของแรงทั้งหมด" },
+];
+const matchOptions = ["ΣF = 0","ΣF = ma","F₃ = −F₁","fₖ = μₖN","W = mg","ปริมาณสเกลาร์บอกความเฉื่อย","F = Gm₁m₂/r²","อัตราส่วน f/N","แรงดึงในเส้นเชือก","ผลรวมเวกเตอร์ของแรงทั้งหมด"];
+
+const fillData = [
+    { q: "วัตถุมวล 10 kg อยู่บนพื้นราบ μk=0.3 ออกแรง 50 N ขนานพื้น ความเร่งของวัตถุเท่ากับ", unit: "m/s²", ans: "2", tol: 0.2 },
+    { q: "ลิฟต์เคลื่อนที่ลงด้วยความเร่ง 3 m/s² มวล 50 kg น้ำหนักที่ชั่งได้ในลิฟต์เท่ากับ", unit: "N", ans: "350", tol: 1 },
+    { q: "มวล 6 kg และ 4 kg แขวนรอก Atwood ความเร่งของระบบเท่ากับ (g=10 m/s²)", unit: "m/s²", ans: "2", tol: 0.2 },
+    { q: "แรง 2 แรงตั้งฉากกัน ขนาด 6 N และ 8 N แรงลัพธ์เท่ากับ", unit: "N", ans: "10", tol: 0.5 },
+    { q: "ระยะห่างระหว่างดาว 2 ดวงเพิ่มขึ้น 2 เท่า แรงดึงดูดใหม่เป็น ___ เท่าของเดิม", unit: "เท่า", ans: "0.25", tol: 0.01 },
+];
+
+const subjData = [
+    {
+        q: "วัตถุมวล 8 kg เคลื่อนที่บนพื้นเอียง 30° มีแรงเสียดทาน μk=0.2 จงหาความเร่งของวัตถุ (g=10 m/s²)",
+        key: `<strong>วิธีทำ:</strong><br>
+        1. แรงในแนวพื้นเอียง: F_net = mg sin30° − μk(mg cos30°)<br>
+        2. F_net = 8×10×0.5 − 0.2×8×10×(√3/2)<br>
+        3. F_net = 40 − 0.2×40√3 ≈ 40 − 13.86 ≈ 26.14 N<br>
+        4. a = F_net/m = 26.14/8 ≈ <strong>3.27 m/s²</strong>`
+    },
+    {
+        q: "ระบบรอก Atwood: m₁=5 kg, m₂=3 kg แขวนผ่านรอกเบา จงหา (1) ความเร่งของระบบ (2) แรงตึงเชือก (g=10 m/s²)",
+        key: `<strong>วิธีทำ:</strong><br>
+        1. a = (m₁−m₂)g/(m₁+m₂) = (5−3)×10/(5+3) = 20/8 = <strong>2.5 m/s²</strong><br>
+        2. T = m₂(g+a) = 3×(10+2.5) = 3×12.5 = <strong>37.5 N</strong><br>
+        ตรวจสอบ: T = m₁(g−a) = 5×(10−2.5) = 5×7.5 = 37.5 N ✓`
+    },
+    {
+        q: "วัตถุ 3 ก้อน มวล 2, 4, 6 kg ผูกเชือกต่อกันลากบนพื้นราบ μk=0.1 ออกแรง F=78 N ที่ก้อนแรก จงหาความเร่งและแรงตึงเชือกแต่ละเส้น (g=10 m/s²)",
+        key: `<strong>วิธีทำ:</strong><br>
+        มวลรวม M = 2+4+6 = 12 kg<br>
+        แรงเสียดทานรวม f = μk×M×g = 0.1×12×10 = 12 N<br>
+        a = (F−f)/M = (78−12)/12 = 66/12 = <strong>5.5 m/s²</strong><br>
+        T₁ (ระหว่าง m₁ กับ m₂): T₁ = (m₂+m₃)(a + μk×g) = 10×(5.5+1) = <strong>65 N</strong><br>
+        T₂ (ระหว่าง m₂ กับ m₃): T₂ = m₃×(a + μk×g) = 6×(5.5+1) = <strong>39 N</strong>`
+    },
+    {
+        q: "อธิบายน้ำหนักที่ชั่งได้ในลิฟต์ทั้ง 4 กรณี: (1) ลิฟต์ขึ้นด้วยความเร่ง (2) ลิฟต์ขึ้นด้วยความเร็วคงที่ (3) ลิฟต์ลงด้วยความเร่ง (4) เชือกขาด",
+        key: `<strong>เฉลย:</strong><br>
+        ให้ N = แรงปฏิกิริยา (น้ำหนักที่ชั่งได้), m = มวล<br>
+        (1) ลิฟต์ขึ้น+ความเร่ง a: N = m(g+a) → <strong>หนักกว่าปกติ N &gt; mg</strong><br>
+        (2) ลิฟต์ขึ้นความเร็วคงที่: a=0 → N = mg → <strong>เท่ากับน้ำหนักปกติ</strong><br>
+        (3) ลิฟต์ลง+ความเร่ง a: N = m(g−a) → <strong>เบากว่าปกติ N &lt; mg</strong><br>
+        (4) เชือกขาด: a = g → N = m(g−g) = 0 → <strong>ไร้น้ำหนัก</strong>`
+    },
+    {
+        q: "อธิบายกฎ 3 ข้อของนิวตัน พร้อมตัวอย่างจากชีวิตประจำวัน 1 ตัวอย่างต่อข้อ",
+        key: `<strong>เฉลย:</strong><br>
+        <strong>กฎข้อ 1 (ความเฉื่อย):</strong> วัตถุจะรักษาสภาพเดิมหาก ΣF=0 เช่น ผู้โดยสารในรถพุ่งไปข้างหน้าเมื่อรถเบรก<br>
+        <strong>กฎข้อ 2 (ความเร่ง):</strong> ΣF = ma เช่น ออกแรงเท่ากันกับวัตถุเบาเร่งมากกว่าวัตถุหนัก<br>
+        <strong>กฎข้อ 3 (ปฏิกิริยา):</strong> แรงกิริยา = แรงปฏิกิริยา เช่น จรวดพ่นแก๊สออกด้านหลัง จรวดพุ่งไปข้างหน้า`
+    },
+];
+
+// ===== RENDER =====
+let userAnswers = new Array(20).fill(-1);
+
+function renderMC() {
+    const container = document.getElementById('mc-questions');
+    mcData.forEach((q, qi) => {
+        const div = document.createElement('div');
+        div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+        div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-blue-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi+1}</span>${q.q}</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="mc-choices-${qi}">
+                ${q.choices.map((c,ci)=>`
+                    <button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-sm flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-full border-2 border-current flex items-center justify-center font-bold font-inter text-xs flex-shrink-0">${ci+1}</span>
+                        <span>${c}</span>
+                    </button>
+                `).join('')}
+            </div>`;
+        container.appendChild(div);
+    });
+}
+
+function selectMC(qi, ci) {
+    if (document.getElementById(`mc-${qi}-0`).classList.contains('correct') || document.getElementById(`mc-${qi}-0`).classList.contains('wrong')) return;
+    const prev = userAnswers[qi];
+    if (prev !== -1) document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+    userAnswers[qi] = ci;
+    document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+}
+
+function renderMatch() {
+    const container = document.getElementById('match-questions');
+    matchData.forEach((m, mi) => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+        const opts = matchOptions.map(o => `<option value="${o}">${o}</option>`).join('');
+        div.innerHTML = `
+            <span class="w-6 h-6 bg-indigo-600 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">${mi+1}</span>
+            <span class="flex-1 text-sm font-medium text-slate-700">${m.left}</span>
+            <select class="match-select" id="match-${mi}">
+                <option value="">-- เลือกคำตอบ --</option>${opts}
+            </select>`;
+        container.appendChild(div);
+    });
+}
+
+function renderFill() {
+    const container = document.getElementById('fill-questions');
+    fillData.forEach((f, fi) => {
+        const div = document.createElement('div');
+        div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+        div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-emerald-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi+1}</span>${f.q}</p>
+            <div class="flex items-center gap-2">
+                <input type="text" class="fill-input flex-1 min-w-0 outline-none" id="fill-${fi}" placeholder="พิมพ์คำตอบ...">
+                <span class="text-sm text-slate-500 font-medium whitespace-nowrap">${f.unit}</span>
+                <span class="text-sm ml-2" id="fill-icon-${fi}"></span>
+            </div>`;
+        container.appendChild(div);
+    });
+}
+
+function renderSubj() {
+    const container = document.getElementById('subj-questions');
+    subjData.forEach((s, si) => {
+        const div = document.createElement('div');
+        div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+        div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-amber-500 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si+1}</span>${s.q}</p>
+            <textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-blue-400 transition-colors min-h-[120px] resize-y" id="subj-${si}" placeholder="เขียนวิธีทำและอธิบายที่นี่..."></textarea>
+            <div class="answer-key mt-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 leading-relaxed" id="key-${si}">${s.key}</div>
+            <button onclick="toggleKey(${si})" class="mt-2 text-xs text-emerald-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}">
+                <i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด
+            </button>`;
+        container.appendChild(div);
+    });
+}
+
+function toggleKey(si) {
+    const key = document.getElementById(`key-${si}`);
+    const btn = document.getElementById(`key-btn-${si}`);
+    key.classList.toggle('show');
+    btn.innerHTML = key.classList.contains('show')
+        ? '<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย'
+        : '<i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด';
+}
+
+// ===== TAB =====
+function showTab(n) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(`tab-${n}`).classList.add('active');
+    document.getElementById(`tab-btn-${n}`).classList.add('active');
+}
+
+// ===== SUBMIT =====
+function submitAll() {
+    // Score MC
+    let p1 = 0;
+    mcData.forEach((q, qi) => {
+        const chosen = userAnswers[qi];
+        for (let ci = 0; ci < 4; ci++) {
+            const btn = document.getElementById(`mc-${qi}-${ci}`);
+            btn.classList.remove('selected');
+            if (ci === q.ans) btn.classList.add('correct');
+            else if (ci === chosen && chosen !== q.ans) btn.classList.add('wrong');
+        }
+        if (chosen === q.ans) p1++;
+    });
+
+    // Score Match
+    let p2 = 0;
+    matchData.forEach((m, mi) => {
+        const sel = document.getElementById(`match-${mi}`);
+        sel.classList.remove('correct','wrong');
+        if (sel.value === m.right) { sel.classList.add('correct'); p2++; }
+        else sel.classList.add('wrong');
+    });
+
+    // Score Fill
+    let p3 = 0;
+    fillData.forEach((f, fi) => {
+        const input = document.getElementById(`fill-${fi}`);
+        const icon = document.getElementById(`fill-icon-${fi}`);
+        const val = parseFloat(input.value.trim());
+        const correct = Math.abs(val - parseFloat(f.ans)) <= f.tol;
+        input.classList.remove('correct','wrong');
+        if (correct) { input.classList.add('correct'); icon.textContent = '✅'; p3++; }
+        else { input.classList.add('wrong'); icon.textContent = '❌'; }
+    });
+
+    // Show all answer keys
+    subjData.forEach((_, si) => document.getElementById(`key-${si}`).classList.add('show'));
+
+    const total = p1 + p2 + p3;
+    document.getElementById('modal-p1').textContent = `${p1}/20`;
+    document.getElementById('modal-p2').textContent = `${p2}/10`;
+    document.getElementById('modal-p3').textContent = `${p3}/5`;
+    document.getElementById('modal-total').textContent = `${total}/35`;
+    const pct = Math.round(total/35*100);
+    let grade = '', emoji = '';
+    if (pct >= 80) { grade = `ยอดเยี่ยม! (${pct}%)`; emoji = '🏆'; }
+    else if (pct >= 60) { grade = `ผ่าน (${pct}%)`; emoji = '👍'; }
+    else { grade = `ต้องทบทวน (${pct}%)`; emoji = '📚'; }
+    document.getElementById('modal-grade').textContent = grade;
+    document.getElementById('modal-emoji').textContent = emoji;
+    document.getElementById('score-modal').classList.add('show');
+}
+
+function closeModal() {
+    document.getElementById('score-modal').classList.remove('show');
+}
+
+// Mobile menu
+document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+
+// Init
+renderMC();
+renderMatch();
+renderFill();
+renderSubj();
+</script>
+</body>
+</html>
