@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบทดสอบ บทที่ 02: การเคลื่อนที่แนวเส้นตรง | ฟิสิกส์ จารย์เปา</title>
+    <!-- โหลดฟอนต์ Prompt (สำหรับภาษาไทยไม่มีหัวแนวโมเดิร์น) และ Inter (สำหรับภาษาอังกฤษและตัวเลข) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- โหลด FontAwesome สำหรับไอคอนตกแต่ง -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- โหลด Tailwind CSS ผ่าน CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Inter', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 8s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- โหลด KaTeX สำหรับแสดงสูตรฟิสิกส์ -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\[', display: true}
+            ],
+            throwOnError : false
+        });"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- 1. แถบเมนูบนสุด (Navigation Bar) -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- ส่วนโลโก้และชื่อเว็บด้านซ้าย -->
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-lg shadow-blue-500/20 animate-spin-slow">
+                    <i class="fa-solid fa-atom"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.65rem] tracking-[2px] font-inter text-blue-600 -mt-1">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            
+            <!-- เมนูนำทางด้านขวา -->
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">HOME</a>
+                <a href="m4-mechanics.html" class="font-medium text-sm text-blue-600 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-blue-600 after:rounded-full">บทเรียน</a>
+                <a href="#" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">นวัตกรรม</a>
+                <a href="#" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">ข้อสอบ</a>
+            </nav>
+            
+            <!-- เมนูสำหรับแสดงผลบนมือถือ (Hamburger menu) -->
+            <button class="md:hidden text-2xl text-slate-800 p-2 focus:outline-none" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- เมนูมือถือแบบ Dropdown -->
+        <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-4 shadow-inner" id="mobile-menu">
+            <a href="index.html" class="font-medium text-slate-600 hover:text-blue-600 py-1 border-b border-slate-100">HOME</a>
+            <a href="m4-mechanics.html" class="font-semibold text-blue-600 py-1 border-b border-slate-100">บทเรียน</a>
+            <a href="#" class="font-medium text-slate-600 hover:text-blue-600 py-1 border-b border-slate-100">นวัตกรรม</a>
+            <a href="#" class="font-medium text-slate-600 hover:text-blue-600 py-1">ข้อสอบ</a>
+        </div>
+    </header>
+
+    <!-- คอนเทนเนอร์หลักสำหรับจัดหน้า -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+        
+        <!-- ปุ่มนำทาง -->
+        <div class="flex justify-between items-center mb-6">
+            <a href="m4-mechanics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้าสารบัญ ม.4 กลศาสตร์
+            </a>
+            <a href="m4-mechanics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-book"></i> สารบัญ ม.4
+            </a>
+        </div>
+
+        <!-- ส่วนหัวข้อทำแบบฝึกหัด -->
+        <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900 text-white rounded-3xl p-8 mb-8 shadow-lg relative overflow-hidden">
+            <div class="absolute w-64 h-64 bg-blue-500/10 rounded-full -top-12 -right-12 blur-3xl"></div>
+            <div class="relative z-10">
+                <span class="bg-blue-500/20 text-blue-200 px-3 py-1 rounded-full text-xs font-semibold inline-block mb-3 border border-blue-400/20">
+                    ระบบทำโจทย์วัดระดับปัญญา (Interactive Quiz Engine)
+                </span>
+                <h1 class="text-2xl md:text-3xl font-extrabold mb-2">แบบฝึกหัด บทที่ 02: การเคลื่อนที่แนวเส้นตรง</h1>
+                <p class="text-blue-100 text-sm md:text-base leading-relaxed">
+                    วัดความรู้เรื่องการกระจัด ความเร็ว ความเร่ง 5 สูตรการเคลื่อนที่คงตัว การตกแบบเสรี และการตีความกราฟการเคลื่อนที่
+                </p>
+            </div>
+        </div>
+
+        <!-- 4 Tabs ควบคุมการสลับส่วนข้อสอบ -->
+        <div class="flex flex-wrap gap-2 border-b border-slate-200 mb-8">
+            <button onclick="switchTab('tab-mc')" id="btn-tab-mc" class="py-2.5 px-4 font-bold text-sm text-blue-600 border-b-2 border-blue-600 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-list-check"></i> 1. ปรนัย (20 ข้อ)
+            </button>
+            <button onclick="switchTab('tab-match')" id="btn-tab-match" class="py-2.5 px-4 font-bold text-sm text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-circle-nodes"></i> 2. จับคู่ (10 ข้อ)
+            </button>
+            <button onclick="switchTab('tab-blank')" id="btn-tab-blank" class="py-2.5 px-4 font-bold text-sm text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-pen-clip"></i> 3. เติมคำ (5 ข้อ)
+            </button>
+            <button onclick="switchTab('tab-sub')" id="btn-tab-sub" class="py-2.5 px-4 font-bold text-sm text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:border-slate-300 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-keyboard"></i> 4. อัตนัย (5 ข้อ)
+            </button>
+        </div>
+
+        <form id="mega-quiz-form" onsubmit="evaluateAllQuiz(event)" class="mb-12">
+            
+            <!-- PART 1: MULTIPLE CHOICE (20 QUESTIONS) -->
+            <div id="tab-mc" class="space-y-6">
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl mb-6">
+                    <h3 class="font-bold text-blue-900 text-sm">💡 ส่วนที่ 1: แบบทดสอบปรนัย (Multiple Choice)</h3>
+                    <p class="text-xs text-blue-800 leading-relaxed mt-0.5">เลือกตัวเลือกที่ถูกต้องที่สุดเพียงตัวเลือกเดียวในแต่ละข้อ โดยตัวเลือกคำตอบ 1, 2, 3, 4 จะถูกนำมาใช้ทั้งหมด</p>
+                </div>
+
+                <!-- ข้อ 1 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q1" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">1</span>
+                        ชายคนหนึ่งเดินไปทางทิศตะวันออก $40\text{ m}$ จากนั้นเดินต่อไปทางทิศเหนือ $30\text{ m}$ ระยะทางและการกระจัดของการเคลื่อนที่นี้เป็นเท่าใดตามลำดับ?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q1', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$70\text{ m}, 70\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q1', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$70\text{ m}, 50\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q1', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$50\text{ m}, 70\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q1', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$50\text{ m}, 50\text{ m}$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 2 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q2" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">2</span>
+                        ปริมาณทางฟิสิกส์ในข้อใดนิยามเป็น "อัตราการเปลี่ยนแปลงการกระจัดเทียบกับเวลา"?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q2', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">อัตราเร็ว ($\text{Speed}$)</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q2', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร็ว ($\text{Velocity}$)</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q2', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร่ง ($\text{Acceleration}$)</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q2', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">ระยะทาง ($\text{Distance}$)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 3 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q3" data-correct="3">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">3</span>
+                        วัตถุชิ้นหนึ่งเริ่มเคลื่อนที่ออกจากตำแหน่งหยุดนิ่งด้วยความเร่งคงตัว $2\text{ m/s}^2$ เมื่อเวลาผ่านไป $5\text{ s}$ วัตถุจะมีความเร็วปลายเท่าใด?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q3', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$5\text{ m/s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q3', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$7\text{ m/s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q3', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$10\text{ m/s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q3', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$25\text{ m/s}$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 4 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q4" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">4</span>
+                        วัตถุเคลื่อนที่ด้วยความเร็วต้น $4\text{ m/s}$ เร่งเครื่องด้วยความเร่งคงตัว $3\text{ m/s}^2$ เป็นเวลา $4\text{ s}$ จะได้การกระจัดเท่าใด?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q4', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$28\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q4', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$40\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q4', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$52\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q4', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$64\text{ m}$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 5 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q5" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">5</span>
+                        รถยนต์แล่นด้วยความเร็ว $20\text{ m/s}$ เหยียบเบรกให้หยุดด้วยความหน่วงคงตัว $4\text{ m/s}^2$ รถยนต์จะไถลไปเป็นระยะทางกี่เมตรก่อนหยุดนิ่ง?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q5', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$25\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q5', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$50\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q5', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$75\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q5', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$100\text{ m}$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 6 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q6" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">6</span>
+                        โยนก้อนหินขึ้นตรงๆ ในแนวดิ่งด้วยความเร็วต้น $30\text{ m/s}$ ก้อนหินจะเคลื่อนที่ขึ้นไปได้ความสูงสูงสุดกี่เมตร? (กำหนด $g = 10\text{ m/s}^2$)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q6', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$30\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q6', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$45\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q6', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$60\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q6', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$90\text{ m}$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 7 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q7" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">7</span>
+                        โยนวัตถุขึ้นในแนวดิ่งด้วยความเร็วต้น $20\text{ m/s}$ วัตถุจะใช้เวลานานเท่าใดจึงจะตกกลับมาถึงระดับเดิมที่โยน? (กำหนด $g = 10\text{ m/s}^2$)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q7', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$2\text{ s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q7', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$4\text{ s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q7', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$6\text{ s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q7', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$8\text{ s}$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 8 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q8" data-correct="1">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">8</span>
+                        ความชัน (Slope) ของกราฟความสัมพันธ์ระหว่างการกระจัดกับเวลา ($s-t$) แทนปริมาณทางฟิสิกส์ใด?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q8', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร็ว ($\text{Velocity}$)</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q8', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร่ง ($\text{Acceleration}$)</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q8', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">ระยะทาง ($\text{Distance}$)</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q8', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">งาน ($\text{Work}$)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 9 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q9" data-correct="3">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">9</span>
+                        พื้นที่ใต้กราฟความสัมพันธ์ระหว่างความเร็วกับเวลา ($v-t$) แทนปริมาณทางฟิสิกส์ในข้อใด?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q9', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร็วเฉลี่ย</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q9', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร่ง</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q9', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">การกระจัด</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q9', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">เวลาทั้งหมด</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 10 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q10" data-correct="3">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">10</span>
+                        ความชัน (Slope) ของกราฟความสัมพันธ์ระหว่างความเร็วกับเวลา ($v-t$) แทนปริมาณในข้อใด?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q10', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">อัตราเร็ว</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q10', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">ระยะทาง</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q10', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร่ง</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q10', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">แรง</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 11 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q11" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">11</span>
+                        ในการเคลื่อนที่แบบตกเสรี (Free Fall) ในสุญญากาศ ปริมาณใดต่อไปนี้มีค่าคงตัวตลอดการเคลื่อนที่?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q11', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร็ว</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q11', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร่ง</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q11', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">การกระจัด</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q11', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">ทิศทางของความเร็ว</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 12 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q12" data-correct="3">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">12</span>
+                        ปล่อยวัตถุจากหยุดนิ่งให้ตกแบบเสรีจากหน้าผาสูง เมื่อเวลาผ่านไป $3\text{ s}$ วัตถุจะตกลงมาเป็นระยะทางกี่เมตร? ($g = 10\text{ m/s}^2$)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q12', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$15\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q12', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$30\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q12', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$45\text{ m}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q12', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$90\text{ m}$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 13 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q13" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">13</span>
+                        โยนก้อนหินขึ้นตรงๆ ในแนวดิ่ง ณ จุดสูงสุดของการเคลื่อนที่ ความเร็วและความเร่งของก้อนหินเป็นอย่างไร? ($g = 10\text{ m/s}^2$)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q13', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร็ว = 0, ความเร่ง = 0</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q13', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร็ว = 0, ความเร่ง = $10\text{ m/s}^2$ ทิศลง</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q13', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร็ว = $10\text{ m/s}$, ความเร่ง = 0</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q13', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">ความเร็ว = $10\text{ m/s}$, ความเร่ง = $10\text{ m/s}^2$ ทิศขึ้น</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 14 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q14" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">14</span>
+                        รถยนต์วิ่งเป็นวงกลมบนสนามแข่งครบรอบ 1 รอบพอดี ข้อสรุปเรื่องระยะทางและการกระจัดในข้อใดถูกต้อง?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q14', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">ระยะทางเป็นศูนย์ แต่การกระจัดไม่เป็นศูนย์</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q14', 2, this)">
+                            <span class="text-xs font-semibold text-slate-700">ระยะทางไม่เป็นศูนย์ แต่การกระจัดเป็นศูนย์</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q14', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">ทั้งระยะทางและการกระจัดเป็นศูนย์</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q14', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">ทั้งระยะทางและการกระจัดมีค่าเท่ากัน</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 15 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q15" data-correct="3">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">15</span>
+                        สมการการเคลื่อนที่แนวตรงด้วยความเร่งคงตัวในข้อใด **ไม่มี** ตัวแปรความเร่ง ($a$) ปรากฏอยู่ในสูตร?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q15', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$v = u + at$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q15', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$s = ut + \frac{1}{2}at^2$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q15', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$s = \left(\frac{u+v}{2}\right)t$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q15', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$v^2 = u^2 + 2as$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 16 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q16" data-correct="1">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">16</span>
+                        วัตถุชิ้นหนึ่งเคลื่อนที่ในแนวตรงด้วยความเร็วคงตัว $15\text{ m/s}$ เป็นเวลา $10\text{ s}$ ความเร่งของการเคลื่อนที่นี้มีค่าเท่าใด?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q16', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$0\text{ m/s}^2$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q16', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$1.5\text{ m/s}^2$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q16', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$15\text{ m/s}^2$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q16', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$150\text{ m/s}^2$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 17 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q17" data-correct="3">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">17</span>
+                        กราฟความสัมพันธ์ระหว่างความเร่งกับเวลา ($a-t$) มีลักษณะเป็นเส้นตรงขนานแกนนอน (เหนือแกน $t$) อธิบายลักษณะการเคลื่อนที่อย่างไร?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q17', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">วัตถุหยุดนิ่งอยู่กับที่</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q17', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">วัตถุมีความเร็วคงตัว</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q17', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">วัตถุมีความเร่งคงตัว</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q17', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">วัตถุมีความเร่งเพิ่มขึ้นเป็นสัดส่วนตรง</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 18 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q18" data-correct="3">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">18</span>
+                        ขว้างลูกบอลลงมาตรงๆ ในแนวดิ่งจากสะพานด้วยความเร็วต้น $5\text{ m/s}$ เมื่อเวลาผ่านไป $2\text{ s}$ ลูกบอลจะมีความเร็วปลายเท่าใด? ($g = 10\text{ m/s}^2$)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q18', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$15\text{ m/s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q18', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$20\text{ m/s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q18', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$25\text{ m/s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q18', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$30\text{ m/s}$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 19 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q19" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">19</span>
+                        รถไฟสองคันแล่นเข้าหากันบนรางตรงด้วยความเร็วคงตัว $30\text{ m/s}$ และ $20\text{ m/s}$ ขณะห่างกัน $500\text{ m}$ รถไฟจะชนกันในเวลากี่วินาที?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q19', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$5\text{ s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q19', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$10\text{ s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q19', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$15\text{ s}$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q19', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$25\text{ s}$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ข้อ 20 -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 q-card" data-qtype="mc" data-qid="q20" data-correct="2">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-start gap-2.5 leading-relaxed">
+                        <span class="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center font-inter text-xs font-bold text-slate-600 mt-0.5">20</span>
+                        วัตถุเคลื่อนที่แนวตรง โดยในวินาทีที่ 1 ได้ระยะทาง $2\text{ m}$, วินาทีที่ 2 ได้ระยะทาง $6\text{ m}$ และวินาทีที่ 3 ได้ระยะทาง $10\text{ m}$ วัตถุนี้มีความเร่งเท่าใด?
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-8">
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q20', 1, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">1</span>
+                            <span class="text-xs font-semibold text-slate-700">$2\text{ m/s}^2$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q20', 2, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">2</span>
+                            <span class="text-xs font-semibold text-slate-700">$4\text{ m/s}^2$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q20', 3, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">3</span>
+                            <span class="text-xs font-semibold text-slate-700">$6\text{ m/s}^2$</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all select-none option-box" onclick="selectMcOption('q20', 4, this)">
+                            <span class="w-7 h-7 bg-slate-100 text-slate-500 font-bold text-xs rounded-full flex items-center justify-center font-inter select-num">4</span>
+                            <span class="text-xs font-semibold text-slate-700">$8\text{ m/s}^2$</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PART 2: MATCHING (10 QUESTIONS) -->
+            <div id="tab-match" class="space-y-6 hidden">
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-xl mb-6">
+                    <h3 class="font-bold text-indigo-900 text-sm">🔗 ส่วนที่ 2: แบบทดสอบจับคู่ (Matching Questions)</h3>
+                    <p class="text-xs text-indigo-800 leading-relaxed mt-0.5">เลือกจับคู่คำศัพท์ กราฟ และนิยามการเคลื่อนที่แนวตรงในกล่อง Dropdown ฝั่งขวาให้ถูกต้อง</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8 space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 match-row" data-correct="1">
+                        <span class="text-sm font-semibold text-slate-700 flex items-center gap-2"><span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">1</span>ความชันของกราฟตำแหน่ง-เวลา ($s-t$)</span>
+                        <select class="p-2.5 rounded-lg border border-slate-200 bg-white text-xs font-medium focus:ring-2 focus:ring-blue-500 w-full sm:w-64 match-select">
+                            <option value="">-- กรุณาเลือกคู่ที่ถูกต้อง --</option>
+                            <option value="1">ความเร็ว ($v$)</option>
+                            <option value="2">ความเร่ง ($a$)</option>
+                            <option value="3">การกระจัด ($s$)</option>
+                            <option value="4">ความเร็วที่เปลี่ยนไป ($\Delta v$)</option>
+                            <option value="5">ความเร็วเป็นศูนย์ ($v = 0$)</option>
+                            <option value="6">ประมาณ 9.8 หรือ 10 m/s²</option>
+                            <option value="7">การกระจัด (เวกเตอร์)</option>
+                            <option value="8">ระยะทาง (สเกลาร์)</option>
+                            <option value="9">ความเร่งเป็นศูนย์ (a = 0)</option>
+                            <option value="10">s = ut + (1/2)at²</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 match-row" data-correct="2">
+                        <span class="text-sm font-semibold text-slate-700 flex items-center gap-2"><span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">2</span>ความชันของกราฟความเร็ว-เวลา ($v-t$)</span>
+                        <select class="p-2.5 rounded-lg border border-slate-200 bg-white text-xs font-medium focus:ring-2 focus:ring-blue-500 w-full sm:w-64 match-select">
+                            <option value="">-- กรุณาเลือกคู่ที่ถูกต้อง --</option>
+                            <option value="1">ความเร็ว ($v$)</option>
+                            <option value="2">ความเร่ง ($a$)</option>
+                            <option value="3">การกระจัด ($s$)</option>
+                            <option value="4">ความเร็วที่เปลี่ยนไป ($\Delta v$)</option>
+                            <option value="5">ความเร็วเป็นศูนย์ ($v = 0$)</option>
+                            <option value="6">ประมาณ 9.8 หรือ 10 m/s²</option>
+                            <option value="7">การกระจัด (เวกเตอร์)</option>
+                            <option value="8">ระยะทาง (สเกลาร์)</option>
+                            <option value="9">ความเร่งเป็นศูนย์ (a = 0)</option>
+                            <option value="10">s = ut + (1/2)at²</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 match-row" data-correct="3">
+                        <span class="text-sm font-semibold text-slate-700 flex items-center gap-2"><span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">3</span>พื้นที่ใต้กราฟความเร็ว-เวลา ($v-t$)</span>
+                        <select class="p-2.5 rounded-lg border border-slate-200 bg-white text-xs font-medium focus:ring-2 focus:ring-blue-500 w-full sm:w-64 match-select">
+                            <option value="">-- กรุณาเลือกคู่ที่ถูกต้อง --</option>
+                            <option value="1">ความเร็ว ($v$)</option>
+                            <option value="2">ความเร่ง ($a$)</option>
+                            <option value="3">การกระจัด ($s$)</option>
+                            <option value="4">ความเร็วที่เปลี่ยนไป ($\Delta v$)</option>
+                            <option value="5">ความเร็วเป็นศูนย์ ($v = 0$)</option>
+                            <option value="6">ประมาณ 9.8 หรือ 10 m/s²</option>
+                            <option value="7">การกระจัด (เวกเตอร์)</option>
+                            <option value="8">ระยะทาง (สเกลาร์)</option>
+                            <option value="9">ความเร่งเป็นศูนย์ (a = 0)</option>
+                            <option value="10">s = ut + (1/2)at²</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 match-row" data-correct="4">
+                        <span class="text-sm font-semibold text-slate-700 flex items-center gap-2"><span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">4</span>พื้นที่ใต้กราฟความเร่ง-เวลา ($a-t$)</span>
+                        <select class="p-2.5 rounded-lg border border-slate-200 bg-white text-xs font-medium focus:ring-2 focus:ring-blue-500 w-full sm:w-64 match-select">
+                            <option value="">-- กรุณาเลือกคู่ที่ถูกต้อง --</option>
+                            <option value="1">ความเร็ว ($v$)</option>
+                            <option value="2">ความเร่ง ($a$)</option>
+                            <option value="3">การกระจัด ($s$)</option>
+                            <option value="4">ความเร็วที่เปลี่ยนไป ($\Delta v$)</option>
+                            <option value="5">ความเร็วเป็นศูนย์ ($v = 0$)</option>
+                            <option value="6">ประมาณ 9.8 หรือ 10 m/s²</option>
+                            <option value="7">การกระจัด (เวกเตอร์)</option>
+                            <option value="8">ระยะทาง (สเกลาร์)</option>
+                            <option value="9">ความเร่งเป็นศูนย์ (a = 0)</option>
+                            <option value="10">s = ut + (1/2)at²</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 match-row" data-correct="5">
+                        <span class="text-sm font-semibold text-slate-700 flex items-center gap-2"><span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">5</span>วัตถุตกแบบเสรี ณ จุดสูงสุดของการเคลื่อนที่</span>
+                        <select class="p-2.5 rounded-lg border border-slate-200 bg-white text-xs font-medium focus:ring-2 focus:ring-blue-500 w-full sm:w-64 match-select">
+                            <option value="">-- กรุณาเลือกคู่ที่ถูกต้อง --</option>
+                            <option value="1">ความเร็ว ($v$)</option>
+                            <option value="2">ความเร่ง ($a$)</option>
+                            <option value="3">การกระจัด ($s$)</option>
+                            <option value="4">ความเร็วที่เปลี่ยนไป ($\Delta v$)</option>
+                            <option value="5">ความเร็วเป็นศูนย์ ($v = 0$)</option>
+                            <option value="6">ประมาณ 9.8 หรือ 10 m/s²</option>
+                            <option value="7">การกระจัด (เวกเตอร์)</option>
+                            <option value="8">ระยะทาง (สเกลาร์)</option>
+                            <option value="9">ความเร่งเป็นศูนย์ (a = 0)</option>
+                            <option value="10">s = ut + (1/2)at²</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 match-row" data-correct="6">
+                        <span class="text-sm font-semibold text-slate-700 flex items-center gap-2"><span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">6</span>ความเร่งเนื่องจากแรงโน้มถ่วงของโลก ($g$)</span>
+                        <select class="p-2.5 rounded-lg border border-slate-200 bg-white text-xs font-medium focus:ring-2 focus:ring-blue-500 w-full sm:w-64 match-select">
+                            <option value="">-- กรุณาเลือกคู่ที่ถูกต้อง --</option>
+                            <option value="1">ความเร็ว ($v$)</option>
+                            <option value="2">ความเร่ง ($a$)</option>
+                            <option value="3">การกระจัด ($s$)</option>
+                            <option value="4">ความเร็วที่เปลี่ยนไป ($\Delta v$)</option>
+                            <option value="5">ความเร็วเป็นศูนย์ ($v = 0$)</option>
+                            <option value="6">ประมาณ 9.8 หรือ 10 m/s²</option>
+                            <option value="7">การกระจัด (เวกเตอร์)</option>
+                            <option value="8">ระยะทาง (สเกลาร์)</option>
+                            <option value="9">ความเร่งเป็นศูนย์ (a = 0)</option>
+                            <option value="10">s = ut + (1/2)at²</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 match-row" data-correct="7">
+                        <span class="text-sm font-semibold text-slate-700 flex items-center gap-2"><span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">7</span>ปริมาณที่บอกเส้นทางเชื่อมตรงสั้นที่สุดจากจุดเริ่มต้นไปจุดสุดท้าย</span>
+                        <select class="p-2.5 rounded-lg border border-slate-200 bg-white text-xs font-medium focus:ring-2 focus:ring-blue-500 w-full sm:w-64 match-select">
+                            <option value="">-- กรุณาเลือกคู่ที่ถูกต้อง --</option>
+                            <option value="1">ความเร็ว ($v$)</option>
+                            <option value="2">ความเร่ง ($a$)</option>
+                            <option value="3">การกระจัด ($s$)</option>
+                            <option value="4">ความเร็วที่เปลี่ยนไป ($\Delta v$)</option>
+                            <option value="5">ความเร็วเป็นศูนย์ ($v = 0$)</option>
+                            <option value="6">ประมาณ 9.8 หรือ 10 m/s²</option>
+                            <option value="7">การกระจัด (เวกเตอร์)</option>
+                            <option value="8">ระยะทาง (สเกลาร์)</option>
+                            <option value="9">ความเร่งเป็นศูนย์ (a = 0)</option>
+                            <option value="10">s = ut + (1/2)at²</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 match-row" data-correct="8">
+                        <span class="text-sm font-semibold text-slate-700 flex items-center gap-2"><span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">8</span>ปริมาณสเกลาร์ที่บอกความยาวรวมของเส้นทางเคลื่อนที่ทั้งหมด</span>
+                        <select class="p-2.5 rounded-lg border border-slate-200 bg-white text-xs font-medium focus:ring-2 focus:ring-blue-500 w-full sm:w-64 match-select">
+                            <option value="">-- กรุณาเลือกคู่ที่ถูกต้อง --</option>
+                            <option value="1">ความเร็ว ($v$)</option>
+                            <option value="2">ความเร่ง ($a$)</option>
+                            <option value="3">การกระจัด ($s$)</option>
+                            <option value="4">ความเร็วที่เปลี่ยนไป ($\Delta v$)</option>
+                            <option value="5">ความเร็วเป็นศูนย์ ($v = 0$)</option>
+                            <option value="6">ประมาณ 9.8 หรือ 10 m/s²</option>
+                            <option value="7">การกระจัด (เวกเตอร์)</option>
+                            <option value="8">ระยะทาง (สเกลาร์)</option>
+                            <option value="9">ความเร่งเป็นศูนย์ (a = 0)</option>
+                            <option value="10">s = ut + (1/2)at²</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 match-row" data-correct="9">
+                        <span class="text-sm font-semibold text-slate-700 flex items-center gap-2"><span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">9</span>การเคลื่อนที่แนวตรงด้วยความเร็วคงตัว มีความเร่งเท่าใด</span>
+                        <select class="p-2.5 rounded-lg border border-slate-200 bg-white text-xs font-medium focus:ring-2 focus:ring-blue-500 w-full sm:w-64 match-select">
+                            <option value="">-- กรุณาเลือกคู่ที่ถูกต้อง --</option>
+                            <option value="1">ความเร็ว ($v$)</option>
+                            <option value="2">ความเร่ง ($a$)</option>
+                            <option value="3">การกระจัด ($s$)</option>
+                            <option value="4">ความเร็วที่เปลี่ยนไป ($\Delta v$)</option>
+                            <option value="5">ความเร็วเป็นศูนย์ ($v = 0$)</option>
+                            <option value="6">ประมาณ 9.8 หรือ 10 m/s²</option>
+                            <option value="7">การกระจัด (เวกเตอร์)</option>
+                            <option value="8">ระยะทาง (สเกลาร์)</option>
+                            <option value="9">ความเร่งเป็นศูนย์ (a = 0)</option>
+                            <option value="10">s = ut + (1/2)at²</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 match-row" data-correct="10">
+                        <span class="text-sm font-semibold text-slate-700 flex items-center gap-2"><span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">10</span>สูตรการเคลื่อนที่ด้วยความเร่งคงตัวที่ไม่ต้องใช้ความเร็วปลาย ($v$)</span>
+                        <select class="p-2.5 rounded-lg border border-slate-200 bg-white text-xs font-medium focus:ring-2 focus:ring-blue-500 w-full sm:w-64 match-select">
+                            <option value="">-- กรุณาเลือกคู่ที่ถูกต้อง --</option>
+                            <option value="1">ความเร็ว ($v$)</option>
+                            <option value="2">ความเร่ง ($a$)</option>
+                            <option value="3">การกระจัด ($s$)</option>
+                            <option value="4">ความเร็วที่เปลี่ยนไป ($\Delta v$)</option>
+                            <option value="5">ความเร็วเป็นศูนย์ ($v = 0$)</option>
+                            <option value="6">ประมาณ 9.8 หรือ 10 m/s²</option>
+                            <option value="7">การกระจัด (เวกเตอร์)</option>
+                            <option value="8">ระยะทาง (สเกลาร์)</option>
+                            <option value="9">ความเร่งเป็นศูนย์ (a = 0)</option>
+                            <option value="10">s = ut + (1/2)at²</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART 3: FILL IN THE BLANKS (5 QUESTIONS) -->
+            <div id="tab-blank" class="space-y-6 hidden">
+                <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-xl mb-6">
+                    <h3 class="font-bold text-emerald-900 text-sm">✍️ ส่วนที่ 3: แบบเติมคำในช่องว่าง (Fill in the Blanks)</h3>
+                    <p class="text-xs text-emerald-800 leading-relaxed mt-0.5">พิมพ์ตัวเลขผลลัพธ์จากการคำนวณทางฟิสิกส์ลงในช่องว่างให้ถูกต้อง (ไม่ต้องพิมพ์หน่วย)</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8 space-y-6">
+                    <div class="blank-row" data-correct-val="3">
+                        <label class="block text-sm font-semibold text-slate-800 mb-2 leading-relaxed flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">1</span>
+                            โยนก้อนหินขึ้นตรงๆ ในแนวดิ่งด้วยความเร็วต้น $30\text{ m/s}$ จะใช้เวลานานกี่วินาทีขึ้นไปถึงจุดสูงสุด? ($g = 10\text{ m/s}^2$)
+                        </label>
+                        <div class="flex items-center gap-2">
+                            <input type="text" class="w-full sm:w-64 p-2.5 rounded-lg border border-slate-250 text-sm font-medium focus:ring-2 focus:ring-blue-500 blank-input" placeholder="ระบุตัวเลขคำตอบ...">
+                            <span class="text-sm font-semibold text-slate-500">วินาที (s)</span>
+                        </div>
+                    </div>
+
+                    <div class="blank-row" data-correct-val="20">
+                        <label class="block text-sm font-semibold text-slate-800 mb-2 leading-relaxed flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">2</span>
+                            วัตถุเริ่มเร่งจากนิ่งด้วยความเร่งคงตัว $4\text{ m/s}^2$ เมื่อผ่านไป $5\text{ s}$ วัตถุจะมีความเร็วปลายเท่าใด?
+                        </label>
+                        <div class="flex items-center gap-2">
+                            <input type="text" class="w-full sm:w-64 p-2.5 rounded-lg border border-slate-250 text-sm font-medium focus:ring-2 focus:ring-blue-500 blank-input" placeholder="ระบุตัวเลขคำตอบ...">
+                            <span class="text-sm font-semibold text-slate-500">m/s</span>
+                        </div>
+                    </div>
+
+                    <div class="blank-row" data-correct-val="20">
+                        <label class="block text-sm font-semibold text-slate-800 mb-2 leading-relaxed flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">3</span>
+                            ปล่อยลูกบอลให้ตกแบบเสรีจากหยุดนิ่งลงมาในแนวดิ่ง เมื่อเวลาผ่านไป $2\text{ s}$ ลูกบอลจะตกลงมาเป็นระยะทางกี่เมตร? ($g = 10\text{ m/s}^2$)
+                        </label>
+                        <div class="flex items-center gap-2">
+                            <input type="text" class="w-full sm:w-64 p-2.5 rounded-lg border border-slate-250 text-sm font-medium focus:ring-2 focus:ring-blue-500 blank-input" placeholder="ระบุตัวเลขคำตอบ...">
+                            <span class="text-sm font-semibold text-slate-500">เมตร (m)</span>
+                        </div>
+                    </div>
+
+                    <div class="blank-row" data-correct-val="5">
+                        <label class="block text-sm font-semibold text-slate-800 mb-2 leading-relaxed flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">4</span>
+                            รถยนต์วิ่งด้วยความเร็ว $15\text{ m/s}$ แล้วเบรกด้วยความหน่วงคงตัว $3\text{ m/s}^2$ จะใช้เวลานานกี่วินาทีรถจึงจะหยุดนิ่ง?
+                        </label>
+                        <div class="flex items-center gap-2">
+                            <input type="text" class="w-full sm:w-64 p-2.5 rounded-lg border border-slate-250 text-sm font-medium focus:ring-2 focus:ring-blue-500 blank-input" placeholder="ระบุตัวเลขคำตอบ...">
+                            <span class="text-sm font-semibold text-slate-500">วินาที (s)</span>
+                        </div>
+                    </div>
+
+                    <div class="blank-row" data-correct-val="0">
+                        <label class="block text-sm font-semibold text-slate-800 mb-2 leading-relaxed flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold">5</span>
+                            ความชัน (Slope) ของกราฟตำแหน่ง-เวลา ($s-t$) ที่เป็นเส้นตรงแนวนอนขนานแกนเวลามีค่าเท่าใด?
+                        </label>
+                        <div class="flex items-center gap-2">
+                            <input type="text" class="w-full sm:w-64 p-2.5 rounded-lg border border-slate-250 text-sm font-medium focus:ring-2 focus:ring-blue-500 blank-input" placeholder="ระบุตัวเลขคำตอบ...">
+                            <span class="text-sm font-semibold text-slate-500">m/s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART 4: SUBJECTIVE / SHORT ANSWER (5 QUESTIONS) -->
+            <div id="tab-sub" class="space-y-6 hidden">
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl mb-6">
+                    <h3 class="font-bold text-amber-900 text-sm">📝 ส่วนที่ 4: แบบอัตนัย (Subjective Questions)</h3>
+                    <p class="text-xs text-amber-800 leading-relaxed mt-0.5">พิมพ์อธิบายแสดงวิธีทำและเหตุผลทางฟิสิกส์ทีละขั้นตอน เมื่อกดส่งคำตอบด้านล่างสุด ปุ่มสำหรับเปิดแสดงแนวทางวิเคราะห์เฉลยอย่างละเอียดจะปรากฏขึ้นมาเพื่อประเมินตนเอง</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- ข้อที่ 1 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8 sub-card">
+                        <label class="block text-base font-bold text-slate-800 mb-3 flex items-start gap-2 leading-relaxed">
+                            <span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold mt-0.5">1</span>
+                            รถยนต์ A วิ่งด้วยความเร็วคงตัว $20\text{ m/s}$ ผ่านจุดหยุดนิ่งที่รถยนต์ B จอดอยู่ ในขณะนั้นรถยนต์ B จึงเริ่มออกตัวเร่งตามด้วยความเร่งคงตัว $4\text{ m/s}^2$ จงแสดงวิธีทำหาว่าอีกนานกี่วินาที รถยนต์ B จึงจะวิ่งทันรถยนต์ A และทันกันที่ระยะทางกี่เมตร?
+                        </label>
+                        <textarea class="w-full p-3 rounded-lg border border-slate-250 text-sm font-medium focus:ring-2 focus:ring-blue-500 h-32 mb-4 sub-input" placeholder="แสดงวิธีทำทีละขั้นตอน..."></textarea>
+                        <div class="hidden bg-slate-50 border border-slate-250 rounded-xl p-4 text-xs text-slate-600 leading-relaxed sub-explain">
+                            <span class="font-bold text-slate-800 block mb-1">📖 แนวทางการทำ & เฉลยละเอียด:</span>
+                            เมื่อรถ B ทันรถ A หมายความว่าการกระจัดเท่ากัน ($s_A = s_B$)<br>
+                            • รถ A (ความเร็วคงตัว): $s_A = v_A \cdot t = 20t$<br>
+                            • รถ B (ความเร่งคงตัว $u=0, a=4$): $s_B = ut + \frac{1}{2}at^2 = 0 + \frac{1}{2}(4)t^2 = 2t^2$<br>
+                            จับ $20t = 2t^2 \Rightarrow 2t^2 - 20t = 0 \Rightarrow 2t(t - 10) = 0 \Rightarrow t = 10\text{ s}$<br>
+                            ระยะทางที่ทันกัน: $s_A = 20(10) = 200\text{ m}$<br>
+                            <strong>ตอบ:</strong> รถ B วิ่งทันรถ A ในเวลา 10 วินาที ณ ระยะทาง 200 เมตร
+                        </div>
+                    </div>
+
+                    <!-- ข้อที่ 2 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8 sub-card">
+                        <label class="block text-base font-bold text-slate-800 mb-3 flex items-start gap-2 leading-relaxed">
+                            <span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold mt-0.5">2</span>
+                            โยนก้อนหินขึ้นในแนวดิ่งจากหน้าผาสูง $60\text{ m}$ ด้วยความเร็วต้น $20\text{ m/s}$ จงแสดงวิธีทำคำนวณหาว่านานกี่วินาที ก้อนหินจึงจะตกถึงพื้นล่างใต้หน้าผา? (กำหนด $g = 10\text{ m/s}^2$)
+                        </label>
+                        <textarea class="w-full p-3 rounded-lg border border-slate-250 text-sm font-medium focus:ring-2 focus:ring-blue-500 h-32 mb-4 sub-input" placeholder="แสดงวิธีทำทีละขั้นตอน..."></textarea>
+                        <div class="hidden bg-slate-50 border border-slate-250 rounded-xl p-4 text-xs text-slate-600 leading-relaxed sub-explain">
+                            <span class="font-bold text-slate-800 block mb-1">📖 แนวทางการทำ & เฉลยละเอียด:</span>
+                            กำหนดทิศขึ้นเป็นบวก: $u = +20\text{ m/s}$, $g = -10\text{ m/s}^2$, ตกลงล่างใต้จุดโยน $s = -60\text{ m}$<br>
+                            จากสูตร $s = ut + \frac{1}{2}gt^2$<br>
+                            $-60 = 20t + \frac{1}{2}(-10)t^2 \Rightarrow -60 = 20t - 5t^2$<br>
+                            จัดรูปสมการ: $5t^2 - 20t - 60 = 0 \Rightarrow t^2 - 4t - 12 = 0 \Rightarrow (t - 6)(t + 2) = 0$<br>
+                            ได้ค่าเวลา $t = 6\text{ s}$ (เนื่องจากเวลาเป็นบวก)<br>
+                            <strong>ตอบ:</strong> ก้อนหินใช้เวลา 6 วินาทีจึงตกถึงพื้นล่าง
+                        </div>
+                    </div>
+
+                    <!-- ข้อที่ 3 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8 sub-card">
+                        <label class="block text-base font-bold text-slate-800 mb-3 flex items-start gap-2 leading-relaxed">
+                            <span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold mt-0.5">3</span>
+                            วัตถุเคลื่อนที่ในแนวตรงโดยมีความเร็วเปลี่ยนตามเวลาตามกราฟ $v-t$ ซึ่งตั้งแต่ $t=0$ ถึง $t=4\text{ s}$ ความเร็วเพิ่มขึ้นแบบเส้นตรงจาก $0$ ถึง $20\text{ m/s}$ และจาก $t=4$ ถึง $t=10\text{ s}$ ความเร็วคงตัวที่ $20\text{ m/s}$ จงคำนวณการกระจัดรวมและความเร็วเฉลี่ยตลอดช่วง $10\text{ s}$?
+                        </label>
+                        <textarea class="w-full p-3 rounded-lg border border-slate-250 text-sm font-medium focus:ring-2 focus:ring-blue-500 h-32 mb-4 sub-input" placeholder="แสดงวิธีทำทีละขั้นตอน..."></textarea>
+                        <div class="hidden bg-slate-50 border border-slate-250 rounded-xl p-4 text-xs text-slate-600 leading-relaxed sub-explain">
+                            <span class="font-bold text-slate-800 block mb-1">📖 แนวทางการทำ & เฉลยละเอียด:</span>
+                            • การกระจัด ($s$) หาจากพื้นที่ใต้กราฟ $v-t$ (รูปสี่เหลี่ยมคางหมู):<br>
+                            $\text{พื้นที่} = \frac{1}{2} \times (\text{ผลบวกด้านคู่ขนาน}) \times \text{สูง} = \frac{1}{2} \times (6 + 10) \times 20 = 160\text{ m}$<br>
+                            • ความเร็วเฉลี่ย ($v_{av}$) = $\frac{\text{การกระจัดรวม}}{\text{เวลารวม}} = \frac{160\text{ m}}{10\text{ s}} = 16\text{ m/s}$<br>
+                            <strong>ตอบ:</strong> การกระจัดรวมเท่ากับ 160 เมตร และความเร็วเฉลี่ยเท่ากับ 16 เมตร/วินาที
+                        </div>
+                    </div>
+
+                    <!-- ข้อที่ 4 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8 sub-card">
+                        <label class="block text-base font-bold text-slate-800 mb-3 flex items-start gap-2 leading-relaxed">
+                            <span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold mt-0.5">4</span>
+                            จงอธิบายความแตกต่างระหว่างความเร่งเฉลี่ย (Average Acceleration) กับความเร่งขณะใดขณะหนึ่ง (Instantaneous Acceleration) พร้อมเขียนสูตรนิยามประกอบ?
+                        </label>
+                        <textarea class="w-full p-3 rounded-lg border border-slate-250 text-sm font-medium focus:ring-2 focus:ring-blue-500 h-32 mb-4 sub-input" placeholder="พิมพ์อธิบายเหตุผล..."></textarea>
+                        <div class="hidden bg-slate-50 border border-slate-250 rounded-xl p-4 text-xs text-slate-600 leading-relaxed sub-explain">
+                            <span class="font-bold text-slate-800 block mb-1">📖 แนวทางการทำ & เฉลยละเอียด:</span>
+                            • <strong>ความเร่งเฉลี่ย ($a_{av}$):</strong> คือ อัตราส่วนของการเปลี่ยนแปลงความเร็วรวมต่อช่วงเวลาทั้งหมดที่ใช้ $a_{av} = \frac{\Delta v}{\Delta t} = \frac{v - u}{t_2 - t_1}$<br>
+                            • <strong>ความเร่งขณะใดขณะหนึ่ง ($a$):</strong> คือ ความเร่ง ณ วินาทีใดวินาทีหนึ่งโดยเฉพาะ พิจารณาเมื่อช่วงเวลาสั้นมากเข้าใกล้ศูนย์ ($\Delta t \to 0$) หาได้จากความชันของเส้นสัมผัสกราฟ $v-t$ ณ จุดเวลานั้น
+                        </div>
+                    </div>
+
+                    <!-- ข้อที่ 5 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8 sub-card">
+                        <label class="block text-base font-bold text-slate-800 mb-3 flex items-start gap-2 leading-relaxed">
+                            <span class="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs font-inter font-bold mt-0.5">5</span>
+                            เมื่อวัตถุสองชิ้นมีมวลต่างกันมาก ($m_1 = 1\text{ kg}$ และ $m_2 = 10\text{ kg}$) ถูกปล่อยจากระดับความสูงเท่ากันในสุญญากาศ วัตถุชิ้นใดจะตกถึงพื้นล่างก่อนเพราะเหตุใด จงอธิบายตามหลักการตกแบบเสรี?
+                        </label>
+                        <textarea class="w-full p-3 rounded-lg border border-slate-250 text-sm font-medium focus:ring-2 focus:ring-blue-500 h-32 mb-4 sub-input" placeholder="พิมพ์อธิบายเหตุผล..."></textarea>
+                        <div class="hidden bg-slate-50 border border-slate-250 rounded-xl p-4 text-xs text-slate-600 leading-relaxed sub-explain">
+                            <span class="font-bold text-slate-800 block mb-1">📖 แนวทางการทำ & เฉลยละเอียด:</span>
+                            วัตถุทั้งสองชิ้นจะตกถึงพื้นพร้อมกัน เนื่องจากในสุญญากาศไม่มีแรงต้านอากาศ แรงดึงดูดของโลกจะเร่งวัตถุทุกชิ้นด้วยความเร่งเนื่องจากแรงโน้มถ่วง ($g$) เท่ากันโดยไม่ขึ้นกับมวลของวัตถุ พิจารณาจากกฎข้อที่สองของนิวตัน $F = mg \Rightarrow a = \frac{F}{m} = \frac{mg}{m} = g$ มวล $m$ จะตัดทอนกันหมด ทำให้ความเร่งคงตัวเท่ากัน ส่งผลให้ความเร็วและระยะทางในการตกเท่ากันในทุกวินาที
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ปุ่มคำนวณและส่งคะแนนรวมท้ายหน้าจอ -->
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center pt-8 border-t border-slate-200 mt-10">
+                <button type="submit" class="w-full sm:w-auto py-4 px-10 bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-750 hover:to-sky-600 text-white rounded-xl font-extrabold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calculator"></i> ส่งคำตอบและตรวจคะแนนรวม
+                </button>
+                <a href="m4-mechanics.html" class="w-full sm:w-auto py-4 px-10 bg-slate-200 hover:bg-slate-350 text-slate-700 rounded-xl font-bold text-center text-sm transition-all flex items-center justify-center gap-2 border border-slate-300">
+                    <i class="fa-solid fa-home"></i> กลับหน้าหลักกลศาสตร์
+                </a>
+            </div>
+        </form>
+
+        <!-- โครงสร้าง Modal แสดงคะแนนแยกรายหมวดหลังกดส่งข้อสอบ -->
+        <div id="result-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+            <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl p-6 md:p-8 transform scale-95 transition-all duration-300 relative border border-slate-100" id="modal-content">
+                
+                <div class="text-center mb-6">
+                    <div id="modal-icon-container" class="w-16 h-16 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 bg-blue-100 text-blue-600">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-900" id="modal-title">รายงานประเมินคะแนนการทดสอบ</h3>
+                    <p class="text-sm text-slate-500 mt-1">บทที่ 02: การเคลื่อนที่แนวเส้นตรง</p>
+                </div>
+
+                <!-- คะแนนสรุปแยกแต่ละส่วนงาน -->
+                <div class="space-y-3 mb-6 bg-slate-50 rounded-2xl p-5 border border-slate-150 text-sm">
+                    <div class="flex justify-between items-center py-1">
+                        <span class="text-slate-600 font-semibold flex items-center gap-2"><i class="fa-solid fa-list-check text-blue-500 w-4"></i> ส่วนที่ 1: ปรนัย (Multiple Choice)</span>
+                        <span class="font-bold text-slate-800 font-inter" id="score-mc-txt">0 / 20</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1 border-t border-slate-200">
+                        <span class="text-slate-600 font-semibold flex items-center gap-2"><i class="fa-solid fa-circle-nodes text-indigo-500 w-4"></i> ส่วนที่ 2: จับคู่ (Matching)</span>
+                        <span class="font-bold text-slate-800 font-inter" id="score-match-txt">0 / 10</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1 border-t border-slate-200">
+                        <span class="text-slate-600 font-semibold flex items-center gap-2"><i class="fa-solid fa-pen-clip text-emerald-500 w-4"></i> ส่วนที่ 3: เติมคำในช่องว่าง</span>
+                        <span class="font-bold text-slate-800 font-inter" id="score-blank-txt">0 / 5</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1 border-t border-slate-200">
+                        <span class="text-slate-600 font-semibold flex items-center gap-2"><i class="fa-solid fa-keyboard text-amber-500 w-4"></i> ส่วนที่ 4: อัตนัย (ส่งคำอธิบายแล้ว)</span>
+                        <span class="font-bold text-amber-600 text-xs bg-amber-50 px-2 py-0.5 rounded-full"><i class="fa-solid fa-eye"></i> ตรวจเฉลยได้แล้ว</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2.5 border-t border-slate-300 text-base font-extrabold text-blue-700">
+                        <span>คะแนนประเมินรวมทั้งหมด:</span>
+                        <span class="font-inter" id="score-total-txt">0 / 35</span>
+                    </div>
+                </div>
+
+                <p class="text-xs text-slate-500 leading-relaxed text-center mb-6">
+                    *ข้อมูลเฉลยละเอียดและปุ่มตรวจสอบถูกไฮไลต์แสดงผลแล้วในหน้าเว็บหลัก คุณสามารถเลื่อนทบทวนจุดถูกผิดเป็นแถบสีแดง-เขียวได้ด้านหลังหน้าต่างป๊อปอัปนี้
+                </p>
+
+                <div class="flex gap-3">
+                    <button onclick="closeModal()" class="flex-1 py-3.5 px-6 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold text-sm transition-all text-center">
+                        ปิดกล่องรายงาน (ทบทวนเฉลย)
+                    </button>
+                    <a href="m4-mechanics.html" class="flex-1 py-3.5 px-6 bg-blue-600 hover:bg-blue-750 text-white rounded-xl font-bold text-sm transition-all text-center">
+                        กลับสารบัญวิชากลศาสตร์
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนท้ายดีไซน์สีเข้ม (Deep Footer Card) -->
+        <footer class="bg-slate-950 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden mt-12">
+            <div class="absolute w-96 h-96 bg-blue-600/5 rounded-full -top-32 -left-32 blur-3xl"></div>
+            
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 pb-8 border-b border-slate-800">
+                    <!-- ฝั่งซ้าย: รูปโปรไฟล์ครู -->
+                    <div class="flex-shrink-0 w-36 h-36 rounded-2xl overflow-hidden border-2 border-slate-800 shadow-xl bg-slate-900">
+                        <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช" class="w-full h-full object-cover object-center scale-110">
+                    </div>
+
+                    <!-- ฝั่งขวา: ข้อความและปุ่มทางลัด -->
+                    <div class="flex-grow text-center md:text-left">
+                        <h3 class="text-xl font-bold mb-3 text-white">คุยกับ จารย์เปา</h3>
+                        <blockquote class="text-slate-300 italic text-sm md:text-base mb-6 max-w-3xl pl-4 border-l-4 border-blue-500/80 mx-auto md:mx-0">
+                            "มุ่งเน้นการปูพื้นฐานวิทยาศาสตร์ฟิสิกส์ให้เข้มแข็งตั้งแต่ระดับ ม.ต้น เพื่อให้พร้อมสำหรับการต่อยอดในระดับที่สูงขึ้น ผมเชื่อว่าการเรียนที่เห็นภาพจริงคือหัวใจสำคัญของการเข้าใจฟิสิกส์อย่างยั่งยืนครับ"
+                        </blockquote>
+                        
+                        <!-- เมนูทางลัด 3 เมนูย่อย -->
+                        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
+                                <span class="bg-orange-500/10 text-orange-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">บทเรียน</span>
+                                <span class="text-sm font-semibold text-white">คลังบทเรียน</span>
+                            </a>
+                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
+                                <span class="bg-emerald-500/10 text-emerald-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">สื่อและนวัตกรรม</span>
+                                <span class="text-sm font-semibold text-white">คลังสื่อ</span>
+                            </a>
+                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
+                                <span class="bg-pink-500/10 text-pink-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">แนวข้อสอบ</span>
+                                <span class="text-sm font-semibold text-white">คลังข้อสอบ</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-6 text-center text-slate-500 text-xs">
+                    <p>&copy; 2026 Gemini Antigravity - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript สำหรับระบบ Interactive Quiz Engine ทั้งหมด -->
+    <script>
+        // บันทึกตัวเลือกแบบปรนัย
+        const userMcAnswers = {
+            q1: null, q2: null, q3: null, q4: null, q5: null,
+            q6: null, q7: null, q8: null, q9: null, q10: null,
+            q11: null, q12: null, q13: null, q14: null, q15: null,
+            q16: null, q17: null, q18: null, q19: null, q20: null
+        };
+
+        // สลับหน้าต่าง Tab
+        function switchTab(tabId) {
+            const tabs = ['tab-mc', 'tab-match', 'tab-blank', 'tab-sub'];
+            tabs.forEach(id => {
+                const el = document.getElementById(id);
+                if (id === tabId) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+
+            const btnIds = ['btn-tab-mc', 'btn-tab-match', 'btn-tab-blank', 'btn-tab-sub'];
+            btnIds.forEach(btnId => {
+                const btn = document.getElementById(btnId);
+                if (btnId === `btn-${tabId}`) {
+                    btn.classList.remove('text-slate-500', 'border-transparent', 'hover:text-slate-800', 'hover:border-slate-300');
+                    btn.classList.add('text-blue-600', 'border-blue-600');
+                } else {
+                    btn.classList.remove('text-blue-600', 'border-blue-600');
+                    btn.classList.add('text-slate-500', 'border-transparent', 'hover:text-slate-800', 'hover:border-slate-300');
+                }
+            });
+        }
+
+        // เลือกตัวเลือกปรนัยพร้อมทำไฮไลต์สี
+        function selectMcOption(questionId, choiceValue, element) {
+            userMcAnswers[questionId] = choiceValue;
+
+            const container = element.parentElement;
+            const options = container.children;
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.remove('border-blue-500', 'bg-blue-50/50', 'text-blue-800');
+                options[i].classList.add('border-slate-200', 'hover:bg-slate-50');
+                
+                const numSpan = options[i].querySelector('.select-num');
+                numSpan.classList.remove('bg-blue-500', 'text-white');
+                numSpan.classList.add('bg-slate-100', 'text-slate-500');
+            }
+
+            element.classList.remove('border-slate-200', 'hover:bg-slate-50');
+            element.classList.add('border-blue-500', 'bg-blue-50/50', 'text-blue-800');
+            
+            const numSpan = element.querySelector('.select-num');
+            numSpan.classList.remove('bg-slate-100', 'text-slate-500');
+            numSpan.classList.add('bg-blue-500', 'text-white');
+        }
+
+        // ระบบประมวลผลคำนวณคะแนนรวมทุกหมวดหมู่วิจัย
+        function evaluateAllQuiz(event) {
+            event.preventDefault();
+
+            // 1. ตรวจสอบปรนัย (20 คะแนน)
+            let mcScore = 0;
+            const mcCards = document.querySelectorAll('.q-card[data-qtype="mc"]');
+            
+            mcCards.forEach(card => {
+                const qid = card.getAttribute('data-qid');
+                const correctVal = parseInt(card.getAttribute('data-correct'));
+                const userVal = userMcAnswers[qid];
+
+                if (userVal === correctVal) {
+                    mcScore++;
+                }
+
+                const optionsBox = card.querySelectorAll('.option-box');
+                optionsBox.forEach((box, index) => {
+                    const boxNum = index + 1;
+                    box.classList.remove('border-blue-500', 'bg-blue-50/50', 'text-blue-800', 'border-slate-200', 'hover:bg-slate-50');
+                    
+                    if (boxNum === correctVal) {
+                        box.classList.add('border-emerald-500', 'bg-emerald-50/80', 'text-emerald-950');
+                    } else if (boxNum === userVal && userVal !== correctVal) {
+                        box.classList.add('border-rose-500', 'bg-rose-50/80', 'text-rose-950');
+                    } else {
+                        box.classList.add('border-slate-200', 'opacity-60');
+                    }
+                });
+            });
+
+            // 2. ตรวจแบบจับคู่ (10 คะแนน)
+            let matchScore = 0;
+            const matchRows = document.querySelectorAll('.match-row');
+            matchRows.forEach(row => {
+                const correctVal = parseInt(row.getAttribute('data-correct'));
+                const selectElement = row.querySelector('.match-select');
+                const userVal = parseInt(selectElement.value);
+
+                selectElement.classList.remove('border-slate-200', 'border-emerald-500', 'border-rose-500');
+                row.classList.remove('bg-slate-50', 'bg-emerald-50/50', 'bg-rose-50/50');
+
+                if (userVal === correctVal) {
+                    matchScore++;
+                    selectElement.classList.add('border-emerald-500', 'text-emerald-700', 'bg-emerald-50/20');
+                    row.classList.add('bg-emerald-50/50', 'border-emerald-200');
+                } else {
+                    selectElement.classList.add('border-rose-500', 'text-rose-700', 'bg-rose-50/20');
+                    row.classList.add('bg-rose-50/50', 'border-rose-200');
+                }
+            });
+
+            // 3. ตรวจแบบเติมคำในช่องว่าง (5 คะแนน)
+            let blankScore = 0;
+            const blankRows = document.querySelectorAll('.blank-row');
+            blankRows.forEach(row => {
+                const correctVals = row.getAttribute('data-correct-val').split(',');
+                const inputElement = row.querySelector('.blank-input');
+                const userVal = inputElement.value.trim().toLowerCase();
+
+                inputElement.classList.remove('border-slate-250', 'border-emerald-500', 'border-rose-500', 'bg-emerald-50/20', 'bg-rose-50/20');
+
+                let isCorrect = false;
+                for (let i = 0; i < correctVals.length; i++) {
+                    if (userVal === correctVals[i].trim().toLowerCase()) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+
+                if (isCorrect && userVal !== "") {
+                    blankScore++;
+                    inputElement.classList.add('border-emerald-500', 'bg-emerald-50/20', 'text-emerald-800');
+                } else {
+                    inputElement.classList.add('border-rose-500', 'bg-rose-50/20', 'text-rose-800');
+                }
+            });
+
+            // 4. แสดงผลแผงแนวคิดคำตอบอัตนัย
+            const explains = document.querySelectorAll('.sub-explain');
+            explains.forEach(exp => {
+                exp.classList.remove('hidden');
+            });
+
+            // 5. รายงานคำนวณคะแนนรวม
+            const totalScore = mcScore + matchScore + blankScore;
+            
+            document.getElementById('score-mc-txt').textContent = `${mcScore} / 20 คะแนน`;
+            document.getElementById('score-match-txt').textContent = `${matchScore} / 10 คะแนน`;
+            document.getElementById('score-blank-txt').textContent = `${blankScore} / 5 คะแนน`;
+            document.getElementById('score-total-txt').textContent = `${totalScore} / 35 คะแนน`;
+
+            const modal = document.getElementById('result-modal');
+            modal.classList.remove('hidden');
+        }
+
+        // ปิด Modal
+        function closeModal() {
+            const modal = document.getElementById('result-modal');
+            modal.classList.add('hidden');
+        }
+
+        // เมนูมือถือ Dropdown
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+    </script>
+</body>
+</html>
