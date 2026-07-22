@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 05: งานและพลังงาน | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+    <style>
+        .tab-btn{transition:all 0.2s}.tab-btn.active{background:#059669;color:white;box-shadow:0 4px 12px rgba(5,150,105,0.3)}.tab-content{display:none}.tab-content.active{display:block}
+        .choice-btn{transition:all 0.2s;cursor:pointer;border:2px solid #e2e8f0}.choice-btn:hover{border-color:#6ee7b7;background:#ecfdf5}.choice-btn.selected{border-color:#059669;background:#ecfdf5;color:#065f46}.choice-btn.correct{border-color:#10b981!important;background:#ecfdf5!important;color:#065f46!important}.choice-btn.wrong{border-color:#ef4444!important;background:#fef2f2!important;color:#991b1b!important}
+        .match-select{border:2px solid #e2e8f0;border-radius:0.5rem;padding:0.4rem 0.6rem;font-size:0.8rem;width:100%}.match-select.correct{border-color:#10b981;background:#ecfdf5}.match-select.wrong{border-color:#ef4444;background:#fef2f2}
+        .fill-input{border:2px solid #e2e8f0;border-radius:0.5rem;padding:0.4rem 0.6rem;font-size:0.9rem}.fill-input.correct{border-color:#10b981;background:#ecfdf5}.fill-input.wrong{border-color:#ef4444;background:#fef2f2}
+        .answer-key{display:none}.answer-key.show{display:block}
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}.modal-overlay.show{display:flex}
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-blue-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-blue-600">HOME</a>
+            <a href="m4-mechanics.html" class="text-sm font-semibold text-blue-600 border-b-2 border-blue-600">บทเรียน</a>
+            <a href="#" class="text-sm font-medium text-slate-500 hover:text-blue-600">นวัตกรรม</a>
+            <a href="#" class="text-sm font-medium text-slate-500 hover:text-blue-600">ข้อสอบ</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m4-mechanics.html" class="text-blue-600 font-semibold py-1">บทเรียน</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-6">
+        <a href="m4-mechanics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</a>
+        <span class="text-xs text-slate-400 font-inter">CH05 QUIZ ENGINE</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-blue-900 via-emerald-800 to-slate-900 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+        <div class="absolute w-72 h-72 bg-emerald-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 text-emerald-200 px-3 py-1 rounded-full text-xs font-semibold mb-4"><i class="fa-solid fa-bolt"></i> บทที่ 05 — ฟิสิกส์ ม.4 กลศาสตร์</div>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด: งานและพลังงาน</h1>
+            <p class="text-emerald-100 text-sm max-w-2xl leading-relaxed">งาน W=Fs cosθ | กำลัง P=W/t | พลังงานจลน์-ศักย์ | กฎอนุรักษ์พลังงาน<br>ปรนัย 20 | จับคู่ 10 | เติมคำ 5 | อัตนัย 5 &nbsp;|&nbsp; <strong>คะแนนเต็ม 35</strong></p>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+        <button onclick="showTab(1)" class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-1"><i class="fa-solid fa-circle-dot mr-1"></i>ส่วนที่ 1 ปรนัย (20)</button>
+        <button onclick="showTab(2)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-2"><i class="fa-solid fa-link mr-1"></i>ส่วนที่ 2 จับคู่ (10)</button>
+        <button onclick="showTab(3)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-3"><i class="fa-solid fa-pen-to-square mr-1"></i>ส่วนที่ 3 เติมคำ (5)</button>
+        <button onclick="showTab(4)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-4"><i class="fa-solid fa-file-pen mr-1"></i>ส่วนที่ 4 อัตนัย (5)</button>
+    </div>
+
+    <div id="tab-1" class="tab-content active"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-emerald-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย</h2><p class="text-xs text-slate-500 mb-4">20 ข้อ ข้อละ 1 คะแนน</p><div id="mc-questions" class="space-y-6"></div></div></div>
+    <div id="tab-2" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-emerald-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่</h2><p class="text-xs text-slate-500 mb-4">10 ข้อ ข้อละ 1 คะแนน</p><div id="match-questions" class="space-y-3"></div></div></div>
+    <div id="tab-3" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-emerald-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำในช่องว่าง</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ ข้อละ 1 คะแนน</p><div id="fill-questions" class="space-y-6"></div></div></div>
+    <div id="tab-4" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-emerald-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ | เขียนวิธีทำ แล้วกดดูเฉลย</p><div id="subj-questions" class="space-y-6"></div></div></div>
+
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="submitAll()" class="py-4 px-10 bg-gradient-to-r from-blue-600 to-emerald-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม</button>
+        <a href="m4-mechanics.html" class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-list"></i> กลับหน้าหลักกลศาสตร์</a>
+    </div>
+</main>
+
+<div class="modal-overlay" id="score-modal">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-600 to-emerald-600 p-6 text-white text-center">
+            <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+            <h2 class="text-2xl font-extrabold">ผลการทำแบบฝึกหัด</h2>
+            <p class="text-blue-100 text-sm mt-1">บทที่ 05: งานและพลังงาน</p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20)</span><span class="font-bold text-blue-700" id="modal-p1">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (10)</span><span class="font-bold text-blue-700" id="modal-p2">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5)</span><span class="font-bold text-blue-700" id="modal-p3">-</span></div>
+            <div class="bg-blue-50 rounded-xl p-4 text-center mt-2">
+                <p class="text-xs text-blue-600 font-semibold mb-1">คะแนนรวม (ส่วนที่ 1-3)</p>
+                <p class="text-4xl font-extrabold text-blue-700" id="modal-total">0/35</p>
+                <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+            </div>
+        </div>
+        <div class="px-6 pb-6 flex gap-3">
+            <button onclick="closeModal()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700">ดูเฉลยละเอียด</button>
+            <a href="m4-mechanics.html" class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300">กลับหน้าหลัก</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const mcData=[
+    {q:"ออกแรง F=10 N ลากวัตถุระยะ s=5 m มุม θ=0° งานที่ทำ W=?",choices:["50 J","0 J","2 J","15 J"],ans:0},
+    {q:"แรงที่ตั้งฉากกับการกระจัดทำงานเท่าไร?",choices:["มากที่สุด","มีค่าน้อย","เป็นศูนย์","ขึ้นกับมวล"],ans:2},
+    {q:"กำลัง P = W/t: งาน 300 J ใน 5 s กำลัง = ?",choices:["60 W","1500 W","295 W","305 W"],ans:0},
+    {q:"กำลัง P = Fv: F=200 N, v=5 m/s กำลัง = ?",choices:["1000 W","205 W","40 W","195 W"],ans:0},
+    {q:"พลังงานจลน์ Ek = ½mv²: m=2 kg, v=4 m/s Ek = ?",choices:["16 J","8 J","32 J","4 J"],ans:0},
+    {q:"พลังงานศักย์โน้มถ่วง Ep = mgh: m=5 kg, h=10 m Ep = ? (g=10)",choices:["500 J","50 J","5000 J","15 J"],ans:0},
+    {q:"สปริง k=200 N/m กดลง x=0.1 m พลังงานศักย์ยืดหยุ่น = ?",choices:["1 J","20 J","200 J","0.01 J"],ans:0},
+    {q:"ทฤษฎีบทงาน-พลังงานจลน์กล่าวว่าอะไร?",choices:["W = ΔEp","W_net = ΔEk","W = Ek","W_net = 0"],ans:1},
+    {q:"กฎอนุรักษ์พลังงานกล: เมื่อไม่มีแรงไม่อนุรักษ์กระทำ?",choices:["Ek เท่านั้นคงที่","Ep เท่านั้นคงที่","Ek + Ep = ค่าคงตัว","Ek = Ep เสมอ"],ans:2},
+    {q:"ลูกปืนตกจากความสูง h ไม่มีแรงต้านอากาศ ความเร็วตอนกระทบ = ?",choices:["√(gh)","√(2gh)","2gh","gh/2"],ans:1},
+    {q:"ประสิทธิภาพ η = W_out/W_in × 100%: W_out=80J, W_in=100J η = ?",choices:["80%","20%","120%","180%"],ans:0},
+    {q:"งานที่ทำโดยแรงเสียดทานมีค่าเป็น?",choices:["บวกเสมอ","ศูนย์เสมอ","ลบเสมอ","ขึ้นกับทิศทาง"],ans:2},
+    {q:"พลังงานกล (Em) = ?",choices:["mgh","½mv²","mgh + ½mv²","mgh - ½mv²"],ans:2},
+    {q:"แรงอนุรักษ์ต่างจากแรงไม่อนุรักษ์อย่างไร?",choices:["งานไม่ขึ้นกับเส้นทาง","งานขึ้นกับขนาด","งานขึ้นกับเส้นทาง","ไม่สัมพันธ์กับพลังงาน"],ans:0},
+    {q:"สปริงถูกกด แล้วดีดวัตถุออก พลังงานเปลี่ยนอย่างไร?",choices:["Ek → Ep","Ep → Ek","Ep → ความร้อน","Ek = ค่าคงที่"],ans:1},
+    {q:"เครื่องยนต์กำลังสูงสุด 100 kW ใช้เดินทาง 1 ชั่วโมงทำงานได้เท่าไร?",choices:["360 MJ","100 kJ","100 J","3.6 kJ"],ans:0},
+    {q:"งานจากแรงโน้มถ่วงไม่ขึ้นกับ?",choices:["มวล","ความสูง","g","เส้นทาง"],ans:3},
+    {q:"เครื่องกลอย่างง่าย: งานใส่เข้า = งานได้ออก (เมื่อ η=100%) หมายความว่า?",choices:["ใช้แรงน้อยลงแต่เคลื่อนที่ไกลขึ้น","ใช้แรงมากขึ้น","พลังงานเพิ่มขึ้น","แรงและระยะทางไม่สัมพันธ์กัน"],ans:0},
+    {q:"พลังงานจลน์เป็นสัดส่วนกับ?",choices:["v","v²","√v","1/v"],ans:1},
+    {q:"ความสัมพันธ์: กำลัง = แรง × ?",choices:["ระยะทาง","มวล","ความเร็ว","เวลา"],ans:2},
+];
+const matchData=[
+    {left:"งาน (Work)",right:"W = Fs cosθ"},
+    {left:"กำลัง (Power)",right:"P = W/t"},
+    {left:"พลังงานจลน์",right:"½mv²"},
+    {left:"พลังงานศักย์โน้มถ่วง",right:"mgh"},
+    {left:"พลังงานศักย์ยืดหยุ่น",right:"½kx²"},
+    {left:"ทฤษฎีบทงาน-พลังงาน",right:"W_net = ΔEk"},
+    {left:"ประสิทธิภาพ",right:"W_out/W_in"},
+    {left:"แรงอนุรักษ์",right:"งานไม่ขึ้นกับเส้นทาง"},
+    {left:"กฎอนุรักษ์พลังงานกล",right:"Ek+Ep = ค่าคงตัว"},
+    {left:"พลังงานกล",right:"Ek + Ep"},
+];
+const matchOptions=["W = Fs cosθ","P = W/t","½mv²","mgh","½kx²","W_net = ΔEk","W_out/W_in","งานไม่ขึ้นกับเส้นทาง","Ek+Ep = ค่าคงตัว","Ek + Ep"];
+const fillData=[
+    {q:"ออกแรง 50 N ทำมุม 60° กับแนวราบ ลากวัตถุ 10 m งาน = ___ J",unit:"J",ans:"250",tol:2},
+    {q:"วัตถุ 4 kg ความเร็ว 6 m/s พลังงานจลน์ = ___ J",unit:"J",ans:"72",tol:1},
+    {q:"วัตถุ 3 kg ตกจากความสูง 20 m (ไม่มีแรงต้าน) ความเร็วตอนกระทบ = ___ m/s (g=10)",unit:"m/s",ans:"20",tol:0.5},
+    {q:"เครื่องจักรทำงาน 6000 J ใน 2 นาที กำลัง = ___ W",unit:"W",ans:"50",tol:1},
+    {q:"สปริง k=500 N/m ยืดออก 0.4 m พลังงานศักย์ยืดหยุ่น = ___ J",unit:"J",ans:"40",tol:1},
+];
+const subjData=[
+    {q:"วัตถุมวล 5 kg เลื่อนขึ้นพื้นเอียง 30° สูง 4 m μk=0.2 จงหาความเร็วที่ฐานโดยใช้กฎอนุรักษ์พลังงาน (g=10 m/s²)",
+    key:"<strong>วิธีทำ:</strong><br>ความยาวพื้นเอียง L = 4/sin30° = 8 m<br>N = mg cos30° = 5×10×(√3/2) = 25√3 N<br>แรงเสียดทาน f = μk×N = 0.2×25√3 = 5√3 N<br>งานเสียดทาน = -f×L = -5√3×8 = -40√3 J<br>Em_top = mgh = 5×10×4 = 200 J, Em_bottom = ½mv²<br>200 - 40√3 = ½×5×v² → v² = 2×(200-69.3)/5 = 52.3 → v ≈ <strong>7.23 m/s</strong>"},
+    {q:"รถ 1000 kg ความเร็ว 20 m/s เบรกหยุดใน 4s จงหา (1) แรงเบรก (2) งานที่เบรกทำ (3) กำลังเฉลี่ยของเบรก",
+    key:"<strong>วิธีทำ:</strong><br>(1) a = Δv/t = 20/4 = 5 m/s² (ชะลอ) → F_brake = ma = 1000×5 = <strong>5000 N</strong><br>(2) s = ½at² = ½×5×16 = 40 m → W = -F×s = -5000×40 = <strong>-200000 J</strong> (งานลบ)<br>(3) P = W/t = 200000/4 = <strong>50000 W = 50 kW</strong>"},
+    {q:"สปริง k=1000 N/m กด 0.2 m แล้วปล่อยดีดวัตถุ 0.5 kg บนพื้นราบ μk=0.1 วัตถุเคลื่อนที่ไปไกลเท่าไร? (g=10)",
+    key:"<strong>วิธีทำ:</strong><br>พลังงานสปริง Eps = ½kx² = ½×1000×0.04 = 20 J<br>แรงเสียดทาน f = μk×mg = 0.1×0.5×10 = 0.5 N<br>20 = f×d → d = 20/0.5 = <strong>40 m</strong>"},
+    {q:"เครื่องสูบน้ำกำลัง 5 kW ประสิทธิภาพ 80% สูบน้ำขึ้นสูง 10 m ได้น้ำกี่ kg ต่อวินาที?",
+    key:"<strong>วิธีทำ:</strong><br>กำลังที่ใช้งานได้จริง P_out = 0.8×5000 = 4000 W<br>P_out = mgh/t → m/t = P_out/(gh) = 4000/(10×10) = <strong>40 kg/s</strong>"},
+    {q:"อธิบายกฎอนุรักษ์พลังงานกลและยกตัวอย่าง 2 ตัวอย่าง พร้อมระบุว่าเมื่อใดที่พลังงานกลไม่อนุรักษ์",
+    key:"<strong>เฉลย:</strong><br><strong>กฎ:</strong> เมื่อมีเฉพาะแรงอนุรักษ์กระทำ Ek+Ep = ค่าคงตัว<br><strong>ตัวอย่าง 1:</strong> ลูกปืนตกอิสระ Ep เปลี่ยนเป็น Ek<br><strong>ตัวอย่าง 2:</strong> ชิงช้า Ep สูงสุดที่ปลาย, Ek สูงสุดที่จุดต่ำสุด<br><strong>ไม่อนุรักษ์:</strong> เมื่อมีแรงเสียดทาน หรือแรงต้านอากาศ พลังงานบางส่วนสูญเสียเป็นความร้อน"},
+];
+
+let userAnswers=new Array(20).fill(-1);
+function renderMC(){const c=document.getElementById('mc-questions');mcData.forEach((q,qi)=>{const d=document.createElement('div');d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-emerald-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi+1}</span>${q.q}</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${q.choices.map((ch,ci)=>`<button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-sm flex items-center gap-3"><span class="w-7 h-7 rounded-full border-2 border-current flex items-center justify-center font-bold font-inter text-xs flex-shrink-0">${ci+1}</span><span>${ch}</span></button>`).join('')}</div>`;c.appendChild(d);});}
+function selectMC(qi,ci){if(document.getElementById(`mc-${qi}-0`).classList.contains('correct')||document.getElementById(`mc-${qi}-0`).classList.contains('wrong'))return;const prev=userAnswers[qi];if(prev!==-1)document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');userAnswers[qi]=ci;document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');}
+function renderMatch(){const c=document.getElementById('match-questions');matchData.forEach((m,mi)=>{const d=document.createElement('div');d.className='flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';const opts=matchOptions.map(o=>`<option value="${o}">${o}</option>`).join('');d.innerHTML=`<span class="w-6 h-6 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">${mi+1}</span><span class="flex-1 text-sm font-medium text-slate-700">${m.left}</span><select class="match-select" id="match-${mi}"><option value="">-- เลือก --</option>${opts}</select>`;c.appendChild(d);});}
+function renderFill(){const c=document.getElementById('fill-questions');fillData.forEach((f,fi)=>{const d=document.createElement('div');d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-blue-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi+1}</span>${f.q}</p><div class="flex items-center gap-2"><input type="text" class="fill-input flex-1 min-w-0 outline-none" id="fill-${fi}" placeholder="พิมพ์คำตอบ..."><span class="text-sm text-slate-500 whitespace-nowrap">${f.unit}</span><span class="text-sm ml-1" id="fill-icon-${fi}"></span></div>`;c.appendChild(d);});}
+function renderSubj(){const c=document.getElementById('subj-questions');subjData.forEach((s,si)=>{const d=document.createElement('div');d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-amber-500 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si+1}</span>${s.q}</p><textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-emerald-400 min-h-[120px] resize-y" id="subj-${si}" placeholder="เขียนวิธีทำที่นี่..."></textarea><div class="answer-key mt-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 leading-relaxed" id="key-${si}">${s.key}</div><button onclick="toggleKey(${si})" class="mt-2 text-xs text-emerald-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}"><i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด</button>`;c.appendChild(d);});}
+function toggleKey(si){const k=document.getElementById(`key-${si}`);const b=document.getElementById(`key-btn-${si}`);k.classList.toggle('show');b.innerHTML=k.classList.contains('show')?'<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย':'<i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด';}
+function showTab(n){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById(`tab-${n}`).classList.add('active');document.getElementById(`tab-btn-${n}`).classList.add('active');}
+function submitAll(){let p1=0;mcData.forEach((q,qi)=>{const chosen=userAnswers[qi];for(let ci=0;ci<4;ci++){const btn=document.getElementById(`mc-${qi}-${ci}`);btn.classList.remove('selected');if(ci===q.ans)btn.classList.add('correct');else if(ci===chosen&&chosen!==q.ans)btn.classList.add('wrong');}if(chosen===q.ans)p1++;});let p2=0;matchData.forEach((m,mi)=>{const sel=document.getElementById(`match-${mi}`);sel.classList.remove('correct','wrong');if(sel.value===m.right){sel.classList.add('correct');p2++;}else sel.classList.add('wrong');});let p3=0;fillData.forEach((f,fi)=>{const input=document.getElementById(`fill-${fi}`);const icon=document.getElementById(`fill-icon-${fi}`);const val=parseFloat(input.value.trim());const ok=Math.abs(val-parseFloat(f.ans))<=f.tol;input.classList.remove('correct','wrong');if(ok){input.classList.add('correct');icon.textContent='✅';p3++;}else{input.classList.add('wrong');icon.textContent='❌';}});subjData.forEach((_,si)=>document.getElementById(`key-${si}`).classList.add('show'));const total=p1+p2+p3;document.getElementById('modal-p1').textContent=`${p1}/20`;document.getElementById('modal-p2').textContent=`${p2}/10`;document.getElementById('modal-p3').textContent=`${p3}/5`;document.getElementById('modal-total').textContent=`${total}/35`;const pct=Math.round(total/35*100);let grade='',emoji='';if(pct>=80){grade=`ยอดเยี่ยม! (${pct}%)`;emoji='🏆';}else if(pct>=60){grade=`ผ่าน (${pct}%)`;emoji='👍';}else{grade=`ต้องทบทวน (${pct}%)`;emoji='📚';}document.getElementById('modal-grade').textContent=grade;document.getElementById('modal-emoji').textContent=emoji;document.getElementById('score-modal').classList.add('show');}
+function closeModal(){document.getElementById('score-modal').classList.remove('show');}
+document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+renderMC();renderMatch();renderFill();renderSubj();
+</script>
+</body>
+</html>
