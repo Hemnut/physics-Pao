@@ -30,16 +30,7 @@
     <!-- โหลด KaTeX สำหรับการแสดงผลสูตรฟิสิกส์ที่คมชัด -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body, {
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false},
-                {left: '\\(', right: '\\)', display: false},
-                {left: '\\[', right: '\\[', display: true}
-            ],
-            throwOnError : false
-        });"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
 
@@ -98,32 +89,32 @@
                 <div class="inline-flex items-center gap-2 bg-blue-500/20 border border-blue-400/30 text-blue-200 px-3 py-1 rounded-full text-xs font-semibold mb-4">
                     <i class="fa-solid fa-person-running"></i> บทเรียนที่ 02 - ฟิสิกส์ ม.4 กลศาสตร์
                 </div>
-                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">การเคลื่อนที่แนวเส้นตรง</h1>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">สรุปเนื้อหา: การเคลื่อนที่แนวเส้นตรง</h1>
                 <p class="text-blue-100 text-sm md:text-base max-w-3xl leading-relaxed">
-                    สรุปเนื้อหาสำคัญ ปริมาณพื้นฐาน 5 สูตรการเคลื่อนที่ด้วยความเร่งคงตัว การตกแบบเสรีภายใต้แรงดึงดูดโลก และการตีความกราฟความสัมพันธ์ระยะทาง ความเร็ว ความเร่ง
+                    สรุปเนื้อหาสำคัญ ปริมาณการเคลื่อนที่ 5 สูตรการเคลื่อนที่แนวตรงด้วยความเร่งคงตัว การตกแบบเสรีภายใต้แรงดึงดูดโลก และการตีความกราฟความสัมพันธ์ระยะทาง ความเร็ว ความเร่ง
                 </p>
             </div>
         </div>
 
         <!-- สารบัญลัด (Quick Index) -->
-        <div class="bg-white rounded-2xl p-5 mb-10 border border-slate-100 shadow-sm">
+        <div class="bg-white rounded-2xl p-5 mb-10 border border-slate-150 shadow-sm">
             <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <i class="fa-solid fa-list-ol text-blue-500"></i> หัวข้อสรุปในบทนี้
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs font-semibold">
-                <a href="#section-1" class="p-2.5 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
+                <a href="#section-1" class="p-3 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
                     <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center font-inter text-[0.65rem]">1</span>
                     ปริมาณการเคลื่อนที่แนวตรง
                 </a>
-                <a href="#section-2" class="p-2.5 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
+                <a href="#section-2" class="p-3 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
                     <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center font-inter text-[0.65rem]">2</span>
                     5 สูตรการเคลื่อนที่คงตัว
                 </a>
-                <a href="#section-3" class="p-2.5 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
+                <a href="#section-3" class="p-3 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
                     <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center font-inter text-[0.65rem]">3</span>
                     การตกแบบเสรี (Free Fall)
                 </a>
-                <a href="#section-4" class="p-2.5 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
+                <a href="#section-4" class="p-3 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
                     <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center font-inter text-[0.65rem]">4</span>
                     การตีความกราฟการเคลื่อนที่
                 </a>
@@ -133,7 +124,7 @@
         <div class="space-y-12">
             
             <!-- SECTION 1: ปริมาณการเคลื่อนที่แนวตรง -->
-            <section id="section-1" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
+            <section id="section-1" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-150 shadow-sm">
                 <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                     <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg font-inter">01</div>
                     <h2 class="text-xl md:text-2xl font-bold text-slate-900">ปริมาณการเคลื่อนที่แนวตรง</h2>
@@ -141,11 +132,11 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <!-- การกระจัด vs ระยะทาง -->
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80">
                         <div class="flex items-center gap-2 text-blue-600 font-bold mb-3 text-sm">
                             <i class="fa-solid fa-route"></i> ระยะทาง (Distance) vs การกระจัด (Displacement)
                         </div>
-                        <ul class="text-xs text-slate-600 space-y-2.5 leading-relaxed">
+                        <ul class="text-xs text-slate-600 space-y-3 leading-relaxed">
                             <li class="flex items-start gap-2">
                                 <span class="text-blue-500 font-bold">•</span>
                                 <span><strong>ระยะทาง ($s$):</strong> เป็นปริมาณสเกลาร์ คิดความยาวรวมของเส้นทางเคลื่อนที่ทั้งหมด มีหน่วยเป็นเมตร ($\text{m}$)</span>
@@ -154,126 +145,144 @@
                                 <span class="text-blue-500 font-bold">•</span>
                                 <span><strong>การกระจัด ($\vec{s}$):</strong> เป็นปริมาณเวกเตอร์ คิดเส้นตรงสั้นที่สุดจากจุดเริ่มต้นชี้ไปยังจุดสุดท้าย มีหน่วยเป็นเมตร ($\text{m}$)</span>
                             </li>
-                            <li class="bg-blue-50/70 p-2.5 rounded-xl border border-blue-100 text-blue-900">
-                                💡 <strong>ข้อสังเกต:</strong> เมื่อเคลื่อนที่ครบรอบกลับมาที่เดิม การกระจัดจะเป็นศูนย์ ($\vec{s} = 0$) แต่ระยะทาง $s > 0$
+                            <li class="bg-blue-50 p-3 rounded-xl border border-blue-100 text-blue-900 font-medium">
+                                💡 <strong>ข้อสังเกตสำคัญ:</strong> เมื่อวัตถุเคลื่อนที่ครบรอบกลับมาที่ตำแหน่งเดิม การกระจัดจะเป็นศูนย์ ($\vec{s} = 0$) แต่ระยะทางจะมีค่ามากกว่าศูนย์ ($s > 0$)
                             </li>
                         </ul>
                     </div>
 
                     <!-- อัตราเร็ว vs ความเร็ว -->
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80">
                         <div class="flex items-center gap-2 text-sky-600 font-bold mb-3 text-sm">
                             <i class="fa-solid fa-gauge-high"></i> อัตราเร็ว (Speed) vs ความเร็ว (Velocity)
                         </div>
-                        <ul class="text-xs text-slate-600 space-y-2.5 leading-relaxed">
+                        <ul class="text-xs text-slate-600 space-y-3 leading-relaxed">
                             <li class="flex items-start gap-2">
                                 <span class="text-sky-500 font-bold">•</span>
-                                <span><strong>อัตราเร็วเฉลี่ย ($v_{av}$):</strong> ปริมาณสเกลาร์ คิดจากระยะทางหารด้วยเวลา \[ v_{av} = \frac{s}{t} \]</span>
+                                <span><strong>อัตราเร็วเฉลี่ย ($v_{av}$):</strong> ปริมาณสเกลาร์ คิดจากระยะทางทั้งหมดหารด้วยเวลา
+                                    <div class="my-1.5 text-center text-slate-800 font-semibold">$$v_{av} = \frac{s}{t}$$</div>
+                                </span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="text-sky-500 font-bold">•</span>
-                                <span><strong>ความเร็วเฉลี่ย ($\vec{v}_{av}$):</strong> ปริมาณเวกเตอร์ คิดจากการกระจัดหารด้วยเวลา \[ \vec{v}_{av} = \frac{\vec{s}}{t} \]</span>
+                                <span><strong>ความเร็วเฉลี่ย ($\vec{v}_{av}$):</strong> ปริมาณเวกเตอร์ คิดจากการกระจัดหารด้วยเวลา
+                                    <div class="my-1.5 text-center text-slate-800 font-semibold">$$\vec{v}_{av} = \frac{\vec{s}}{t}$$</div>
+                                </span>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- ความเร่ง -->
-                <div class="bg-gradient-to-r from-blue-50 to-sky-50 rounded-2xl p-5 border border-blue-100">
+                <div class="bg-gradient-to-r from-blue-50 to-sky-50 rounded-2xl p-6 border border-blue-100">
                     <h4 class="font-bold text-blue-900 text-sm mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-bolt"></i> ความเร่ง (Acceleration: $\vec{a}$)
+                        <i class="fa-solid fa-bolt text-blue-600"></i> ความเร่ง (Acceleration: $\vec{a}$)
                     </h4>
-                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
-                        คือ อัตราการเปลี่ยนแปลงความเร็วต่อหนึ่งหน่วยเวลา มีหน่วยเป็นเมตรต่อวินาทีกำลังสอง ($\text{m/s}^2$) เป็นปริมาณเวกเตอร์
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                        คือ อัตราการเปลี่ยนแปลงความเร็วต่อหนึ่งหน่วยเวลา มีหน่วยเป็นเมตรต่อวินาทีกำลังสอง ($\text{m/s}^2$) จัดเป็นปริมาณเวกเตอร์
                     </p>
-                    <div class="bg-white rounded-xl p-3 border border-blue-100 text-center font-bold text-blue-900 text-sm">
-                        \[ \vec{a} = \frac{\vec{v} - \vec{u}}{\Delta t} \]
+                    <div class="bg-white rounded-xl p-4 border border-blue-200/80 text-center font-bold text-blue-900 shadow-sm mb-4">
+                        $$\vec{a} = \frac{\vec{v} - \vec{u}}{\Delta t}$$
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 text-xs">
-                        <div class="bg-white/80 p-2.5 rounded-xl border border-blue-100">
-                            🟢 <strong>ความเร่งเป็นบวก ($a > 0$):</strong> ความเร็วเพิ่มขึ้น (ทิศความเร่งเดียวกับความเร็ว)
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-white/90 p-3 rounded-xl border border-blue-100 flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                            <span><strong>ความเร่งเป็นบวก ($a > 0$):</strong> ความเร็วเพิ่มขึ้นเรื่อยๆ (ทิศความเร่งทิศเดียวกับความเร็ว)</span>
                         </div>
-                        <div class="bg-white/80 p-2.5 rounded-xl border border-blue-100">
-                            🔴 <strong>ความหน่วง ($a < 0$):</strong> ความเร็วลดลง (ทิศความเร่งสวนทางกับความเร็ว)
+                        <div class="bg-white/90 p-3 rounded-xl border border-blue-100 flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500 flex-shrink-0"></span>
+                            <span><strong>ความหน่วง ($a < 0$):</strong> ความเร็วลดลงเรื่อยๆ (ทิศความเร่งสวนทางกับความเร็ว)</span>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- SECTION 2: 5 สูตรการเคลื่อนที่แนวตรงด้วยความเร่งคงตัว -->
-            <section id="section-2" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
+            <section id="section-2" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-150 shadow-sm">
                 <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                     <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg font-inter">02</div>
                     <div>
                         <h2 class="text-xl md:text-2xl font-bold text-slate-900">5 สูตรการเคลื่อนที่แนวตรงด้วยความเร่งคงตัว</h2>
-                        <span class="text-xs text-slate-400">ใช้เฉพาะเมื่อความเร่งคงตัว ($a = \text{Constant}$) เท่านั้น</span>
+                        <span class="text-xs text-slate-400 font-medium">ใช้คำนวณเฉพาะเมื่อความเร่งมีค่าคงตัว ($a = \text{Constant}$) เท่านั้น</span>
                     </div>
                 </div>
 
                 <!-- ตาราง 5 สูตร -->
                 <div class="overflow-x-auto mb-6">
-                    <table class="w-full text-left text-xs border-collapse">
+                    <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
-                                <th class="p-3 rounded-tl-xl">ลำดับ</th>
-                                <th class="p-3">สมการการเคลื่อนที่</th>
-                                <th class="p-3">ตัวแปรที่ไม่ต้องใช้</th>
-                                <th class="p-3 rounded-tr-xl">ข้อแนะนำการใช้งาน</th>
+                            <tr class="bg-slate-100 text-slate-700 font-bold text-xs border-b border-slate-200">
+                                <th class="p-3.5 rounded-tl-xl text-center w-12">ข้อ</th>
+                                <th class="p-3.5 text-center min-w-[200px]">สมการการเคลื่อนที่</th>
+                                <th class="p-3.5 text-center w-36">ตัวแปรที่ไม่ต้องใช้</th>
+                                <th class="p-3.5 rounded-tr-xl">ข้อแนะนำและบริบทการใช้งาน</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
                             <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="p-3 font-bold text-blue-600 font-inter">1</td>
-                                <td class="p-3 font-bold text-slate-900">\[ v = u + at \]</td>
-                                <td class="p-3 text-rose-500 font-semibold">$s$ (ระยะทาง)</td>
-                                <td class="p-3">ใช้เมื่อรู้ความเร็วต้น ความเร่ง และเวลา ต้องการหาความเร็วปลาย</td>
+                                <td class="p-4 font-bold text-blue-600 text-center font-inter">1</td>
+                                <td class="p-4 text-center font-bold text-slate-900 text-sm">
+                                    $$v = u + at$$
+                                </td>
+                                <td class="p-4 text-center font-bold text-rose-500 bg-rose-50/50 rounded-lg">$s$ (ระยะทาง)</td>
+                                <td class="p-4">ใช้เมื่อทราบความเร็วต้น ความเร่ง และเวลา โดยโจทย์ไม่ได้ถามและไม่ได้ให้การกระจัด $s$</td>
                             </tr>
                             <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="p-3 font-bold text-blue-600 font-inter">2</td>
-                                <td class="p-3 font-bold text-slate-900">\[ s = \left(\frac{u+v}{2}\right)t \]</td>
-                                <td class="p-3 text-rose-500 font-semibold">$a$ (ความเร่ง)</td>
-                                <td class="p-3">ใช้เมื่อไม่ทราบค่าความเร่ง $a$ แต่ทราบความเร็วต้นและความเร็วปลาย</td>
+                                <td class="p-4 font-bold text-blue-600 text-center font-inter">2</td>
+                                <td class="p-4 text-center font-bold text-slate-900 text-sm">
+                                    $$s = \left(\frac{u+v}{2}\right)t$$
+                                </td>
+                                <td class="p-4 text-center font-bold text-rose-500 bg-rose-50/50 rounded-lg">$a$ (ความเร่ง)</td>
+                                <td class="p-4">ใช้เมื่อไม่ทราบค่าความเร่ง $a$ แต่ทราบความเร็วต้น ความเร็วปลาย และเวลา</td>
                             </tr>
                             <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="p-3 font-bold text-blue-600 font-inter">3</td>
-                                <td class="p-3 font-bold text-slate-900">\[ s = ut + \frac{1}{2}at^2 \]</td>
-                                <td class="p-3 text-rose-500 font-semibold">$v$ (ความเร็วปลาย)</td>
-                                <td class="p-3">สูตรหลักยอดนิยม ใช้เมื่อไม่รู้ความเร็วปลาย $v$</td>
+                                <td class="p-4 font-bold text-blue-600 text-center font-inter">3</td>
+                                <td class="p-4 text-center font-bold text-slate-900 text-sm">
+                                    $$s = ut + \frac{1}{2}at^2$$
+                                </td>
+                                <td class="p-4 text-center font-bold text-rose-500 bg-rose-50/50 rounded-lg">$v$ (ความเร็วปลาย)</td>
+                                <td class="p-4">สูตรหลักยอดนิยม ใช้เมื่อคำนวณหาระยะทางโดยโจทย์ไม่บอกความเร็วปลาย $v$</td>
                             </tr>
                             <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="p-3 font-bold text-blue-600 font-inter">4</td>
-                                <td class="p-3 font-bold text-slate-900">\[ s = vt - \frac{1}{2}at^2 \]</td>
-                                <td class="p-3 text-rose-500 font-semibold">$u$ (ความเร็วต้น)</td>
-                                <td class="p-3">ใช้เมื่อรู้ความเร็วปลาย $v$ แต่ไม่รู้ความเร็วต้น $u$</td>
+                                <td class="p-4 font-bold text-blue-600 text-center font-inter">4</td>
+                                <td class="p-4 text-center font-bold text-slate-900 text-sm">
+                                    $$s = vt - \frac{1}{2}at^2$$
+                                </td>
+                                <td class="p-4 text-center font-bold text-rose-500 bg-rose-50/50 rounded-lg">$u$ (ความเร็วต้น)</td>
+                                <td class="p-4">ใช้เมื่อทราบความเร็วปลาย $v$ ความเร่ง และเวลา แต่ไม่ทราบความเร็วต้น $u$</td>
                             </tr>
                             <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="p-3 font-bold text-blue-600 font-inter">5</td>
-                                <td class="p-3 font-bold text-slate-900">\[ v^2 = u^2 + 2as \]</td>
-                                <td class="p-3 text-rose-500 font-semibold">$t$ (เวลา)</td>
-                                <td class="p-3">ใช้เมื่อโจทย์ไม่บอกเวลา $t$ และไม่ต้องการคำนวณหาเวลา</td>
+                                <td class="p-4 font-bold text-blue-600 text-center font-inter">5</td>
+                                <td class="p-4 text-center font-bold text-slate-900 text-sm">
+                                    $$v^2 = u^2 + 2as$$
+                                </td>
+                                <td class="p-4 text-center font-bold text-rose-500 bg-rose-50/50 rounded-lg">$t$ (เวลา)</td>
+                                <td class="p-4">ใช้เมื่อโจทย์ไม่ได้ให้ช่วงเวลา $t$ มาเกี่ยวข้องในการคำนวณ</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <!-- เทคนิคการวิเคราะห์โจทย์ -->
-                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-2xl">
-                    <h4 class="font-bold text-indigo-900 text-sm mb-1">🎯 เทคนิคเลือกสูตรจาก จารย์เปา</h4>
-                    <p class="text-xs text-indigo-800 leading-relaxed">
-                        ใน 5 ตัวแปร ($u, v, a, s, t$) โจทย์มักจะบอกมา 3 ตัวแปร และถามหาตัวแปรที่ 4 ให้พิจารณาดูว่า <strong>"ตัวแปรใดที่โจทย์ไม่พูดถึงเลย"</strong> แล้วเลือกสูตรที่ไม่มีตัวแปรนั้นในการคำนวณ!
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-5 rounded-r-2xl">
+                    <h4 class="font-bold text-indigo-900 text-sm mb-1.5 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i> เทคนิคเลือกสูตรจาก จารย์เปา
+                    </h4>
+                    <p class="text-xs text-indigo-900 leading-relaxed">
+                        ใน 5 ตัวแปร ($u, v, a, s, t$) โจทย์มักจะกำหนดค่ามาให้ 3 ตัวแปร และต้องการหาตัวแปรที่ 4 ให้สังเกตว่า <strong>"ตัวแปรใดที่โจทย์ไม่ได้พูดถึงและไม่ได้ถามหาเลย"</strong> จากนั้นให้เลือกสูตรที่ไม่มีตัวแปรนั้นมาใช้คำนวณได้ทันที!
                     </p>
                 </div>
             </section>
 
             <!-- SECTION 3: การตกแบบเสรี (Free Fall) -->
-            <section id="section-3" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
+            <section id="section-3" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-150 shadow-sm">
                 <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                     <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg font-inter">03</div>
                     <h2 class="text-xl md:text-2xl font-bold text-slate-900">การตกแบบเสรี (Free Fall Motion)</h2>
                 </div>
 
                 <p class="text-xs text-slate-600 leading-relaxed mb-6">
-                    การตกแบบเสรี คือ การเคลื่อนที่ของวัตถุในแนวดิ่งภายใต้แรงโน้มถ่วงของโลกเพียงแรงเดียว (ไม่มีแรงต้านอากาศ) โดยมีความเร่งคงตัว $g \approx 9.8\text{ m/s}^2$ (ในการคำนวณระดับ ม.ปลาย นิยมใช้ $g = 10\text{ m/s}^2$)
+                    การตกแบบเสรี คือ การเคลื่อนที่ของวัตถุในแนวดิ่งภายใต้แรงดึงดูดของโลกเพียงแรงเดียว (โดยถือว่าไม่มีแรงต้านอากาศ) วัตถุจะเคลื่อนที่ด้วยความเร่งคงตัวเท่ากับความเร่งเนื่องจากแรงโน้มถ่วงของโลก $g \approx 9.8\text{ m/s}^2$ (หรือประมาณ $10\text{ m/s}^2$)
                 </p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -282,37 +291,37 @@
                         <h4 class="font-bold text-emerald-900 text-sm mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-compass"></i> กฎการกำหนดเครื่องหมาย Vector (+/-)
                         </h4>
-                        <ul class="text-xs text-emerald-950 space-y-2 leading-relaxed">
+                        <ul class="text-xs text-emerald-950 space-y-2.5 leading-relaxed">
                             <li>1. <strong>ยึดทิศทางของความเร็วต้น ($u$) เป็นบวก (+) เสมอ</strong></li>
-                            <li>2. ปริมาณที่มีทิศทางเดียวกับ $u$ ให้มีเครื่องหมายเป็นบวก (+)</li>
-                            <li>3. ปริมาณที่มีทิศทางสวนทางกับ $u$ ให้มีเครื่องหมายเป็นลบ (-)</li>
-                            <li class="pt-2 border-t border-emerald-200/60 text-emerald-900">
-                                ⚠️ <strong>กรณีโยนวัตถุขึ้น:</strong> ความเร็วต้น $u$ ชี้ขึ้น ดังนั้น $g$ ซึ่งมีทิศลงล่างเสมอ จะมีค่าติดลบ ($g = -10\text{ m/s}^2$)
+                            <li>2. ปริมาณใดที่มีทิศทางเดียวกับ $u$ ให้ใส่เครื่องหมายเป็นบวก (+)</li>
+                            <li>3. ปริมาณใดที่มีทิศทางสวนทางกับ $u$ ให้ใส่เครื่องหมายเป็นลบ (-)</li>
+                            <li class="pt-2 border-t border-emerald-200/60 text-emerald-900 font-medium">
+                                ⚠️ <strong>ข้อควรระวังกรณีโยนวัตถุขึ้น:</strong> ความเร็วต้น $u$ มีทิศชี้ขึ้น ดังนั้นความเร่ง $g$ ซึ่งมีทิศลงล่างเข้าสู่จุดศูนย์กลางโลกเสมอ จึงต้องใส่ค่าติดลบ ($g = -10\text{ m/s}^2$)
                             </li>
                         </ul>
                     </div>
 
                     <!-- จุดสำคัญการโยนขึ้น -->
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80">
                         <h4 class="font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-arrow-up-long text-blue-500"></i> ข้อควรจำ ณ จุดสูงสุด
                         </h4>
                         <ul class="text-xs text-slate-600 space-y-2.5 leading-relaxed">
                             <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                <span>ความเร็ว ณ จุดสูงสุดเป็นศูนย์ ($v = 0$)</span>
+                                <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
+                                <span>ความเร็ว ณ จุดสูงสุดมีค่าเป็นศูนย์ ($v = 0$)</span>
                             </li>
                             <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                <span>เวลาขาขึ้น = เวลาขาลง (เมื่อตกกลับมาที่ระดับเดิม)</span>
+                                <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
+                                <span>เวลาขาขึ้น = เวลาขาลง (เมื่อตกกลับมาถึงระดับเดิม)</span>
                             </li>
                             <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
                                 <span>ขนาดความเร็วขาลง = ขนาดความเร็วขาขึ้น ณ ระดับความสูงเดียวกัน</span>
                             </li>
                             <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                <span>ความสูงสูงสุด: \[ s_{max} = \frac{u^2}{2g} \]</span>
+                                <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
+                                <span>ความสูงสูงสุด: $$s_{max} = \frac{u^2}{2g}$$</span>
                             </li>
                         </ul>
                     </div>
@@ -320,7 +329,7 @@
             </section>
 
             <!-- SECTION 4: การตีความกราฟการเคลื่อนที่ -->
-            <section id="section-4" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
+            <section id="section-4" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-150 shadow-sm">
                 <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                     <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-lg font-inter">04</div>
                     <h2 class="text-xl md:text-2xl font-bold text-slate-900">การตีความกราฟการเคลื่อนที่ ($s-t, v-t, a-t$)</h2>
@@ -328,50 +337,50 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     <!-- กราฟ s-t -->
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-center">
-                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 font-bold font-inter">s-t</div>
-                        <h4 class="font-bold text-slate-800 text-sm mb-2">กราฟตำแหน่ง-เวลา</h4>
-                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-1 text-slate-600">
-                            <p>📈 <strong>ความชัน (Slope):</strong> คือ ความเร็ว ($v$)</p>
-                            <p>🛑 <strong>พื้นที่ใต้กราฟ:</strong> ไม่มีนิยาม</p>
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 text-center">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 font-bold font-inter text-sm shadow-sm">s-t</div>
+                        <h4 class="font-bold text-slate-800 text-sm mb-3">กราฟตำแหน่ง-เวลา</h4>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-2 text-slate-700">
+                            <p>📈 <strong>ความชัน (Slope):</strong> ความเร็ว ($v$)</p>
+                            <p>📐 <strong>พื้นที่ใต้กราฟ:</strong> ไม่มีความหมาย</p>
                         </div>
                     </div>
 
                     <!-- กราฟ v-t -->
                     <div class="bg-blue-50/80 rounded-2xl p-5 border border-blue-200 text-center shadow-sm">
-                        <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold font-inter">v-t</div>
-                        <h4 class="font-bold text-blue-900 text-sm mb-2">กราฟความเร็ว-เวลา (สำคัญที่สุด)</h4>
-                        <div class="bg-white p-3 rounded-xl border border-blue-200 text-xs space-y-1 text-slate-700">
-                            <p>📈 <strong>ความชัน (Slope):</strong> คือ ความเร่ง ($a$)</p>
-                            <p>📐 <strong>พื้นที่ใต้กราฟ:</strong> คือ การกระจัด ($s$)</p>
+                        <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold font-inter text-sm shadow-md">v-t</div>
+                        <h4 class="font-bold text-blue-900 text-sm mb-3">กราฟความเร็ว-เวลา (สำคัญที่สุด)</h4>
+                        <div class="bg-white p-3 rounded-xl border border-blue-200 text-xs space-y-2 text-slate-800 font-medium">
+                            <p>📈 <strong>ความชัน (Slope):</strong> ความเร่ง ($a$)</p>
+                            <p>📐 <strong>พื้นที่ใต้กราฟ:</strong> การกระจัด ($s$)</p>
                         </div>
                     </div>
 
                     <!-- กราฟ a-t -->
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-center">
-                        <div class="w-10 h-10 bg-slate-200 text-slate-700 rounded-full flex items-center justify-center mx-auto mb-3 font-bold font-inter">a-t</div>
-                        <h4 class="font-bold text-slate-800 text-sm mb-2">กราฟความเร่ง-เวลา</h4>
-                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-1 text-slate-600">
-                            <p>📈 <strong>ความชัน (Slope):</strong> ไม่มีนิยาม</p>
-                            <p>📐 <strong>พื้นที่ใต้กราฟ:</strong> คือ ความเร็วที่เปลี่ยนไป ($\Delta v$)</p>
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 text-center">
+                        <div class="w-12 h-12 bg-slate-200 text-slate-700 rounded-full flex items-center justify-center mx-auto mb-3 font-bold font-inter text-sm shadow-sm">a-t</div>
+                        <h4 class="font-bold text-slate-800 text-sm mb-3">กราฟความเร่ง-เวลา</h4>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-2 text-slate-700">
+                            <p>📈 <strong>ความชัน (Slope):</strong> ไม่มีความหมาย</p>
+                            <p>📐 <strong>พื้นที่ใต้กราฟ:</strong> ความเร็วเปลี่ยน ($\Delta v$)</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- สรุปแผนผังความเชื่อมโยงกราฟ -->
-                <div class="bg-slate-900 text-white rounded-2xl p-6 text-center">
-                    <h4 class="text-xs font-bold text-blue-400 uppercase tracking-widest mb-3">สรุปแผนผังการหา ความชัน และ พื้นที่ใต้กราฟ</h4>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-bold font-inter">
+                <div class="bg-slate-900 text-white rounded-2xl p-6 text-center shadow-md">
+                    <h4 class="text-xs font-bold text-blue-400 uppercase tracking-widest mb-4">สรุปแผนผังการหา ความชัน และ พื้นที่ใต้กราฟ</h4>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs font-bold font-inter">
                         <span class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 text-blue-300">กราฟ $s-t$</span>
                         <span class="text-slate-400">--- ความชัน (Slope) ---></span>
-                        <span class="bg-blue-600 px-4 py-2 rounded-xl text-white">กราฟ $v-t$</span>
+                        <span class="bg-blue-600 px-4 py-2 rounded-xl text-white shadow">กราฟ $v-t$</span>
                         <span class="text-slate-400">--- ความชัน (Slope) ---></span>
                         <span class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 text-amber-300">กราฟ $a-t$</span>
                     </div>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-bold font-inter mt-3">
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs font-bold font-inter mt-4">
                         <span class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 text-blue-300">การกระจัด ($s$)</span>
                         <span class="text-emerald-400 font-normal"><--- พื้นที่ใต้กราฟ (Area) ---</span>
-                        <span class="bg-blue-600 px-4 py-2 rounded-xl text-white">กราฟ $v-t$</span>
+                        <span class="bg-blue-600 px-4 py-2 rounded-xl text-white shadow">กราฟ $v-t$</span>
                         <span class="text-emerald-400 font-normal"><--- พื้นที่ใต้กราฟ (Area) ---</span>
                         <span class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 text-amber-300">ความเร็วเปลี่ยน ($\Delta v$)</span>
                     </div>
@@ -433,8 +442,21 @@
 
     </main>
 
-    <!-- สคริปต์เมนูมือถือ -->
+    <!-- สคริปต์สั่งให้ KaTeX ทำการประมวลผลสมการทั้งหมดในหน้าเมื่อโหลด DOM เสร็จ -->
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false
+            });
+        });
+
+        // สคริปต์เมนูมือถือ
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
