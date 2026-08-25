@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 19: ฟิสิกส์อะตอม | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+    <style>
+        .tab-btn{transition:all 0.2s}.tab-btn.active{background:#7e22ce;color:white;box-shadow:0 4px 12px rgba(126,34,206,0.3)}
+        .tab-content{display:none}.tab-content.active{display:block}
+        .choice-btn{transition:all 0.2s;cursor:pointer;border:2px solid #e2e8f0}.choice-btn:hover{border-color:#d8b4fe;background:#faf5ff}
+        .choice-btn.selected{border-color:#7e22ce;background:#faf5ff;color:#581c87}
+        .choice-btn.correct{border-color:#10b981!important;background:#ecfdf5!important;color:#065f46!important}
+        .choice-btn.wrong{border-color:#ef4444!important;background:#fef2f2!important;color:#991b1b!important}
+        .match-select,.fill-input{border:2px solid #e2e8f0;border-radius:0.5rem;padding:0.4rem 0.6rem}.match-select{font-size:0.8rem;width:100%}.fill-input{font-size:0.9rem}
+        .match-select.correct,.fill-input.correct{border-color:#10b981;background:#ecfdf5}.match-select.wrong,.fill-input.wrong{border-color:#ef4444;background:#fef2f2}
+        .answer-key{display:none}.answer-key.show{display:block}
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}.modal-overlay.show{display:flex}
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-purple-500 to-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-purple-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-purple-600">HOME</a>
+            <a href="m6-physics.html" class="text-sm font-semibold text-purple-600 border-b-2 border-purple-600">บทเรียน ม.6</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m6-physics.html" class="text-purple-600 font-semibold py-1">บทเรียน ม.6</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-6">
+        <a href="m6-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-purple-600 hover:text-purple-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.6
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CH19 QUIZ ENGINE</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+        <div class="absolute w-72 h-72 bg-purple-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 bg-purple-500/20 border border-purple-400/30 text-purple-200 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                <i class="fa-solid fa-atom"></i> บทที่ 19 — ฟิสิกส์ ม.6
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด: ฟิสิกส์อะตอม</h1>
+            <p class="text-purple-100 text-sm max-w-2xl leading-relaxed">
+                ทอมสัน e/m | มิลลิแกน | อะตอมโบร์ & สเปกตรัม | โฟโตอิเล็กทริก | คอมป์ตัน & เดอบรอยล์<br>
+                ปรนัย 20 | จับคู่ 10 | เติมคำ 5 | อัตนัย 5 &nbsp;|&nbsp; <strong>คะแนนเต็ม 35</strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+        <button onclick="showTab(1)" class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-1"><i class="fa-solid fa-circle-dot mr-1"></i>ส่วนที่ 1 ปรนัย (20)</button>
+        <button onclick="showTab(2)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-2"><i class="fa-solid fa-link mr-1"></i>ส่วนที่ 2 จับคู่ (10)</button>
+        <button onclick="showTab(3)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-3"><i class="fa-solid fa-pen-to-square mr-1"></i>ส่วนที่ 3 เติมคำ (5)</button>
+        <button onclick="showTab(4)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-4"><i class="fa-solid fa-file-pen mr-1"></i>ส่วนที่ 4 อัตนัย (5)</button>
+    </div>
+
+    <div id="tab-1" class="tab-content active"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-purple-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย</h2><p class="text-xs text-slate-500 mb-4">20 ข้อ ข้อละ 1 คะแนน</p><div id="mc-questions" class="space-y-6"></div></div></div>
+    <div id="tab-2" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-purple-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่</h2><p class="text-xs text-slate-500 mb-4">10 ข้อ ข้อละ 1 คะแนน</p><div id="match-questions" class="space-y-3"></div></div></div>
+    <div id="tab-3" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-purple-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำในช่องว่าง</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ ข้อละ 1 คะแนน</p><div id="fill-questions" class="space-y-6"></div></div></div>
+    <div id="tab-4" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-purple-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ | เขียนวิธีทำ แล้วกดดูเฉลย</p><div id="subj-questions" class="space-y-6"></div></div></div>
+
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="submitAll()" class="py-4 px-10 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม</button>
+        <a href="m6-physics.html" class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-list"></i> กลับหน้าหลัก ม.6</a>
+    </div>
+</main>
+
+<div class="modal-overlay" id="score-modal">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+        <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white text-center">
+            <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+            <h2 class="text-2xl font-extrabold">ผลการทำแบบฝึกหัด</h2>
+            <p class="text-purple-100 text-sm mt-1">บทที่ 19: ฟิสิกส์อะตอม</p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20)</span><span class="font-bold text-purple-700" id="modal-p1">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (10)</span><span class="font-bold text-purple-700" id="modal-p2">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5)</span><span class="font-bold text-purple-700" id="modal-p3">-</span></div>
+            <div class="bg-purple-50 rounded-xl p-4 text-center mt-2">
+                <p class="text-xs text-purple-600 font-semibold mb-1">คะแนนรวม (ส่วนที่ 1-3)</p>
+                <p class="text-4xl font-extrabold text-purple-700" id="modal-total">0/35</p>
+                <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+            </div>
+        </div>
+        <div class="px-6 pb-6 flex gap-3">
+            <button onclick="closeModal()" class="flex-1 py-3 bg-purple-600 text-white rounded-xl font-bold text-sm hover:bg-purple-700">ดูเฉลยละเอียด</button>
+            <a href="m6-physics.html" class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300">กลับหน้าหลัก</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const mcData=[
+    {q:"เจ.เจ. ทอมสัน สามารถหาอัตราส่วนประจุต่อมวล (q/m) ของอิเล็กตรอนได้ค่าประมาณเท่าใด?",choices:["1.76 × 10¹¹ C/kg","1.6 × 10⁻¹⁹ C/kg","9.1 × 10⁻³¹ C/kg","6.626 × 10⁻³⁴ C/kg"],ans:0},
+    {q:"การทดลองหยดน้ำมันของมิลลิแกน มีวัตถุประสงค์เพื่อหาค่าใดของอิเล็กตรอน?",choices:["ขนาดของประจุไฟฟ้า (e = 1.6 × 10⁻¹⁹ C)","อัตราส่วน q/m","รัศมีอะตอม","ระดับพลังงาน"],ans:0},
+    {q:"ตามแบบจำลองอะตอมของโบร์ พลังงานของอิเล็กตรอนในวงโคจร n = 1 (สภาวะพื้นฐาน Ground State) มีค่าเท่าใด?",choices:["-13.6 eV","-3.4 eV","-1.51 eV","0 eV"],ans:0},
+    {q:"ระดับพลังงานของอิเล็กตรอนในวงโคจร n = 2 ของไฮโดรเจนเท่ากับกี่ eV?",choices:["-3.4 eV (-13.6/2²)","-13.6 eV","-1.51 eV","-0.85 eV"],ans:0},
+    {q:"อนุกรมเส้นสเปกตรัมของไฮโดรเจนชุดใดที่ปลดปล่อยโฟตอนอยู่ในช่วงแสงขาวที่ตามองเห็น (Visible Light)?",choices:["อนุกรมบัลเมอร์ (Balmer)","อนุกรมไลแมน (Lyman)","อนุกรมพาสเชน (Paschen)","อนุกรมแบรกเกต (Bracket)"],ans:0},
+    {q:"อนุกรมเส้นสเปกตรัมชุดไลแมน (Lyman series) ปลดปล่อยแสงช่วงใด?",choices:["อัลตราไวโอเลต (UV)","อินฟราเรด","แสงขาว","รังสีเอกซ์"],ans:0},
+    {q:"โลหะชนิดหนึ่งมีฟังก์ชันงาน W = 2.0 eV ถ้าฉายแสงที่มีพลังงานโฟตอน E = 3.5 eV ลงไป โฟโตอิเล็กตรอนจะหลุดด้วยพลังงานจลน์สูงสุด (E_k,max) กี่ eV?",choices:["1.5 eV","5.5 eV","2.0 eV","0 eV"],ans:0},
+    {q:"จากข้อ 7 ความต่างศักย์หยุดยั้ง (Stopping Potential V_0) มีค่ากี่โวลต์?",choices:["1.5 V","2.0 V","3.5 V","5.5 V"],ans:0},
+    {q:"ความถี่ขีดเริ่ม (Threshold Frequency f_0) ในปรากฏการณ์โฟโตอิเล็กทริกคืออะไร?",choices:["ความถี่ต่ำที่สุดของแสงที่ทำให้อิเล็กตรอนเริ่มหลุดออกจากโลหะพอดี","ความถี่สูงสุดของแสง","ความถี่ของโฟโตอิเล็กตรอน","ความถี่ของรังสีเอกซ์"],ans:0},
+    {q:"ความยาวคลื่นเดอบรอยล์ (λ) ของอนุภาคมวล m เคลื่อนที่ด้วยความเร็ว v คำนวณจากสมการใด?",choices:["λ = h / (m v)","λ = h m v","λ = m v / h","λ = h c / E"],ans:0},
+    {q:"ถ้ารถยนต์คันหนึ่งมีมวลเพิ่มขึ้นและเคลื่อนที่ด้วยความเร็วสูงขึ้น ความยาวคลื่นเดอบรอยล์ของรถยนต์จะเป็นอย่างไร?",choices:["สั้นลงมาก (สังเกตสมบัติคลื่นยาก)","ยาวขึ้น","เท่าเดิม","เป็นศูนย์"],ans:0},
+    {q:"ปรากฏการณ์คอมป์ตัน (Compton Effect) สรุปว่าแสงแสดงสมบัติเป็นอะไร?",choices:["อนุภาค (โฟตอนชนอิเล็กตรอนแล้วสูญเสียโมเมนตัมและพลังงาน)","คลื่นเสียง","สนามไฟฟ้า","คลื่นตามยาว"],ans:0},
+    {q:"หลอดผลิตรังสีเอกซ์ เร่งอิเล็กตรอนด้วยความต่างศักย์ V = 10,000 V รังสีเอกซ์สั้นที่สุดมีพลังงานสูงสุดเท่าใด?",choices:["10,000 eV (10 keV)","5,000 eV","20,000 eV","100 eV"],ans:0},
+    {q:"การทดลองของฟรังก์และเฮิรตซ์ สรุปเพื่อสนับสนุนทฤษฎีอะตอมของโบร์ในเรื่องใด?",choices:["ระดับพลังงานของอะตอมมีลักษณะเป็นชั้นๆ (Discrete levels)","อะตอมเป็นทรงกลมตัน","ประจุไฟฟ้าเป็นจำนวนเท่า","อิเล็กตรอนไม่มีมวล"],ans:0},
+    {q:"ตามหลักความไม่แน่นอนของไฮเซนเบิร์ก (Heisenberg Uncertainty Principle) ข้อใดถูกต้อง?",choices:["เราไม่สามารถวัดตำแหน่งและโมเมนตัมของอนุภาคให้แม่นยำพร้อมกันได้อย่างสมบูรณ์","วัดตำแหน่งแม่นยำจะทำให้วัดโมเมนตัมแม่นยำด้วย","อิเล็กตรอนอยู่นิ่งที่จุดจุดหนึ่ง","อนุภาคไม่มีตำแหน่ง"],ans:0},
+    {q:"แบบจำลองอะตอมแบบกลุ่มหมอก อธิบายตำแหน่งของอิเล็กตรอนอย่างไร?",choices:["บอกเป็นโอกาสที่จะพบอิเล็กตรอน ณ บริเวณต่างๆ รอบนิวเคลียส","บอกเป็นเส้นทางวงโคจรวงกลมที่แน่นอน","บอกว่าอยู่นิ่งตรงกลาง","บอกว่าอยู่ไกลออกไปไร้ขอบเขต"],ans:0},
+    {q:"เมื่ออิเล็กตรอนเปลี่ยนจากระดับ n = 3 ไปยัง n = 2 อะตอมจะดูดหรือปล่อยโฟตอน?",choices:["ปล่อยโฟตอนพลังงาน ΔE = E₃ - E₂","ดูดโฟตอนพลังงาน ΔE","ปล่อยรังสีแกมมา","ไม่เกิดอะไรขึ้น"],ans:0},
+    {q:"ฟังก์ชันงาน (Work Function W) ของโลหะขึ้นอยู่กับปัจจัยใด?",choices:["ชนิดของโลหะเท่านั้น","ความเข้มแสงที่ฉาย","ความถี่แสง","เวลาที่ฉายแสง"],ans:0},
+    {q:"จำนวนโฟโตอิเล็กตรอนที่หลุดออกจากโลหะในปรากฏการณ์โฟโตอิเล็กทริกแปรผันตรงกับอะไร?",choices:["ความเข้มแสง (Intensity)","ความถี่แสง","ความยาวคลื่น","ความต่างศักย์"],ans:0},
+    {q:"โฟตอนของรังสีเอกซ์ชนอิเล็กตรอนในปรากฏการณ์คอมป์ตัน ความยาวคลื่นของรังสีเอกซ์กระเจิง (λ') เมื่อเทียบกับก่อนชน (λ) เป็นอย่างไร?",choices:["λ' ยาวกว่า λ (พลังงานลดลง)","λ' สั้นกว่า λ","λ' เท่าเดิม","λ' เป็นศูนย์"],ans:0}
+];
+
+const matchData=[
+    {left:"ทดลองทอมสัน",right:"วัดอัตราส่วน q/m = 1.76 × 10¹¹ C/kg"},
+    {left:"ทดลองมิลลิแกน",right:"หยดน้ำมัน วัดประจุ e = 1.6 × 10⁻¹⁹ C"},
+    {left:"พลังงานโบร์ n=1",right:"E₁ = -13.6 eV (สภาวะพื้นฐาน)"},
+    {left:"อนุกรมบัลเมอร์",right:"สเปกตรัมช่วงแสงขาว (Visible)"},
+    {left:"อนุกรมไลแมน",right:"สเปกตรัมช่วง UV (n_f = 1)"},
+    {left:"โฟโตอิเล็กทริก",right:"E_light = W + E_k,max"},
+    {left:"ความต่างศักย์หยุดยั้ง",right:"E_k,max = e V_0"},
+    {left:"เดอบรอยล์",right:"λ = h / (m v)"},
+    {left:"รังสีเอกซ์สั้นที่สุด",right:"e V_0 = h f_max = h c / λ_min"},
+    {left:"หลักความไม่แน่นอน",right:"Δx Δp ≥ h / (4π)"}
+];
+const matchOptions=["วัดอัตราส่วน q/m = 1.76 × 10¹¹ C/kg","หยดน้ำมัน วัดประจุ e = 1.6 × 10⁻¹⁹ C","E₁ = -13.6 eV (สภาวะพื้นฐาน)","สเปกตรัมช่วงแสงขาว (Visible)","สเปกตรัมช่วง UV (n_f = 1)","E_light = W + E_k,max","E_k,max = e V_0","λ = h / (m v)","e V_0 = h f_max = h c / λ_min","Δx Δp ≥ h / (4π)"];
+
+const fillData=[
+    {q:"พลังงานในระดับ n = 4 ของอะตอมไฮโดรเจน E₄ = ___ eV (ประมาณ 2 ทศนิยม, ใช้ -13.6/n²)",unit:"eV",ans:"-0.85",tol:0.05},
+    {q:"โลหะมีฟังก์ชันงาน W = 2.3 eV ฉายแสงพลังงาน 4.0 eV ความต่างศักย์หยุดยั้ง V_0 = ___ V",unit:"V",ans:"1.7",tol:0.1},
+    {q:"หลอดรังสีเอกซ์ใช้ความต่างศักย์ 12.4 kV (12,400 V) ความยาวคลื่นสั้นสุด λ_min = ___ nm (ใช้อัตราส่วน 1240/V)",unit:"nm",ans:"0.1",tol:0.02},
+    {q:"อิเล็กตรอนมวล 9.1 × 10⁻³¹ kg เคลื่อนที่ความเร็ว 2 × 10⁶ m/s โมเมนตัม p = ___ × 10⁻²⁴ kg·m/s",unit:"× 10⁻²⁴ kg·m/s",ans:"1.82",tol:0.05},
+    {q:"ประจุมิลลิแกน q = 4.8 × 10⁻¹⁹ C คิดเป็นจำนวนอิเล็กตรอน = ___ ตัว",unit:"ตัว",ans:"3",tol:0.1}
+];
+
+const subjData=[
+    {q:"1. อิเล็กตรอนในอะตอมไฮโดรเจนเปลี่ยนระดับพลังงานจาก n = 3 (E₃ = -1.51 eV) ลงมายัง n = 2 (E₂ = -3.40 eV) จงหาพลังงานของโฟตอนที่ปลดปล่อยออกมาในหน่วย eV และความยาวคลื่นในหน่วย nm",
+    key:"<strong>วิธีทำ:</strong><br>ΔE = E₃ - E₂ = -1.51 - (-3.40) = <strong>1.89 eV</strong><br>หาความยาวคลื่น λ (nm) ≈ 1240 / ΔE = 1240 / 1.89 ≈ <strong>656 nm</strong> (แสงสีแดง อนุกรมบัลเมอร์)"},
+    {q:"2. ในการทดลองโฟโตอิเล็กทริก ฉายแสงความถี่ 1 × 10¹⁵ Hz ลงบนโลหะชนิดหนึ่ง ปรากฏว่าต้องใช้ความต่างศักย์หยุดยั้ง V_0 = 1.5 V จงหา (1) พลังงานโฟตอน (2) ฟังก์ชันงาน W ของโลหะในหน่วย eV (กำหนด h = 4.14 × 10⁻¹⁵ eV·s)",
+    key:"<strong>วิธีทำ:</strong><br>(1) E_light = h · f = (4.14 × 10⁻¹⁵ eV·s) × (1 × 10¹⁵ Hz) = <strong>4.14 eV</strong><br>(2) E_k,max = e · V_0 = 1.5 eV<br>จาก E_light = W + E_k,max → 4.14 = W + 1.5 → W = <strong>2.64 eV</strong>"},
+    {q:"3. จงหาความยาวคลื่นเดอบรอยล์ของอิเล็กตรอน (m = 9.1 × 10⁻³¹ kg, e = 1.6 × 10⁻¹⁹ C) ที่ถูกเร่งผ่านความต่างศักย์ V = 100 V",
+    key:"<strong>วิธีทำ:</strong><br>พลังงานจลน์ E_k = e·V = 100 eV = 1.6 × 10⁻¹⁷ J<br>λ = h / √(2 · m · E_k)<br>λ = (6.626 × 10⁻³⁴) / √[2 × (9.1 × 10⁻³¹) × (1.6 × 10⁻¹⁷)]<br>λ = (6.626 × 10⁻³⁴) / √(29.12 × 10⁻⁴⁸) = (6.626 × 10⁻³⁴) / (5.40 × 10⁻²⁴) ≈ <strong>1.23 × 10⁻¹⁰ m = 0.123 nm</strong>"},
+    {q:"4. อธิบายความแตกต่างระหว่างสเปกตรัมรังสีเอกซ์แบบต่อเนื่อง (Continuous X-rays) และแบบเส้น (Characteristic X-rays)",
+    key:"<strong>เฉลย:</strong><br><strong>รังสีเอกซ์แบบต่อเนื่อง:</strong> เกิดจากอิเล็กตรอนพลังงานสูงวิ่งเข้าใกล้ นิวเคลียสเป้า แล้วถูกต้านให้ชะลอความเร็ว (ความหน่วง) คายพลังงานออกมาเป็นคลื่น EM ขึ้นอยู่กับความต่างศักย์เร่ง V_0<br><strong>รังสีเอกซ์แบบเส้น:</strong> เกิดจากอิเล็กตรอนชนใส่อิเล็กตรอนชั้นในสุด (K-shell) หลุดออก แล้วอิเล็กตรอนชั้นนอกโดดลงมาแทนที่ ปลดปล่อยพลังงานเฉพาะตัวตามชนิดของโลหะเป้า"},
+    {q:"5. สรุปสาระสำคัญของสมมติฐานเดอบรอยล์และความสำคัญของทวิภาพคลื่น-อนุภาค (Duality of wave and particle)",
+    key:"<strong>เฉลย:</strong><br><strong>สาระสำคัญ:</strong> สารและคลื่นมีความเกี่ยวข้องกัน แสงซึ่งเดิมเชื่อว่าเป็นคลื่นสามารถแสดงสมบัติเป็นอนุภาค (โฟตอน) ในโฟโตอิเล็กทริกและคอมป์ตัน ในทางกลับกัน อนุภาคที่มีมวล (เช่น อิเล็กตรอน) ก็สามารถแสดงสมบัติเป็นคลื่นได้ (มีการเลี้ยวเบนและแทรกสอด)<br><strong>ความสำคัญ:</strong> เป็นรากฐานสำคัญของการพัฒนา <strong>กลศาสตร์ควอนตัม (Quantum Mechanics)</strong> และกล้องจุลทรรศน์อิเล็กตรอน"}
+];
+
+let userAnswers=new Array(20).fill(-1);
+function renderMC(){
+    const c=document.getElementById('mc-questions');
+    mcData.forEach((q,qi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-purple-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi+1}</span>${q.q}</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${q.choices.map((ch,ci)=>`<button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-sm flex items-center gap-3"><span class="w-7 h-7 rounded-full border-2 border-current flex items-center justify-center font-bold font-inter text-xs flex-shrink-0">${ci+1}</span><span>${ch}</span></button>`).join('')}</div>`;
+        c.appendChild(d);
+    });
+}
+function selectMC(qi,ci){
+    if(document.getElementById(`mc-${qi}-0`).classList.contains('correct')||document.getElementById(`mc-${qi}-0`).classList.contains('wrong'))return;
+    const prev=userAnswers[qi];
+    if(prev!==-1)document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+    userAnswers[qi]=ci;
+    document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+}
+function renderMatch(){
+    const c=document.getElementById('match-questions');
+    matchData.forEach((m,mi)=>{
+        const d=document.createElement('div');
+        d.className='flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+        const opts=matchOptions.map(o=>`<option value="${o}">${o}</option>`).join('');
+        d.innerHTML=`<span class="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">${mi+1}</span><span class="flex-1 text-sm font-medium text-slate-700">${m.left}</span><select class="match-select" id="match-${mi}"><option value="">-- เลือก --</option>${opts}</select>`;
+        c.appendChild(d);
+    });
+}
+function renderFill(){
+    const c=document.getElementById('fill-questions');
+    fillData.forEach((f,fi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-purple-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi+1}</span>${f.q}</p><div class="flex items-center gap-2"><input type="text" class="fill-input flex-1 min-w-0 outline-none" id="fill-${fi}" placeholder="พิมพ์คำตอบ..."><span class="text-sm text-slate-500 whitespace-nowrap">${f.unit}</span><span class="text-sm ml-1" id="fill-icon-${fi}"></span></div>`;
+        c.appendChild(d);
+    });
+}
+function renderSubj(){
+    const c=document.getElementById('subj-questions');
+    subjData.forEach((s,si)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-indigo-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si+1}</span>${s.q}</p><textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-purple-400 min-h-[120px] resize-y" id="subj-${si}" placeholder="เขียนวิธีทำที่นี่..."></textarea><div class="answer-key mt-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 leading-relaxed" id="key-${si}">${s.key}</div><button onclick="toggleKey(${si})" class="mt-2 text-xs text-emerald-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}"><i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด</button>`;
+        c.appendChild(d);
+    });
+}
+function toggleKey(si){
+    const k=document.getElementById(`key-${si}`);
+    const b=document.getElementById(`key-btn-${si}`);
+    k.classList.toggle('show');
+    b.innerHTML=k.classList.contains('show')?'<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย':'<i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด';
+}
+function showTab(n){
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById(`tab-${n}`).classList.add('active');
+    document.getElementById(`tab-btn-${n}`).classList.add('active');
+}
+function submitAll(){
+    let p1=0;
+    mcData.forEach((q,qi)=>{
+        const chosen=userAnswers[qi];
+        for(let ci=0;ci<4;ci++){
+            const btn=document.getElementById(`mc-${qi}-${ci}`);
+            btn.classList.remove('selected');
+            if(ci===q.ans)btn.classList.add('correct');
+            else if(ci===chosen&&chosen!==q.ans)btn.classList.add('wrong');
+        }
+        if(chosen===q.ans)p1++;
+    });
+    let p2=0;
+    matchData.forEach((m,mi)=>{
+        const sel=document.getElementById(`match-${mi}`);
+        sel.classList.remove('correct','wrong');
+        if(sel.value===m.right){sel.classList.add('correct');p2++;}else sel.classList.add('wrong');
+    });
+    let p3=0;
+    fillData.forEach((f,fi)=>{
+        const input=document.getElementById(`fill-${fi}`);
+        const icon=document.getElementById(`fill-icon-${fi}`);
+        const val=parseFloat(input.value.trim());
+        const ok=Math.abs(val-parseFloat(f.ans))<=f.tol;
+        input.classList.remove('correct','wrong');
+        if(ok){input.classList.add('correct');icon.textContent='✅';p3++;}else{input.classList.add('wrong');icon.textContent='❌';}
+    });
+    subjData.forEach((_,si)=>document.getElementById(`key-${si}`).classList.add('show'));
+    const total=p1+p2+p3;
+    document.getElementById('modal-p1').textContent=`${p1}/20`;
+    document.getElementById('modal-p2').textContent=`${p2}/10`;
+    document.getElementById('modal-p3').textContent=`${p3}/5`;
+    document.getElementById('modal-total').textContent=`${total}/35`;
+    const pct=Math.round(total/35*100);
+    let grade='',emoji='';
+    if(pct>=80){grade=`ยอดเยี่ยม! (${pct}%)`;emoji='🏆';}
+    else if(pct>=60){grade=`ผ่าน (${pct}%)`;emoji='👍';}
+    else{grade=`ต้องทบทวน (${pct}%)`;emoji='📚';}
+    document.getElementById('modal-grade').textContent=grade;
+    document.getElementById('modal-emoji').textContent=emoji;
+    document.getElementById('score-modal').classList.add('show');
+}
+function closeModal(){document.getElementById('score-modal').classList.remove('show');}
+document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+renderMC();renderMatch();renderFill();renderSubj();
+</script>
+</body>
+</html>

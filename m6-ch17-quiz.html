@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 17: ของไหล | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+    <style>
+        .tab-btn{transition:all 0.2s}.tab-btn.active{background:#0891b2;color:white;box-shadow:0 4px 12px rgba(8,145,178,0.3)}
+        .tab-content{display:none}.tab-content.active{display:block}
+        .choice-btn{transition:all 0.2s;cursor:pointer;border:2px solid #e2e8f0}.choice-btn:hover{border-color:#a5f3fc;background:#ecfeff}
+        .choice-btn.selected{border-color:#0891b2;background:#ecfeff;color:#0e7490}
+        .choice-btn.correct{border-color:#10b981!important;background:#ecfdf5!important;color:#065f46!important}
+        .choice-btn.wrong{border-color:#ef4444!important;background:#fef2f2!important;color:#991b1b!important}
+        .match-select,.fill-input{border:2px solid #e2e8f0;border-radius:0.5rem;padding:0.4rem 0.6rem}.match-select{font-size:0.8rem;width:100%}.fill-input{font-size:0.9rem}
+        .match-select.correct,.fill-input.correct{border-color:#10b981;background:#ecfdf5}.match-select.wrong,.fill-input.wrong{border-color:#ef4444;background:#fef2f2}
+        .answer-key{display:none}.answer-key.show{display:block}
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}.modal-overlay.show{display:flex}
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-cyan-500 to-teal-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-cyan-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-cyan-600">HOME</a>
+            <a href="m6-physics.html" class="text-sm font-semibold text-cyan-600 border-b-2 border-cyan-600">บทเรียน ม.6</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m6-physics.html" class="text-cyan-600 font-semibold py-1">บทเรียน ม.6</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-6">
+        <a href="m6-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 hover:text-cyan-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.6
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CH17 QUIZ ENGINE</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-cyan-900 via-teal-800 to-emerald-700 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+        <div class="absolute w-72 h-72 bg-cyan-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 bg-cyan-500/20 border border-cyan-400/30 text-cyan-200 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                <i class="fa-solid fa-droplet"></i> บทที่ 17 — ฟิสิกส์ ม.6
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด: ของไหล</h1>
+            <p class="text-cyan-100 text-sm max-w-2xl leading-relaxed">
+                ความดันเกจ/สัมบูรณ์ | กฎพาสคัล | แรงพยุงอาร์คิมีดีส | ความตึงผิว & ความหนืด | แบร์นูลลี<br>
+                ปรนัย 20 | จับคู่ 10 | เติมคำ 5 | อัตนัย 5 &nbsp;|&nbsp; <strong>คะแนนเต็ม 35</strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+        <button onclick="showTab(1)" class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-1"><i class="fa-solid fa-circle-dot mr-1"></i>ส่วนที่ 1 ปรนัย (20)</button>
+        <button onclick="showTab(2)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-2"><i class="fa-solid fa-link mr-1"></i>ส่วนที่ 2 จับคู่ (10)</button>
+        <button onclick="showTab(3)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-3"><i class="fa-solid fa-pen-to-square mr-1"></i>ส่วนที่ 3 เติมคำ (5)</button>
+        <button onclick="showTab(4)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-4"><i class="fa-solid fa-file-pen mr-1"></i>ส่วนที่ 4 อัตนัย (5)</button>
+    </div>
+
+    <div id="tab-1" class="tab-content active"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-cyan-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย</h2><p class="text-xs text-slate-500 mb-4">20 ข้อ ข้อละ 1 คะแนน</p><div id="mc-questions" class="space-y-6"></div></div></div>
+    <div id="tab-2" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-cyan-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่</h2><p class="text-xs text-slate-500 mb-4">10 ข้อ ข้อละ 1 คะแนน</p><div id="match-questions" class="space-y-3"></div></div></div>
+    <div id="tab-3" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-cyan-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำในช่องว่าง</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ ข้อละ 1 คะแนน</p><div id="fill-questions" class="space-y-6"></div></div></div>
+    <div id="tab-4" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-cyan-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ | เขียนวิธีทำ แล้วกดดูเฉลย</p><div id="subj-questions" class="space-y-6"></div></div></div>
+
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="submitAll()" class="py-4 px-10 bg-gradient-to-r from-cyan-600 to-teal-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม</button>
+        <a href="m6-physics.html" class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-list"></i> กลับหน้าหลัก ม.6</a>
+    </div>
+</main>
+
+<div class="modal-overlay" id="score-modal">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+        <div class="bg-gradient-to-r from-cyan-600 to-teal-600 p-6 text-white text-center">
+            <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+            <h2 class="text-2xl font-extrabold">ผลการทำแบบฝึกหัด</h2>
+            <p class="text-cyan-100 text-sm mt-1">บทที่ 17: ของไหล</p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20)</span><span class="font-bold text-cyan-700" id="modal-p1">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (10)</span><span class="font-bold text-cyan-700" id="modal-p2">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5)</span><span class="font-bold text-cyan-700" id="modal-p3">-</span></div>
+            <div class="bg-cyan-50 rounded-xl p-4 text-center mt-2">
+                <p class="text-xs text-cyan-600 font-semibold mb-1">คะแนนรวม (ส่วนที่ 1-3)</p>
+                <p class="text-4xl font-extrabold text-cyan-700" id="modal-total">0/35</p>
+                <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+            </div>
+        </div>
+        <div class="px-6 pb-6 flex gap-3">
+            <button onclick="closeModal()" class="flex-1 py-3 bg-cyan-600 text-white rounded-xl font-bold text-sm hover:bg-cyan-700">ดูเฉลยละเอียด</button>
+            <a href="m6-physics.html" class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300">กลับหน้าหลัก</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const mcData=[
+    {q:"วัตถุมวล 400 kg มีปริมาตร 0.2 m³ ความหนาแน่น ρ ของวัตถุนี้เท่ากับกี่ kg/m³?",choices:["2000 kg/m³","1000 kg/m³","80 kg/m³","500 kg/m³"],ans:0},
+    {q:"ความดันเกจใต้น้ำทะเลลึก 10 เมตร (ρ_water = 1000 kg/m³, g = 10 m/s²) มีค่ากี่ Pa?",choices:["1 × 10⁵ Pa","2 × 10⁵ Pa","0.5 × 10⁵ Pa","100 Pa"],ans:0},
+    {q:"ความดันสัมบูรณ์ (Absolute pressure) ที่ความลึก 10 เมตรใต้น้ำเท่ากับกี่ Pa (กำหนด P_a = 1 × 10⁵ Pa)?",choices:["2 × 10⁵ Pa","1 × 10⁵ Pa","3 × 10⁵ Pa","1.5 × 10⁵ Pa"],ans:0},
+    {q:"เครื่องอัดไฮดรอลิกลูกสูบเล็กพื้นที่ a = 3 cm² ลูกสูบใหญ่ A = 24 cm² ถ้านอกแรงกด F = 10 N จะยกน้ำหนัก W ได้สูงสุดกี่ N?",choices:["80 N","40 N","240 N","160 N"],ans:0},
+    {q:"วัตถุมวล 2 kg ลอยในน้ำ ปริมาตรส่วนที่จมใต้น้ำเท่ากับกี่ m³ (ρ_water = 1000 kg/m³, g = 10 m/s²)?",choices:["0.002 m³","0.001 m³","0.02 m³","0.2 m³"],ans:0},
+    {q:"วัตถุชิ้นหนึ่งลอยน้ำโดยมีปริมาตรจมลงไป 60% ของปริมาตรทั้งหมด ความหนาแน่นของวัตถุเท่ากับกี่ kg/m³?",choices:["600 kg/m³","400 kg/m³","800 kg/m³","900 kg/m³"],ans:0},
+    {q:"เมื่อนำห่วงลวดรัศมี R จุ่มลงในน้ำแล้วค่อยๆ ดึงขึ้น เส้นขอบผิวสัมผัสกับน้ำในการคำนวณแรงตึงผิว γ มีความยาวเท่าใด?",choices:["4π R (ทั้งขอบในและขอบนอก)","2π R","π R²","8π R"],ans:0},
+    {q:"ปรากฏการณ์กิริยาแคพิลลารี (Capillarity) ที่น้ำซึมขึ้นในหลอดแก้วรูเล็ก เกิดจากแรงใดมากกว่าแรงใด?",choices:["แรงยึดติด (Adhesion) > แรงเชื่อมแน่น (Cohesion)","แรงเชื่อมแน่น > แรงยึดติด","แรงตึงผิว > แรงพยุง","แรงหนืด > แรงโน้มถ่วง"],ans:0},
+    {q:"ข้อใดกล่าวถูกต้องเกี่ยวกับความหนืดของของเหลวเมื่ออุณหภูมิเพิ่มขึ้น?",choices:["ความหนืดลดลง","ความหนืดเพิ่มขึ้น","ความหนืดเท่าเดิม","ไม่เกี่ยวข้องกับอุณหภูมิ"],ans:0},
+    {q:"ลูกกลมโลหะตกในของเหลวความหนืด ช่วงแรกมีความเร่ง ช่วงหลังย่อยมีความเร็วคงตัว เรียกว่าอะไร?",choices:["ความเร็วปลาย (Terminal Velocity)","ความเร็วต้น","ความเร็วสูงสุด","ความเร่งศูนย์"],ans:0},
+    {q:"ตามกฎของสโตกส์ (Stokes' Law) แรงหนืด F กระทำต่อวัตถุทรงกลมรัศมี r มีค่าแปรผันตรงกับอะไร?",choices:["รัศมี r และความเร็ว v","r² และ v²","1/r","มวลวัตถุ"],ans:0},
+    {q:"น้ำไหลในท่อที่มีพื้นที่ตัดลดลงจาก 10 cm² เหลือ 2 cm² ถ้าความเร็วท่อแรก v₁ = 1 m/s ความเร็วท่อคอด v₂ = ?",choices:["5 m/s","2 m/s","10 m/s","0.2 m/s"],ans:0},
+    {q:"ตามหลักการของแบร์นูลลี บริเวณที่ของไหลเคลื่อนที่ด้วยอัตราเร็วสูง ความดันจะเป็นอย่างไร?",choices:["ความดันต่ำ","ความดันสูง","ความดันคงที่","ความดันเป็นศูนย์"],ans:0},
+    {q:"แรงยกปีกเครื่องบินเกิดจากปรากฏการณ์ตามหลักการของใคร?",choices:["แบร์นูลลี (Bernoulli)","พาสคัล (Pascal)","อาร์คิมีดีส (Archimedes)","สโตกส์ (Stokes)"],ans:0},
+    {q:"บารอมิเตอร์ปรอทวัดความดันบรรยากาศที่ระดับน้ำทะเลได้ความสูงลำปรอทกี่ mm?",choices:["760 mm","100 mm","500 mm","1000 mm"],ans:0},
+    {q:"ความดันเกจที่จุดใต้น้ำขึ้นอยู่กับปัจจัยใดบ้าง?",choices:["ความหนาแน่นของเหลว (ρ) และความลึก (h)","รูปทรงของภาชนะ","พื้นที่ผิวหน้า","มวลรวมน้ำในภาชนะ"],ans:0},
+    {q:"โป๊ะสี่เหลี่ยมลอยน้ำทะเล น้ำทะเลมีความหนาแน่น 1.03 × 10³ kg/m³ ถ้าโป๊ะจมลงไป d = 1 m แสดงว่าแรงพยุงต่อน้ำหนักโป๊ะเป็นอย่างไร?",choices:["เท่ากับน้ำหนักโป๊ะพอดี","มากกว่าน้ำหนักโป๊ะ","น้อยกว่าน้ำหนักโป๊ะ","เป็นศูนย์"],ans:0},
+    {q:"เครื่องอัดไฮดรอลิกประสิทธิภาพ 80% หมายความว่าอย่างไร?",choices:["งานที่ได้จากการยกวัตถุคิดเป็น 80% ของงานที่ใส่เข้าลูกสูบเล็ก","แรงยกได้ 80%","ลูกสูบขยับได้ 80%","ความดันสูญเสีย 80%"],ans:0},
+    {q:"ของไหลในอุดมคติ (Ideal Fluid) มีคุณสมบัติตามข้อใด?",choices:["ไม่มีความหนืด และอัดตัวไม่ได้ (ความหนาแน่นคงที่)","มีความหนืดสูง","อัดตัวได้ง่าย","ไหลแบบหมุนวน"],ans:0},
+    {q:"อัตราการไหล Q (Volume Flow Rate) มีหน่วยเป็นอะไร?",choices:["m³/s","m/s","kg/s","N/m²"],ans:0}
+];
+
+const matchData=[
+    {left:"ความดันเกจ",right:"P_g = ρ g h"},
+    {left:"ความดันสัมบูรณ์",right:"P_abs = P_a + ρ g h"},
+    {left:"เครื่องอัดไฮดรอลิก",right:"W / A = F / a (กฎพาสคัล)"},
+    {left:"แรงพยุง (Archimedes)",right:"F_B = ρ_fluid V_sub g"},
+    {left:"แรงตึงผิว",right:"γ = F / L"},
+    {left:"แรงหนืดสโตกส์",right:"F = 6π η r v"},
+    {left:"ความเร็วปลาย",right:"สภาวะ แรงพยุง + แรงหนืด = mg (a=0)"},
+    {left:"สมการความต่อเนื่อง",right:"A₁ v₁ = A₂ v₂"},
+    {left:"หลักของแบร์นูลลี",right:"P + ½ρv² + ρgh = ค่าคงตัว"},
+    {left:"1 บรรยากาศ (1 atm)",right:"1.01 × 10⁵ Pa = 760 mmHg"}
+];
+const matchOptions=["P_g = ρ g h","P_abs = P_a + ρ g h","W / A = F / a (กฎพาสคัล)","F_B = ρ_fluid V_sub g","γ = F / L","F = 6π η r v","สภาวะ แรงพยุง + แรงหนืด = mg (a=0)","A₁ v₁ = A₂ v₂","P + ½ρv² + ρgh = ค่าคงตัว","1.01 × 10⁵ Pa = 760 mmHg"];
+
+const fillData=[
+    {q:"ถังน้ำสูง 5 m มีน้ำเต็มถัง ความดันเกจที่ก้นถัง = ___ × 10⁴ Pa (ρ=1000 kg/m³, g=10 m/s²)",unit:"× 10⁴ Pa",ans:"5",tol:0.1},
+    {q:"ลูกสูบไฮดรอลิก a = 2 cm², A = 50 cm² ถ้าออกแรงกด F = 20 N น้ำหนักยกได้ W = ___ N",unit:"N",ans:"500",tol:1},
+    {q:"วัตถุ 5 kg ลอยน้ำ ปริมาตรส่วนที่จม V_sub = ___ × 10⁻³ m³ (ρ_water=1000, g=10)",unit:"× 10⁻³ m³",ans:"5",tol:0.1},
+    {q:"น้ำไหลผ่านท่อ A₁ = 4 cm² ด้วยความเร็ว 2 m/s ผ่านท่อคอด A₂ = 1 cm² ความเร็ว v₂ = ___ m/s",unit:"m/s",ans:"8",tol:0.1},
+    {q:"น้ำยาความตึงผิว γ = 0.05 N/m ห่วงลวดขอบยาว L = 0.2 m แรงตึงผิว F = ___ N",unit:"N",ans:"0.01",tol:0.002}
+];
+
+const subjData=[
+    {q:"1. เขื่อนกั้นน้ำกว้าง 100 m มีระดับน้ำลึก 20 m จงหาแรงดันรวมที่น้ำกระทำต่อผนังเขื่อน (กำหนด ρ_water = 1000 kg/m³, g = 10 m/s²)",
+    key:"<strong>วิธีทำ:</strong><br>ความดันเฉลี่ยของน้ำที่ผนังเขื่อน P_avg = ½ · ρ · g · h = ½ × 1000 × 10 × 20 = 100,000 Pa<br>พื้นที่ผนังเขื่อน A = width × height = 100 × 20 = 2000 m²<br>แรงดันรวม F = P_avg × A = 100,000 Pa × 2000 m² = <strong>2 × 10⁸ N (200 MN)</strong>"},
+    {q:"2. วัตถุชิ้นหนึ่งหนัก 50 N ในอากาศ เมื่อนำไปชั่งขณะจมมิดในน้ำอ่านได้ 40 N จงหาความหนาแน่นของวัตถุนี้",
+    key:"<strong>วิธีทำ:</strong><br>แรงพยุง F_B = W_air - W_water = 50 - 40 = 10 N<br>F_B = ρ_water · V · g → 10 = 1000 × V × 10 → V = 0.001 m³<br>มวลวัตถุ m = W_air / g = 50 / 10 = 5 kg<br>ความหนาแน่น ρ_obj = m / V = 5 / 0.001 = <strong>5000 kg/m³</strong>"},
+    {q:"3. น้ำไหลผ่านท่อที่มีขนาดเส้นผ่านศูนย์กลางลดลงจาก 4 cm เหลือ 2 cm ถ้าอัตราเร็วของน้ำในท่อใหญ่เป็น 1.5 m/s และความดันเป็น 2 × 10⁵ Pa จงหาความดันในท่อเล็ก",
+    key:"<strong>วิธีทำ:</strong><br>1) หา v₂ จากสมการความต่อเนื่อง: A₁v₁ = A₂v₂ → (π·r₁²)v₁ = (π·r₂²)v₂<br>(2²) × 1.5 = (1²) × v₂ → v₂ = 6 m/s<br>2) หา P₂ จากสมการแบร์นูลลี (ระดับเดียวกัน h₁=h₂):<br>P₁ + ½ρv₁² = P₂ + ½ρv₂²<br>(2 × 10⁵) + ½(1000)(1.5²) = P₂ + ½(1000)(6²)<br>200000 + 1125 = P₂ + 18000 → P₂ = <strong>183,125 Pa (1.83 × 10⁵ Pa)</strong>"},
+    {q:"4. อธิบายเหตุผลพร้อมหลักการทางฟิสิกส์ว่าทำไมปีกเครื่องบินจึงถูกออกแบบให้โค้งทางด้านบนและเรียบทางด้านล่าง",
+    key:"<strong>เฉลย:</strong><br>เมื่อเครื่องบินเคลื่อนที่ อากาศเหนือปีกโค้งต้องเดินทางเป็นระยะทางยาวกว่า ทำให้มีความเร็ว v_top สูงกว่า v_bottom<br>ตามหลักของแบร์นูลลี ด้านบนที่มีความเร็วสูงจะมีความดัน P_top ต่ำกว่าความดันด้านล่าง P_bottom<br>ความแตกต่างของความดันนี้ทำให้เกิดแรงยก (Lift force) ดันปีกเครื่องบินให้พุ่งขึ้นสู่สู่อากาศ"},
+    {q:"5. หยดน้ำฝนรัศมี 1 mm (10⁻³ m) ตกในอากาศความหนืด η = 1.8 × 10⁻⁵ Pa·s จงหาอัตราเร็วปลาย (Terminal Velocity) สมมุติความหนาแน่นน้ำ 1000 kg/m³ และอากาศ 1.2 kg/m³",
+    key:"<strong>วิธีทำ:</strong><br>v_t = [2 r² g (ρ_water - ρ_air)] / [9 η]<br>v_t = [2 × (10⁻³)² × 9.8 × (1000 - 1.2)] / [9 × 1.8 × 10⁻⁵]<br>v_t = [2 × 10⁻⁶ × 9.8 × 998.8] / [1.62 × 10⁻⁴] ≈ <strong>120.8 m/s</strong>"}
+];
+
+let userAnswers=new Array(20).fill(-1);
+function renderMC(){
+    const c=document.getElementById('mc-questions');
+    mcData.forEach((q,qi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-cyan-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi+1}</span>${q.q}</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${q.choices.map((ch,ci)=>`<button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-sm flex items-center gap-3"><span class="w-7 h-7 rounded-full border-2 border-current flex items-center justify-center font-bold font-inter text-xs flex-shrink-0">${ci+1}</span><span>${ch}</span></button>`).join('')}</div>`;
+        c.appendChild(d);
+    });
+}
+function selectMC(qi,ci){
+    if(document.getElementById(`mc-${qi}-0`).classList.contains('correct')||document.getElementById(`mc-${qi}-0`).classList.contains('wrong'))return;
+    const prev=userAnswers[qi];
+    if(prev!==-1)document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+    userAnswers[qi]=ci;
+    document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+}
+function renderMatch(){
+    const c=document.getElementById('match-questions');
+    matchData.forEach((m,mi)=>{
+        const d=document.createElement('div');
+        d.className='flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+        const opts=matchOptions.map(o=>`<option value="${o}">${o}</option>`).join('');
+        d.innerHTML=`<span class="w-6 h-6 bg-cyan-600 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">${mi+1}</span><span class="flex-1 text-sm font-medium text-slate-700">${m.left}</span><select class="match-select" id="match-${mi}"><option value="">-- เลือก --</option>${opts}</select>`;
+        c.appendChild(d);
+    });
+}
+function renderFill(){
+    const c=document.getElementById('fill-questions');
+    fillData.forEach((f,fi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-cyan-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi+1}</span>${f.q}</p><div class="flex items-center gap-2"><input type="text" class="fill-input flex-1 min-w-0 outline-none" id="fill-${fi}" placeholder="พิมพ์คำตอบ..."><span class="text-sm text-slate-500 whitespace-nowrap">${f.unit}</span><span class="text-sm ml-1" id="fill-icon-${fi}"></span></div>`;
+        c.appendChild(d);
+    });
+}
+function renderSubj(){
+    const c=document.getElementById('subj-questions');
+    subjData.forEach((s,si)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-teal-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si+1}</span>${s.q}</p><textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-cyan-400 min-h-[120px] resize-y" id="subj-${si}" placeholder="เขียนวิธีทำที่นี่..."></textarea><div class="answer-key mt-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 leading-relaxed" id="key-${si}">${s.key}</div><button onclick="toggleKey(${si})" class="mt-2 text-xs text-emerald-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}"><i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด</button>`;
+        c.appendChild(d);
+    });
+}
+function toggleKey(si){
+    const k=document.getElementById(`key-${si}`);
+    const b=document.getElementById(`key-btn-${si}`);
+    k.classList.toggle('show');
+    b.innerHTML=k.classList.contains('show')?'<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย':'<i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด';
+}
+function showTab(n){
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById(`tab-${n}`).classList.add('active');
+    document.getElementById(`tab-btn-${n}`).classList.add('active');
+}
+function submitAll(){
+    let p1=0;
+    mcData.forEach((q,qi)=>{
+        const chosen=userAnswers[qi];
+        for(let ci=0;ci<4;ci++){
+            const btn=document.getElementById(`mc-${qi}-${ci}`);
+            btn.classList.remove('selected');
+            if(ci===q.ans)btn.classList.add('correct');
+            else if(ci===chosen&&chosen!==q.ans)btn.classList.add('wrong');
+        }
+        if(chosen===q.ans)p1++;
+    });
+    let p2=0;
+    matchData.forEach((m,mi)=>{
+        const sel=document.getElementById(`match-${mi}`);
+        sel.classList.remove('correct','wrong');
+        if(sel.value===m.right){sel.classList.add('correct');p2++;}else sel.classList.add('wrong');
+    });
+    let p3=0;
+    fillData.forEach((f,fi)=>{
+        const input=document.getElementById(`fill-${fi}`);
+        const icon=document.getElementById(`fill-icon-${fi}`);
+        const val=parseFloat(input.value.trim());
+        const ok=Math.abs(val-parseFloat(f.ans))<=f.tol;
+        input.classList.remove('correct','wrong');
+        if(ok){input.classList.add('correct');icon.textContent='✅';p3++;}else{input.classList.add('wrong');icon.textContent='❌';}
+    });
+    subjData.forEach((_,si)=>document.getElementById(`key-${si}`).classList.add('show'));
+    const total=p1+p2+p3;
+    document.getElementById('modal-p1').textContent=`${p1}/20`;
+    document.getElementById('modal-p2').textContent=`${p2}/10`;
+    document.getElementById('modal-p3').textContent=`${p3}/5`;
+    document.getElementById('modal-total').textContent=`${total}/35`;
+    const pct=Math.round(total/35*100);
+    let grade='',emoji='';
+    if(pct>=80){grade=`ยอดเยี่ยม! (${pct}%)`;emoji='🏆';}
+    else if(pct>=60){grade=`ผ่าน (${pct}%)`;emoji='👍';}
+    else{grade=`ต้องทบทวน (${pct}%)`;emoji='📚';}
+    document.getElementById('modal-grade').textContent=grade;
+    document.getElementById('modal-emoji').textContent=emoji;
+    document.getElementById('score-modal').classList.add('show');
+}
+function closeModal(){document.getElementById('score-modal').classList.remove('show');}
+document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+renderMC();renderMatch();renderFill();renderSubj();
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 15: ไฟฟ้าและแม่เหล็ก | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+    <style>
+        .tab-btn{transition:all 0.2s}.tab-btn.active{background:#d97706;color:white;box-shadow:0 4px 12px rgba(217,119,6,0.3)}
+        .tab-content{display:none}.tab-content.active{display:block}
+        .choice-btn{transition:all 0.2s;cursor:pointer;border:2px solid #e2e8f0}.choice-btn:hover{border-color:#fde68a;background:#fffbeb}
+        .choice-btn.selected{border-color:#d97706;background:#fffbeb;color:#b45309}
+        .choice-btn.correct{border-color:#10b981!important;background:#ecfdf5!important;color:#065f46!important}
+        .choice-btn.wrong{border-color:#ef4444!important;background:#fef2f2!important;color:#991b1b!important}
+        .match-select,.fill-input{border:2px solid #e2e8f0;border-radius:0.5rem;padding:0.4rem 0.6rem}.match-select{font-size:0.8rem;width:100%}.fill-input{font-size:0.9rem}
+        .match-select.correct,.fill-input.correct{border-color:#10b981;background:#ecfdf5}.match-select.wrong,.fill-input.wrong{border-color:#ef4444;background:#fef2f2}
+        .answer-key{display:none}.answer-key.show{display:block}
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}.modal-overlay.show{display:flex}
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-amber-500 to-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-amber-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-amber-600">HOME</a>
+            <a href="m6-physics.html" class="text-sm font-semibold text-amber-600 border-b-2 border-amber-600">บทเรียน ม.6</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m6-physics.html" class="text-amber-600 font-semibold py-1">บทเรียน ม.6</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-6">
+        <a href="m6-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-amber-600 hover:text-amber-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.6
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CH15 QUIZ ENGINE</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-slate-900 via-amber-950 to-orange-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+        <div class="absolute w-72 h-72 bg-amber-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/30 text-amber-200 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                <i class="fa-solid fa-magnet"></i> บทที่ 15 — ฟิสิกส์ ม.6
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด: ไฟฟ้าและแม่เหล็ก</h1>
+            <p class="text-amber-100 text-sm max-w-2xl leading-relaxed">
+                ฟลักซ์แม่เหล็ก | แรงต่อประจุ F=qvB | ลวดตัวนำ F=ILB | มอเตอร์ & หม้อแปลง | วงจร AC<br>
+                ปรนัย 20 | จับคู่ 10 | เติมคำ 5 | อัตนัย 5 &nbsp;|&nbsp; <strong>คะแนนเต็ม 35</strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+        <button onclick="showTab(1)" class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-1"><i class="fa-solid fa-circle-dot mr-1"></i>ส่วนที่ 1 ปรนัย (20)</button>
+        <button onclick="showTab(2)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-2"><i class="fa-solid fa-link mr-1"></i>ส่วนที่ 2 จับคู่ (10)</button>
+        <button onclick="showTab(3)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-3"><i class="fa-solid fa-pen-to-square mr-1"></i>ส่วนที่ 3 เติมคำ (5)</button>
+        <button onclick="showTab(4)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-4"><i class="fa-solid fa-file-pen mr-1"></i>ส่วนที่ 4 อัตนัย (5)</button>
+    </div>
+
+    <div id="tab-1" class="tab-content active"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-amber-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย</h2><p class="text-xs text-slate-500 mb-4">20 ข้อ ข้อละ 1 คะแนน</p><div id="mc-questions" class="space-y-6"></div></div></div>
+    <div id="tab-2" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-amber-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่</h2><p class="text-xs text-slate-500 mb-4">10 ข้อ ข้อละ 1 คะแนน</p><div id="match-questions" class="space-y-3"></div></div></div>
+    <div id="tab-3" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-amber-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำในช่องว่าง</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ ข้อละ 1 คะแนน</p><div id="fill-questions" class="space-y-6"></div></div></div>
+    <div id="tab-4" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-amber-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ | เขียนวิธีทำ แล้วกดดูเฉลย</p><div id="subj-questions" class="space-y-6"></div></div></div>
+
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="submitAll()" class="py-4 px-10 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม</button>
+        <a href="m6-physics.html" class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-list"></i> กลับหน้าหลัก ม.6</a>
+    </div>
+</main>
+
+<div class="modal-overlay" id="score-modal">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+        <div class="bg-gradient-to-r from-amber-600 to-orange-600 p-6 text-white text-center">
+            <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+            <h2 class="text-2xl font-extrabold">ผลการทำแบบฝึกหัด</h2>
+            <p class="text-amber-100 text-sm mt-1">บทที่ 15: ไฟฟ้าและแม่เหล็ก</p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20)</span><span class="font-bold text-amber-700" id="modal-p1">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (10)</span><span class="font-bold text-amber-700" id="modal-p2">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5)</span><span class="font-bold text-amber-700" id="modal-p3">-</span></div>
+            <div class="bg-amber-50 rounded-xl p-4 text-center mt-2">
+                <p class="text-xs text-amber-600 font-semibold mb-1">คะแนนรวม (ส่วนที่ 1-3)</p>
+                <p class="text-4xl font-extrabold text-amber-700" id="modal-total">0/35</p>
+                <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+            </div>
+        </div>
+        <div class="px-6 pb-6 flex gap-3">
+            <button onclick="closeModal()" class="flex-1 py-3 bg-amber-600 text-white rounded-xl font-bold text-sm hover:bg-amber-700">ดูเฉลยละเอียด</button>
+            <a href="m6-physics.html" class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300">กลับหน้าหลัก</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const mcData=[
+    {q:"ขดลวดพื้นที่ 10 × 10⁻⁴ m² วางในสนามแม่เหล็กสม่ำเสมอ B = 10 T โดยระนาบขดลวดทำมุม 90° กับสนามแม่เหล็ก ฟลักซ์แม่เหล็ก = ?",choices:["1.0 × 10⁻² Wb","2.0 × 10⁻² Wb","0.5 × 10⁻² Wb","0 Wb"],ans:0},
+    {q:"จากข้อ 1 ถ้าระนาบขดลวดทำมุม 30° กับสนามแม่เหล็ก ฟลักซ์แม่เหล็กที่ผ่านขดลวด = ?",choices:["0.5 × 10⁻² Wb","1.0 × 10⁻² Wb","2.0 × 10⁻² Wb","0 Wb"],ans:0},
+    {q:"ประจุไฟฟ้า 1.6 × 10⁻¹⁹ C เคลื่อนที่ความเร็ว 2 × 10⁷ m/s ทำมุม 30° กับสนามแม่เหล็ก B = 1.5 T แรงแม่เหล็ก = ?",choices:["2.4 × 10⁻¹² N","1.2 × 10⁻¹² N","4.8 × 10⁻¹² N","0 N"],ans:1},
+    {q:"ในกรณีใดที่แรงแม่เหล็กกระทำต่อประจุไฟฟ้ามีค่าเป็นศูนย์ (F = 0)?",choices:["ประจุเคลื่อนที่ตั้งฉากกับ B","ประจุเคลื่อนที่ขนานกับ B","ประจุบวกเคลื่อนที่ใน B","ประจุมีมวลมาก"],ans:1},
+    {q:"ลวดตัวนำยาว 60 cm มีกระแส 10 A วางทำมุม 30° กับสนามแม่เหล็ก B = 1.5 T แรงกระทำต่อเส้นลวด = ?",choices:["4.5 N","9.0 N","3.0 N","6.0 N"],ans:0},
+    {q:"ลวดขนาน 2 เส้น มีกระแสไหลทิศทางเดียวกัน ลวดทั้งสองจะเกิดแรงกระทำอย่างไร?",choices:["ผลักกัน","ดูดกัน","ไม่มีแรงกระทำ","หมุนรอบกัน"],ans:1},
+    {q:"ขดลวดสี่เหลี่ยมผืนผ้า N = 400 รอบ พื้นที่ 10 cm² กระแส 6 A วางใน B = 5 T โดยระนาบขดลวดทำมุม 60° กับแนว B โมเมนต์แรงคู่ควบ = ?",choices:["6 N·m","3 N·m","12 N·m","0 N·m"],ans:1},
+    {q:"อุปกรณ์ใดใช้สลับทิศทางกระแสไฟฟ้าในขดลวดของมอเตอร์ไฟฟ้ากระแสตรงเพื่อ ให้หมุนทิศทางเดียวต่อเนื่อง?",choices:["หม้อแปลง","คอมมิวเทเตอร์วงแหวนผ่าซีก","ตัวเก็บประจุ","ฟิวส์"],ans:1},
+    {q:"หม้อแปลงไฟฟ้าลง แปลงแรงดันจาก 20000 V เป็น 200 V ขดลวดปฐมภูมิ N₁ = 10000 รอบ ขดลวดทุติยภูมิ N₂ = ?",choices:["100 รอบ","200 รอบ","500 รอบ","1000 รอบ"],ans:0},
+    {q:"หม้อแปลงไฟฟ้าอุดมคติ (Eff = 100%) กำลังไฟฟ้าปฐมภูมิ P₁ กับทุติยภูมิ P₂ สัมพันธ์กันอย่างไร?",choices:["P₁ > P₂","P₁ < P₂","P₁ = P₂","P₁ = 0"],ans:2},
+    {q:"มิเตอร์อ่านค่าความต่างศักย์ไฟฟ้ากระแสสลับในบ้านได้ 220 V หมายความว่าค่าความต่างศักย์สูงสุด V_m = ?",choices:["220 V","110 V","220√2 V (ประมาณ 311 V)","440 V"],ans:2},
+    {q:"ในวงจร AC ที่มีเฉพาะตัวต้านทาน R เฟสของกระแสไฟฟ้า (i) และความต่างศักย์ (v) เป็นอย่างไร?",choices:["i นำ v อยู่ 90°","v นำ i อยู่ 90°","เฟสตรงกันพอดี","เฟสตรงข้ามกัน 180°"],ans:2},
+    {q:"ตัวเก็บประจุ C = 0.5 μF ในวงจร AC ความถี่ f = 1 kHz ค่าความต้านทานเชิงความจุ X_C เท่ากับประมาณเท่าใด?",choices:["318 Ω","100 Ω","500 Ω","1000 Ω"],ans:0},
+    {q:"ตัวเหนี่ยวนำ L = 0.07 H ต่อกับ AC 220 V, 50 Hz ค่าความต้านทานเชิงเหนี่ยวนำ X_L เท่ากับประมาณเท่าใด?",choices:["22 Ω","44 Ω","100 Ω","220 Ω"],ans:0},
+    {q:"จากข้อ 14 กระแสไฟฟ้า I_rms ที่ไหลผ่านตัวเหนี่ยวนำ = ?",choices:["10 A","5 A","20 A","2.2 A"],ans:0},
+    {q:"ในวงจร AC ที่มีเฉพาะตัวเก็บประจุ C เฟสของความต่างศักย์ v มีค่าอย่างไรเมื่อเทียบกับกระแส i?",choices:["v นำ i อยู่ 90°","v ตาม i อยู่ 90°","เฟสตรงกัน","เฟสตรงข้าม 180°"],ans:1},
+    {q:"ในวงจร AC ที่มีเฉพาะตัวเหนี่ยวนำ L เฟสของความต่างศักย์ v มีค่าอย่างไรเมื่อเทียบกับกระแส i?",choices:["v นำ i อยู่ 90°","v ตาม i อยู่ 90°","เฟสตรงกัน","ไม่มีเฟส"],ans:0},
+    {q:"ตัวประกอบกำลัง (Power Factor) ของวงจร AC คือค่าใด?",choices:["sinΦ","cosΦ","tanΦ","cotΦ"],ans:1},
+    {q:"มอเตอร์หมุนช้าลงเนื่องจากฝืด แรงเคลื่อนไฟฟ้าดันกลับ (e) จะเป็นอย่างไร?",choices:["เพิ่มขึ้น","ลดลง","คงเดิม","เป็นศูนย์เสมอ"],ans:1},
+    {q:"เมื่อหมุนแท่งแม่เหล็กเข้าหาขดลวด จะเกิดอะไรขึ้นในขดลวดตามกฎฟาราเดย์และเลนซ์?",choices:["เกิดกระแสเหนี่ยวนำต้านการเปลี่ยนแปลงฟลักซ์","ไม่มีอะไรเกิดขึ้น","เกิดความต้านทานเพิ่ม","ประจุไฟฟ้าหายไป"],ans:0}
+];
+
+const matchData=[
+    {left:"ฟลักซ์แม่เหล็ก (Φ)",right:"Φ = B A sinθ (Wb)"},
+    {left:"แรงแม่เหล็กต่อประจุ",right:"F = q v B sinθ"},
+    {left:"รัศมีวงกลมประจุใน B",right:"R = m v / (q B)"},
+    {left:"แรงต่อลวดตัวนำ",right:"F = I L B sinθ"},
+    {left:"โมเมนต์แรงคู่ควบขดลวด",right:"M = N I A B cosθ"},
+    {left:"สมการหม้อแปลงไฟฟ้า",right:"E₁/E₂ = N₁/N₂"},
+    {left:"ค่ายังผลกระแส AC",right:"I_rms = I_m / √2"},
+    {left:"ความต้านทานเชิงความจุ",right:"X_C = 1 / (2π f C)"},
+    {left:"ความต้านทานเชิงเหนี่ยวนำ",right:"X_L = 2π f L"},
+    {left:"กำลังไฟฟ้าเฉลี่ย AC",right:"P = I_rms V_rms cosΦ"}
+];
+const matchOptions=["Φ = B A sinθ (Wb)","F = q v B sinθ","R = m v / (q B)","F = I L B sinθ","M = N I A B cosθ","E₁/E₂ = N₁/N₂","I_rms = I_m / √2","X_C = 1 / (2π f C)","X_L = 2π f L","P = I_rms V_rms cosΦ"];
+
+const fillData=[
+    {q:"ขดลวด N=100 รอบ พื้นที่ 0.05 m² กระแส 2 A วางใน B = 1 T ระนาบขดลวดขนาน B (θ=0°) โมเมนต์ M = ___ N·m",unit:"N·m",ans:"10",tol:0.5},
+    {q:"หม้อแปลงลง 220 V เป็น 11 V ขดลวดปฐมภูมิ N₁ = 2000 รอบ ขดลวดทุติยภูมิ N₂ = ___ รอบ",unit:"รอบ",ans:"100",tol:1},
+    {q:"โวลต์มิเตอร์ AC อ่านค่าความต่างศักย์ได้ 100 V ค่าความต่างศักย์สูงสุด V_m = ___ V (ประมาณ 1 ทศนิยม)",unit:"V",ans:"141.4",tol:1.0},
+    {q:"ลวดตัวนำ 0.5 m กระแส 4 A วางตั้งฉากกับ B = 0.2 T แรง F = ___ N",unit:"N",ans:"0.4",tol:0.05},
+    {q:"ประจุ 2 × 10⁻⁶ C เคลื่อนที่ 10⁵ m/s ตั้งฉากกับ B = 0.5 T แรง F = ___ N",unit:"N",ans:"0.1",tol:0.01}
+];
+
+const subjData=[
+    {q:"1. รถมวล 1000 kg เคลื่อนที่ในแนวราบด้วยความเร็ว 20 m/s และสนามแม่เหล็กโลกดิ่งลง B = 5 × 10⁻⁵ T จงหาแรงเคลื่อนไฟฟ้าเหนี่ยวนำระหว่างปลายเพลาล้อรถยาว 1.5 m",
+    key:"<strong>วิธีทำ:</strong><br>e = B · L · v<br>e = (5 × 10⁻⁵ T) × (1.5 m) × (20 m/s)<br>e = 1.5 × 10⁻³ V = <strong>1.5 mV</strong>"},
+    {q:"2. หม้อแปลงอุดมคติรับไฟ 220 V จ่ายไฟ 110 V ให้เครื่องใช้ไฟฟ้าขนาด 550 W จงหากระแสไฟฟ้าในขดลวดปฐมภูมิ I₁ และทุติยภูมิ I₂",
+    key:"<strong>วิธีทำ:</strong><br>P₁ = P₂ = 550 W<br>I₂ = P₂ / V₂ = 550 / 110 = <strong>5 A</strong><br>I₁ = P₁ / V₁ = 550 / 220 = <strong>2.5 A</strong>"},
+    {q:"3. มอเตอร์กระแสตรงต่อกับแหล่งจ่าย 12 V ขณะหมุนมีความต่างศักย์ดันกลับ e = 10 V มีความต้านทานขดลวด R = 1 Ω จงหากระแสไฟฟ้าขณะหมุนปกติ และถ้ามอเตอร์ติดขัดหยุดหมุน กระแสจะเป็นเท่าใด",
+    key:"<strong>วิธีทำ:</strong><br>ขณะหมุนปกติ: I = (E - e) / R = (12 - 10) / 1 = <strong>2 A</strong><br>ถ้าหยุดหมุน (e = 0): I = E / R = 12 / 1 = <strong>12 A</strong> (เสี่ยงมอเตอร์ไหม้)"},
+    {q:"4. วงจร AC มี R = 40 Ω, L = 0.1 H ต่ออนุกรมกับแหล่งจ่าย 100 V, 50 Hz จงหาค่า X_L, ความต้านทานเชิงซ้อน Z และกระแส I_rms",
+    key:"<strong>วิธีทำ:</strong><br>X_L = 2π f L = 2 × 3.14 × 50 × 0.1 ≈ <strong>31.4 Ω</strong><br>Z = √(R² + X_L²) = √(40² + 31.4²) ≈ <strong>50.85 Ω</strong><br>I_rms = V / Z = 100 / 50.85 ≈ <strong>1.97 A</strong>"},
+    {q:"5. อธิบายหลักการทำงานของหม้อแปลงไฟฟ้าพร้อมยกตัวอย่างการประยุกต์ใช้งานในชีวิตประจำวัน",
+    key:"<strong>เฉลย:</strong><br><strong>หลักการ:</strong> ใช้การเหนี่ยวนำแม่เหล็กไฟฟ้า โดยปล่อย AC ผ่านขดลวดปฐมภูมิ เกิดฟลักซ์แม่เหล็กเปลี่ยนแปลงผ่านแกนเหล็ก ส่งผ่านไปยังขดลวดทุติยภูมิเกิดแรงเคลื่อนไฟฟ้าเหนี่ยวนำตามอัตราส่วนจำนวนรอบ (E₁/E₂ = N₁/N₂)<br><strong>ตัวอย่าง:</strong> อะแดปเตอร์ชาร์จโทรศัพท์ (หม้อแปลงลง), หม้อแปลงบนเสาไฟฟ้าส่งจ่ายเข้าบ้านเรือน"}
+];
+
+let userAnswers=new Array(20).fill(-1);
+function renderMC(){
+    const c=document.getElementById('mc-questions');
+    mcData.forEach((q,qi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-amber-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi+1}</span>${q.q}</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${q.choices.map((ch,ci)=>`<button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-sm flex items-center gap-3"><span class="w-7 h-7 rounded-full border-2 border-current flex items-center justify-center font-bold font-inter text-xs flex-shrink-0">${ci+1}</span><span>${ch}</span></button>`).join('')}</div>`;
+        c.appendChild(d);
+    });
+}
+function selectMC(qi,ci){
+    if(document.getElementById(`mc-${qi}-0`).classList.contains('correct')||document.getElementById(`mc-${qi}-0`).classList.contains('wrong'))return;
+    const prev=userAnswers[qi];
+    if(prev!==-1)document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+    userAnswers[qi]=ci;
+    document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+}
+function renderMatch(){
+    const c=document.getElementById('match-questions');
+    matchData.forEach((m,mi)=>{
+        const d=document.createElement('div');
+        d.className='flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+        const opts=matchOptions.map(o=>`<option value="${o}">${o}</option>`).join('');
+        d.innerHTML=`<span class="w-6 h-6 bg-amber-600 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">${mi+1}</span><span class="flex-1 text-sm font-medium text-slate-700">${m.left}</span><select class="match-select" id="match-${mi}"><option value="">-- เลือก --</option>${opts}</select>`;
+        c.appendChild(d);
+    });
+}
+function renderFill(){
+    const c=document.getElementById('fill-questions');
+    fillData.forEach((f,fi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-amber-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi+1}</span>${f.q}</p><div class="flex items-center gap-2"><input type="text" class="fill-input flex-1 min-w-0 outline-none" id="fill-${fi}" placeholder="พิมพ์คำตอบ..."><span class="text-sm text-slate-500 whitespace-nowrap">${f.unit}</span><span class="text-sm ml-1" id="fill-icon-${fi}"></span></div>`;
+        c.appendChild(d);
+    });
+}
+function renderSubj(){
+    const c=document.getElementById('subj-questions');
+    subjData.forEach((s,si)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-orange-500 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si+1}</span>${s.q}</p><textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-amber-400 min-h-[120px] resize-y" id="subj-${si}" placeholder="เขียนวิธีทำที่นี่..."></textarea><div class="answer-key mt-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 leading-relaxed" id="key-${si}">${s.key}</div><button onclick="toggleKey(${si})" class="mt-2 text-xs text-emerald-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}"><i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด</button>`;
+        c.appendChild(d);
+    });
+}
+function toggleKey(si){
+    const k=document.getElementById(`key-${si}`);
+    const b=document.getElementById(`key-btn-${si}`);
+    k.classList.toggle('show');
+    b.innerHTML=k.classList.contains('show')?'<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย':'<i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด';
+}
+function showTab(n){
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById(`tab-${n}`).classList.add('active');
+    document.getElementById(`tab-btn-${n}`).classList.add('active');
+}
+function submitAll(){
+    let p1=0;
+    mcData.forEach((q,qi)=>{
+        const chosen=userAnswers[qi];
+        for(let ci=0;ci<4;ci++){
+            const btn=document.getElementById(`mc-${qi}-${ci}`);
+            btn.classList.remove('selected');
+            if(ci===q.ans)btn.classList.add('correct');
+            else if(ci===chosen&&chosen!==q.ans)btn.classList.add('wrong');
+        }
+        if(chosen===q.ans)p1++;
+    });
+    let p2=0;
+    matchData.forEach((m,mi)=>{
+        const sel=document.getElementById(`match-${mi}`);
+        sel.classList.remove('correct','wrong');
+        if(sel.value===m.right){sel.classList.add('correct');p2++;}else sel.classList.add('wrong');
+    });
+    let p3=0;
+    fillData.forEach((f,fi)=>{
+        const input=document.getElementById(`fill-${fi}`);
+        const icon=document.getElementById(`fill-icon-${fi}`);
+        const val=parseFloat(input.value.trim());
+        const ok=Math.abs(val-parseFloat(f.ans))<=f.tol;
+        input.classList.remove('correct','wrong');
+        if(ok){input.classList.add('correct');icon.textContent='✅';p3++;}else{input.classList.add('wrong');icon.textContent='❌';}
+    });
+    subjData.forEach((_,si)=>document.getElementById(`key-${si}`).classList.add('show'));
+    const total=p1+p2+p3;
+    document.getElementById('modal-p1').textContent=`${p1}/20`;
+    document.getElementById('modal-p2').textContent=`${p2}/10`;
+    document.getElementById('modal-p3').textContent=`${p3}/5`;
+    document.getElementById('modal-total').textContent=`${total}/35`;
+    const pct=Math.round(total/35*100);
+    let grade='',emoji='';
+    if(pct>=80){grade=`ยอดเยี่ยม! (${pct}%)`;emoji='🏆';}
+    else if(pct>=60){grade=`ผ่าน (${pct}%)`;emoji='👍';}
+    else{grade=`ต้องทบทวน (${pct}%)`;emoji='📚';}
+    document.getElementById('modal-grade').textContent=grade;
+    document.getElementById('modal-emoji').textContent=emoji;
+    document.getElementById('score-modal').classList.add('show');
+}
+function closeModal(){document.getElementById('score-modal').classList.remove('show');}
+document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+renderMC();renderMatch();renderFill();renderSubj();
+</script>
+</body>
+</html>
