@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปบทที่ 07: การเคลื่อนที่แบบหมุน | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-blue-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-blue-600">HOME</a>
+            <a href="m4-mechanics.html" class="text-sm font-semibold text-blue-600 border-b-2 border-blue-600">ม.4 กลศาสตร์</a>
+            <a href="m6-physics.html" class="text-sm font-medium text-slate-500 hover:text-blue-600">ม.6 บทเรียน</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m4-mechanics.html" class="text-blue-600 font-semibold py-1">ม.4 กลศาสตร์</a>
+        <a href="m6-physics.html" class="text-slate-600 py-1">ม.6 บทเรียน</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-4">
+        <a href="m4-mechanics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-purple-600 hover:text-purple-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.4
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CHAPTER 07 VISUAL SUMMARY</span>
+    </div>
+
+    <!-- Outer Container Matching Image Style -->
+    <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-8">
+        
+        <!-- Header Title with Number Badge -->
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+            <span class="w-10 h-10 bg-purple-100 text-purple-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">07</span>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900">การเคลื่อนที่แบบหมุน (Rotational Motion)</h1>
+        </div>
+
+        <!-- Section 1: Linear vs Rotational quantities comparison -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-purple-600 flex items-center gap-2">
+                <i class="fa-solid fa-rotate"></i> 1. ตารางเปรียบเทียบการเคลื่อนที่แนวตรง vs การหมุน
+            </h3>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 text-center text-xs font-inter">
+                <div class="bg-white p-3 rounded-xl border border-slate-200">
+                    <span class="text-slate-400 font-bold block mb-1">ระยะทาง</span>
+                    <span class="text-base font-bold text-slate-800">s ↔ θ</span>
+                    <span class="text-[0.65rem] text-purple-600 block mt-1">s = r · θ</span>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200">
+                    <span class="text-slate-400 font-bold block mb-1">ความเร็ว</span>
+                    <span class="text-base font-bold text-slate-800">v ↔ ω</span>
+                    <span class="text-[0.65rem] text-purple-600 block mt-1">v = r · ω</span>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200">
+                    <span class="text-slate-400 font-bold block mb-1">ความเร่ง</span>
+                    <span class="text-base font-bold text-slate-800">a ↔ α</span>
+                    <span class="text-[0.65rem] text-purple-600 block mt-1">a = r · α</span>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200">
+                    <span class="text-slate-400 font-bold block mb-1">มวล/ความเฉื่อย</span>
+                    <span class="text-base font-bold text-slate-800">m ↔ I</span>
+                    <span class="text-[0.65rem] text-purple-600 block mt-1">I = m · r²</span>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200">
+                    <span class="text-slate-400 font-bold block mb-1">แรง / ทอร์ก</span>
+                    <span class="text-base font-bold text-slate-800">F ↔ τ</span>
+                    <span class="text-[0.65rem] text-purple-600 block mt-1">τ = r · F sinθ</span>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200">
+                    <span class="text-slate-400 font-bold block mb-1">โมเมนตัม</span>
+                    <span class="text-base font-bold text-slate-800">p ↔ L</span>
+                    <span class="text-[0.65rem] text-purple-600 block mt-1">L = I · ω</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Torque & Moment of Inertia -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Torque Box -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-purple-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-wrench"></i> 2. ทอร์ก (Torque: τ) & กฎการหมุน
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        ทอร์กคือผลของการหมุนที่กระทำต่อวัตถุ (เทียบเท่า F = ma ในแนวตรง)
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex justify-center items-center">
+                    <div class="text-lg md:text-xl font-bold font-inter text-purple-700">
+                        τ = I · α &nbsp;&nbsp;(τ = r · F · sinθ)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment of Inertia Box -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-purple-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-compact-disc"></i> 3. โมเมนต์ความเฉื่อย (I)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        ปริมาณต้านการเปลี่ยนสภาพการหมุน ขึ้นกับมวลและการกระจายมวลรอบแกนหมุน
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex justify-center items-center">
+                    <div class="text-base md:text-lg font-bold font-inter text-slate-800">
+                        จุดมวล: I = m·r² &nbsp;|&nbsp; แผ่นจาน: I = ½mR² &nbsp;|&nbsp; วงแหวน: I = mR²
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Section 3: Rotational Energy & Angular Momentum -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-purple-600 flex items-center gap-2">
+                <i class="fa-solid fa-bolt"></i> 4. พลังงานจลน์การหมุน & อนุรักษ์โมเมนตัมเชิงมุม
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-inter text-slate-800">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">พลังงานจลน์การหมุน (Rotational Kinetic Energy)</span>
+                    <span class="text-lg font-bold text-purple-700">E_k,rot = ½ · I · ω²</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">กฎการอนุรักษ์โมเมนตัมเชิงมุม (เมื่อ τ_ext = 0)</span>
+                    <span class="text-lg font-bold text-purple-700">L_1 = L_2 &nbsp;→&nbsp; I₁·ω₁ = I₂·ω₂</span>
+                </div>
+            </div>
+
+            <div class="bg-amber-50/80 border border-amber-200/80 text-amber-900 rounded-xl p-3.5 text-xs flex items-start gap-2.5">
+                <span class="text-base">💡</span>
+                <div><strong>ตัวอย่างการหุบแขนนักสเก็ต:</strong> เมื่อนักสเก็ตน้ำแข็งหุบแขนเข้ามา โมเมนต์ความเฉื่อย I จะลดลง ส่งผลให้ความเร็วเชิงมุม ω เพิ่มขึ้นมหาศาล เพื่อรักษา L = Iω ให้คงตัว</div>
+            </div>
+        </div>
+
+        <div class="flex justify-center gap-4 pt-4 border-t border-slate-100">
+            <a href="m4-ch07-quiz.html" class="py-3 px-8 bg-purple-600 hover:bg-purple-700 text-white font-extrabold rounded-2xl shadow-lg text-sm flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> ไปทำแบบฝึกหัด บทที่ 07
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-slate-900 text-slate-400 py-6 mt-12 text-center text-xs">
+    © 2026 ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB
+</footer>
+<script>
+    document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+</script>
+</body>
+</html>

@@ -2,14 +2,14 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุปบทที่ 18: ความร้อนและทฤษฎีจลน์ของแก๊ส | ฟิสิกส์ จารย์เปา</title>
+    <title>สรุปบทที่ 18: ความร้อนและทฤษฎีจลน์แก๊ส | ฟิสิกส์ จารย์เปา</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen">
+<body class="bg-slate-100 text-slate-800 min-h-screen">
 <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
@@ -18,98 +18,149 @@
         </div>
         <nav class="hidden md:flex gap-8 items-center">
             <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-rose-600">HOME</a>
-            <a href="m6-physics.html" class="text-sm font-semibold text-rose-600 border-b-2 border-rose-600">บทเรียน ม.6</a>
+            <a href="m6-physics.html" class="text-sm font-semibold text-rose-600 border-b-2 border-rose-600">ม.6 บทเรียน</a>
         </nav>
         <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
     </div>
     <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
         <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
-        <a href="m6-physics.html" class="text-rose-600 font-semibold py-1">บทเรียน ม.6</a>
+        <a href="m6-physics.html" class="text-rose-600 font-semibold py-1">ม.6 บทเรียน</a>
     </div>
 </header>
 
-<main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
     <div class="flex items-center justify-between mb-4">
         <a href="m6-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-rose-600 hover:text-rose-800">
             <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.6
         </a>
-        <span class="text-xs text-slate-400 font-inter">CHAPTER 18 SUMMARY</span>
+        <span class="text-xs text-slate-400 font-inter">CHAPTER 18 VISUAL SUMMARY</span>
     </div>
 
-    <div class="bg-gradient-to-r from-rose-900 via-red-800 to-orange-700 text-white rounded-3xl p-8 mb-8 shadow-xl">
-        <div class="inline-flex items-center gap-2 bg-white/20 border border-white/30 text-white px-3 py-1 rounded-full text-xs font-semibold mb-3">
-            <i class="fa-solid fa-fire"></i> บทที่ 18 — ฟิสิกส์ ม.6
+    <!-- Outer Container Matching Screenshot Design Style -->
+    <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-8">
+        
+        <!-- Header Title with Number Badge -->
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+            <span class="w-10 h-10 bg-rose-100 text-rose-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">18</span>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900">ความร้อนและทฤษฎีจลน์ของแก๊ส (Heat & Kinetic Theory)</h1>
         </div>
-        <h1 class="text-3xl font-extrabold mb-2">สรุปเนื้อหา: ความร้อนและทฤษฎีจลน์ของแก๊ส</h1>
-        <p class="text-rose-100 text-sm">ความร้อนจำเพาะ, ความร้อนแฝง, กฎแก๊สอุดมคติ, v_rms, พลังงานภายใน U, และกฎข้อ 1 เทอร์โมไดนามิกส์</p>
-    </div>
 
-    <!-- Section 1 -->
-    <div class="bg-white rounded-2xl p-6 mb-6 border border-slate-200 shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-rose-700 flex items-center gap-2">
-            <i class="fa-solid fa-temperature-three-quarters"></i> 1. พลังงานความร้อนและการเปลี่ยนสถานะ
-        </h2>
-        <ul class="list-disc list-inside text-sm text-slate-700 space-y-2 leading-relaxed">
-            <li><strong>ความร้อนจำเพาะ (c):</strong> ปริมาณความร้อนที่ทำให้อุณหภูมิสาร 1 kg เปลี่ยนไป 1 K (หรือ 1°C): ΔQ = m · c · ΔT</li>
-            <li><strong>ความจุความร้อน (C):</strong> C = m · c ดังนั้น ΔQ = C · ΔT</li>
-            <li><strong>ความร้อนแฝงจำเพาะ (L):</strong> ปริมาณความร้อนที่ใช้เปลี่ยนสถานะโดยอุณหภูมิคงที่: ΔQ = m · L</li>
-            <li><strong>สมดุลความร้อน:</strong> ความร้อนที่สูญเสีย = ความร้อนที่ได้รับ (Q_loss = Q_gain)</li>
-        </ul>
-        <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-sm font-mono text-rose-900">
-            ΔQ = m · c · ΔT &nbsp;&nbsp;(เปลี่ยนอุณหภูมิ) &nbsp;&nbsp;|&nbsp;&nbsp; ΔQ = m · L &nbsp;&nbsp;(เปลี่ยนสถานะ)
+        <!-- Section 1: Heat & Ideal Gas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Heat Box -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-rose-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-fire"></i> 1. ปริมาณความร้อน (Heat: Q)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        เปลี่ยนอุณหภูมิใช้ ΔQ = m·c·ΔT | เปลี่ยนสถานะใช้ ΔQ = m·L
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex justify-center items-center">
+                    <div class="text-base md:text-lg font-bold font-inter text-slate-800">
+                        ΔQ = m · c · ΔT &nbsp;&nbsp;|&nbsp;&nbsp; ΔQ = m · L
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ideal Gas Box -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-rose-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-cubes-stacked"></i> 2. สมการสถานะแก๊สอุดมคติ
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        ความดัน P, ปริมาตร V, อุณหภูมิ T (Kelvin) และจำนวนโมล n
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex justify-center items-center">
+                    <div class="text-lg md:text-xl font-bold font-inter text-rose-700">
+                        P · V = n · R · T = N · k_B · T
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
 
-    <!-- Section 2 -->
-    <div class="bg-white rounded-2xl p-6 mb-6 border border-slate-200 shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-rose-700 flex items-center gap-2">
-            <i class="fa-solid fa-cubes-stacked"></i> 2. กฎของแก๊สอุดมคติ (Ideal Gas Laws)
-        </h2>
-        <p class="text-sm text-slate-700 leading-relaxed">
-            แก๊สอุดมคติปฏิบัติตามกฎของบอยล์, ชาร์ล และเกย์-ลูสแซก:
-        </p>
-        <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-sm font-mono text-rose-900 space-y-1">
-            <p>กฎรวมแก๊ส: (P₁ · V₁) / T₁ = (P₂ · V₂) / T₂ &nbsp;&nbsp;(T ต้องเป็น Kelvin เสมอ K = °C + 273)</p>
-            <p>สมการสถานะแก๊สอุดมคติ: P · V = n · R · T = N · k_B · T</p>
-            <p>R = 8.31 J/(mol·K) , k_B = 1.38 × 10⁻²³ J/K (ค่านิจโบลต์ซมันน์)</p>
+        <!-- Section 2: v_rms & Internal Energy U -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-rose-600 flex items-center gap-2">
+                <i class="fa-solid fa-gauge-high"></i> 3. อัตราเร็ว v_rms & พลังงานภายในระบบ (U)
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-inter text-slate-800">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">อัตราเร็ว root-mean-square (v_rms)</span>
+                    <div class="flex items-center gap-2 text-base font-bold text-rose-700">
+                        <span>v_rms =</span>
+                        <span class="text-xl">√</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-1">3 R T</span>
+                            <span>M</span>
+                        </div>
+                        <span>=</span>
+                        <span class="text-xl">√</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-1">3 P</span>
+                            <span>ρ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">พลังงานภายในระบบ (Internal Energy U)</span>
+                    <div class="flex items-center gap-2 text-base font-bold text-rose-700">
+                        <span>U =</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-1">3</span>
+                            <span>2</span>
+                        </div>
+                        <span>n R T =</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-1">3</span>
+                            <span>2</span>
+                        </div>
+                        <span>P V</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Section 3 -->
-    <div class="bg-white rounded-2xl p-6 mb-6 border border-slate-200 shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-rose-700 flex items-center gap-2">
-            <i class="fa-solid fa-gauge-high"></i> 3. ทฤษฎีจลน์ของแก๊ส & อัตราเร็ว v_rms
-        </h2>
-        <p class="text-sm text-slate-700 leading-relaxed">
-            โมเลกุลแก๊สเคลื่อนที่สับสนไร้ทิศทาง (Brownian motion) ชนกันแบบยืดหยุ่น ความดันเกิดจากการชนผนังภาชนะ
-        </p>
-        <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-sm font-mono text-rose-900 space-y-1">
-            <p>ความดันแก๊ส: P = (1/3) · (N·m·v̄²) / V = (2/3) · (N·Ē_k) / V</p>
-            <p>พลังงานจลน์เฉลี่ย 1 โมเลกุล: Ē_k = (3/2) · k_B · T</p>
-            <p>อัตราเร็ว v_rms = √(3RT / M) = √(3k_B T / m) = √(3P / ρ)</p>
+        <!-- Section 3: First Law of Thermodynamics -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-rose-600 flex items-center gap-2">
+                <i class="fa-solid fa-heart-pulse"></i> 4. กฎข้อที่ 1 ของเทอร์โมไดนามิกส์ (ΔQ = ΔU + ΔW)
+            </h3>
+            
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex justify-center items-center">
+                <div class="text-xl md:text-2xl font-bold font-inter text-slate-800">
+                    ΔQ = ΔU + P · ΔV
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="bg-white border border-slate-200 rounded-xl p-3">
+                    <strong class="text-rose-600 block mb-1">ΔQ (ความร้อน):</strong> + เมื่อดูดความร้อนเข้าสู่ระบบ / - เมื่อคายความร้อน
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-3">
+                    <strong class="text-rose-600 block mb-1">ΔU (พลังงานภายใน):</strong> + เมื่อ T เพิ่มขึ้น / - เมื่อ T ลดลง
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-3">
+                    <strong class="text-rose-600 block mb-1">ΔW (งาน):</strong> + เมื่อแก๊สขยายตัว (V เพิ่ม) / - เมื่อแก๊สหดตัว
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Section 4 -->
-    <div class="bg-white rounded-2xl p-6 mb-6 border border-slate-200 shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-rose-700 flex items-center gap-2">
-            <i class="fa-solid fa-heart-pulse"></i> 4. พลังงานภายในระบบ & กฎข้อที่ 1 ของเทอร์โมไดนามิกส์
-        </h2>
-        <p class="text-sm text-slate-700 leading-relaxed">
-            <strong>พลังงานภายใน (U):</strong> ผลรวมพลังงานจลน์โมเลกุลแก๊สทั้งหมด U = (3/2) · N · k_B · T = (3/2) · n · R · T = (3/2) · P · V<br>
-            <strong>กฎข้อที่ 1 (First Law):</strong> ΔQ = ΔU + ΔW (กฎอนุรักษ์พลังงาน)
-        </p>
-        <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-sm font-mono text-rose-900 space-y-1">
-            <p>ΔQ : ความร้อน (+ เมื่อดูดความร้อน, - เมื่อคายความร้อน)</p>
-            <p>ΔU : พลังงานภายในเปลี่ยน (+ เมื่อ T เพิ่ม, - เมื่อ T ลด)</p>
-            <p>ΔW : งานของแก๊ส (+ เมื่อขยายตัว V เพิ่ม, - เมื่อหดตัว V ลด): ΔW = P · ΔV</p>
+        <div class="flex justify-center gap-4 pt-4 border-t border-slate-100">
+            <a href="m6-ch18-quiz.html" class="py-3 px-8 bg-rose-600 hover:bg-rose-700 text-white font-extrabold rounded-2xl shadow-lg text-sm flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> ไปทำแบบฝึกหัด บทที่ 18
+            </a>
         </div>
-    </div>
 
-    <div class="mt-8 flex justify-center gap-4">
-        <a href="m6-ch18-quiz.html" class="py-3.5 px-8 bg-rose-600 hover:bg-rose-700 text-white font-extrabold rounded-2xl shadow-lg transition-all text-sm flex items-center gap-2">
-            <i class="fa-solid fa-pen-to-square"></i> ไปทำแบบฝึกหัด บทที่ 18
-        </a>
     </div>
 </main>
 

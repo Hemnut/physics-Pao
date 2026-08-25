@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปบทที่ 04: การเคลื่อนที่แบบต่างๆ | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-blue-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-blue-600">HOME</a>
+            <a href="m4-mechanics.html" class="text-sm font-semibold text-blue-600 border-b-2 border-blue-600">ม.4 กลศาสตร์</a>
+            <a href="m6-physics.html" class="text-sm font-medium text-slate-500 hover:text-blue-600">ม.6 บทเรียน</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m4-mechanics.html" class="text-blue-600 font-semibold py-1">ม.4 กลศาสตร์</a>
+        <a href="m6-physics.html" class="text-slate-600 py-1">ม.6 บทเรียน</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-4">
+        <a href="m4-mechanics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-purple-600 hover:text-purple-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.4
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CHAPTER 04 VISUAL SUMMARY</span>
+    </div>
+
+    <!-- Outer Container Matching Image Style -->
+    <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-8">
+        
+        <!-- Header Title with Number Badge -->
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+            <span class="w-10 h-10 bg-purple-100 text-purple-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">04</span>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900">การเคลื่อนที่แบบต่างๆ (Projectile, Circular & SHM)</h1>
+        </div>
+
+        <!-- Section 1: Projectile Motion -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-purple-600 flex items-center gap-2">
+                <i class="fa-solid fa-person-falling"></i> 1. การเคลื่อนที่แบบโพรเจกไทล์ (Projectile Motion)
+            </h3>
+            <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                เป็นการเคลื่อนที่ 2 มิติพร้อมกัน โดยแนวราบแกน X มีความเร็วคงตัว (a_x = 0) และแนวดิ่งแกน Y ตกเสรีภายใต้แรงโน้มถ่วง (a_y = g)
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">แนวราบ (แกน X: a_x = 0)</span>
+                    <span class="text-lg font-bold font-inter text-slate-800">s_x = u_x · t &nbsp;&nbsp;(u_x = u · cosθ)</span>
+                </div>
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">แนวดิ่ง (แกน Y: a_y = g)</span>
+                    <span class="text-lg font-bold font-inter text-slate-800">v_y = u_y + g·t &nbsp;&nbsp;(u_y = u · sinθ)</span>
+                </div>
+            </div>
+
+            <div class="bg-amber-50/80 border border-amber-200/80 text-amber-900 rounded-xl p-3.5 text-xs flex items-start gap-2.5">
+                <span class="text-base">💡</span>
+                <div><strong>ข้อสังเกตสำคัญ:</strong> ณ จุดสูงสุดของการยิงโพรเจกไทล์ ความเร็วแนวดิ่งจะเป็นศูนย์ (v_y = 0) แต่ความเร็วแนวราบยังคงมีค่าคงเดิม (v_x = u_x) และยิงทำมุม 45° จะได้ระยะทางแนวราบไกลสุด (s_x,max)</div>
+            </div>
+        </div>
+
+        <!-- Section 2: Circular Motion -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-purple-600 flex items-center gap-2">
+                <i class="fa-solid fa-circle-notch"></i> 2. การเคลื่อนที่แบบวงกลม (Circular Motion)
+            </h3>
+            <p class="text-xs md:text-sm text-slate-700">
+                วัตถุมีแรงเข้าสู่ศูนย์กลาง (F_c) กระทำตั้งฉากกับแนวความเร็วเชิงเส้นเสมอ ทำให้ความเร่งชี้เข้าหาศูนย์กลาง (a_c)
+            </p>
+
+            <!-- Formula display card for Circular Motion -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row items-center justify-around gap-4">
+                <div class="text-base md:text-lg font-bold font-inter text-slate-800">
+                    v = r · ω &nbsp;&nbsp;(ω = 2πf = 2π/T)
+                </div>
+                <div class="flex items-center gap-2 text-base md:text-lg font-bold font-inter text-purple-700">
+                    <span>F_c =</span>
+                    <div class="inline-flex flex-col items-center text-center">
+                        <span class="border-b border-slate-800 px-2 pb-0.5">m · v²</span>
+                        <span class="px-2 pt-0.5">r</span>
+                    </div>
+                    <span>= m · ω² · r</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="bg-white border border-slate-200 rounded-xl p-3 text-xs flex items-center gap-2">
+                    <span class="w-3 h-3 bg-purple-500 rounded-full flex-shrink-0"></span>
+                    <span><strong>รถเลี้ยวโค้ง:</strong> แรงเสียดทานระหว่างยางกับถนนทำหน้าที่เป็นแรงเข้าสู่ศูนย์กลาง (f_s = F_c)</span>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-3 text-xs flex items-center gap-2">
+                    <span class="w-3 h-3 bg-indigo-500 rounded-full flex-shrink-0"></span>
+                    <span><strong>ดาวเทียมโคจร:</strong> แรงดึงดูดระหว่างมวลทำหน้าที่เป็นแรงเข้าสู่ศูนย์กลาง (F_g = F_c)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Simple Harmonic Motion -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-purple-600 flex items-center gap-2">
+                <i class="fa-solid fa-arrows-left-right"></i> 3. การสั่นแบบฮาร์มอนิกอย่างง่าย (Simple Harmonic Motion: SHM)
+            </h3>
+            <p class="text-xs md:text-sm text-slate-700">
+                เป็นการสั่นกลับไปกลับมารอบตำแหน่งสมดุล โดยมีแรงกู้คืน F = -k·x แปรผันตรงกับระยะขจัด
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-inter text-slate-800">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">คาบการสั่นของสปริง (Spring Period)</span>
+                    <div class="flex items-center gap-2 text-base font-bold">
+                        <span>T = 2π</span>
+                        <span class="text-xl">√</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-1">m</span>
+                            <span>k</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">คาบการแกว่งลูกตุ้มอย่างง่าย (Pendulum Period)</span>
+                    <div class="flex items-center gap-2 text-base font-bold">
+                        <span>T = 2π</span>
+                        <span class="text-xl">√</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-1">L</span>
+                            <span>g</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center gap-4 pt-4 border-t border-slate-100">
+            <a href="m4-ch04-quiz.html" class="py-3 px-8 bg-purple-600 hover:bg-purple-700 text-white font-extrabold rounded-2xl shadow-lg text-sm flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> ไปทำแบบฝึกหัด บทที่ 04
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-slate-900 text-slate-400 py-6 mt-12 text-center text-xs">
+    © 2026 ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB
+</footer>
+<script>
+    document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+</script>
+</body>
+</html>

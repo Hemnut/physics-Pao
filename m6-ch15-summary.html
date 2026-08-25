@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen">
+<body class="bg-slate-100 text-slate-800 min-h-screen">
 <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
@@ -18,112 +18,153 @@
         </div>
         <nav class="hidden md:flex gap-8 items-center">
             <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-amber-600">HOME</a>
-            <a href="m6-physics.html" class="text-sm font-semibold text-amber-600 border-b-2 border-amber-600">บทเรียน ม.6</a>
+            <a href="m6-physics.html" class="text-sm font-semibold text-amber-600 border-b-2 border-amber-600">ม.6 บทเรียน</a>
         </nav>
         <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
     </div>
     <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
         <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
-        <a href="m6-physics.html" class="text-amber-600 font-semibold py-1">บทเรียน ม.6</a>
+        <a href="m6-physics.html" class="text-amber-600 font-semibold py-1">ม.6 บทเรียน</a>
     </div>
 </header>
 
-<main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
     <div class="flex items-center justify-between mb-4">
         <a href="m6-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-amber-600 hover:text-amber-800">
             <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.6
         </a>
-        <span class="text-xs text-slate-400 font-inter">CHAPTER 15 SUMMARY</span>
+        <span class="text-xs text-slate-400 font-inter">CHAPTER 15 VISUAL SUMMARY</span>
     </div>
 
-    <div class="bg-gradient-to-r from-amber-900 via-amber-700 to-orange-600 text-white rounded-3xl p-8 mb-8 shadow-xl">
-        <div class="inline-flex items-center gap-2 bg-white/20 border border-white/30 text-white px-3 py-1 rounded-full text-xs font-semibold mb-3">
-            <i class="fa-solid fa-magnet"></i> บทที่ 15 — ฟิสิกส์ ม.6
+    <!-- Outer Container Matching Screenshot Design Style -->
+    <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-8">
+        
+        <!-- Header Title with Number Badge -->
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+            <span class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">15</span>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900">ไฟฟ้าและแม่เหล็ก (Magnetism & Electromagnetism)</h1>
         </div>
-        <h1 class="text-3xl font-extrabold mb-2">สรุปเนื้อหา: ไฟฟ้าและแม่เหล็ก</h1>
-        <p class="text-amber-100 text-sm">สนามแม่เหล็ก, ฟลักซ์, แรงกระทำต่อประจุ/ลวดตัวนำ, มอเตอร์, การเหนี่ยวนำ, หม้อแปลงไฟฟ้า และวงจร AC</p>
-    </div>
 
-    <!-- Section 1 -->
-    <div class="bg-white rounded-2xl p-6 mb-6 border border-slate-200 shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-amber-700 flex items-center gap-2">
-            <i class="fa-solid fa-compass"></i> 1. สนามแม่เหล็กและฟลักซ์แม่เหล็ก
-        </h2>
-        <ul class="list-disc list-inside text-sm text-slate-700 space-y-2 leading-relaxed">
-            <li><strong>ขั้วแม่เหล็ก:</strong> มีขั้วเหนือ (N) และขั้วใต้ (S) เสมอ ขั้วเหมือนกันผลักกัน ขั้วต่างกันดูดกัน</li>
-            <li><strong>เส้นสนามแม่เหล็ก (B):</strong> ภายนอกแท่งแม่เหล็กมีทิศพุ่งจาก N ไป S ส่วนภายในมีทิศจาก S ไป N</li>
-            <li><strong>สนามแม่เหล็กโลก:</strong> ทิศทางแม่เหล็กโลกจะตรงข้ามกับชื่อขั้วภูมิศาสตร์ (ขั้วเหนือภูมิศาสตร์เป็นขั้วใต้แม่เหล็ก)</li>
-            <li><strong>ฟลักซ์แม่เหล็ก (Φ):</strong> เส้นแรงแม่เหล็กที่ผ่านพื้นที่ A มีหน่วยเป็น เวเบอร์ (Wb)</li>
-        </ul>
-        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-sm font-mono text-amber-900">
-            Φ = B · A · sinθ &nbsp;&nbsp;(เมื่อ θ คือมุมระหว่างระนาบพื้นที่กับสนามแม่เหล็ก B)
+        <!-- Section 1: Flux & Motion in B -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Flux Box -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-amber-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-compass"></i> 1. ฟลักซ์แม่เหล็ก (Magnetic Flux: Φ)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        จำนวนเส้นแรงแม่เหล็กที่ผ่านพื้นที่ A มีหน่วยเป็น เวเบอร์ (Wb)
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex justify-center items-center">
+                    <div class="text-lg md:text-xl font-bold font-inter text-slate-800">
+                        Φ = B · A · sinθ &nbsp;&nbsp;(Wb)
+                    </div>
+                </div>
+
+                <div class="bg-amber-50/80 border border-amber-200/80 text-amber-900 rounded-xl p-3 text-xs flex items-start gap-2">
+                    <span class="text-base">💡</span>
+                    <div><strong>ข้อสังเกต:</strong> θ คือมุมระหว่างระนาบพื้นที่กับสนามแม่เหล็ก B (ถ้า B ตั้งฉากกับระนาบ θ = 90° จะได้ Φ_max = B·A)</div>
+                </div>
+            </div>
+
+            <!-- Force on Charge Box -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-amber-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-atom"></i> 2. แรงแม่เหล็กต่อประจุ (F̄ = q v̄ × B̄)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        แรงแม่เหล็กที่กระทำต่อประจุ q ที่เคลื่อนที่ด้วยความเร็ว v ในสนามแม่เหล็ก B
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex justify-center items-center">
+                    <div class="text-lg md:text-xl font-bold font-inter text-amber-700">
+                        F = q · v · B · sinθ
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-xl p-3 text-xs">
+                    <span><strong>รัศมีวงกลมประจุ (θ = 90°):</strong> R = (m · v) / (q · B)</span>
+                </div>
+            </div>
+
         </div>
-    </div>
 
-    <!-- Section 2 -->
-    <div class="bg-white rounded-2xl p-6 mb-6 border border-slate-200 shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-amber-700 flex items-center gap-2">
-            <i class="fa-solid fa-atom"></i> 2. แรงกระทำต่อประจุไฟฟ้าในสนามแม่เหล็ก
-        </h2>
-        <p class="text-sm text-slate-700 leading-relaxed">
-            เมื่อประจุไฟฟ้า q เคลื่อนที่ด้วยความเร็ว v ตัดสนามแม่เหล็ก B จะเกิดแรงแม่เหล็ก F กระทำต่อประจุ โดยใช้ <strong>กฎมือขวา</strong> สำหรับประจุบวก (ประจุลบใช้มือซ้ายหรือทิศตรงข้าม)
-        </p>
-        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-sm font-mono text-amber-900 space-y-1">
-            <p>F = q · v · B · sinθ</p>
-            <p>ถ้ายิงประจุตั้งฉากกับ B (θ = 90°): ประจุจะเคลื่อนที่เป็นวงกลม รัศมี R = (m · v) / (q · B)</p>
-            <p>ถ้า v ขนานกับ B (θ = 0°): F = 0 ประจุเคลื่อนที่เป็นเส้นตรงด้วยความเร็วคงตัว</p>
+        <!-- Section 2: Force on Wires & Motor Torque -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-amber-600 flex items-center gap-2">
+                <i class="fa-solid fa-bolt"></i> 3. แรงต่อลวดตัวนำ & โมเมนต์แรงคู่ควบในมอเตอร์
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">แรงแม่เหล็กกระทำต่อเส้นลวด (Force on Wire)</span>
+                    <span class="text-lg font-bold font-inter text-slate-800">F = I · L · B · sinθ</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">โมเมนต์แรงคู่ควบขดลวด (Motor Torque)</span>
+                    <span class="text-lg font-bold font-inter text-amber-700">M = N · I · A · B · cosθ</span>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Section 3 -->
-    <div class="bg-white rounded-2xl p-6 mb-6 border border-slate-200 shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-amber-700 flex items-center gap-2">
-            <i class="fa-solid fa-bolt"></i> 3. แรงกระทำต่อลวดตัวนำและโมเมนต์แรงคู่ควบ
-        </h2>
-        <p class="text-sm text-slate-700 leading-relaxed">
-            เมื่อมีกระแสไฟฟ้า I ไหลผ่านลวดตัวนำยาว L วางในสนามแม่เหล็ก B จะเกิดแรงกระทำ F = I · L · B · sinθ และหากทำเป็นขดลวด N รอบ มีพื้นที่ A จะเกิดโมเมนต์ของแรงคู่ควบทำให้ขดลวดหมุน (หลักการของมอเตอร์ไฟฟ้า)
-        </p>
-        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-sm font-mono text-amber-900 space-y-1">
-            <p>M = N · I · A · B · cosθ &nbsp;&nbsp;(เมื่อ θ คือมุมระหว่างระนาบขดลวดกับสนามแม่เหล็ก B)</p>
-            <p>M สูงสุด เมื่อ ระนาบขดลวดขนานกับ B (θ = 0°), M = 0 เมื่อ ระนาบขดลวดตั้งฉากกับ B (θ = 90°)</p>
+        <!-- Section 3: Transformers & AC Circuits -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-amber-600 flex items-center gap-2">
+                <i class="fa-solid fa-plug"></i> 4. หม้อแปลงไฟฟ้า & วงจรไฟฟ้ากระแสสลับ (AC)
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-inter text-slate-800">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">อัตราส่วนหม้อแปลง</span>
+                    <div class="flex items-center gap-2 text-base font-bold">
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-1">E₁</span>
+                            <span>E₂</span>
+                        </div>
+                        <span>=</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-1">N₁</span>
+                            <span>N₂</span>
+                        </div>
+                        <span>=</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-1">V₁</span>
+                            <span>V₂</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">ความต้านทานเชิงความจุ (X_C)</span>
+                    <div class="flex items-center gap-2 text-base font-bold">
+                        <span>X_C =</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-2">1</span>
+                            <span>2π f C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">ความต้านทานเชิงเหนี่ยวนำ (X_L)</span>
+                    <span class="text-lg font-bold text-slate-800">X_L = 2π · f · L</span>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Section 4 -->
-    <div class="bg-white rounded-2xl p-6 mb-6 border border-slate-200 shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-amber-700 flex items-center gap-2">
-            <i class="fa-solid fa-plug"></i> 4. การเหนี่ยวนำแม่เหล็กไฟฟ้า & หม้อแปลงไฟฟ้า
-        </h2>
-        <p class="text-sm text-slate-700 leading-relaxed">
-            <strong>กฎของฟาราเดย์:</strong> เมื่อฟลักซ์แม่เหล็กที่ผ่านขดลวดเปลี่ยนแปลง จะเกิดแรงเคลื่อนไฟฟ้าเหนี่ยวนำ (e)<br>
-            <strong>กฎของเลนซ์:</strong> ทิศทางของกระแสเหนี่ยวนำจะต้านการเปลี่ยนแปลงของฟลักซ์แม่เหล็กเดิมที่ทำให้เกิดมัน
-        </p>
-        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-sm font-mono text-amber-900 space-y-1">
-            <p>หม้อแปลงไฟฟ้า: E₁ / E₂ = N₁ / N₂ = V₁ / V₂</p>
-            <p>ประสิทธิภาพหม้อแปลง (Eff) = (P₂ / P₁) × 100% = (I₂V₂ / I₁V₁) × 100%</p>
+        <div class="flex justify-center gap-4 pt-4 border-t border-slate-100">
+            <a href="m6-ch15-quiz.html" class="py-3 px-8 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-2xl shadow-lg text-sm flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> ไปทำแบบฝึกหัด บทที่ 15
+            </a>
         </div>
-    </div>
 
-    <!-- Section 5 -->
-    <div class="bg-white rounded-2xl p-6 mb-6 border border-slate-200 shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-amber-700 flex items-center gap-2">
-            <i class="fa-solid fa-wave-square"></i> 5. วงจรไฟฟ้ากระแสสลับ (AC Circuit)
-        </h2>
-        <p class="text-sm text-slate-700 leading-relaxed">
-            ในวงจร AC กระแสและแรงดันเปลี่ยนตามฟังก์ชันไซน์: i = I_m · sin(ωt), v = V_m · sin(ωt)<br>
-            ค่ายังผล (Root Mean Square, rms): I_rms = I_m / √2 , V_rms = V_m / √2
-        </p>
-        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-sm font-mono text-amber-900 space-y-1">
-            <p>ตัวเก็บประจุ C: X_C = 1 / (ωC) = 1 / (2πfC) (กระแสมีเฟสนำแรงดัน 90°)</p>
-            <p>ตัวเหนี่ยวนำ L: X_L = ωL = 2πfL (แรงดันมีเฟสนำกระแส 90°)</p>
-            <p>กำลังไฟฟ้าเฉลี่ย: P = I_rms · V_rms · cosΦ &nbsp;&nbsp;(cosΦ คือ ตัวประกอบกำลัง Power Factor)</p>
-        </div>
-    </div>
-
-    <div class="mt-8 flex justify-center gap-4">
-        <a href="m6-ch15-quiz.html" class="py-3.5 px-8 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-2xl shadow-lg transition-all text-sm flex items-center gap-2">
-            <i class="fa-solid fa-pen-to-square"></i> ไปทำแบบฝึกหัด บทที่ 15
-        </a>
     </div>
 </main>
 

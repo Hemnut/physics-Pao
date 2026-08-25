@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปบทที่ 08: สมดุลกลและสภาพยืดหยุ่น | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-blue-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-blue-600">HOME</a>
+            <a href="m4-mechanics.html" class="text-sm font-semibold text-blue-600 border-b-2 border-blue-600">ม.4 กลศาสตร์</a>
+            <a href="m6-physics.html" class="text-sm font-medium text-slate-500 hover:text-blue-600">ม.6 บทเรียน</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m4-mechanics.html" class="text-blue-600 font-semibold py-1">ม.4 กลศาสตร์</a>
+        <a href="m6-physics.html" class="text-slate-600 py-1">ม.6 บทเรียน</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-4">
+        <a href="m4-mechanics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-teal-600 hover:text-teal-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.4
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CHAPTER 08 VISUAL SUMMARY</span>
+    </div>
+
+    <!-- Outer Container Matching Image Style -->
+    <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-8">
+        
+        <!-- Header Title with Number Badge -->
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+            <span class="w-10 h-10 bg-teal-100 text-teal-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">08</span>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900">สมดุลกลและสภาพยืดหยุ่น (Mechanical Equilibrium & Elasticity)</h1>
+        </div>
+
+        <!-- Section 1: Complete Equilibrium -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-teal-600 flex items-center gap-2">
+                <i class="fa-solid fa-scale-balanced"></i> 1. สมดุลสมบูรณ์ (Complete Equilibrium)
+            </h3>
+            <p class="text-xs md:text-sm text-slate-700">
+                วัตถุจะอยู่ในสมดุลสมบูรณ์เมื่อไม่เลื่อนที่และไม่หมุน ซึ่งต้องสอดคล้องกับเงื่อนไข 2 ข้อพร้อมกัน:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">สมดุลต่อการเลื่อนที่ (Translational)</span>
+                    <span class="text-xl font-bold font-inter text-slate-800">ΣF̄ = 0 &nbsp;&nbsp;(ΣF_x = 0, ΣF_y = 0)</span>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">สมดุลต่อการหมุน (Rotational)</span>
+                    <span class="text-xl font-bold font-inter text-slate-800">ΣM = 0 &nbsp;&nbsp;(M_ทวน = M_ตาม)</span>
+                </div>
+            </div>
+
+            <!-- Stability badges -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs mt-2">
+                <div class="bg-white border border-slate-200 rounded-xl p-3">
+                    <strong class="text-emerald-600 block mb-1">🟢 สมดุลเสถียร (Stable):</strong> ถูกรบกวนแล้ว CG สูงขึ้น สามารถกลับคืนสู่ตำแหน่งเดิมได้
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-3">
+                    <strong class="text-rose-600 block mb-1">🔴 สมดุลไม่เสถียร (Unstable):</strong> ถูกรบกวนแล้ว CG ต่ำลง ล้มออกไปจากตำแหน่งเดิม
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-3">
+                    <strong class="text-blue-600 block mb-1">🔵 สมดุลสะเทิน (Neutral):</strong> ถูกรบกวนแล้ว CG อยู่ในระดับความสูงเดิมเสมอ
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Stress, Strain & Young's Modulus -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-teal-600 flex items-center gap-2">
+                <i class="fa-solid fa-expand"></i> 2. สภาพยืดหยุ่น (Elasticity: Stress, Strain & Young's Modulus)
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Stress Card -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                    <span class="text-xs font-bold text-teal-600 block">ความเค้นดึง (Tensile Stress: σ)</span>
+                    <p class="text-xs text-slate-600">อัตราส่วนแรงดึงต่อพื้นที่หน้าตัด (มีหน่วยเป็น Pa = N/m²):</p>
+                    <div class="flex items-center justify-center gap-2 text-lg font-bold font-inter text-slate-800 bg-slate-50 p-3 rounded-xl">
+                        <span>σ =</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-800 px-2 pb-0.5">F</span>
+                            <span class="px-2 pt-0.5">A</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strain Card -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                    <span class="text-xs font-bold text-teal-600 block">ความเครียดดึง (Tensile Strain: ε)</span>
+                    <p class="text-xs text-slate-600">อัตราส่วนระยะยืดต่อความยาวเดิม (ไม่มีหน่วย):</p>
+                    <div class="flex items-center justify-center gap-2 text-lg font-bold font-inter text-slate-800 bg-slate-50 p-3 rounded-xl">
+                        <span>ε =</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-800 px-2 pb-0.5">ΔL</span>
+                            <span class="px-2 pt-0.5">L₀</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Young's Modulus Card -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row items-center justify-around gap-4">
+                <div class="text-center md:text-left">
+                    <span class="text-xs font-bold text-teal-600 block">มอดุลัสของยัง (Young's Modulus: Y)</span>
+                    <p class="text-xs text-slate-500">อัตราส่วนความเค้นต่อความเครียด (บอกความยากง่ายในการยืดวัสดุ)</p>
+                </div>
+                <div class="flex items-center gap-3 text-lg md:text-xl font-bold font-inter text-teal-700">
+                    <span>Y =</span>
+                    <div class="inline-flex flex-col items-center text-center">
+                        <span class="border-b border-slate-800 px-2 pb-0.5">σ</span>
+                        <span class="px-2 pt-0.5">ε</span>
+                    </div>
+                    <span>=</span>
+                    <div class="inline-flex flex-col items-center text-center">
+                        <span class="border-b border-slate-800 px-2 pb-0.5">F · L₀</span>
+                        <span class="px-2 pt-0.5">A · ΔL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center gap-4 pt-4 border-t border-slate-100">
+            <a href="m4-ch08-quiz.html" class="py-3 px-8 bg-teal-600 hover:bg-teal-700 text-white font-extrabold rounded-2xl shadow-lg text-sm flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> ไปทำแบบฝึกหัด บทที่ 08
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-slate-900 text-slate-400 py-6 mt-12 text-center text-xs">
+    © 2026 ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB
+</footer>
+<script>
+    document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+</script>
+</body>
+</html>

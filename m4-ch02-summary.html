@@ -1,465 +1,196 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุปเนื้อหา บทที่ 02: การเคลื่อนที่แนวเส้นตรง | ฟิสิกส์ จารย์เปา</title>
-    <!-- โหลดฟอนต์ Prompt (สำหรับภาษาไทยไม่มีหัวแนวโมเดิร์น) และ Inter (สำหรับภาษาอังกฤษและตัวเลข) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปบทที่ 02: การเคลื่อนที่แนวเส้นตรง | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- โหลด FontAwesome สำหรับไอคอนตกแต่ง -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- โหลด Tailwind CSS ผ่าน CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Prompt', 'Inter', 'sans-serif'],
-                        inter: ['Inter', 'sans-serif'],
-                    },
-                    animation: {
-                        'spin-slow': 'spin 8s linear infinite',
-                    }
-                }
-            }
-        }
-    </script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
-
-    <!-- 1. แถบเมนูบนสุด (Navigation Bar) -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <!-- ส่วนโลโก้และชื่อเว็บด้านซ้าย -->
-            <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-lg shadow-blue-500/20 animate-spin-slow">
-                    <i class="fa-solid fa-atom"></i>
-                </div>
-                <span class="font-bold text-lg text-slate-900 flex flex-col">
-                    ฟิสิกส์ จารย์เปา
-                    <span class="text-[0.65rem] tracking-[2px] font-inter text-blue-600 -mt-1">VISUAL EDUCATION HUB</span>
-                </span>
-            </div>
-            
-            <!-- เมนูนำทางด้านขวา -->
-            <nav class="hidden md:flex gap-8 items-center">
-                <a href="index.html" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">HOME</a>
-                <a href="m4-mechanics.html" class="font-medium text-sm text-blue-600 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-blue-600 after:rounded-full">บทเรียน</a>
-                <a href="#" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">นวัตกรรม</a>
-                <a href="#" class="font-medium text-sm text-slate-500 hover:text-blue-600 transition-colors">ข้อสอบ</a>
-            </nav>
-            
-            <!-- เมนูสำหรับแสดงผลบนมือถือ (Hamburger menu) -->
-            <button class="md:hidden text-2xl text-slate-800 p-2 focus:outline-none" id="mobile-menu-btn" aria-label="Toggle Menu">
-                <i class="fa-solid fa-bars" id="menu-icon"></i>
-            </button>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-blue-600 to-sky-400 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-blue-600">VISUAL EDUCATION HUB</span></span>
         </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-blue-600">HOME</a>
+            <a href="m4-mechanics.html" class="text-sm font-semibold text-blue-600 border-b-2 border-blue-600">ม.4 กลศาสตร์</a>
+            <a href="m6-physics.html" class="text-sm font-medium text-slate-500 hover:text-blue-600">ม.6 บทเรียน</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m4-mechanics.html" class="text-blue-600 font-semibold py-1">ม.4 กลศาสตร์</a>
+        <a href="m6-physics.html" class="text-slate-600 py-1">ม.6 บทเรียน</a>
+    </div>
+</header>
 
-        <!-- เมนูมือถือแบบ Dropdown -->
-        <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-4 shadow-inner" id="mobile-menu">
-            <a href="index.html" class="font-medium text-slate-600 hover:text-blue-600 py-1 border-b border-slate-100">HOME</a>
-            <a href="m4-mechanics.html" class="font-semibold text-blue-600 py-1 border-b border-slate-100">บทเรียน</a>
-            <a href="#" class="font-medium text-slate-600 hover:text-blue-600 py-1 border-b border-slate-100">นวัตกรรม</a>
-            <a href="#" class="font-medium text-slate-600 hover:text-blue-600 py-1">ข้อสอบ</a>
-        </div>
-    </header>
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-4">
+        <a href="m4-mechanics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.4
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CHAPTER 02 VISUAL SUMMARY</span>
+    </div>
 
-    <!-- คอนเทนเนอร์หลักสำหรับจัดหน้า -->
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+    <!-- Outer Container Matching Screenshot Style -->
+    <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-8">
         
-        <!-- ปุ่มนำทางย้อนกลับ -->
-        <div class="flex justify-between items-center mb-6">
-            <a href="m4-mechanics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้าสารบัญ ม.4 กลศาสตร์
-            </a>
-            <span class="text-xs font-inter text-slate-400">CHAPTER 02 SUMMARY</span>
+        <!-- Header Title with Number Badge -->
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+            <span class="w-10 h-10 bg-blue-100 text-blue-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">02</span>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900">ปริมาณการเคลื่อนที่แนวตรง (Kinematics in 1D)</h1>
         </div>
 
-        <!-- ส่วนหัวบทเรียน (Hero Banner) -->
-        <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900 text-white rounded-3xl p-8 md:p-10 mb-10 shadow-xl relative overflow-hidden">
-            <div class="absolute w-72 h-72 bg-blue-500/10 rounded-full -top-16 -right-16 blur-3xl"></div>
-            <div class="relative z-10">
-                <div class="inline-flex items-center gap-2 bg-blue-500/20 border border-blue-400/30 text-blue-200 px-3 py-1 rounded-full text-xs font-semibold mb-4">
-                    <i class="fa-solid fa-person-running"></i> บทเรียนที่ 02 - ฟิสิกส์ ม.4 กลศาสตร์
+        <!-- Section 1: Distance vs Displacement & Speed vs Velocity -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Sub-Box 1: Distance vs Displacement -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-blue-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-route"></i> ระยะทาง (Distance) vs การกระจัด (Displacement)
+                    </h3>
+                    <ul class="text-xs md:text-sm text-slate-700 space-y-2 leading-relaxed">
+                        <li>• <strong>ระยะทาง (s):</strong> เป็นปริมาณสเกลาร์ คิดความยาวรวมของเส้นทางเคลื่อนที่ทั้งหมด มีหน่วยเป็นเมตร (m)</li>
+                        <li>• <strong>การกระจัด (s̄):</strong> เป็นปริมาณเวกเตอร์ คิดเส้นตรงสั้นที่สุดจากจุดเริ่มต้นชี้ไปยังจุดสุดท้าย มีหน่วยเป็นเมตร (m)</li>
+                    </ul>
                 </div>
-                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">สรุปเนื้อหา: การเคลื่อนที่แนวเส้นตรง</h1>
-                <p class="text-blue-100 text-sm md:text-base max-w-3xl leading-relaxed">
-                    สรุปเนื้อหาสำคัญ ปริมาณการเคลื่อนที่ 5 สูตรการเคลื่อนที่แนวตรงด้วยความเร่งคงตัว การตกแบบเสรีภายใต้แรงดึงดูดโลก และการตีความกราฟความสัมพันธ์ระยะทาง ความเร็ว ความเร่ง
-                </p>
+                <div class="bg-amber-50/80 border border-amber-200/80 text-amber-900 rounded-xl p-3.5 text-xs flex items-start gap-2.5 mt-2">
+                    <span class="text-base">💡</span>
+                    <div><strong>ข้อสังเกตสำคัญ:</strong> เมื่อวัตถุเคลื่อนที่ครบรอบกลับมาที่ตำแหน่งเดิม การกระจัดจะเป็นศูนย์ (s̄ = 0) แต่ระยะทางจะมีค่ามากกว่าศูนย์ (s > 0)</div>
+                </div>
             </div>
+
+            <!-- Sub-Box 2: Speed vs Velocity -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-blue-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-gauge-high"></i> อัตราเร็ว (Speed) vs ความเร็ว (Velocity)
+                    </h3>
+                    
+                    <p class="text-xs text-slate-700 font-semibold mt-2">• <strong>อัตราเร็วเฉลี่ย (v_av):</strong> ปริมาณสเกลาร์ คิดจากระยะทางทั้งหมดหารด้วยเวลา</p>
+                    <div class="bg-white rounded-2xl border border-slate-200/80 p-3 shadow-sm flex justify-center items-center my-2">
+                        <div class="flex items-center gap-2 text-base md:text-lg font-bold font-inter text-slate-800">
+                            <span>v_av =</span>
+                            <div class="inline-flex flex-col items-center text-center">
+                                <span class="border-b border-slate-800 px-3 pb-0.5">s</span>
+                                <span class="px-3 pt-0.5">t</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-slate-700 font-semibold mt-3">• <strong>ความเร็วเฉลี่ย (v̄_av):</strong> ปริมาณเวกเตอร์ คิดจากการกระจัดหารด้วยเวลา</p>
+                    <div class="bg-white rounded-2xl border border-slate-200/80 p-3 shadow-sm flex justify-center items-center my-2">
+                        <div class="flex items-center gap-2 text-base md:text-lg font-bold font-inter text-slate-800">
+                            <span>v̄_av =</span>
+                            <div class="inline-flex flex-col items-center text-center">
+                                <span class="border-b border-slate-800 px-3 pb-0.5">s̄</span>
+                                <span class="px-3 pt-0.5">t</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- สารบัญลัด (Quick Index) -->
-        <div class="bg-white rounded-2xl p-5 mb-10 border border-slate-150 shadow-sm">
-            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-list-ol text-blue-500"></i> หัวข้อสรุปในบทนี้
+        <!-- Section 2: Acceleration -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-blue-600 flex items-center gap-2">
+                <i class="fa-solid fa-bolt"></i> ความเร่ง (Acceleration: ā)
             </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs font-semibold">
-                <a href="#section-1" class="p-3 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
-                    <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center font-inter text-[0.65rem]">1</span>
-                    ปริมาณการเคลื่อนที่แนวตรง
-                </a>
-                <a href="#section-2" class="p-3 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
-                    <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center font-inter text-[0.65rem]">2</span>
-                    5 สูตรการเคลื่อนที่คงตัว
-                </a>
-                <a href="#section-3" class="p-3 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
-                    <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center font-inter text-[0.65rem]">3</span>
-                    การตกแบบเสรี (Free Fall)
-                </a>
-                <a href="#section-4" class="p-3 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-600 rounded-xl transition-all flex items-center gap-2 border border-slate-100">
-                    <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center font-inter text-[0.65rem]">4</span>
-                    การตีความกราฟการเคลื่อนที่
-                </a>
+            <p class="text-xs md:text-sm text-slate-700">
+                คือ อัตราการเปลี่ยนแปลงความเร็วต่อหนึ่งหน่วยเวลา มีหน่วยเป็นเมตรต่อวินาทีกำลังสอง (m/s²) จัดเป็นปริมาณเวกเตอร์
+            </p>
+
+            <!-- Main Acceleration Formula Card -->
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm flex justify-center items-center my-3">
+                <div class="flex items-center gap-3 text-xl md:text-2xl font-bold font-inter text-slate-800">
+                    <span>ā =</span>
+                    <div class="inline-flex flex-col items-center text-center">
+                        <span class="border-b-2 border-slate-800 px-4 pb-1">v̄ - ū</span>
+                        <span class="px-4 pt-1">Δt</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Positive acceleration vs Deceleration cards side-by-side -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <div class="bg-white border border-slate-200 rounded-xl p-3.5 text-xs flex items-center gap-2.5">
+                    <span class="w-3.5 h-3.5 bg-emerald-500 rounded-full flex-shrink-0"></span>
+                    <span><strong>ความเร่งเป็นบวก (a > 0):</strong> ความเร็วเพิ่มขึ้นเรื่อยๆ (ทิศความเร่งทิศเดียวกับความเร็ว)</span>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl p-3.5 text-xs flex items-center gap-2.5">
+                    <span class="w-3.5 h-3.5 bg-rose-500 rounded-full flex-shrink-0"></span>
+                    <span><strong>ความหน่วง (a < 0):</strong> ความเร็วลดลงเรื่อยๆ (ทิศความเร่งสวนทางกับความเร็ว)</span>
+                </div>
             </div>
         </div>
 
-        <div class="space-y-12">
-            
-            <!-- SECTION 1: ปริมาณการเคลื่อนที่แนวตรง -->
-            <section id="section-1" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-150 shadow-sm">
-                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg font-inter">01</div>
-                    <h2 class="text-xl md:text-2xl font-bold text-slate-900">ปริมาณการเคลื่อนที่แนวตรง</h2>
-                </div>
+        <!-- Section 3: 5 Key Motion Equations -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-blue-600 flex items-center gap-2">
+                <i class="fa-solid fa-square-root-variable"></i> 5 สมการหลักการเคลื่อนที่ด้วยความเร่งคงที่ (a = คงตัว)
+            </h3>
+            <p class="text-xs text-slate-600">เมื่อ u = ความเร็วต้น, v = ความเร็วปลาย, a = ความเร่ง, t = เวลา, s = การกระจัด</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <!-- การกระจัด vs ระยะทาง -->
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80">
-                        <div class="flex items-center gap-2 text-blue-600 font-bold mb-3 text-sm">
-                            <i class="fa-solid fa-route"></i> ระยะทาง (Distance) vs การกระจัด (Displacement)
-                        </div>
-                        <ul class="text-xs text-slate-600 space-y-3 leading-relaxed">
-                            <li class="flex items-start gap-2">
-                                <span class="text-blue-500 font-bold">•</span>
-                                <span><strong>ระยะทาง (<span class="font-inter font-bold text-blue-700">s</span>):</strong> เป็นปริมาณสเกลาร์ คิดความยาวรวมของเส้นทางเคลื่อนที่ทั้งหมด มีหน่วยเป็นเมตร (<span class="font-inter">m</span>)</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-blue-500 font-bold">•</span>
-                                <span><strong>การกระจัด (<span class="font-inter font-bold text-blue-700">s̄</span>):</strong> เป็นปริมาณเวกเตอร์ คิดเส้นตรงสั้นที่สุดจากจุดเริ่มต้นชี้ไปยังจุดสุดท้าย มีหน่วยเป็นเมตร (<span class="font-inter">m</span>)</span>
-                            </li>
-                            <li class="bg-blue-50 p-3 rounded-xl border border-blue-100 text-blue-900 font-medium">
-                                💡 <strong>ข้อสังเกตสำคัญ:</strong> เมื่อวัตถุเคลื่อนที่ครบรอบกลับมาที่ตำแหน่งเดิม การกระจัดจะเป็นศูนย์ (<span class="font-inter font-bold">s̄ = 0</span>) แต่ระยะทางจะมีค่ามากกว่าศูนย์ (<span class="font-inter font-bold">s &gt; 0</span>)
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- อัตราเร็ว vs ความเร็ว -->
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80">
-                        <div class="flex items-center gap-2 text-sky-600 font-bold mb-3 text-sm">
-                            <i class="fa-solid fa-gauge-high"></i> อัตราเร็ว (Speed) vs ความเร็ว (Velocity)
-                        </div>
-                        <ul class="text-xs text-slate-600 space-y-3 leading-relaxed">
-                            <li class="flex items-start gap-2">
-                                <span class="text-sky-500 font-bold">•</span>
-                                <div class="w-full">
-                                    <strong>อัตราเร็วเฉลี่ย (<span class="font-inter font-bold">v<sub>av</sub></span>):</strong> ปริมาณสเกลาร์ คิดจากระยะทางทั้งหมดหารด้วยเวลา
-                                    <div class="my-2 p-2 bg-white rounded-xl border border-slate-200 text-center font-inter font-bold text-slate-800 text-sm">
-                                        v<sub>av</sub> = <span class="inline-flex flex-col items-center justify-center align-middle mx-1"><span class="border-b border-slate-400 px-2 pb-0.5">s</span><span class="pt-0.5">t</span></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-sky-500 font-bold">•</span>
-                                <div class="w-full">
-                                    <strong>ความเร็วเฉลี่ย (<span class="font-inter font-bold">v̄<sub>av</sub></span>):</strong> ปริมาณเวกเตอร์ คิดจากการกระจัดหารด้วยเวลา
-                                    <div class="my-2 p-2 bg-white rounded-xl border border-slate-200 text-center font-inter font-bold text-slate-800 text-sm">
-                                        v̄<sub>av</sub> = <span class="inline-flex flex-col items-center justify-center align-middle mx-1"><span class="border-b border-slate-400 px-2 pb-0.5">s̄</span><span class="pt-0.5">t</span></span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- ความเร่ง -->
-                <div class="bg-gradient-to-r from-blue-50 to-sky-50 rounded-2xl p-6 border border-blue-100">
-                    <h4 class="font-bold text-blue-900 text-sm mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-bolt text-blue-600"></i> ความเร่ง (Acceleration: <span class="font-inter font-bold">ā</span>)
-                    </h4>
-                    <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                        คือ อัตราการเปลี่ยนแปลงความเร็วต่อหนึ่งหน่วยเวลา มีหน่วยเป็นเมตรต่อวินาทีกำลังสอง (<span class="font-inter">m/s<sup>2</sup></span>) จัดเป็นปริมาณเวกเตอร์
-                    </p>
-                    <div class="bg-white rounded-xl p-4 border border-blue-200/80 text-center font-inter font-extrabold text-blue-800 text-base md:text-lg shadow-sm mb-4">
-                        ā = <span class="inline-flex flex-col items-center justify-center align-middle mx-1"><span class="border-b-2 border-blue-500 px-3 pb-0.5">v̄ - ū</span><span class="pt-0.5">Δt</span></span>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                        <div class="bg-white/90 p-3 rounded-xl border border-blue-100 flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-emerald-500 flex-shrink-0"></span>
-                            <span><strong>ความเร่งเป็นบวก (<span class="font-inter font-bold">a &gt; 0</span>):</strong> ความเร็วเพิ่มขึ้นเรื่อยๆ (ทิศความเร่งทิศเดียวกับความเร็ว)</span>
-                        </div>
-                        <div class="bg-white/90 p-3 rounded-xl border border-blue-100 flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-rose-500 flex-shrink-0"></span>
-                            <span><strong>ความหน่วง (<span class="font-inter font-bold">a &lt; 0</span>):</strong> ความเร็วลดลงเรื่อยๆ (ทิศความเร่งสวนทางกับความเร็ว)</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 2: 5 สูตรการเคลื่อนที่แนวตรงด้วยความเร่งคงตัว -->
-            <section id="section-2" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-150 shadow-sm">
-                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg font-inter">02</div>
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-slate-900">5 สูตรการเคลื่อนที่แนวตรงด้วยความเร่งคงตัว</h2>
-                        <span class="text-xs text-slate-400 font-medium">ใช้คำนวณเฉพาะเมื่อความเร่งมีค่าคงตัว (<span class="font-inter">a = Constant</span>) เท่านั้น</span>
-                    </div>
-                </div>
-
-                <!-- ตาราง 5 สูตร -->
-                <div class="overflow-x-auto mb-6">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-100 text-slate-700 font-bold text-xs border-b border-slate-200">
-                                <th class="p-3.5 rounded-tl-xl text-center w-12">ข้อ</th>
-                                <th class="p-3.5 text-center min-w-[220px]">สมการการเคลื่อนที่</th>
-                                <th class="p-3.5 text-center w-36">ตัวแปรที่ไม่ต้องใช้</th>
-                                <th class="p-3.5 rounded-tr-xl">ข้อแนะนำและบริบทการใช้งาน</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
-                            <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="p-4 font-bold text-blue-600 text-center font-inter">1</td>
-                                <td class="p-4 text-center font-inter font-extrabold text-blue-700 text-base md:text-lg">
-                                    v = u + at
-                                </td>
-                                <td class="p-4 text-center font-bold text-rose-500 bg-rose-50/50 rounded-lg"><span class="font-inter">s</span> (ระยะทาง)</td>
-                                <td class="p-4">ใช้เมื่อทราบความเร็วต้น ความเร่ง และเวลา โดยโจทย์ไม่ได้ถามและไม่ได้ให้การกระจัด <span class="font-inter font-bold">s</span></td>
-                            </tr>
-                            <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="p-4 font-bold text-blue-600 text-center font-inter">2</td>
-                                <td class="p-4 text-center font-inter font-extrabold text-blue-700 text-base md:text-lg">
-                                    s = (<span class="inline-flex flex-col items-center justify-center align-middle mx-0.5"><span class="border-b border-blue-500 px-1 pb-0.5">u + v</span><span class="pt-0.5">2</span></span>)t
-                                </td>
-                                <td class="p-4 text-center font-bold text-rose-500 bg-rose-50/50 rounded-lg"><span class="font-inter">a</span> (ความเร่ง)</td>
-                                <td class="p-4">ใช้เมื่อไม่ทราบค่าความเร่ง <span class="font-inter font-bold">a</span> แต่ทราบความเร็วต้น ความเร็วปลาย และเวลา</td>
-                            </tr>
-                            <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="p-4 font-bold text-blue-600 text-center font-inter">3</td>
-                                <td class="p-4 text-center font-inter font-extrabold text-blue-700 text-base md:text-lg">
-                                    s = ut + <span class="inline-flex flex-col items-center justify-center align-middle mx-1"><span class="border-b border-blue-500 px-1 pb-0.5">1</span><span class="pt-0.5">2</span></span>at<sup>2</sup>
-                                </td>
-                                <td class="p-4 text-center font-bold text-rose-500 bg-rose-50/50 rounded-lg"><span class="font-inter">v</span> (ความเร็วปลาย)</td>
-                                <td class="p-4">สูตรหลักยอดนิยม ใช้เมื่อคำนวณหาระยะทางโดยโจทย์ไม่บอกความเร็วปลาย <span class="font-inter font-bold">v</span></td>
-                            </tr>
-                            <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="p-4 font-bold text-blue-600 text-center font-inter">4</td>
-                                <td class="p-4 text-center font-inter font-extrabold text-blue-700 text-base md:text-lg">
-                                    s = vt - <span class="inline-flex flex-col items-center justify-center align-middle mx-1"><span class="border-b border-blue-500 px-1 pb-0.5">1</span><span class="pt-0.5">2</span></span>at<sup>2</sup>
-                                </td>
-                                <td class="p-4 text-center font-bold text-rose-500 bg-rose-50/50 rounded-lg"><span class="font-inter">u</span> (ความเร็วต้น)</td>
-                                <td class="p-4">ใช้เมื่อทราบความเร็วปลาย <span class="font-inter font-bold">v</span> ความเร่ง และเวลา แต่ไม่ทราบความเร็วต้น <span class="font-inter font-bold">u</span></td>
-                            </tr>
-                            <tr class="hover:bg-blue-50/50 transition-colors">
-                                <td class="p-4 font-bold text-blue-600 text-center font-inter">5</td>
-                                <td class="p-4 text-center font-inter font-extrabold text-blue-700 text-base md:text-lg">
-                                    v<sup>2</sup> = u<sup>2</sup> + 2as
-                                </td>
-                                <td class="p-4 text-center font-bold text-rose-500 bg-rose-50/50 rounded-lg"><span class="font-inter">t</span> (เวลา)</td>
-                                <td class="p-4">ใช้เมื่อโจทย์ไม่ได้ให้ช่วงเวลา <span class="font-inter font-bold">t</span> มาเกี่ยวข้องในการคำนวณ</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- เทคนิคการวิเคราะห์โจทย์ -->
-                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-5 rounded-r-2xl">
-                    <h4 class="font-bold text-indigo-900 text-sm mb-1.5 flex items-center gap-2">
-                        <i class="fa-solid fa-lightbulb text-amber-500"></i> เทคนิคเลือกสูตรจาก จารย์เปา
-                    </h4>
-                    <p class="text-xs text-indigo-900 leading-relaxed">
-                        ใน 5 ตัวแปร (<span class="font-inter font-bold">u, v, a, s, t</span>) โจทย์มักจะกำหนดค่ามาให้ 3 ตัวแปร และต้องการหาตัวแปรที่ 4 ให้สังเกตว่า <strong>"ตัวแปรใดที่โจทย์ไม่ได้พูดถึงและไม่ได้ถามหาเลย"</strong> จากนั้นให้เลือกสูตรที่ไม่มีตัวแปรนั้นมาใช้คำนวณได้ทันที!
-                    </p>
-                </div>
-            </section>
-
-            <!-- SECTION 3: การตกแบบเสรี (Free Fall) -->
-            <section id="section-3" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-150 shadow-sm">
-                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg font-inter">03</div>
-                    <h2 class="text-xl md:text-2xl font-bold text-slate-900">การตกแบบเสรี (Free Fall Motion)</h2>
-                </div>
-
-                <p class="text-xs text-slate-600 leading-relaxed mb-6">
-                    การตกแบบเสรี คือ การเคลื่อนที่ของวัตถุในแนวดิ่งภายใต้แรงดึงดูดของโลกเพียงแรงเดียว (โดยถือว่าไม่มีแรงต้านอากาศ) วัตถุจะเคลื่อนที่ด้วยความเร่งคงตัวเท่ากับความเร่งเนื่องจากแรงโน้มถ่วงของโลก <span class="font-inter font-bold">g ≈ 9.8 m/s<sup>2</sup></span> (หรือประมาณ <span class="font-inter font-bold">10 m/s<sup>2</sup></span>)
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <!-- กฎการกำหนดเครื่องหมาย -->
-                    <div class="bg-emerald-50/60 rounded-2xl p-5 border border-emerald-100">
-                        <h4 class="font-bold text-emerald-900 text-sm mb-3 flex items-center gap-2">
-                            <i class="fa-solid fa-compass"></i> กฎการกำหนดเครื่องหมาย Vector (+/-)
-                        </h4>
-                        <ul class="text-xs text-emerald-950 space-y-2.5 leading-relaxed">
-                            <li>1. <strong>ยึดทิศทางของความเร็วต้น (<span class="font-inter font-bold">u</span>) เป็นบวก (+) เสมอ</strong></li>
-                            <li>2. ปริมาณใดที่มีทิศทางเดียวกับ <span class="font-inter font-bold">u</span> ให้ใส่เครื่องหมายเป็นบวก (+)</li>
-                            <li>3. ปริมาณใดที่มีทิศทางสวนทางกับ <span class="font-inter font-bold">u</span> ให้ใส่เครื่องหมายเป็นลบ (-)</li>
-                            <li class="pt-2 border-t border-emerald-200/60 text-emerald-900 font-medium">
-                                ⚠️ <strong>ข้อควรระวังกรณีโยนวัตถุขึ้น:</strong> ความเร็วต้น <span class="font-inter font-bold">u</span> มีทิศชี้ขึ้น ดังนั้นความเร่ง <span class="font-inter font-bold">g</span> ซึ่งมีทิศลงล่างเข้าสู่จุดศูนย์กลางโลกเสมอ จึงต้องใส่ค่าติดลบ (<span class="font-inter font-bold">g = -10 m/s<sup>2</sup></span>)
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- จุดสำคัญการโยนขึ้น -->
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80">
-                        <h4 class="font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
-                            <i class="fa-solid fa-arrow-up-long text-blue-500"></i> ข้อควรจำ ณ จุดสูงสุด
-                        </h4>
-                        <ul class="text-xs text-slate-600 space-y-2.5 leading-relaxed">
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-                                <span>ความเร็ว ณ จุดสูงสุดมีค่าเป็นศูนย์ (<span class="font-inter font-bold">v = 0</span>)</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-                                <span>เวลาขาขึ้น = เวลาขาลง (เมื่อตกกลับมาถึงระดับเดิม)</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-                                <span>ขนาดความเร็วขาลง = ขนาดความเร็วขาขึ้น ณ ระดับความสูงเดียวกัน</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-                                <span>ความสูงสูงสุด: <span class="font-inter font-bold text-blue-700 ml-1">s<sub>max</sub> = <span class="inline-flex flex-col items-center justify-center align-middle mx-0.5"><span class="border-b border-blue-500 px-1">u<sup>2</sup></span><span>2g</span></span></span></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 4: การตีความกราฟการเคลื่อนที่ -->
-            <section id="section-4" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-150 shadow-sm">
-                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-lg font-inter">04</div>
-                    <h2 class="text-xl md:text-2xl font-bold text-slate-900">การตีความกราฟการเคลื่อนที่ (s-t, v-t, a-t)</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <!-- กราฟ s-t -->
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 text-center">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 font-bold font-inter text-sm shadow-sm">s-t</div>
-                        <h4 class="font-bold text-slate-800 text-sm mb-3">กราฟตำแหน่ง-เวลา</h4>
-                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-2 text-slate-700">
-                            <p>📈 <strong>ความชัน (Slope):</strong> ความเร็ว (<span class="font-inter font-bold">v</span>)</p>
-                            <p>📐 <strong>พื้นที่ใต้กราฟ:</strong> ไม่มีความหมาย</p>
-                        </div>
-                    </div>
-
-                    <!-- กราฟ v-t -->
-                    <div class="bg-blue-50/80 rounded-2xl p-5 border border-blue-200 text-center shadow-sm">
-                        <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold font-inter text-sm shadow-md">v-t</div>
-                        <h4 class="font-bold text-blue-900 text-sm mb-3">กราฟความเร็ว-เวลา (สำคัญที่สุด)</h4>
-                        <div class="bg-white p-3 rounded-xl border border-blue-200 text-xs space-y-2 text-slate-800 font-medium">
-                            <p>📈 <strong>ความชัน (Slope):</strong> ความเร่ง (<span class="font-inter font-bold">a</span>)</p>
-                            <p>📐 <strong>พื้นที่ใต้กราฟ:</strong> การกระจัด (<span class="font-inter font-bold">s</span>)</p>
-                        </div>
-                    </div>
-
-                    <!-- กราฟ a-t -->
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 text-center">
-                        <div class="w-12 h-12 bg-slate-200 text-slate-700 rounded-full flex items-center justify-center mx-auto mb-3 font-bold font-inter text-sm shadow-sm">a-t</div>
-                        <h4 class="font-bold text-slate-800 text-sm mb-3">กราฟความเร่ง-เวลา</h4>
-                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-2 text-slate-700">
-                            <p>📈 <strong>ความชัน (Slope):</strong> ไม่มีความหมาย</p>
-                            <p>📐 <strong>พื้นที่ใต้กราฟ:</strong> ความเร็วเปลี่ยน (<span class="font-inter font-bold">Δv</span>)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- สรุปแผนผังความเชื่อมโยงกราฟ -->
-                <div class="bg-slate-900 text-white rounded-2xl p-6 text-center shadow-md">
-                    <h4 class="text-xs font-bold text-blue-400 uppercase tracking-widest mb-4">สรุปแผนผังการหา ความชัน และ พื้นที่ใต้กราฟ</h4>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs font-bold font-inter">
-                        <span class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 text-blue-300">กราฟ s-t</span>
-                        <span class="text-slate-400">--- ความชัน (Slope) ---></span>
-                        <span class="bg-blue-600 px-4 py-2 rounded-xl text-white shadow">กราฟ v-t</span>
-                        <span class="text-slate-400">--- ความชัน (Slope) ---></span>
-                        <span class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 text-amber-300">กราฟ a-t</span>
-                    </div>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs font-bold font-inter mt-4">
-                        <span class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 text-blue-300">การกระจัด (s)</span>
-                        <span class="text-emerald-400 font-normal"><--- พื้นที่ใต้กราฟ (Area) ---</span>
-                        <span class="bg-blue-600 px-4 py-2 rounded-xl text-white shadow">กราฟ v-t</span>
-                        <span class="text-emerald-400 font-normal"><--- พื้นที่ใต้กราฟ (Area) ---</span>
-                        <span class="bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 text-amber-300">ความเร็วเปลี่ยน (Δv)</span>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- ปุ่มปฏิบัติการท้ายบทเรียน -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 pt-8 border-t border-slate-200">
-            <a href="m4-ch02-quiz.html" class="w-full sm:w-auto py-4 px-8 bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-750 hover:to-sky-600 text-white font-extrabold rounded-xl text-center text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
-                <i class="fa-solid fa-pen-to-square"></i> ตะลุยโจทย์ บทที่ 02 (Interactive Quiz)
-            </a>
-            <a href="m4-mechanics.html" class="w-full sm:w-auto py-4 px-8 bg-slate-200 hover:bg-slate-350 text-slate-700 font-bold rounded-xl text-center text-sm transition-all flex items-center justify-center gap-2 border border-slate-300">
-                <i class="fa-solid fa-list"></i> กลับสู่สารบัญ ม.4 กลศาสตร์
-            </a>
-        </div>
-
-        <!-- ส่วนท้ายดีไซน์สีเข้ม (Deep Footer Card) -->
-        <footer class="bg-slate-950 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden mt-12">
-            <div class="absolute w-96 h-96 bg-blue-600/5 rounded-full -top-32 -left-32 blur-3xl"></div>
-            
-            <div class="relative z-10">
-                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 pb-8 border-b border-slate-800">
-                    <!-- ฝั่งซ้าย: รูปโปรไฟล์ครู -->
-                    <div class="flex-shrink-0 w-36 h-36 rounded-2xl overflow-hidden border-2 border-slate-800 shadow-xl bg-slate-900">
-                        <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช" class="w-full h-full object-cover object-center scale-110">
-                    </div>
-
-                    <!-- ฝั่งขวา: ข้อความและปุ่มทางลัด -->
-                    <div class="flex-grow text-center md:text-left">
-                        <h3 class="text-xl font-bold mb-3 text-white">คุยกับ จารย์เปา</h3>
-                        <blockquote class="text-slate-300 italic text-sm md:text-base mb-6 max-w-3xl pl-4 border-l-4 border-blue-500/80 mx-auto md:mx-0">
-                            "มุ่งเน้นการปูพื้นฐานวิทยาศาสตร์ฟิสิกส์ให้เข้มแข็งตั้งแต่ระดับ ม.ต้น เพื่อให้พร้อมสำหรับการต่อยอดในระดับที่สูงขึ้น ผมเชื่อว่าการเรียนที่เห็นภาพจริงคือหัวใจสำคัญของการเข้าใจฟิสิกส์อย่างยั่งยืนครับ"
-                        </blockquote>
-                        
-                        <!-- เมนูทางลัด 3 เมนูย่อย -->
-                        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
-                                <span class="bg-orange-500/10 text-orange-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">บทเรียน</span>
-                                <span class="text-sm font-semibold text-white">คลังบทเรียน</span>
-                            </a>
-                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
-                                <span class="bg-emerald-500/10 text-emerald-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">สื่อและนวัตกรรม</span>
-                                <span class="text-sm font-semibold text-white">คลังสื่อ</span>
-                            </a>
-                            <a href="#" class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 py-2 px-4 rounded-xl flex items-center gap-3 transition-all">
-                                <span class="bg-pink-500/10 text-pink-400 text-[0.7rem] px-2 py-0.5 rounded font-bold">แนวข้อสอบ</span>
-                                <span class="text-sm font-semibold text-white">คลังข้อสอบ</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 font-inter text-slate-800">
                 
-                <div class="pt-6 text-center text-slate-500 text-xs">
-                    <p>&copy; 2026 Gemini Antigravity - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-[0.7rem] font-bold text-slate-400 mb-1">สมการที่ 1 (ไม่มี s)</span>
+                    <span class="text-lg font-bold">v = u + a·t</span>
                 </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-[0.7rem] font-bold text-slate-400 mb-1">สมการที่ 2 (ไม่มี a)</span>
+                    <div class="flex items-center gap-1.5 text-base font-bold">
+                        <span>s =</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-700 px-1">u + v</span>
+                            <span>2</span>
+                        </div>
+                        <span>· t</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-[0.7rem] font-bold text-slate-400 mb-1">สมการที่ 3 (ไม่มี v)</span>
+                    <span class="text-base font-bold">s = u·t + ½·a·t²</span>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-[0.7rem] font-bold text-slate-400 mb-1">สมการที่ 4 (ไม่มี u)</span>
+                    <span class="text-base font-bold">s = v·t - ½·a·t²</span>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center col-span-1 sm:col-span-2 md:col-span-1">
+                    <span class="text-[0.7rem] font-bold text-slate-400 mb-1">สมการที่ 5 (ไม่มี t)</span>
+                    <span class="text-lg font-bold">v² = u² + 2·a·s</span>
+                </div>
+
             </div>
-        </footer>
+        </div>
 
-    </main>
+        <div class="flex justify-center gap-4 pt-4 border-t border-slate-100">
+            <a href="m4-ch02-quiz.html" class="py-3 px-8 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-2xl shadow-lg text-sm flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> ไปทำแบบฝึกหัด บทที่ 02
+            </a>
+        </div>
 
-    <!-- สคริปต์เมนูมือถือ -->
-    <script>
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            if (mobileMenu.classList.contains('hidden')) {
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars');
-            } else {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-xmark');
-            }
-        });
-    </script>
+    </div>
+</main>
+
+<footer class="bg-slate-900 text-slate-400 py-6 mt-12 text-center text-xs">
+    © 2026 ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB
+</footer>
+<script>
+    document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+</script>
 </body>
 </html>
