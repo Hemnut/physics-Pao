@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปบทที่ 12: แสงเชิงฟิสิกส์ | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-indigo-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-indigo-600">HOME</a>
+            <a href="m5-physics.html" class="text-sm font-semibold text-indigo-600 border-b-2 border-indigo-600">ม.5 บทเรียน</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m5-physics.html" class="text-indigo-600 font-semibold py-1">ม.5 บทเรียน</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-4">
+        <a href="m5-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CHAPTER 12 VISUAL SUMMARY</span>
+    </div>
+
+    <!-- Outer Container Matching Screenshot Design Style -->
+    <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-8">
+        
+        <!-- Header Title with Number Badge -->
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+            <span class="w-10 h-10 bg-indigo-100 text-indigo-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">12</span>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900">แสงเชิงฟิสิกส์ (Physical Optics)</h1>
+        </div>
+
+        <!-- Section 1: Double Slit Interference -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-indigo-600 flex items-center gap-2">
+                <i class="fa-solid fa-bars-staggered"></i> 1. การแทรกสอดผ่านสลิตคู่ (Double Slit Interference)
+            </h3>
+            <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                เกิดแถบสว่างและแถบมืดสลับกันบนฉากอย่างสมมาตร
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-inter text-slate-800">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">แถบสว่าง (Bright Fringe: A_n)</span>
+                    <div class="flex items-center gap-2 text-base md:text-lg font-bold text-indigo-700">
+                        <span>d · sinθ =</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-800 px-2 pb-0.5">d · x</span>
+                            <span class="px-2 pt-0.5">D</span>
+                        </div>
+                        <span>= n · λ</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">แถบมืด (Dark Fringe: N_n)</span>
+                    <div class="flex items-center gap-2 text-base md:text-lg font-bold text-indigo-700">
+                        <span>d · sinθ =</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-800 px-2 pb-0.5">d · x</span>
+                            <span class="px-2 pt-0.5">D</span>
+                        </div>
+                        <span>= (n - ½) · λ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Single Slit & Grating -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Single Slit Box -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-indigo-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-ellipsis-vertical"></i> 2. การเลี้ยวเบนสลิตเดี่ยว (Single Slit)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        แถบสว่างกลางจะกว้างและสว่างที่สุด แถบมืดคำนวณจาก:
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex justify-center items-center">
+                    <div class="flex items-center gap-2 text-base md:text-lg font-bold font-inter text-slate-800">
+                        <span>d · sinθ =</span>
+                        <div class="inline-flex flex-col items-center text-center">
+                            <span class="border-b border-slate-800 px-2 pb-0.5">d · x</span>
+                            <span class="px-2 pt-0.5">D</span>
+                        </div>
+                        <span>= n · λ &nbsp;&nbsp;(แถบมืด)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grating Box -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-indigo-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-border-all"></i> 3. เกรตติง (Diffraction Grating)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        มี N ช่อง/cm ระยะห่างช่อง d = (1/N) cm แถบสว่างคมชัดมาก
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex justify-center items-center">
+                    <div class="text-lg md:text-xl font-bold font-inter text-indigo-700">
+                        d · sinθ = n · λ &nbsp;&nbsp;(n = 1, 2, 3...)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="flex justify-center gap-4 pt-4 border-t border-slate-100">
+            <a href="m5-ch12-quiz.html" class="py-3 px-8 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-2xl shadow-lg text-sm flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> ไปทำแบบฝึกหัด บทที่ 12
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-slate-900 text-slate-400 py-6 mt-12 text-center text-xs">
+    © 2026 ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB
+</footer>
+<script>
+    document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+</script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟิสิกส์ ม.5 | ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+<!-- Header -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                <i class="fa-solid fa-wave-square"></i>
+            </div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-emerald-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-emerald-600">HOME</a>
+            <a href="m4-mechanics.html" class="text-sm font-medium text-slate-500 hover:text-emerald-600">ม.4 กลศาสตร์</a>
+            <a href="#" class="text-sm font-semibold text-emerald-600 border-b-2 border-emerald-600">ม.5 บทเรียนทั้งหมด</a>
+            <a href="m6-physics.html" class="text-sm font-medium text-slate-500 hover:text-emerald-600">ม.6 บทเรียน</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m4-mechanics.html" class="text-slate-600 py-1 border-b">ม.4 กลศาสตร์</a>
+        <a href="#" class="text-emerald-600 font-semibold py-1 border-b">ม.5 บทเรียนทั้งหมด</a>
+        <a href="m6-physics.html" class="text-slate-600 py-1">ม.6 บทเรียน</a>
+    </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <!-- Breadcrumb & Title Banner -->
+    <div class="flex items-center justify-between mb-4">
+        <a href="index.html" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-800">
+            <i class="fa-solid fa-arrow-left"></i> หน้าหลักคลังบทเรียน
+        </a>
+        <span class="text-xs text-slate-400 font-inter">GRADE 11 PHYSICS CURRICULUM</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-slate-900 via-emerald-950 to-teal-950 text-white rounded-3xl p-8 md:p-10 mb-10 shadow-2xl relative overflow-hidden">
+        <div class="absolute w-96 h-96 bg-emerald-500/10 rounded-full -top-30 -right-20 blur-3xl"></div>
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 text-emerald-200 px-4 py-1.5 rounded-full text-xs font-semibold mb-4">
+                <i class="fa-solid fa-graduation-cap"></i> หลักสูตรฟิสิกส์ ม.5 เข้มข้นครบทั้ง 5 บท
+            </div>
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">คลังบทเรียน & แบบฝึกหัด ฟิสิกส์ ม.5</h1>
+            <p class="text-emerald-100 text-sm md:text-base max-w-3xl leading-relaxed">
+                รวบรวมเนื้อหาและ Interactive Quiz Engine ครอบคลุม คลื่นกล, เสียง, แสงและทัศนอุปกรณ์, แสงเชิงฟิสิกส์ และไฟฟ้ากระแส พร้อมสูตรมาตรฐานและแนวคิดสำคัญ
+            </p>
+        </div>
+    </div>
+
+    <!-- Chapter Cards Grid (บทที่ 09 - 14) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Chapter 09 Card -->
+        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition-all flex flex-col justify-between group">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <span class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl font-bold group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-water"></i>
+                    </span>
+                    <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">บทที่ 09</span>
+                </div>
+                <h3 class="text-xl font-extrabold text-slate-900 mb-2">คลื่นกล</h3>
+                <p class="text-xs text-slate-500 mb-4 leading-relaxed">
+                    ถ่ายโอนพลังงาน, องค์ประกอบคลื่น (A, λ, f, T), v=fλ, เฟสของคลื่น, ซ้อนทับ, สมบัติ 4 ประการ (สะท้อน หักเห แทรกสอด เลี้ยวเบน), คลื่นนิ่ง
+                </p>
+            </div>
+            <div class="space-y-3 pt-4 border-t border-slate-100">
+                <div class="flex gap-2">
+                    <a href="m5-ch09-summary.html" class="flex-1 py-2.5 bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-bold rounded-xl text-xs text-center transition-all flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-book-open"></i> สรุปเนื้อหา
+                    </a>
+                    <a href="m5-ch09-quiz.html" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs text-center shadow-md transition-all flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-pen-to-square"></i> ทำข้อสอบ (35)
+                    </a>
+                </div>
+                <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                    <i class="fa-solid fa-download text-emerald-600"></i> ดาวน์โหลดเอกสาร
+                </a>
+            </div>
+        </div>
+
+        <!-- Chapter 10 Card -->
+        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition-all flex flex-col justify-between group">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <span class="w-12 h-12 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-xl font-bold group-hover:bg-sky-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </span>
+                    <span class="text-xs font-bold text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-200">บทที่ 10</span>
+                </div>
+                <h3 class="text-xl font-extrabold text-slate-900 mb-2">เสียง</h3>
+                <p class="text-xs text-slate-500 mb-4 leading-relaxed">
+                    อัตราเร็วเสียง v=331+0.6t, เสียงก้อง & โซนาร์, ความเข้มเสียง I & ระดับเสียง dB, การบีต f_beat, คลื่นนิ่งในท่อเรโซแนนซ์, ดอปเพลอร์ & ช็อกเวฟ
+                </p>
+            </div>
+            <div class="space-y-3 pt-4 border-t border-slate-100">
+                <div class="flex gap-2">
+                    <a href="m5-ch10-summary.html" class="flex-1 py-2.5 bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-700 font-bold rounded-xl text-xs text-center transition-all flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-book-open"></i> สรุปเนื้อหา
+                    </a>
+                    <a href="m5-ch10-quiz.html" class="flex-1 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-xs text-center shadow-md transition-all flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-pen-to-square"></i> ทำข้อสอบ (35)
+                    </a>
+                </div>
+                <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                    <i class="fa-solid fa-download text-sky-600"></i> ดาวน์โหลดเอกสาร
+                </a>
+            </div>
+        </div>
+
+        <!-- Chapter 11 Card -->
+        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition-all flex flex-col justify-between group">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <span class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-xl font-bold group-hover:bg-amber-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-glasses"></i>
+                    </span>
+                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">บทที่ 11</span>
+                </div>
+                <h3 class="text-xl font-extrabold text-slate-900 mb-2">แสงและทัศนอุปกรณ์</h3>
+                <p class="text-xs text-slate-500 mb-4 leading-relaxed">
+                    การสะท้อนกระจกเงา (เว้า/นูน 1/f=1/s+1/s'), กฎสเนลล์ & สะท้อนกลับหมด, ความลึกจริง-ปรากฏ, เลนส์บาง, รุ้งกินน้ำ & มิราจ, ตาและการมองเห็น
+                </p>
+            </div>
+            <div class="space-y-3 pt-4 border-t border-slate-100">
+                <div class="flex gap-2">
+                    <a href="m5-ch11-summary.html" class="flex-1 py-2.5 bg-slate-100 hover:bg-amber-50 text-slate-700 hover:text-amber-700 font-bold rounded-xl text-xs text-center transition-all flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-book-open"></i> สรุปเนื้อหา
+                    </a>
+                    <a href="m5-ch11-quiz.html" class="flex-1 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs text-center shadow-md transition-all flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-pen-to-square"></i> ทำข้อสอบ (35)
+                    </a>
+                </div>
+                <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                    <i class="fa-solid fa-download text-amber-600"></i> ดาวน์โหลดเอกสาร
+                </a>
+            </div>
+        </div>
+
+        <!-- Chapter 12 Card -->
+        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition-all flex flex-col justify-between group">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <span class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-xl font-bold group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </span>
+                    <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200">บทที่ 12</span>
+                </div>
+                <h3 class="text-xl font-extrabold text-slate-900 mb-2">แสงเชิงฟิสิกส์</h3>
+                <p class="text-xs text-slate-500 mb-4 leading-relaxed">
+                    แทรกสอดสลิตคู่ (d sinθ = nλ / (n-½)λ), เลี้ยวเบนสลิตเดี่ยว (d sinθ = nλ แถบมืด), เกรตติง N ช่อง/cm (d sinθ = nλ), การกระเจิงแสงในบรรยากาศ
+                </p>
+            </div>
+            <div class="space-y-3 pt-4 border-t border-slate-100">
+                <div class="flex gap-2">
+                    <a href="m5-ch12-summary.html" class="flex-1 py-2.5 bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-700 font-bold rounded-xl text-xs text-center transition-all flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-book-open"></i> สรุปเนื้อหา
+                    </a>
+                    <a href="m5-ch12-quiz.html" class="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs text-center shadow-md transition-all flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-pen-to-square"></i> ทำข้อสอบ (35)
+                    </a>
+                </div>
+                <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                    <i class="fa-solid fa-download text-indigo-600"></i> ดาวน์โหลดเอกสาร
+                </a>
+            </div>
+        </div>
+
+        <!-- Chapter 14 Card -->
+        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition-all flex flex-col justify-between group">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <span class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-xl font-bold group-hover:bg-rose-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-bolt font-bold"></i>
+                    </span>
+                    <span class="text-xs font-bold text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-200">บทที่ 14</span>
+                </div>
+                <h3 class="text-xl font-extrabold text-slate-900 mb-2">ไฟฟ้ากระแส</h3>
+                <p class="text-xs text-slate-500 mb-4 leading-relaxed">
+                    กระแสไฟฟ้า I=Q/t=n e v A, กฎของโอห์ม V=IR, สภาพต้านทาน R=ρL/A, พลังงาน W & กำลัง P, ต่อ R อนุกรม/ขนาน, แบตเตอรี่ E=I(R+r), แอมมิเตอร์ & โวลต์มิเตอร์
+                </p>
+            </div>
+            <div class="space-y-3 pt-4 border-t border-slate-100">
+                <div class="flex gap-2">
+                    <a href="m5-ch14-summary.html" class="flex-1 py-2.5 bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-700 font-bold rounded-xl text-xs text-center transition-all flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-book-open"></i> สรุปเนื้อหา
+                    </a>
+                    <a href="m5-ch14-quiz.html" class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs text-center shadow-md transition-all flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-pen-to-square"></i> ทำข้อสอบ (35)
+                    </a>
+                </div>
+                <a href="#" target="_blank" class="w-full py-2 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 rounded-xl text-center text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm">
+                    <i class="fa-solid fa-download text-rose-600"></i> ดาวน์โหลดเอกสาร
+                </a>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-slate-900 text-slate-400 py-8 mt-12 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 text-center text-xs">
+        <p class="mb-2">© 2026 ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
+        <p>พัฒนาสื่อการสอนฟิสิกส์ ม.ปลาย สไตล์มินิมอล โมเดิร์น คลีน สบายตา</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+</script>
+</body>
+</html>
