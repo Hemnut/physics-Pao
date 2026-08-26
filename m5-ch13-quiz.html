@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 13: ไฟฟ้าสถิต | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+    <style>
+        .tab-btn{transition:all 0.2s}.tab-btn.active{background:#d97706;color:white;box-shadow:0 4px 12px rgba(217,119,6,0.3)}
+        .tab-content{display:none}.tab-content.active{display:block}
+        .choice-btn{transition:all 0.2s;cursor:pointer;border:2px solid #e2e8f0}.choice-btn:hover{border-color:#fde68a;background:#fffbeb}
+        .choice-btn.selected{border-color:#d97706;background:#fffbeb;color:#b45309}
+        .choice-btn.correct{border-color:#10b981!important;background:#ecfdf5!important;color:#065f46!important}
+        .choice-btn.wrong{border-color:#ef4444!important;background:#fef2f2!important;color:#991b1b!important}
+        .match-select,.fill-input{border:2px solid #e2e8f0;border-radius:0.5rem;padding:0.4rem 0.6rem}.match-select{font-size:0.8rem;width:100%}.fill-input{font-size:0.9rem}
+        .match-select.correct,.fill-input.correct{border-color:#10b981;background:#ecfdf5}.match-select.wrong,.fill-input.wrong{border-color:#ef4444;background:#fef2f2}
+        .answer-key{display:none}.answer-key.show{display:block}
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}.modal-overlay.show{display:flex}
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-amber-500 to-yellow-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-bolt"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-amber-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-amber-600">HOME</a>
+            <a href="m5-physics.html" class="text-sm font-semibold text-amber-600 border-b-2 border-amber-600">บทเรียน ม.5</a>
+        </nav>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-6">
+        <a href="m5-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-amber-600 hover:text-amber-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CH13 QUIZ ENGINE</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-slate-900 via-amber-950 to-yellow-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl">
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด: ไฟฟ้าสถิต</h1>
+        <p class="text-amber-100 text-sm max-w-2xl leading-relaxed">
+            ปรนัย 5 | จับคู่ 5 | เติมคำ 3 | อัตนัย 2 &nbsp;|&nbsp; <strong>ระบบตรวจคะแนน Interactive</strong>
+        </p>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+        <button onclick="showTab(1)" class="tab-btn active flex-1 py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-1">ส่วนที่ 1 ปรนัย</button>
+        <button onclick="showTab(2)" class="tab-btn flex-1 py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-2">ส่วนที่ 2 จับคู่</button>
+        <button onclick="showTab(3)" class="tab-btn flex-1 py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-3">ส่วนที่ 3 เติมคำ</button>
+        <button onclick="showTab(4)" class="tab-btn flex-1 py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-4">ส่วนที่ 4 อัตนัย</button>
+    </div>
+
+    <div id="tab-1" class="tab-content active"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><div id="mc-questions" class="space-y-6"></div></div></div>
+    <div id="tab-2" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><div id="match-questions" class="space-y-3"></div></div></div>
+    <div id="tab-3" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><div id="fill-questions" class="space-y-6"></div></div></div>
+    <div id="tab-4" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><div id="subj-questions" class="space-y-6"></div></div></div>
+
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="submitAll()" class="py-4 px-10 bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl text-sm">ส่งคำตอบและตรวจคะแนนรวม</button>
+    </div>
+</main>
+
+<script>
+const mcData=[
+    {q:"เมื่อนำแท่งแก้วไปถูผ้าสักหลาด เหตุใดแท่งแก้วจึงมีประจุไฟฟ้าสะสมเป็นบวก?", choices:["แท่งแก้วจ่ายประจุลบให้ผ้าสักหลาดฝ่ายเดียว","แท่งแก้วรับประจุบวกจากผ้าสักหลาด","แท่งแก้วรับประจุบวกจากสิ่งแวดล้อม","แท่งแก้วจ่ายอิเล็กตรอนให้ผ้าสักหลาดมากกว่าที่รับมา"], ans:3},
+    {q:"ประจุ +5.0 × 10⁻⁵ C และ -2.0 × 10⁻⁵ C วางห่างกัน 1 เมตร จะมีแรงกระทำต่อกันกี่นิวตัน?", choices:["ผลักกัน 9 N","ผลักกัน 18 N","ดูดกัน 9 N","ดูดกัน 18 N"], ans:2},
+    {q:"วางประจุ Q = -1 × 10⁻⁹ C ศักย์ไฟฟ้า ณ จุดที่ห่างจากประจุ Q ออกไป 1 เมตร มีค่ากี่โวลต์?", choices:["3 V","9 V","-3 V","-9 V"], ans:3},
+    {q:"ทรงกลมตัวนำรัศมี 20 cm มีประจุ 1 μC ศักย์ไฟฟ้าที่ระยะ 5 cm จากจุดศูนย์กลางภายในทรงกลมมีค่ากี่โวลต์?", choices:["0 V","45 × 10³ V","9 × 10⁴ V","1.8 × 10⁵ V"], ans:1},
+    {q:"ตัวเก็บประจุความจุ 0.2 μF ต่อกับความต่างศักย์ 250 V จะเก็บประจุไว้ได้กี่คูลอมบ์?", choices:["0.5 × 10⁻⁴ C","1.25 × 10⁻⁴ C","2.5 × 10⁻⁵ C","5.0 × 10⁻⁵ C"], ans:3}
+];
+
+const matchData=[
+    {left:"กฎของคูลอมบ์ (แรงระหว่างประจุ)", right:"F = (K·Q₁·Q₂) / R²"},
+    {left:"สนามไฟฟ้ารอบจุดประจุ", right:"E = KQ / R²"},
+    {left:"งานในการเลื่อนประจุไฟฟ้า", right:"W = q(V₂ - V₁)"},
+    {left:"พลังงานสะสมในตัวเก็บประจุ", right:"U = ½ C V²"},
+    {left:"ความจุตัวเก็บประจุทรงกลม", right:"C = a / K"}
+];
+const matchOptions=["F = (K·Q₁·Q₂) / R²","E = KQ / R²","W = q(V₂ - V₁)","U = ½ C V²","C = a / K"];
+
+const fillData=[
+    {q:"ตัวนำทรงกลมรัศมี 10 cm มีความจุประจุเท่ากับกี่ picofarad (pF) (โดยประมาณ 1 ทศนิยม)?", unit:"pF", ans:"11.1", tol:0.2},
+    {q:"แผ่นโลหะคู่ขนานห่างกัน 1 mm ต่อกับแบตเตอรี่ 1.5 V สนามไฟฟ้าสม่ำเสมอเท่ากับกี่ V/m?", unit:"V/m", ans:"1500", tol:10},
+    {q:"ตัวเก็บประจุ 2 μF และ 6 μF ต่ออนุกรมกัน จะมีความจุไฟฟ้ารวมกี่ μF?", unit:"μF", ans:"1.5", tol:0.1}
+];
+
+const subjData=[
+    {q:"1. จงหางานที่ใช้ในการเลื่อนประจุขนาด -2 C จากจุดที่มีศักย์ไฟฟ้า +10 V ไปยังจุดที่มีศักย์ไฟฟ้า +15 V", key:"<strong>วิธีทำ:</strong><br>W = q(V₂ - V₁)<br>W = (-2 C) × (15 V - 10 V)<br>W = (-2) × (5) = <strong>-10 จูล</strong>"},
+    {q:"2. ตัวเก็บประจุ C₁ = 3 μF และ C₂ = 6 μF ต่ออนุกรมกัน ต่อเข้ากับแรงดันรวม 18 V จงหาความต่างศักย์ตกคร่อม C₁", key:"<strong>วิธีทำ:</strong><br>C_รวม = (3 × 6) / (3 + 6) = 2 μF<br>Q_รวม = C_รวม × V = 2 μF × 18 V = 36 μC<br>การต่ออนุกรม Q₁ = Q_รวม = 36 μC<br>V₁ = Q₁ / C₁ = 36 μC / 3 μF = <strong>12 โวลต์</strong>"}
+];
+
+let userAnswers=new Array(mcData.length).fill(-1);
+
+function renderMC(){
+    const c=document.getElementById('mc-questions');
+    mcData.forEach((q,qi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-amber-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi+1}</span>${q.q}</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${q.choices.map((ch,ci)=>`<button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-sm flex items-center gap-3"><span class="w-7 h-7 rounded-full border-2 border-current flex items-center justify-center font-bold font-inter text-xs flex-shrink-0">${ci+1}</span><span>${ch}</span></button>`).join('')}</div>`;
+        c.appendChild(d);
+    });
+}
+function selectMC(qi,ci){
+    const prev=userAnswers[qi];
+    if(prev!==-1)document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+    userAnswers[qi]=ci;
+    document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+}
+function renderMatch(){
+    const c=document.getElementById('match-questions');
+    matchData.forEach((m,mi)=>{
+        const d=document.createElement('div');
+        d.className='flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+        const opts=matchOptions.map(o=>`<option value="${o}">${o}</option>`).join('');
+        d.innerHTML=`<span class="w-6 h-6 bg-amber-600 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">${mi+1}</span><span class="flex-1 text-sm font-medium text-slate-700">${m.left}</span><select class="match-select" id="match-${mi}"><option value="">-- เลือก --</option>${opts}</select>`;
+        c.appendChild(d);
+    });
+}
+function renderFill(){
+    const c=document.getElementById('fill-questions');
+    fillData.forEach((f,fi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-amber-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi+1}</span>${f.q}</p><div class="flex items-center gap-2"><input type="text" class="fill-input flex-1 min-w-0 outline-none" id="fill-${fi}" placeholder="พิมพ์คำตอบ..."><span class="text-sm text-slate-500 whitespace-nowrap">${f.unit}</span></div>`;
+        c.appendChild(d);
+    });
+}
+function renderSubj(){
+    const c=document.getElementById('subj-questions');
+    subjData.forEach((s,si)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-amber-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si+1}</span>${s.q}</p><textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-amber-400 min-h-[100px]" placeholder="เขียนวิธีทำที่นี่..."></textarea><div class="answer-key mt-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 leading-relaxed" id="key-${si}">${s.key}</div><button onclick="toggleKey(${si})" class="mt-2 text-xs text-emerald-700 font-semibold flex items-center gap-1" id="key-btn-${si}"><i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด</button>`;
+        c.appendChild(d);
+    });
+}
+function toggleKey(si){
+    const k=document.getElementById(`key-${si}`);
+    k.classList.toggle('show');
+}
+function showTab(n){
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById(`tab-${n}`).classList.add('active');
+    document.getElementById(`tab-btn-${n}`).classList.add('active');
+}
+function submitAll(){
+    let score = 0;
+    mcData.forEach((q,qi)=>{
+        const chosen=userAnswers[qi];
+        for(let ci=0;ci<q.choices.length;ci++){
+            const btn=document.getElementById(`mc-${qi}-${ci}`);
+            btn.classList.remove('selected');
+            if(ci===q.ans) btn.classList.add('correct');
+            else if(ci===chosen && chosen!==q.ans) btn.classList.add('wrong');
+        }
+        if(chosen===q.ans) score++;
+    });
+    matchData.forEach((m,mi)=>{
+        const sel=document.getElementById(`match-${mi}`);
+        sel.classList.remove('correct','wrong');
+        if(sel.value===m.right){ sel.classList.add('correct'); score++; }
+        else sel.classList.add('wrong');
+    });
+    fillData.forEach((f,fi)=>{
+        const input=document.getElementById(`fill-${fi}`);
+        const val=parseFloat(input.value.trim());
+        const ok=Math.abs(val-parseFloat(f.ans))<=f.tol;
+        input.classList.remove('correct','wrong');
+        if(ok){ input.classList.add('correct'); score++; }
+        else input.classList.add('wrong');
+    });
+    subjData.forEach((_,si)=>document.getElementById(`key-${si}`).classList.add('show'));
+    alert(`ทำการตรวจคะแนนเสร็จสิ้น! คะแนนส่วนปรนัย/จับคู่/เติมคำ ของคุณคือ: ${score} คะแนน`);
+}
+renderMC();renderMatch();renderFill();renderSubj();
+</script>
+</body>
+</html>
