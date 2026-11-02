@@ -1,19 +1,315 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุป บทที่ 12 แสงเชิงฟิสิกส์ | ฟิสิกส์ จารย์เปา</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปบทที่ 12: แสงเชิงฟิสิกส์ (Physical Optics) | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Prompt', 'Inter', 'sans-serif'], inter: ['Inter', 'sans-serif'] } } } }</script>
 </head>
-<body class="bg-slate-50 text-slate-800">
-<main class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-extrabold mb-6">สรุปเนื้อหา บทที่ 12: แสงเชิงฟิสิกส์</h1>
-    <div class="bg-white p-6 rounded-2xl shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-indigo-700">1. การแทรกสอด (สลิตคู่)</h2>
-        <p class="text-sm">แถบสว่าง: $d \sin\theta = n\lambda$ | แถบมืด: $d \sin\theta = (n - \frac{1}{2})\lambda$</p>
-        <h2 class="text-xl font-bold text-indigo-700">2. เกรตติง (Grating)</h2>
-        <p class="text-sm">ระยะช่อง $d = \frac{1}{N}\text{ cm}$ โดย $d \sin\theta = n\lambda$</p>
-    </div>
-</main>
+
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-indigo-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-indigo-600">HOME</a>
+                <a href="m5-physics.html"
+                    class="text-sm font-semibold text-indigo-600 border-b-2 border-indigo-600">บทเรียน ม.5</a>
+                <a href="m5-ch12-quiz.html" class="text-sm font-medium text-slate-500 hover:text-indigo-600">แบบฝึกหัด
+                    Ch 12</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center justify-between mb-4">
+            <a href="m5-physics.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+            </a>
+            <span class="text-xs text-slate-400 font-inter">CHAPTER 12 VISUAL SUMMARY</span>
+        </div>
+
+        <!-- Hero Card -->
+        <div
+            class="bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute w-72 h-72 bg-indigo-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <div
+                    class="inline-flex items-center gap-2 bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-lightbulb"></i> บทที่ 12 — ฟิสิกส์ ม.5 เล่ม 3
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">สรุปเนื้อหา: แสงเชิงฟิสิกส์ (Physical Optics)</h1>
+                <p class="text-indigo-100 text-sm max-w-2xl leading-relaxed">
+                    การแทรกสอดของแสงผ่านสลิตคู่ (Young's Slit) | การเลี้ยวเบนของแสงผ่านสลิตเดี่ยว | เกรตติง (Diffraction
+                    Grating) & สเปกตรัม | การกระเจิงของแสงในชั้นบรรยากาศ
+                </p>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="space-y-8">
+
+            <!-- Section 1: Double Slit Interference -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-indigo-100 text-indigo-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">12.1</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">การแทรกสอดของแสงผ่านสลิตคู่
+                            (Double Slit)</h2>
+                        <p class="text-xs text-slate-500">Young's Double-Slit Experiment</p>
+                    </div>
+                </div>
+
+                <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                    เมื่อฉายแสงอาพันธ์ความยาวคลื่นเดียว ($\lambda$) ตกตั้งฉากกับแผ่นสลิตคู่ที่มีระยะห่างระหว่างช่องเป็น
+                    $d$ แสงที่ผ่านช่องแคบทั้งสองจะเกิดการแทรกสอด
+                    ปรากฏเป็นริ้วแถบสว่างและแถบมืดสลับกันอย่างสม่ำเสมอบนฉากที่อยู่ห่างออกไปเป็นระยะ $D$
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Bright Fringes (Antinode) -->
+                    <div class="p-5 bg-indigo-50/70 rounded-2xl border border-indigo-200 space-y-3">
+                        <div class="font-bold text-indigo-900 text-sm flex items-center justify-between">
+                            <span>แถบสว่าง (Bright Fringes / ปฏิบัพ Aₙ)</span>
+                            <span
+                                class="text-xs bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded font-mono font-bold">แทรกสอดเสริม</span>
+                        </div>
+                        <p class="text-xs text-slate-600">ผลต่างทางเดินของแสงเป็นจำนวนเต็มเท่าของความยาวคลื่น:</p>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-indigo-800 text-sm border border-indigo-100 space-y-1">
+                            <div>|S₁P − S₂P| = nλ</div>
+                            <div>d sin θ = nλ &nbsp;≈&nbsp; d · (x / D) = nλ</div>
+                            <div class="text-xs text-indigo-600 font-sans">x = nλD / d</div>
+                        </div>
+                        <span class="text-[11px] text-slate-500 block text-center">(n = 0 คือแถบสว่างกลาง A₀, n = 1, 2,
+                            3...)</span>
+                    </div>
+
+                    <!-- Dark Fringes (Node) -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="font-bold text-slate-900 text-sm flex items-center justify-between">
+                            <span>แถบมืด (Dark Fringes / บัพ Nₙ)</span>
+                            <span
+                                class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono font-bold">แทรกสอดหักล้าง</span>
+                        </div>
+                        <p class="text-xs text-slate-600">ผลต่างทางเดินของแสงเป็นครึ่งหนึ่งของความยาวคลื่น:</p>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-slate-800 text-sm border border-slate-200 space-y-1">
+                            <div>|S₁P − S₂P| = (n − ½)λ</div>
+                            <div>d sin θ = (n − ½)λ &nbsp;≈&nbsp; d · (x / D) = (n − ½)λ</div>
+                            <div class="text-xs text-slate-500 font-sans">x = (n − ½)λD / d</div>
+                        </div>
+                        <span class="text-[11px] text-slate-500 block text-center">(n = 1 คือแถบมืดแรก N₁, n = 2,
+                            3...)</span>
+                    </div>
+                </div>
+
+                <!-- Fringes Spacing -->
+                <div
+                    class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs md:text-sm">
+                    <div>
+                        <strong class="text-slate-800">ระยะห่างระหว่างแถบสว่าง 2 แถบที่ติดกัน (Fringe Width:
+                            Δx):</strong>
+                        <p class="text-slate-500 text-xs">แถบสว่างของการแทรกสอดสลิตคู่จะมีระยะห่างเท่าๆ กันตลอด</p>
+                    </div>
+                    <div
+                        class="p-3 bg-white rounded-xl border border-indigo-200 font-mono font-bold text-indigo-800 text-base whitespace-nowrap shadow-sm">
+                        Δx = λ · D / d
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Single Slit Diffraction -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-indigo-100 text-indigo-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">12.2</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">การเลี้ยวเบนของแสงผ่านสลิตเดี่ยว
+                            (Single Slit)</h2>
+                        <p class="text-xs text-slate-500">Single Slit Diffraction Pattern</p>
+                    </div>
+                </div>
+
+                <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                    เมื่อแสงผ่านช่องแคบเดี่ยวกว้าง $a$ หรือ $d$ แสงจะเลี้ยวเบนและแทรกสอดกันเอง ทำให้เกิด
+                    <strong>แถบสว่างกลางที่มีขนาดกว้างมากและสว่างที่สุด</strong> โดยมีแถบมืดและแถบสว่างข้างๆ
+                    ที่มีความสว่างลดลงอย่างรวดเร็ว
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Dark Fringes in Single Slit -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-moon text-indigo-600"></i> สมการตำแหน่งแถบมืด (Dark Fringes)
+                        </h3>
+                        <p class="text-xs text-slate-600">ในการคำนวณสลิตเดี่ยว เราจะคิดที่ตำแหน่งแถบมืด:</p>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-indigo-800 text-sm border border-slate-200 space-y-1">
+                            <div>d sin θ = nλ</div>
+                            <div>d · (x / D) = nλ &nbsp;→&nbsp; x = nλD / d</div>
+                        </div>
+                        <span class="text-[11px] text-slate-500 block text-center">(n = 1, 2, 3... คือแถบมืดลำดับที่ 1,
+                            2, 3...)</span>
+                    </div>
+
+                    <!-- Central Maximum Width -->
+                    <div class="p-5 bg-indigo-50/70 rounded-2xl border border-indigo-200 space-y-3">
+                        <h3 class="font-bold text-indigo-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-sun text-amber-500"></i> ความกว้างของแถบสว่างกลาง (Central Fringe)
+                        </h3>
+                        <p class="text-xs text-slate-600">ระยะระหว่างแถบมืดแรกทั้งสองข้าง ($N_1$ ด้านซ้ายถึง $N_1$
+                            ด้านขวา):</p>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-indigo-900 text-base border border-indigo-100">
+                            ความกว้างแถบสว่างกลาง = 2x₁ = 2λD / d
+                        </div>
+                        <span class="text-[11px] text-slate-500 block text-center">แถบสว่างกลางจะกว้างเป็น 2
+                            เท่าของแถบสว่างข้างเคียง</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Diffraction Grating -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-indigo-100 text-indigo-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">12.3</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">เกรตติงและสเปกตรัมของแสง
+                            (Diffraction Grating)</h2>
+                        <p class="text-xs text-slate-500">Gratings, Spectral Lines & Max Orders</p>
+                    </div>
+                </div>
+
+                <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                    เกรตติงคือแผ่นทึบแสงที่มีช่องแคบจำนวนมากขนานกันอย่างสม่ำเสมอ เช่น 1,000 ถึง 10,000 ช่องต่อเซนติเมตร
+                    ทำให้ริ้วแถบสว่างมีความคมชัดและแยกสเปกตรัมของแสงสีต่างๆ ได้ละเอียดมาก
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Grating Formula -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-indigo-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-bars text-purple-600"></i> ระยะห่างช่องเกรตติง (d) & แถบสว่าง
+                        </h3>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-slate-800 text-sm border border-slate-200">
+                            d = ความยาวเกรตติง / จำนวนช่อง = 1 / N
+                        </div>
+                        <p class="text-xs text-slate-600">สมการแถบสว่างของการแทรกสอดผ่านเกรตติง:</p>
+                        <div
+                            class="p-3 bg-indigo-50 rounded-xl font-mono text-center font-bold text-indigo-800 text-base border border-indigo-200">
+                            d sin θ = nλ &nbsp;&nbsp;(n = 0, 1, 2, 3...)
+                        </div>
+                    </div>
+
+                    <!-- Overlap & Max Orders -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-indigo-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group text-indigo-600"></i> การซ้อนทับกัน & จำนวนแถบสว่างสูงสุด
+                        </h3>
+                        <ul class="text-xs md:text-sm text-slate-700 space-y-2">
+                            <li>• <strong>การซ้อนทับกันของสเปกตรัม:</strong> แถบสว่างสีที่ 1 ลำดับ $n_1$ ซ้อนทับกับสีที่
+                                2 ลำดับ $n_2$ เมื่อ:
+                                <span
+                                    class="block font-mono font-bold text-center text-indigo-700 bg-white p-2 rounded-lg border my-1">n₁
+                                    λ₁ = n₂ λ₂</span>
+                            </li>
+                            <li>• <strong>จำนวนแถบสว่างสูงสุด:</strong> คิดที่มุมเบี่ยงเบนมากสุด $\theta = 90^\circ$
+                                ($\sin 90^\circ = 1$):
+                                <span
+                                    class="block font-mono font-bold text-center text-indigo-700 bg-white p-2 rounded-lg border my-1">n_{max}
+                                    \le d / \lambda</span>
+                                จำนวนแถบสว่างทั้งหมดที่มองเห็นได้ = $2n_{max} + 1$ (รวมแถบกลาง $n=0$)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Light Scattering -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-indigo-100 text-indigo-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">12.4</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">การกระเจิงของแสง (Rayleigh
+                            Scattering)</h2>
+                        <p class="text-xs text-slate-500">Why the Sky is Blue & Sunsets are Red</p>
+                    </div>
+                </div>
+
+                <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                    เมื่อแสงอาทิตย์ส่องผ่านบรรยากาศโลก แสงจะตกกระทบโมเลกุลของก๊าซในอากาศ
+                    ทำให้อิเล็กตรอนในโมเลกุลดูดกลืนและปลดปล่อยคลื่นแสงออกมาในทุกทิศทาง
+                    โดยอัตราการกระเจิงจะแปรผกผันกับความยาวคลื่นยกกำลังสี่: <strong>การกระเจิง $\propto
+                        \frac{1}{\lambda^4}$</strong> (แสง $\lambda$ สั้นกระเจิงได้ดีกว่า $\lambda$ ยาว)
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <div class="p-5 bg-sky-50 rounded-2xl border border-sky-200 space-y-2">
+                        <strong class="text-sky-900 font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-sun text-sky-500"></i> ทำไมท้องฟ้าเวลากลางวันเป็นสีฟ้า?
+                        </strong>
+                        <p class="text-slate-600 leading-relaxed">
+                            แสงสีม่วงและสีน้ำเงินมีความยาวคลื่นสั้น จึง <strong>กระเจิงได้ดีกว่าแสงสีแดงมาก</strong>
+                            และกระจายไปทั่วท้องฟ้า ประกอบกับสายตาของมนุษย์มีความไวต่อแสงสีน้ำเงินมากกว่าแสงสีม่วง
+                            เราจึงมองเห็นท้องฟ้าเป็นสีฟ้าครามสดใส
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-orange-50 rounded-2xl border border-orange-200 space-y-2">
+                        <strong class="text-orange-950 font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-mountain-sun text-orange-500"></i>
+                            ทำไมท้องฟ้าตอนเช้าและตอนเย็นเป็นสีส้มแดง?
+                        </strong>
+                        <p class="text-slate-600 leading-relaxed">
+                            ขณะดวงอาทิตย์อยู่ใกล้ขอบฟ้า แสงอาทิตย์ต้องเดินทางผ่านชั้นบรรยากาศเป็นระยะทางที่ยาวไกลมาก
+                            แสงสีม่วงและสีน้ำเงินถูกกระเจิงออกไปหมดก่อนจะถึงตาเรา เหลือเพียง
+                            <strong>แสงสีแดงและสีส้ม</strong> ซึ่งมีความยาวคลื่นยาวและกระเจิงน้อยที่สุด
+                            เดินทางตรงเข้าสู่ตาเราได้
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Links -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <a href="m5-ch12-quiz.html"
+                    class="py-4 px-8 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i> ทำแบบฝึกหัดท้ายบทที่ 12 (35 คะแนน)
+                </a>
+                <a href="m5-physics.html"
+                    class="py-4 px-8 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-list"></i> กลับหน้ารวมบทเรียน ม.5
+                </a>
+            </div>
+
+        </div>
+    </main>
 </body>
+
 </html>

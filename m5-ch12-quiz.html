@@ -1,17 +1,801 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบฝึกหัด บทที่ 12 แสงเชิงฟิสิกส์ | ฟิสิกส์ จารย์เปา</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 12: แสงเชิงฟิสิกส์ | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Prompt', 'Inter', 'sans-serif'], inter: ['Inter', 'sans-serif'] } } } }</script>
+    <style>
+        .tab-btn {
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #4f46e5;
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .choice-btn {
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 2px solid #e2e8f0;
+        }
+
+        .choice-btn:hover {
+            border-color: #c7d2fe;
+            background: #eef2ff;
+        }
+
+        .choice-btn.selected {
+            border-color: #4f46e5;
+            background: #eef2ff;
+            color: #3730a3;
+            font-weight: 600;
+        }
+
+        .choice-btn.correct {
+            border-color: #10b981 !important;
+            background: #ecfdf5 !important;
+            color: #065f46 !important;
+            font-weight: bold;
+        }
+
+        .choice-btn.wrong {
+            border-color: #ef4444 !important;
+            background: #fef2f2 !important;
+            color: #991b1b !important;
+        }
+
+        .match-select {
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.85rem;
+            width: 100%;
+            outline: none;
+        }
+
+        .match-select.correct {
+            border-color: #10b981;
+            background: #ecfdf5;
+            color: #065f46;
+        }
+
+        .match-select.wrong {
+            border-color: #ef4444;
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        .fill-input {
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .fill-input.correct {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+
+        .fill-input.wrong {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .answer-key {
+            display: none;
+        }
+
+        .answer-key.show {
+            display: block;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-<main class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-extrabold mb-6">แบบฝึกหัด Interactive: แสงเชิงฟิสิกส์</h1>
-    <div class="bg-white p-6 rounded-2xl border border-slate-200">
-        <p class="font-bold mb-2">ข้อ 1. แสงความยาวคลื่น 600 nm ผ่านสลิตคู่ระยะห่าง 0.1 mm เกิดแถบสว่างเบนเป็นมุมกี่องศาในอันดับที่ 1?</p>
-        <p class="text-sm text-slate-600">คำนวณจาก: $\sin\theta = \frac{n\lambda}{d}$</p>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-indigo-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html"
+                    class="text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors">HOME</a>
+                <a href="m5-physics.html"
+                    class="text-sm font-semibold text-indigo-600 border-b-2 border-indigo-600 pb-1">บทเรียน ม.5</a>
+                <a href="m5-ch12-summary.html"
+                    class="text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors">สรุป Ch 12</a>
+            </nav>
+            <button class="md:hidden text-2xl text-slate-800 p-2" id="mobile-menu-btn"><i
+                    class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+            <a href="index.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">HOME</a>
+            <a href="m5-physics.html" class="text-indigo-600 font-semibold py-1 border-b border-slate-100">บทเรียน
+                ม.5</a>
+            <a href="m5-ch12-summary.html" class="text-slate-600 font-medium py-1">สรุปเนื้อหา Ch 12</a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center justify-between mb-6">
+            <a href="m5-physics.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+            </a>
+            <span class="text-xs text-slate-400 font-inter">CH12 QUIZ ENGINE</span>
+        </div>
+
+        <!-- Hero -->
+        <div
+            class="bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute w-72 h-72 bg-indigo-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <div
+                    class="inline-flex items-center gap-2 bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-lightbulb"></i> แบบฝึกหัดมาตรฐาน บทที่ 12 — ฟิสิกส์ ม.5
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด & คลังข้อสอบ: แสงเชิงฟิสิกส์ (Physical
+                    Optics)</h1>
+                <p class="text-indigo-100 text-sm max-w-2xl leading-relaxed">
+                    แทรกสอดสลิตคู่ | เลี้ยวเบนสลิตเดี่ยว | เกรตติง & สเปกตรัม | การกระเจิงของแสงในบรรยากาศ<br>
+                    ส่วนที่ 1: ปรนัย 20 ข้อ | ส่วนที่ 2: จับคู่ 10 ข้อ | ส่วนที่ 3: เติมคำ 5 ข้อ | ส่วนที่ 4: อัตนัย 5
+                    ข้อ &nbsp;|&nbsp; <strong>คะแนนเต็ม 35 คะแนน</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+            <button onclick="showTab(1)"
+                class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600"
+                id="tab-btn-1">
+                <i class="fa-solid fa-circle-dot mr-1"></i> ส่วนที่ 1 ปรนัย (20)
+            </button>
+            <button onclick="showTab(2)"
+                class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600"
+                id="tab-btn-2">
+                <i class="fa-solid fa-link mr-1"></i> ส่วนที่ 2 จับคู่ (10)
+            </button>
+            <button onclick="showTab(3)"
+                class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600"
+                id="tab-btn-3">
+                <i class="fa-solid fa-pen-to-square mr-1"></i> ส่วนที่ 3 เติมคำ (5)
+            </button>
+            <button onclick="showTab(4)"
+                class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600"
+                id="tab-btn-4">
+                <i class="fa-solid fa-file-pen mr-1"></i> ส่วนที่ 4 อัตนัย (5)
+            </button>
+        </div>
+
+        <!-- TAB 1: MULTIPLE CHOICE -->
+        <div id="tab-1" class="tab-content active space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-indigo-800 text-base mb-1 flex items-center gap-2"><i
+                        class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย 4 ตัวเลือก</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 20 ข้อ ข้อละ 1 คะแนน | เลือกตัวเลือกที่ถูกต้องที่สุด</p>
+                <div id="mc-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- TAB 2: MATCHING -->
+        <div id="tab-2" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-indigo-800 text-base mb-1 flex items-center gap-2"><i
+                        class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่ความสัมพันธ์</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 10 ข้อ ข้อละ 1 คะแนน | เลือกนิยามหรือสูตรที่ถูกต้องจาก
+                    Dropdown</p>
+                <div id="match-questions" class="space-y-3"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: FILL IN THE BLANK -->
+        <div id="tab-3" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-indigo-800 text-base mb-1 flex items-center gap-2"><i
+                        class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำตอบคำนวณ</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 5 ข้อ ข้อละ 1 คะแนน | คำนวณและกรอกตัวเลขคำตอบลงในช่องว่าง
+                </p>
+                <div id="fill-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- TAB 4: SUBJECTIVE -->
+        <div id="tab-4" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-indigo-800 text-base mb-1 flex items-center gap-2"><i
+                        class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย แสดงวิธีทำอย่างละเอียด</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 5 ข้อ | เขียนวิธีทำอย่างเป็นขั้นตอน
+                    แล้วกดปุ่มเฉลยเพื่อตรวจคำตอบ</p>
+                <div id="subj-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- Submit Button Area -->
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <button onclick="submitAll()"
+                class="py-4 px-10 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม
+            </button>
+            <a href="m5-physics.html"
+                class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+                <i class="fa-solid fa-list"></i> กลับหน้ารวม ม.5
+            </a>
+        </div>
+    </main>
+
+    <!-- Score Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white text-center">
+                <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+                <h2 class="text-2xl font-extrabold">ผลการทดสอบ</h2>
+                <p class="text-indigo-100 text-sm mt-1">บทที่ 12: แสงเชิงฟิสิกส์ (Physical Optics)</p>
+            </div>
+            <div class="p-6 space-y-3">
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20 คะแนน)</span>
+                    <span class="font-bold text-indigo-700" id="modal-p1">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (10 คะแนน)</span>
+                    <span class="font-bold text-indigo-700" id="modal-p2">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5 คะแนน)</span>
+                    <span class="font-bold text-indigo-700" id="modal-p3">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-500 text-xs">ส่วนที่ 4 อัตนัย (ประเมินตนเอง)</span>
+                    <span class="text-xs text-slate-400">ดูเฉลยวิธีทำ</span>
+                </div>
+                <div class="bg-indigo-50 rounded-xl p-4 text-center mt-2 border border-indigo-100">
+                    <p class="text-xs text-indigo-600 font-semibold mb-1">คะแนนรวมทั้งหมด</p>
+                    <p class="text-4xl font-extrabold text-indigo-700" id="modal-total">0/35</p>
+                    <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+                </div>
+            </div>
+            <div class="px-6 pb-6 flex gap-3">
+                <button onclick="closeModal()"
+                    class="flex-1 py-3 bg-indigo-600 text-white rounded-xl font-bold text-sm hover:bg-indigo-700 transition-colors">
+                    ดูเฉลยละเอียดทุกข้อ
+                </button>
+                <a href="m5-physics.html"
+                    class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300 transition-colors">
+                    กลับหน้ารวม ม.5
+                </a>
+            </div>
+        </div>
     </div>
-</main>
+
+    <script>
+        // ===== DATA: CHAPTER 12 PHYSICAL OPTICS =====
+        const mcData = [
+            {
+                q: "เมื่อฉายแสงความยาวคลื่น 700 nm ตกตั้งฉากบนช่องแคบคู่ซึ่งห่างกัน 0.2 mm จงหาว่าแถบสว่างลำดับที่ 10 ทั้งสองด้านจะทำมุมกันกี่องศา? (กำหนด sin 2° = 0.035)",
+                choices: [
+                    "2 องศา",
+                    "3 องศา",
+                    "4 องศา",
+                    "8 องศา"
+                ],
+                ans: 2
+            },
+            {
+                q: "สลิตคู่ห่างกัน 0.03 มิลลิเมตร วางห่างจากฉาก 2 เมตร เมื่อฉายแสงผ่านสลิต ปรากฏว่าแถบสว่างลำดับที่ 5 อยู่ห่างจากแนวกลาง 14 เซนติเมตร ความยาวคลื่นของแสงเป็นกี่นาโนเมตร?",
+                choices: [
+                    "320 nm",
+                    "380 nm",
+                    "420 nm",
+                    "480 nm"
+                ],
+                ans: 2
+            },
+            {
+                q: "ช่องแคบคู่หนึ่งห่างกัน 0.1 มิลลิเมตร เมื่อฉายแสงความยาวคลื่น 600 นาโนเมตร ตกตั้งฉากบนช่องแคบ แถบสว่างลำดับที่ 4 บนฉากที่ห่างออกไป 80 เซนติเมตร จะอยู่ห่างจากแนวกลางกี่เซนติเมตร?",
+                choices: [
+                    "0.80 cm",
+                    "1.92 cm",
+                    "4.68 cm",
+                    "6.59 cm"
+                ],
+                ans: 1
+            },
+            {
+                q: "(แนว En) เมื่อใช้แสงที่มีความยาวคลื่น 5.0 × 10⁻⁷ เมตร ตกตั้งฉากกับสลิตคู่เกิดภาพแทรกสอดบนฉากที่อยู่ห่างออกไป 1 เมตร ถ้าระยะห่างระหว่างสลิตคู่เท่ากับ 0.1 มิลลิเมตร แถบสว่าง 2 แถบที่ติดกันอยู่ห่างกันกี่มิลลิเมตร?",
+                choices: [
+                    "1 มิลลิเมตร",
+                    "3 มิลลิเมตร",
+                    "5 มิลลิเมตร",
+                    "10 มิลลิเมตร"
+                ],
+                ans: 2
+            },
+            {
+                q: "สลิตคู่ที่มีระยะระหว่างสลิตเป็น 0.10 เซนติเมตร ฉากอยู่ห่างจากสลิตเป็นระยะทาง 1.0 เมตร ระยะระหว่างแถบมืดที่อยู่ติดกันมีค่าเป็น 0.5 มิลลิเมตร ความยาวคลื่นแสงที่ใช้เป็นกี่นาโนเมตร?",
+                choices: [
+                    "300 nm",
+                    "400 nm",
+                    "500 nm",
+                    "600 nm"
+                ],
+                ans: 2
+            },
+            {
+                q: "แสงสีเหลืองความยาวคลื่น 630 นาโนเมตร ตกตั้งฉากผ่านสลิตคู่อันหนึ่ง บนฉากที่ห่างออกไป 1.5 เมตร แถบสว่างลำดับที่ 3 และลำดับที่ 7 อยู่ห่างกัน 6 มิลลิเมตร ช่องทั้งสองของสลิตคู่นี้อยู่ห่างกันกี่ไมโครเมตร?",
+                choices: [
+                    "330 μm",
+                    "450 μm",
+                    "580 μm",
+                    "630 μm"
+                ],
+                ans: 3
+            },
+            {
+                q: "เมื่อใช้แสงสีแดงความยาวคลื่น 650 นาโนเมตร ตกตั้งฉากกับสลิตคู่ แถบสว่าง 2 แถบติดกันอยู่ห่างกัน 0.25 มิลลิเมตร ถ้าเปลี่ยนไปใช้แสงสีม่วงความยาวคลื่น 400 นาโนเมตร แถบสว่าง 2 แถบติดกันจะอยู่ห่างกันกี่มิลลิเมตร?",
+                choices: [
+                    "0.10 mm",
+                    "0.15 mm",
+                    "0.20 mm",
+                    "0.22 mm"
+                ],
+                ans: 1
+            },
+            {
+                q: "ฉายแสงผ่านสลิตเดี่ยวทำให้เกิดแนวมืดแถบแรกเบนไปจากแนวกลางเป็นมุม 30° ถ้าความยาวคลื่นแสงคือ 650 นาโนเมตร จงหาความกว้างของช่องสลิตเดี่ยวในหน่วยไมโครเมตร",
+                choices: [
+                    "0.65 μm",
+                    "1.30 μm",
+                    "650 μm",
+                    "1300 μm"
+                ],
+                ans: 1
+            },
+            {
+                q: "(แนว En) ใช้แสงความยาวคลื่น 600 นาโนเมตร ตกตั้งฉากผ่านสลิตเดี่ยวกว้าง 50 ไมโครเมตร แถบมืดแถบแรกอยู่ห่างจากกึ่งกลางแถบสว่างกลาง 6.0 มิลลิเมตร ระยะระหว่างสลิตเดี่ยวกับฉากเป็นกี่เซนติเมตร?",
+                choices: [
+                    "20 cm",
+                    "30 cm",
+                    "40 cm",
+                    "50 cm"
+                ],
+                ans: 3
+            },
+            {
+                q: "(แนว En) แสงสีเหลืองความยาวคลื่น 590 นาโนเมตร ฉายผ่านสลิตเดี่ยวกว้าง 250 ไมโครเมตร แสงตกบนฉากหลังสลิตที่ระยะ 50 เซนติเมตร ความกว้างของแถบสว่างกลาง (ระหว่างมืดแรกสองข้าง) เป็นเท่าใด?",
+                choices: [
+                    "1.18 มิลลิเมตร",
+                    "2.36 มิลลิเมตร",
+                    "3.54 มิลลิเมตร",
+                    "4.92 มิลลิเมตร"
+                ],
+                ans: 1
+            },
+            {
+                q: "ใช้แสงความยาวคลื่น 600 นาโนเมตร ฉายผ่านสลิตเดี่ยวเกิดแถบบนฉากห่าง 3 เมตร ระยะห่างระหว่างจุดที่มืดที่สุดสองข้างของแถบสว่างกลางเป็น 1.5 เซนติเมตร สลิตนั้นกว้างกี่เมตร?",
+                choices: [
+                    "1.2 × 10⁻² เมตร",
+                    "2.4 × 10⁻² เมตร",
+                    "1.2 × 10⁻⁴ เมตร",
+                    "2.4 × 10⁻⁴ เมตร"
+                ],
+                ans: 3
+            },
+            {
+                q: "(แนว มช) เกรตติงมี 2,000 ช่องต่อเซนติเมตร ถ้าฉายแสงความยาวคลื่นขนาดหนึ่งไปยังเกรตติง แถบสว่างแรกบนจอทำมุม 30° กับแนวกลาง แสงนั้นมีความยาวคลื่นกี่นาโนเมตร?",
+                choices: [
+                    "1,500 nm",
+                    "2,000 nm",
+                    "2,200 nm",
+                    "2,500 nm"
+                ],
+                ans: 3
+            },
+            {
+                q: "(แนว มช) แสงความยาวคลื่น 500 นาโนเมตร พุ่งผ่านเกรตติงพบว่าแถบสว่างลำดับที่ 4 ทำมุมกับแนวกลาง 30 องศา จงหาจำนวนช่องต่อเซนติเมตรของเกรตติงนี้",
+                choices: [
+                    "2,000 ช่อง/cm",
+                    "2,200 ช่อง/cm",
+                    "3,333 ช่อง/cm",
+                    "2,500 ช่อง/cm"
+                ],
+                ans: 3
+            },
+            {
+                q: "(แนว En) แสงขาวตกตั้งฉากกับเกรตติง สเปกตรัมลำดับที่ 3 ของแสงสีม่วงตรงกับสเปกตรัมลำดับที่ 2 ของแสงสีแดง ถ้าความยาวคลื่นแสงสีม่วงเป็น 400 นาโนเมตร แสงสีแดงมีความยาวคลื่นกี่นาโนเมตร?",
+                choices: [
+                    "100 nm",
+                    "300 nm",
+                    "600 nm",
+                    "900 nm"
+                ],
+                ans: 2
+            },
+            {
+                q: "เมื่อให้แสงความยาวคลื่น λ₁ และ λ₂ ผ่านสลิตคู่ห่างกัน d พบว่าแถบมืดที่ 4 ของแสง λ₁ ซ้อนทับกับแถบมืดที่ 5 ของแสง λ₂ อัตราส่วน λ₁ / λ₂ มีค่าเท่าใด?",
+                choices: [
+                    "1/2",
+                    "5/3",
+                    "3/5",
+                    "9/7"
+                ],
+                ans: 3
+            },
+            {
+                q: "(แนว En) ต้องการให้ตำแหน่งริ้วมืดแรกของการเลี้ยวเบนของสลิตเดี่ยว ตรงกับตำแหน่งมืดที่ 5 ของการแทรกสอดของสลิตคู่ ระยะระหว่างสลิตคู่ต้องเป็นกี่เท่าของความกว้างสลิตเดี่ยว?",
+                choices: [
+                    "5 เท่า",
+                    "7/2 เท่า",
+                    "9/2 เท่า",
+                    "11/2 เท่า"
+                ],
+                ans: 2
+            },
+            {
+                q: "เมื่อให้ลำแสงขนานผ่านสลิตคู่อันหนึ่ง แสงสีใดต่อไปนี้จะให้จำนวนแถบสว่างปรากฏบนฉากมากที่สุด?",
+                choices: [
+                    "แสงสีน้ำเงิน",
+                    "แสงสีเขียว",
+                    "แสงสีแสด",
+                    "แสงสีแดง"
+                ],
+                ans: 0
+            },
+            {
+                q: "เกรตติงอันหนึ่งมี 4,000 ช่องต่อเซนติเมตร ถ้าให้แสงมีความยาวคลื่น 600 นาโนเมตร ส่องผ่าน จะมองเห็นแถบสว่างทั้งหมดกี่แถบ (รวมแถบกลาง)?",
+                choices: [
+                    "4 แถบ",
+                    "5 แถบ",
+                    "8 แถบ",
+                    "9 แถบ"
+                ],
+                ans: 3
+            },
+            {
+                q: "ปรากฏการณ์ที่ทำให้มองเห็นท้องฟ้าเป็นสีฟ้าในเวลากลางวัน และเห็นท้องฟ้าเป็นสีส้มแดงในเวลาเย็น เกิดจากคุณสมบัติใดของแสง?",
+                choices: [
+                    "การสะท้อนกลับหมดของแสง",
+                    "การเลี้ยวเบนของแสงผ่านกลุ่มเมฆ",
+                    "การกระเจิงของแสงโดยโมเลกุลในอากาศ (Rayleigh Scattering)",
+                    "การโพลาไรเซชันของแสงอาทิตย์"
+                ],
+                ans: 2
+            },
+            {
+                q: "เหตุใดแสงสีม่วงและสีน้ำเงินจึงกระเจิงได้ดีกว่าแสงสีแดงในชั้นบรรยากาศโลก?",
+                choices: [
+                    "เพราะมีความเร็วมากกว่าแสงสีแดง",
+                    "เพราะมีความยาวคลื่นสั้นกว่า (ความถี่สูงกว่า)",
+                    "เพราะแอมพลิจูดของคลื่นสูงกว่า",
+                    "เพราะดัชนีหักเหของอากาศต่อแสงสีม่วงเป็นศูนย์"
+                ],
+                ans: 1
+            }
+        ];
+
+        const matchData = [
+            { left: "1. การแทรกสอดสลิตคู่ (แถบสว่าง Aₙ)", right: "d sin θ = nλ หรือ λ = dx / (nD)" },
+            { left: "2. การแทรกสอดสลิตคู่ (แถบมืด Nₙ)", right: "d sin θ = (n − ½)λ" },
+            { left: "3. ระยะห่างระหว่างแถบสว่างติดกันในสลิตคู่", right: "Δx = λD / d" },
+            { left: "4. การเลี้ยวเบนสลิตเดี่ยว (แถบมืด Nₙ)", right: "d sin θ = nλ (เมื่อ d คือความกว้างสลิตเดี่ยว)" },
+            { left: "5. ความกว้างของแถบสว่างกลางสลิตเดี่ยว", right: "2x₁ = 2λD / d" },
+            { left: "6. ระยะห่างช่องเกรตติง (d)", right: "d = 1 / N (ความยาว / จำนวนช่อง)" },
+            { left: "7. สเปกตรัมแถบสว่างเกรตติง", right: "d sin θ = nλ" },
+            { left: "8. การซ้อนทับกันของสเปกตรัมสองสี", right: "n₁ λ₁ = n₂ λ₂" },
+            { left: "9. การกระเจิงของแสง (Rayleigh)", right: "สัดส่วนการกระเจิงแปรผันตรงกับ 1 / λ⁴" },
+            { left: "10. ท้องฟ้าตอนเช้าและเย็นเป็นสีแดง", right: "แสงเดินทางผ่านบรรยากาศหนา สีม่วงน้ำเงินกระเจิงหายไปหมด" }
+        ];
+
+        const matchOptions = [
+            "d sin θ = nλ หรือ λ = dx / (nD)",
+            "d sin θ = (n − ½)λ",
+            "Δx = λD / d",
+            "d sin θ = nλ (เมื่อ d คือความกว้างสลิตเดี่ยว)",
+            "2x₁ = 2λD / d",
+            "d = 1 / N (ความยาว / จำนวนช่อง)",
+            "d sin θ = nλ",
+            "n₁ λ₁ = n₂ λ₂",
+            "สัดส่วนการกระเจิงแปรผันตรงกับ 1 / λ⁴",
+            "แสงเดินทางผ่านบรรยากาศหนา สีม่วงน้ำเงินกระเจิงหายไปหมด"
+        ];
+
+        const fillData = [
+            {
+                q: "สลิตคู่มีช่องห่างกัน 0.40 mm วางห่างจากฉาก 2.50 m วัดระยะห่างระหว่างแถบสว่างติดกันได้ 3.50 mm แสงนี้มีความยาวคลื่นกี่นาโนเมตร",
+                unit: "nm",
+                ans: "560",
+                tol: 5
+            },
+            {
+                q: "ฉายแสงความยาวคลื่น 550 nm ผ่านสลิตเดี่ยวกว้าง 50 μm บนฉากห่าง 0.6 m แถบมืดที่ 1 อยู่ห่างจากแนวกลางกี่มิลลิเมตร",
+                unit: "mm",
+                ans: "6.6",
+                tol: 0.2
+            },
+            {
+                q: "เกรตติง 10,000 ช่องต่อเซนติเมตร แถบสว่างแรกเบนไป 30 องศา ความยาวคลื่นของแสงนี้มีค่ากี่นาโนเมตร",
+                unit: "nm",
+                ans: "500",
+                tol: 5
+            },
+            {
+                q: "เกรตติง 6,000 ช่อง/cm แถบสว่างที่ 2 เบนทำมุม 37 องศา (sin 37° = 0.6) แสงมีความยาวคลื่นกี่นาโนเมตร",
+                unit: "nm",
+                ans: "500",
+                tol: 5
+            },
+            {
+                q: "ฉายแสงความยาวคลื่น 500 nm และ 600 nm ผ่านเกรตติง ริ้วสว่างของแสง 500 nm ลำดับที่เท่าใดจะซ้อนทับกับริ้วสว่างลำดับที่ 5 ของแสง 600 nm เป็นครั้งแรก",
+                unit: "ลำดับที่",
+                ans: "6",
+                tol: 0.1
+            }
+        ];
+
+        const subjData = [
+            {
+                q: "1. แสงเลเซอร์สีแดงความยาวคลื่น 650 นาโนเมตร ส่องผ่านสลิตคู่ที่มีระยะระหว่างช่อง 0.25 มิลลิเมตร ฉากรับแสงอยู่ห่างจากสลิตคู่เป็นระยะ 1.50 เมตร จงคำนวณหา (1) ระยะห่างระหว่างแถบสว่างสองแถบที่ติดกัน (2) ระยะจากแถบสว่างกลางถึงแถบมืดที่ 3",
+                key: `<strong>วิธีทำ:</strong><br>
+        กำหนด: $\\lambda = 650 \\times 10^{-9}\\text{ m}, d = 0.25 \\times 10^{-3}\\text{ m}, D = 1.50\\text{ m}$<br>
+        1. หาระยะห่างระหว่างแถบสว่างติดกัน ($\\Delta x$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\Delta x = \\frac{\\lambda D}{d} = \\frac{(650 \\times 10^{-9})(1.50)}{0.25 \\times 10^{-3}} = 3.9 \\times 10^{-3}\\text{ m} = \\mathbf{3.9\\text{ มิลลิเมตร}}$<br>
+        2. หาระยะจากแถบสว่างกลางถึงแถบมืดที่ 3 ($n = 3$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$x = \\left(n - \\frac{1}{2}\\right) \\frac{\\lambda D}{d} = \\left(3 - \\frac{1}{2}\\right) \\Delta x = 2.5 \\times 3.9\\text{ mm} = \\mathbf{9.75\\text{ มิลลิเมตร}}$`
+            },
+            {
+                q: "2. แสงสีเดียวกระทบตั้งฉากกับสลิตเดี่ยวที่มีความกว้างของช่อง 0.04 มิลลิเมตร ฉากอยู่ห่างจากสลิต 1.20 เมตร ถ้าวัดความกว้างของแถบสว่างกลางบนฉาก (ระยะระหว่างแถบมืดลำดับที่ 1 ทั้งสองข้าง) ได้ 3.6 เซนติเมตร จงหาความยาวคลื่นของแสงที่ใช้ในหน่วยนาโนเมตร",
+                key: `<strong>วิธีทำ:</strong><br>
+        กำหนด: $d = 0.04 \\times 10^{-3}\\text{ m}, D = 1.20\\text{ m}$, ความกว้างแถบสว่างกลาง $2x_1 = 3.6\\text{ cm} = 0.036\\text{ m}$<br>
+        ดังนั้นระยะจากแนวกลางถึงแถบมืดแรก $x_1 = \\frac{0.036}{2} = 0.018\\text{ m}$<br>
+        ใช้สมการแถบมืดสลิตเดี่ยว ($n = 1$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$d \\cdot \\frac{x_1}{D} = 1 \\cdot \\lambda$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\lambda = \\frac{d x_1}{D} = \\frac{(0.04 \\times 10^{-3}\\text{ m})(0.018\\text{ m})}{1.20\\text{ m}}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\lambda = \\frac{7.2 \\times 10^{-7}}{1.20} = 6.0 \\times 10^{-7}\\text{ m} = \\mathbf{600\\text{ นาโนเมตร}}$`
+            },
+            {
+                q: "3. เกรตติงอันหนึ่งมี 5,000 ช่องต่อเซนติเมตร เมื่อฉายแสงความยาวคลื่น 600 นาโนเมตร ตกตั้งฉากกับเกรตติง จงหา (1) มุมเบี่ยงเบนของแถบสว่างลำดับที่ 2 และ (2) จำนวนแถบสว่างทั้งหมดที่สามารถมองเห็นได้บนฉาก",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. หาระยะห่างระหว่างช่องเกรตติง ($d$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$d = \\frac{1\\text{ cm}}{5,000} = \\frac{10^{-2}\\text{ m}}{5,000} = 2.0 \\times 10^{-6}\\text{ เมตร}$<br>
+        2. หามุมเบี่ยงเบนของแถบสว่างลำดับที่ 2 ($n = 2$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$d \\sin\\theta = n\\lambda \\implies (2.0 \\times 10^{-6}) \\sin\\theta = 2(600 \\times 10^{-9}) = 1.2 \\times 10^{-6}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\sin\\theta = \\frac{1.2 \\times 10^{-6}}{2.0 \\times 10^{-6}} = 0.60 \\implies \\theta = \\arcsin(0.60) \\approx \\mathbf{37^\\circ}$<br>
+        3. หาจำนวนแถบสว่างทั้งหมด (คิดที่ $\\sin\\theta \\le 1$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$n_{max} \\le \\frac{d}{\\lambda} = \\frac{2.0 \\times 10^{-6}}{600 \\times 10^{-9}} = 3.33 \\implies n_{max} = 3$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;เกิดแถบสว่างฝั่งละ 3 แถบ รวมแถบสว่างกลาง ($n = 0$) เป็น $\\mathbf{2(3) + 1 = 7\\text{ แถบ}}$`
+            },
+            {
+                q: "4. เมื่อให้แสงขาวตกตั้งฉากกับเกรตติง พบว่าแถบสว่างลำดับที่ 3 ของแสงสีม่วง (ความยาวคลื่น 400 นาโนเมตร) เกิดขึ้นซ้อนทับพอดีกับแถบสว่างลำดับที่ 2 ของแสงอีกสีหนึ่ง จงคำนวณหาความยาวคลื่นของแสงสีที่สอง และระบุว่าเป็นแสงสีใด",
+                key: `<strong>วิธีทำ:</strong><br>
+        ตำแหน่งที่สเปกตรัมซ้อนทับกันจะมีมุม $\\theta$ เดียวกัน:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$d \\sin\\theta = n_1 \\lambda_1 = n_2 \\lambda_2$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$3 \\times (400\\text{ nm}) = 2 \\times \\lambda_2$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$1200 = 2 \\lambda_2 \\implies \\lambda_2 = \\frac{1200}{2} = \\mathbf{600\\text{ นาโนเมตร}}$<br>
+        ความยาวคลื่น 600 นาโนเมตรนี้อยู่ในย่าน <strong>แสงสีส้ม-แดง (Orange-Red)</strong>`
+            },
+            {
+                q: "5. อธิบายหลักการทางฟิสิกส์ของการกระเจิงของแสง (Rayleigh Scattering) พร้อมให้เหตุผลว่า ทำไมเวลากลางวันเราจึงเห็นท้องฟ้าเป็นสีฟ้า แต่ในเวลาดวงอาทิตย์ขึ้นและตกเราจึงเห็นท้องฟ้าเป็นสีส้มแดง",
+                key: `<strong>แนวคำตอบ:</strong><br>
+        1. <strong>หลักการกระเจิงแสงของเรย์ลี (Rayleigh Scattering):</strong> เมื่อแสงกระทบอนุภาคที่มีขนาดเล็กกว่าความยาวคลื่น แสงจะถูกดูดกลืนและแผ่กระจายออกทุกทิศทาง โดยอัตราการกระเจิงจะแปรผันตรงกับหนึ่งส่วนความยาวคลื่นยกกำลังสี่ ($\\text{Scattering} \\propto \\frac{1}{\\lambda^4}$) แสงที่มีความยาวคลื่นสั้น (ม่วง, คราม, น้ำเงิน) จะกระเจิงได้ดีกว่าแสงความยาวคลื่นยาว (แดง, ส้ม) มากกว่า 10 เท่า<br>
+        2. <strong>ท้องฟ้าเวลากลางวัน:</strong> แสงสีม่วงและน้ำเงินกระเจิงฟุ้งกระจายไปทั่วท้องฟ้า และเนื่องจากดวงตามนุษย์มีความไวต่อแสงสีน้ำเงินมากกว่าสีม่วง เราจึงมองเห็นท้องฟ้าเป็น <strong>สีฟ้าคราม</strong><br>
+        3. <strong>ท้องฟ้าตอนเช้าและเย็น:</strong> แสงอาทิตย์ส่องเฉียงผ่านบรรยากาศเป็นระยะทางไกลมาก แสงสีม่วงและน้ำเงินถูกกระเจิงออกไปด้านข้างจนหมด เหลือเพียงแสงสีแดงและส้มที่มีความยาวคลื่นยาวและกระเจิงน้อยที่สุด เดินทางตรงทะลุผ่านบรรยากาศมาเข้าตาเราได้ ทำให้เราเห็นท้องฟ้าเป็น <strong>สีส้มแดง</strong>`
+            }
+        ];
+
+        // ===== RENDER SCRIPT =====
+        let userAnswers = new Array(mcData.length).fill(-1);
+
+        function renderMC() {
+            const container = document.getElementById('mc-questions');
+            mcData.forEach((q, qi) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-indigo-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi + 1}</span>
+                ${q.q}
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="mc-choices-${qi}">
+                ${q.choices.map((c, ci) => `
+                    <button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-xs md:text-sm flex items-center gap-3 bg-white">
+                        <span class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center font-bold font-inter text-xs flex-shrink-0 text-slate-500">${ci + 1}</span>
+                        <span>${c}</span>
+                    </button>
+                `).join('')}
+            </div>`;
+                container.appendChild(div);
+            });
+        }
+
+        function selectMC(qi, ci) {
+            if (document.getElementById(`mc-${qi}-0`).classList.contains('correct') || document.getElementById(`mc-${qi}-0`).classList.contains('wrong')) return;
+            const prev = userAnswers[qi];
+            if (prev !== -1) {
+                document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+            }
+            userAnswers[qi] = ci;
+            document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+        }
+
+        function renderMatch() {
+            const container = document.getElementById('match-questions');
+            matchData.forEach((m, mi) => {
+                const div = document.createElement('div');
+                div.className = 'flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+                const opts = matchOptions.map(o => `<option value="${o}">${o}</option>`).join('');
+                div.innerHTML = `
+            <div class="flex items-center gap-2 flex-1">
+                <span class="w-6 h-6 bg-indigo-700 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 font-inter">${mi + 1}</span>
+                <span class="text-xs md:text-sm font-medium text-slate-700">${m.left}</span>
+            </div>
+            <select class="match-select sm:w-80" id="match-${mi}">
+                <option value="">-- เลือกสูตรหรือนิยามที่ถูกต้อง --</option>${opts}
+            </select>`;
+                container.appendChild(div);
+            });
+        }
+
+        function renderFill() {
+            const container = document.getElementById('fill-questions');
+            fillData.forEach((f, fi) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-purple-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi + 1}</span>
+                ${f.q}
+            </p>
+            <div class="flex items-center gap-2 max-w-md">
+                <input type="text" class="fill-input flex-1 outline-none bg-white font-mono" id="fill-${fi}" placeholder="พิมพ์ตัวเลขคำตอบ...">
+                <span class="text-xs md:text-sm text-slate-500 font-medium whitespace-nowrap">${f.unit}</span>
+                <span class="text-sm ml-2" id="fill-icon-${fi}"></span>
+            </div>`;
+                container.appendChild(div);
+            });
+        }
+
+        function renderSubj() {
+            const container = document.getElementById('subj-questions');
+            subjData.forEach((s, si) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-amber-500 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si + 1}</span>
+                ${s.q}
+            </p>
+            <textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-indigo-400 transition-colors min-h-[100px] bg-white resize-y" id="subj-${si}" placeholder="พิมพ์แสดงแนวคิดหรือบันทึกวิธีทำของคุณที่นี่..."></textarea>
+            <div class="answer-key mt-3 p-4 bg-indigo-50 border border-indigo-200 rounded-xl text-xs md:text-sm text-indigo-950 leading-relaxed" id="key-${si}">${s.key}</div>
+            <button onclick="toggleKey(${si})" class="mt-2 text-xs text-indigo-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}">
+                <i class="fa-solid fa-eye"></i> แสดงเฉลยและวิธีคิดละเอียด
+            </button>`;
+                container.appendChild(div);
+            });
+        }
+
+        function toggleKey(si) {
+            const key = document.getElementById(`key-${si}`);
+            const btn = document.getElementById(`key-btn-${si}`);
+            key.classList.toggle('show');
+            btn.innerHTML = key.classList.contains('show')
+                ? '<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย'
+                : '<i class="fa-solid fa-eye"></i> แสดงเฉลยและวิธีคิดละเอียด';
+        }
+
+        function showTab(n) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`tab-${n}`).classList.add('active');
+            document.getElementById(`tab-btn-${n}`).classList.add('active');
+        }
+
+        function submitAll() {
+            let p1 = 0;
+            mcData.forEach((q, qi) => {
+                const chosen = userAnswers[qi];
+                for (let ci = 0; ci < 4; ci++) {
+                    const btn = document.getElementById(`mc-${qi}-${ci}`);
+                    btn.classList.remove('selected');
+                    if (ci === q.ans) btn.classList.add('correct');
+                    else if (ci === chosen && chosen !== q.ans) btn.classList.add('wrong');
+                }
+                if (chosen === q.ans) p1++;
+            });
+
+            let p2 = 0;
+            matchData.forEach((m, mi) => {
+                const sel = document.getElementById(`match-${mi}`);
+                sel.classList.remove('correct', 'wrong');
+                if (sel.value === m.right) { sel.classList.add('correct'); p2++; }
+                else sel.classList.add('wrong');
+            });
+
+            let p3 = 0;
+            fillData.forEach((f, fi) => {
+                const input = document.getElementById(`fill-${fi}`);
+                const icon = document.getElementById(`fill-icon-${fi}`);
+                const val = parseFloat(input.value.trim());
+                const correct = Math.abs(val - parseFloat(f.ans)) <= f.tol;
+                input.classList.remove('correct', 'wrong');
+                if (correct) { input.classList.add('correct'); icon.textContent = '✅'; p3++; }
+                else { input.classList.add('wrong'); icon.textContent = '❌'; }
+            });
+
+            // Show subjective keys
+            subjData.forEach((_, si) => document.getElementById(`key-${si}`).classList.add('show'));
+
+            const total = p1 + p2 + p3;
+            document.getElementById('modal-p1').textContent = `${p1}/20`;
+            document.getElementById('modal-p2').textContent = `${p2}/10`;
+            document.getElementById('modal-p3').textContent = `${p3}/5`;
+            document.getElementById('modal-total').textContent = `${total}/35`;
+            const pct = Math.round(total / 35 * 100);
+            let grade = '', emoji = '';
+            if (pct >= 80) { grade = `ยอดเยี่ยมมาก! (${pct}%) ความเข้าใจแสงเชิงฟิสิกส์ระดับเกียรตินิยม`; emoji = '🏆'; }
+            else if (pct >= 60) { grade = `ผ่านเกณฑ์ (${pct}%) ทบทวนสูตรเกรตติงและสลิตเดี่ยวเพิ่มเติม`; emoji = '👍'; }
+            else { grade = `ควรทบทวนเนื้อหา (${pct}%) ลองอ่านสรุปอีกครั้งนะ`; emoji = '📚'; }
+            document.getElementById('modal-grade').textContent = grade;
+            document.getElementById('modal-emoji').textContent = emoji;
+            document.getElementById('score-modal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('score-modal').classList.remove('show');
+        }
+
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        renderMC();
+        renderMatch();
+        renderFill();
+        renderSubj();
+    </script>
 </body>
+
 </html>

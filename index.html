@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ฟิสิกส์ จารย์เปา | VISUAL EDUCATION HUB</title>
-    <!-- โหลดฟอนต์ Prompt (สำหรับภาษาไทยไม่มีหัวแนวโมเดิร์น) และ Inter (สำหรับภาษาอังกฤษและตัวเลข) -->
+    <!-- โหลดฟอนต์ Prompt และ Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,7 +13,127 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- เชื่อมโยงไฟล์ตกแต่ง CSS -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* สไตล์สำหรับกลุ่มไอคอนช่องทางการติดต่อใน Navigation Bar ด้านบน */
+        .contact-icons-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .contact-icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+
+        .contact-icon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .contact-icon-btn.facebook:hover {
+            background-color: #1877f2;
+            color: #ffffff;
+        }
+
+        .contact-icon-btn.phone:hover {
+            background-color: #10b981;
+            color: #ffffff;
+        }
+
+        .contact-icon-btn.line:hover {
+            background-color: #06c755;
+            color: #ffffff;
+        }
+
+        /* สไตล์สำหรับกลุ่มไอคอนช่องทางการติดต่อใน Footer ด้านล่าง */
+        .footer-contact-group {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            margin-top: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-icon-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .footer-icon-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+        }
+
+        .footer-icon-btn.facebook:hover {
+            background-color: #1877f2;
+            color: #ffffff;
+            border-color: #1877f2;
+        }
+
+        .footer-icon-btn.phone:hover {
+            background-color: #10b981;
+            color: #ffffff;
+            border-color: #10b981;
+        }
+
+        .footer-icon-btn.line:hover {
+            background-color: #06c755;
+            color: #ffffff;
+            border-color: #06c755;
+        }
+
+        /* ปุ่มเกี่ยวกับอาจารย์เปา (โดดเด่น เห็นชัด) */
+        .about-pao-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.55rem 1.2rem;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-left: 0.5rem;
+        }
+
+        .about-pao-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 22px rgba(37, 99, 235, 0.6);
+            background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 100%);
+        }
+
+        .about-pao-btn i {
+            font-size: 1rem;
+            color: #fbbf24;
+        }
+    </style>
 </head>
+
 <body>
 
     <!-- 1. แถบเมนูบนสุด (Navigation Bar) -->
@@ -25,14 +146,28 @@
                 </div>
                 <span class="logo-text">ฟิสิกส์ จารย์เปา <span class="logo-subtext">VISUAL EDUCATION HUB</span></span>
             </div>
-            
-            <!-- เมนูนำทางด้านขวา -->
+
+            <!-- เมนูนำทางด้านขวา: เหลือเฉพาะ HOME + ช่องทางติดต่อ -->
             <nav class="nav-links">
                 <a href="index.html" class="nav-link active">HOME</a>
-                <a href="m4-mechanics.html" class="nav-link">ม.4 กลศาสตร์</a>
-                <a href="m6-physics.html" class="nav-link">ม.6 บทเรียน</a>
+
+                <!-- กลุ่มไอคอนช่องทางการติดต่อ -->
+                <div class="contact-icons-group">
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/profile.php?id=100076034031908#" target="_blank" rel="noopener noreferrer" class="contact-icon-btn facebook" title="Facebook Messenger">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <!-- โทรศัพท์ -->
+                    <a href="tel:0982727834" class="contact-icon-btn phone" title="โทรศัพท์">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                    <!-- Line -->
+                    <a href="https://line.me/ti/p/_TtCVxnlIh" target="_blank" rel="noopener noreferrer" class="contact-icon-btn line" title="Line">
+                        <i class="fa-brands fa-line"></i>
+                    </a>
+                </div>
             </nav>
-            
+
             <!-- เมนูสำหรับแสดงผลบนมือถือ (Hamburger menu) -->
             <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Toggle Menu">
                 <i class="fa-solid fa-bars"></i>
@@ -52,15 +187,12 @@
                 </div>
                 <h1 class="hero-title">เปิดโลกฟิสิกส์<br><span class="highlight-blue">ม.ต้น - ม.ปลาย</span></h1>
                 <p class="hero-description">
-                    ยินดีต้อนรับสู่คลังสื่อการสอน ฟิสิกส์จารย์เปา (ครูพิชิต เห็มนุช) รวบรวมความรู้ตั้งแต่พื้นฐาน ม.ต้น จนถึงเนื้อหาเข้มข้น ม.ปลาย ครบจบในที่เดียว เพื่อสร้างความเข้าใจที่เห็นภาพจริงและยั่งยืน
+                    ยินดีต้อนรับสู่คลังสื่อการสอน ฟิสิกส์จารย์เปา (ครูพิชิต เห็มนุช) รวบรวมความรู้ตั้งแต่พื้นฐาน ม.ต้น
+                    จนถึงเนื้อหาเข้มข้น ม.ปลาย ครบจบในที่เดียว เพื่อสร้างความเข้าใจที่เห็นภาพจริงและยั่งยืน
                 </p>
-                <a href="m4-mechanics.html" class="cta-button">
+                <a href="courses.html" class="cta-button">
                     <i class="fa-solid fa-book-open btn-icon"></i>
-                    <span>เข้าสู่คลังบทเรียน ม.4</span>
-                </a>
-                <a href="m6-physics.html" class="cta-button" style="margin-left: 10px; background: linear-gradient(135deg, #d97706, #b45309);">
-                    <i class="fa-solid fa-bolt-lightning btn-icon"></i>
-                    <span>เข้าสู่คลังบทเรียน ม.6</span>
+                    <span>คลังความรู้</span>
                 </a>
             </div>
 
@@ -102,12 +234,12 @@
                 </a>
 
                 <!-- กล่องที่ 3 (ขอบสีเขียวมินต์): ม.5 -->
-                <a href="#" class="course-card border-mint">
+                <a href="m5-physics.html" class="course-card border-mint">
                     <div class="card-icon-wrapper bg-mint-light text-mint">
                         <i class="fa-solid fa-wave-square"></i>
                     </div>
                     <h3 class="card-title">ม.5</h3>
-                    <p class="card-subtitle">คลื่น</p>
+                    <p class="card-subtitle">คลื่น แสง เสียง ไฟฟ้า</p>
                 </a>
 
                 <!-- กล่องที่ 4 (ขอบสีส้มทอง): ม.6 -->
@@ -120,7 +252,7 @@
                 </a>
 
                 <!-- กล่องที่ 5 (พิเศษ - การทดลอง): การทดลอง -->
-                <a href="#" class="course-card special-card border-purple">
+                <a href="experiments.html" class="course-card special-card border-purple">
                     <span class="special-badge bg-purple-light text-purple">LAB</span>
                     <div class="card-icon-wrapper bg-purple-light text-purple">
                         <i class="fa-solid fa-laptop-code"></i>
@@ -138,6 +270,26 @@
                     <h3 class="card-title">เกมส์</h3>
                     <p class="card-subtitle">PHYSICS GAMES</p>
                 </a>
+
+                <!-- กล่องที่ 7 (พิเศษ - ข้อสอบ): ข้อสอบ -->
+                <a href="exams.html" class="course-card special-card border-blue">
+                    <span class="special-badge bg-blue-light text-blue">EXAM</span>
+                    <div class="card-icon-wrapper bg-blue-light text-blue">
+                        <i class="fa-solid fa-file-pen"></i>
+                    </div>
+                    <h3 class="card-title">ข้อสอบ</h3>
+                    <p class="card-subtitle">EXAM & QUIZ</p>
+                </a>
+
+                <!-- กล่องที่ 8 (เปลี่ยนเป็น แบบทดสอบ): แบบทดสอบ -->
+                <a href="exams.html" class="course-card special-card border-mint">
+                    <span class="special-badge bg-mint-light text-mint">TEST</span>
+                    <div class="card-icon-wrapper bg-mint-light text-mint">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="card-title">แบบทดสอบ</h3>
+                    <p class="card-subtitle">ONLINE QUIZ & TEST</p>
+                </a>
             </div>
         </section>
 
@@ -151,31 +303,36 @@
                     </div>
                 </div>
 
-                <!-- ฝั่งขวา: ข้อความและเมนูทางลัด -->
+                <!-- ฝั่งขวา: ข้อความคำคม + ไอคอนติดต่อ + ปุ่มเกี่ยวกับอาจารย์เปา -->
                 <div class="footer-info-area">
                     <h3 class="footer-title">คุยกับ จารย์เปา</h3>
                     <blockquote class="footer-quote">
-                        "มุ่งเน้นการปูพื้นฐานวิทยาศาสตร์ฟิสิกส์ให้เข้มแข็งตั้งแต่ระดับ ม.ต้น เพื่อให้พร้อมสำหรับการต่อยอดในระดับที่สูงขึ้น ผมเชื่อว่าการเรียนที่เห็นภาพจริงคือหัวใจสำคัญของการเข้าใจฟิสิกส์อย่างยั่งยืนครับ"
+                        "มุ่งเน้นการปูพื้นฐานวิทยาศาสตร์ฟิสิกส์ให้เข้มแข็งตั้งแต่ระดับ ม.ต้น
+                        เพื่อให้พร้อมสำหรับการต่อยอดในระดับที่สูงขึ้น
+                        ผมเชื่อว่าการเรียนที่เห็นภาพจริงคือหัวใจสำคัญของการเข้าใจฟิสิกส์อย่างยั่งยืนครับ"
                     </blockquote>
-                    
-                    <!-- เมนูทางลัด 3 เมนูย่อย -->
-                    <div class="footer-shortcuts">
-                        <a href="m4-mechanics.html" class="shortcut-item">
-                            <span class="shortcut-label color-orange">ม.4</span>
-                            <span class="shortcut-text">กลศาสตร์ (8 บท)</span>
+
+                    <!-- ช่องทางการติดต่อใน Footer + ปุ่มเกี่ยวกับอาจารย์เปา -->
+                    <div class="footer-contact-group">
+                        <a href="https://www.facebook.com/profile.php?id=100076034031908#" target="_blank" rel="noopener noreferrer" class="footer-icon-btn facebook" title="Facebook Messenger">
+                            <i class="fa-brands fa-facebook-f"></i>
                         </a>
-                        <a href="m6-physics.html" class="shortcut-item">
-                            <span class="shortcut-label color-green">ม.6</span>
-                            <span class="shortcut-text">ฟิสิกส์ ม.6 (5 บท)</span>
+                        <a href="tel:0982727834" class="footer-icon-btn phone" title="โทรศัพท์ 098-272-7834">
+                            <i class="fa-solid fa-phone"></i>
                         </a>
-                        <a href="m6-physics.html" class="shortcut-item">
-                            <span class="shortcut-label color-pink">แนวข้อสอบ</span>
-                            <span class="shortcut-text">คลังข้อสอบ</span>
+                        <a href="https://line.me/ti/p/_TtCVxnlIh" target="_blank" rel="noopener noreferrer" class="footer-icon-btn line" title="Line">
+                            <i class="fa-brands fa-line"></i>
+                        </a>
+
+                        <!-- ปุ่มโดดเด่นข้างๆ ไอคอน Line -->
+                        <a href="about.html" class="about-pao-btn" title="เกี่ยวกับอาจารย์เปา">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <span>เกี่ยวกับอาจารย์เปา</span>
                         </a>
                     </div>
                 </div>
             </div>
-            
+
             <div class="footer-bottom-text">
                 <p>&copy; 2026 Gemini Antigravity - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
             </div>
@@ -187,10 +344,9 @@
     <script>
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
-        
+
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // เปลี่ยนไอคอนระหว่างแฮมเบอร์เกอร์กับกากบาท
             const icon = mobileMenuBtn.querySelector('i');
             if (icon.classList.contains('fa-bars')) {
                 icon.classList.remove('fa-bars');
@@ -202,4 +358,5 @@
         });
     </script>
 </body>
+
 </html>

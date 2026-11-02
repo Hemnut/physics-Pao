@@ -1,26 +1,1367 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุป บทที่ 9 คลื่นกล | ฟิสิกส์ จารย์เปา</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปเจาะลึก บทที่ 09: คลื่นกล (Mechanical Waves) ฉบับสมบูรณ์ | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Courier New', 'monospace'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-<main class="max-w-4xl mx-auto px-4 py-8">
-    <a href="m5-physics.html" class="text-emerald-600 font-bold text-sm mb-4 inline-block"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5</a>
-    <h1 class="text-3xl font-extrabold mb-6">สรุปเนื้อหา บทที่ 9: คลื่นกล</h1>
-    <div class="bg-white p-6 rounded-2xl shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-emerald-700">1. อัตราเร็วคลื่น</h2>
-        <p class="text-sm">สมการพื้นฐาน: $v = f\lambda = \frac{\lambda}{T}$</p>
-        <h2 class="text-xl font-bold text-emerald-700">2. สมบัติของคลื่น 4 ประการ</h2>
-        <ul class="list-disc pl-5 text-sm space-y-1">
-            <li><strong>การสะท้อน:</strong> มุมตกกระทบ = มุมสะท้อน</li>
-            <li><strong>การหักเห:</strong> $\frac{\sin\theta_1}{\sin\theta_2} = \frac{v_1}{v_2} = \frac{\lambda_1}{\lambda_2}$</li>
-            <li><strong>การแทรกสอด:</strong> แถบสว่าง $S_1P - S_2P = n\lambda$, แถบมืด $S_1P - S_2P = (n-\frac{1}{2})\lambda$</li>
-            <li><strong>การเลี้ยวเบน:</strong> คลื่นอ้อมสิ่งกีดขวางได้ดีเมื่อช่องแคบมีขนาดใกล้เคียงความยาวคลื่น</li>
-        </ul>
-    </div>
-</main>
+
+<body class="bg-slate-100 text-slate-800 min-h-screen scroll-smooth font-sans">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm backdrop-blur-md bg-white/95">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-water"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-emerald-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html"
+                    class="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors">HOME</a>
+                <a href="m5-physics.html"
+                    class="text-sm font-semibold text-emerald-600 border-b-2 border-emerald-600 pb-1">บทเรียน ม.5</a>
+                <a href="m5-ch09-quiz.html"
+                    class="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors">แบบฝึกหัด Ch
+                    09</a>
+            </nav>
+            <div class="flex items-center gap-2">
+                <a href="m5-ch09-quiz.html"
+                    class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl shadow-sm transition-all">
+                    <i class="fa-solid fa-pen-to-square"></i> ทำแบบฝึกหัด (35 ข้อ)
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+
+        <!-- Breadcrumb & Quick Info -->
+        <div class="flex items-center justify-between mb-4">
+            <a href="m5-physics.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+            </a>
+            <span class="text-xs text-slate-400 font-inter tracking-wider">CHAPTER 09 COMPREHENSIVE TEXTBOOK
+                GUIDE</span>
+        </div>
+
+        <!-- Hero Card -->
+        <div
+            class="bg-gradient-to-r from-slate-900 via-emerald-950 to-teal-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+            <div
+                class="absolute w-96 h-96 bg-emerald-500/10 rounded-full -top-32 -right-20 blur-3xl pointer-events-none">
+            </div>
+            <div class="relative z-10">
+                <div
+                    class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-wave-square"></i> สรุปเนื้อหาละเอียดฉบับสมบูรณ์ — ฟิสิกส์ ม.5 เล่ม 3
+                </div>
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">บทที่ 09: คลื่นกล (Mechanical Waves)
+                </h1>
+                <p class="text-emerald-100 text-sm md:text-base max-w-3xl leading-relaxed">
+                    เจาะลึกครบถ้วนตามแบบเรียน 55 หน้า ตั้งแต่นิยามการถ่ายโอนพลังงาน การเคลื่อนที่ของอนุภาคตัวกลาง
+                    การจำแนกประเภทคลื่น องค์ประกอบคลื่น กราฟตำแหน่ง-เวลา ความสัมพันธ์ของเฟสและสมการคลื่นไซน์ สมบัติทั้ง
+                    4 ประการ (สะท้อน หักเห แทรกสอด เลี้ยวเบน) และคลื่นนิ่งในเส้นเชือก พร้อมสรุปสูตรและข้อสอบแนว มช.,
+                    Entrance และ สอวน.
+                </p>
+                <div class="flex flex-wrap gap-3 mt-6 text-xs text-emerald-200">
+                    <span class="bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
+                        <i class="fa-solid fa-layer-group text-emerald-400"></i> ครอบคลุม 5 หัวข้อย่อย (9.1 - 9.5)
+                    </span>
+                    <span class="bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
+                        <i class="fa-solid fa-bolt text-emerald-400"></i> ตะลุย 20+ ตัวอย่างโจทย์แนวคิดลัด
+                    </span>
+                    <span class="bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-300"></i>
+                        ดักจับจุดที่นักเรียนมักโดนหลอกบ่อย
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Jump Navigation Bar -->
+        <div
+            class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm mb-8 flex flex-wrap items-center justify-between gap-2 text-xs font-semibold">
+            <span class="text-slate-400 flex items-center gap-1.5 px-2">
+                <i class="fa-solid fa-compass text-emerald-600"></i> ข้ามไปยังหัวข้อ:
+            </span>
+            <div class="flex flex-wrap gap-1.5">
+                <a href="#sec-9-1"
+                    class="px-2.5 py-1.5 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-colors">9.1
+                    การถ่ายโอน & ชนิดคลื่น</a>
+                <a href="#sec-9-2"
+                    class="px-2.5 py-1.5 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-colors">9.2
+                    องค์ประกอบ & เฟส</a>
+                <a href="#sec-9-3"
+                    class="px-2.5 py-1.5 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-colors">9.3
+                    การซ้อนทับ</a>
+                <a href="#sec-9-4"
+                    class="px-2.5 py-1.5 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-colors">9.4
+                    สมบัติคลื่นทั้ง 4</a>
+                <a href="#sec-9-5"
+                    class="px-2.5 py-1.5 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-colors">9.5
+                    คลื่นนิ่ง</a>
+            </div>
+        </div>
+
+        <!-- Master Formula Cheat Sheet -->
+        <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md mb-8">
+            <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-bookmark text-emerald-600"></i> สรุปสูตรหลักประจำบทที่ 9 (Master Formula Cheat
+                Sheet)
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-mono">
+                <div class="p-4 bg-emerald-50/70 rounded-2xl border border-emerald-200 flex flex-col justify-between">
+                    <div>
+                        <span class="text-slate-500 font-sans block mb-1 font-semibold">1. อัตราเร็วคลื่น</span>
+                        <strong class="text-emerald-900 text-base block font-bold">v = s/t = f · λ = λ/T</strong>
+                    </div>
+                    <span class="text-[11px] text-slate-500 font-sans mt-2">s: ระยะทาง (m), t: เวลา (s), f: ความถี่
+                        (Hz), λ: ความยาวคลื่น (m)</span>
+                </div>
+                <div class="p-4 bg-emerald-50/70 rounded-2xl border border-emerald-200 flex flex-col justify-between">
+                    <div>
+                        <span class="text-slate-500 font-sans block mb-1 font-semibold">2. ผลต่างเฟส (ΔΦ)</span>
+                        <strong class="text-emerald-900 text-sm block font-bold">ΔΦ = (360°/λ) · Δx = 360° · f ·
+                            Δt</strong>
+                    </div>
+                    <span class="text-[11px] text-slate-500 font-sans mt-2">เรเดียน: ΔΦ = (2π/λ) · Δx = 2π · f · Δt =
+                        (2π/T) · Δt</span>
+                </div>
+                <div class="p-4 bg-emerald-50/70 rounded-2xl border border-emerald-200 flex flex-col justify-between">
+                    <div>
+                        <span class="text-slate-500 font-sans block mb-1 font-semibold">3. กฎของสเนลล์ (หักเห)</span>
+                        <strong class="text-emerald-900 text-sm block font-bold">sin θ₁ / sin θ₂ = v₁ / v₂ = λ₁ / λ₂ =
+                            n₂₁</strong>
+                    </div>
+                    <span class="text-[11px] text-slate-500 font-sans mt-2">f คงที่เสมอ! θ คือมุมระหว่างรังสีกับเส้นปกติ
+                        หรือ หน้าคลื่นกับรอยต่อ</span>
+                </div>
+                <div class="p-4 bg-emerald-50/70 rounded-2xl border border-emerald-200 flex flex-col justify-between">
+                    <div>
+                        <span class="text-slate-500 font-sans block mb-1 font-semibold">4. แทรกสอด & คลื่นนิ่ง</span>
+                        <strong class="text-emerald-900 text-xs block font-bold">Aₙ: |S₁P − S₂P| = nλ<br>Nₙ: |S₁P − S₂P|
+                            = (n − ½)λ</strong>
+                    </div>
+                    <span class="text-[11px] text-slate-500 font-sans mt-2">คลื่นนิ่ง: L = n · (λ/2), fₙ = n · v /
+                        (2L)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="space-y-10">
+
+            <!-- ========================================== -->
+            <!-- SECTION 9.1: การถ่ายโอนพลังงาน & ชนิดของคลื่น -->
+            <!-- ========================================== -->
+            <section id="sec-9-1"
+                class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6 scroll-mt-20">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">9.1</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">การถ่ายโอนพลังงานและชนิดของคลื่น
+                        </h2>
+                        <p class="text-xs text-slate-500">Wave Energy Transfer & Classifications of Waves</p>
+                    </div>
+                </div>
+
+                <div class="space-y-5 text-xs md:text-sm text-slate-700 leading-relaxed">
+                    <!-- Core Definition Box -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb"></i> นิยามการเคลื่อนที่แบบคลื่น (Wave Motion)
+                        </h3>
+                        <p class="text-slate-800 text-sm leading-relaxed">
+                            การเคลื่อนที่แบบคลื่น หมายถึง <strong>“การเคลื่อนที่ซึ่งพลังงานถูกถ่ายทอดไปข้างหน้าได้
+                                โดยที่อนุภาคของตัวกลางสั่นอยู่ที่เดิม”</strong>
+                        </p>
+                        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900">
+                            <strong>⚠️ กฎเหล็กที่ข้อสอบชอบถาม:</strong>
+                            ตัวกลาง<strong>ไม่ได้เคลื่อนที่ตามคลื่น</strong>ไปข้างหน้า แต่สั่นแกว่งไปมา (Oscillate)
+                            รอบจุดสมดุลเดิม สิ่งที่เคลื่อนที่ไปข้างหน้าคือ <strong>“พลังงาน”</strong> และ
+                            <strong>“รูปคลื่น”</strong> เท่านั้น!
+                        </div>
+                    </div>
+
+                    <!-- 3 Experiments in Textbook -->
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-flask text-emerald-600"></i> การทดลอง 3 รูปแบบในบทเรียน
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                                <strong class="text-slate-800 block text-xs font-bold text-emerald-800">1.
+                                    การสะบัดเส้นเชือก</strong>
+                                <p class="text-xs text-slate-600">
+                                    ใช้เชือกยาวประมาณ 5 เมตร ผูกด้ายสีสดไว้ตรงกลาง ปลายหนึ่งยึดฝาผนัง
+                                    เมื่อสะบัดปลายเชือกขึ้นลงตามแนวดิ่ง ส่วนโค้งของคลื่นจะพุ่งเข้าหาผนัง แต่
+                                    <strong>เส้นด้ายสีสดจะเพียงสั่นขึ้นลงอยู่ที่เดิม</strong> ไม่ได้วิ่งไปชนผนัง
+                                </p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                                <strong class="text-slate-800 block text-xs font-bold text-emerald-800">2.
+                                    การชนของลูกแก้ว</strong>
+                                <p class="text-xs text-slate-600">
+                                    วางลูกแก้ว 7 ลูกเรียงกันบนรางราบ ออกแรงเคาะลูกแรก ลูกแก้วจะส่งแรงชนต่อไปเป็นทอดๆ
+                                    จนลูกสุดท้ายกระดอนออก พลังงานถูกส่งไปข้างหน้า แต่
+                                    <strong>ลูกแก้วแต่ละลูกเพียงแค่สั่นไปมาอยู่ที่เดิม</strong>
+                                </p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                                <strong class="text-slate-800 block text-xs font-bold text-emerald-800">3.
+                                    วัตถุลอยบนผิวน้ำ</strong>
+                                <p class="text-xs text-slate-600">
+                                    เมื่อมีคลื่นน้ำแผ่ผ่านใบไม้หรือเศษไม้ที่ลอยอยู่บนผิวน้ำ เศษไม้จะ
+                                    <strong>กระเพื่อมขึ้นลงและกลับมาอยู่ที่ตำแหน่งเดิมเมื่อคลื่นผ่านไปแล้ว</strong>
+                                    ไม่ได้ลอยติดไปกับสันคลื่น
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Particle Motion vs Wave Motion Comparison -->
+                    <div
+                        class="p-5 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl border border-emerald-200 space-y-3">
+                        <h4 class="font-bold text-emerald-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-scale-balanced"></i> ตารางเปรียบเทียบ: การเคลื่อนที่ของอนุภาคตัวกลาง
+                            vs การเคลื่อนที่ของคลื่น
+                        </h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs bg-white rounded-xl overflow-hidden border border-emerald-200">
+                                <thead class="bg-emerald-100/70 font-bold text-slate-800 border-b border-emerald-200">
+                                    <tr>
+                                        <th class="p-2.5 text-left">คุณสมบัติ</th>
+                                        <th class="p-2.5 text-center">อนุภาคตัวกลาง (Particle)</th>
+                                        <th class="p-2.5 text-center">คลื่น (Wave)</th>
+                                        <th class="p-2.5 text-left">ข้อวิเคราะห์เชิงลึก</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-emerald-100 text-slate-700">
+                                    <tr>
+                                        <td class="p-2.5 font-medium">1. ลักษณะการเคลื่อนที่</td>
+                                        <td class="p-2.5 text-center">สั่นแบบฮาร์มอนิกอย่างง่าย (SHM) อยู่ที่เดิม</td>
+                                        <td class="p-2.5 text-center">แผ่ไปข้างหน้าด้วยความเร็วคงที่</td>
+                                        <td class="p-2.5">อนุภาคมีแอมพลิจูดจำกัด คลื่นเดินทางต่อเนื่อง</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2.5 font-medium">2. ความถี่ (f) และ คาบ (T)</td>
+                                        <td class="p-2.5 text-center font-bold text-emerald-700">เท่ากัน</td>
+                                        <td class="p-2.5 text-center font-bold text-emerald-700">เท่ากัน</td>
+                                        <td class="p-2.5">ช่วงเวลาที่อนุภาคสั่นครบ 1 รอบ = คาบคลื่น (T)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2.5 font-medium">3. แอมพลิจูด (A)</td>
+                                        <td class="p-2.5 text-center font-bold text-emerald-700">เท่ากัน</td>
+                                        <td class="p-2.5 text-center font-bold text-emerald-700">เท่ากัน</td>
+                                        <td class="p-2.5">การกระจัดสูงสุดของอนุภาค = แอมพลิจูดของคลื่น</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2.5 font-medium text-rose-700 font-bold">4. ความเร็ว (v)</td>
+                                        <td class="p-2.5 text-center text-rose-600 font-bold">ไม่คงที่!
+                                            เปลี่ยนแปลงตลอดเวลา</td>
+                                        <td class="p-2.5 text-center text-emerald-700 font-bold">คงที่ (v = f · λ)</td>
+                                        <td class="p-2.5 text-rose-800">
+                                            อนุภาคมีความเร็วสูงสุด v<sub>max</sub> = ωA ที่จุดสมดุล และมีความเร็ว v = 0
+                                            ที่สันคลื่นและท้องคลื่น! (ข้อสอบชอบถามมาก)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Waveform Shift Technique for Particle Motion -->
+                    <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-arrows-up-down text-emerald-600"></i> เทคนิคยอดเซียน:
+                            การหาทิศทางการเคลื่อนที่ของอนุภาคตัวกลาง ณ เวลาถัดไป
+                        </h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            ข้อสอบเข้ามหาวิทยาลัย (เช่น ข้อ 3, ข้อ 11, ข้อ 40 ใน PDF) มักจะให้รูปคลื่น ณ เวลา t = 0
+                            แล้วถามว่าจุด A, B, C บนเส้นเชือกกำลังเคลื่อนที่ขึ้นหรือลงเมื่อเวลาผ่านไปเล็กน้อย ให้ใช้วิธี
+                            <strong>“วาดเส้นประของรูปคลื่น ณ เวลาถัดไป
+                                โดยเลื่อนรูปคลื่นเดิมไปตามทิศทางการเคลื่อนที่ของคลื่นเล็กน้อย”</strong>
+                        </p>
+
+                        <!-- SVG Illustration for Particle Motion -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 flex flex-col items-center">
+                            <svg viewBox="0 0 500 130" class="w-full max-w-lg h-auto">
+                                <!-- Wave at t=0 (Solid blue) -->
+                                <path d="M 20 65 Q 80 15, 140 65 T 260 65 T 380 65 T 480 65" fill="none"
+                                    stroke="#2563eb" stroke-width="3" />
+                                <!-- Wave at t=dt (Dashed emerald, shifted right) -->
+                                <path d="M 35 65 Q 95 15, 155 65 T 275 65 T 395 65 T 495 65" fill="none"
+                                    stroke="#10b981" stroke-width="2" stroke-dasharray="6,4" />
+
+                                <!-- Direction of Wave Arrow -->
+                                <line x1="330" y1="20" x2="400" y2="20" stroke="#ef4444" stroke-width="2.5" />
+                                <polygon points="400,20 392,16 392,24" fill="#ef4444" />
+                                <text x="325" y="14" font-size="11" fill="#ef4444" font-weight="bold">ทิศทางคลื่น
+                                    (ขวา)</text>
+
+                                <!-- Point A (Behind crest: moving down) -->
+                                <circle cx="60" cy="40" r="4" fill="#dc2626" />
+                                <text x="50" y="35" font-size="12" font-weight="bold" fill="#dc2626">A</text>
+                                <line x1="60" y1="43" x2="60" y2="58" stroke="#dc2626" stroke-width="2" />
+                                <polygon points="57,56 60,62 63,56" fill="#dc2626" />
+
+                                <!-- Point B (In front of crest: moving up) -->
+                                <circle cx="100" cy="40" r="4" fill="#059669" />
+                                <text x="105" y="35" font-size="12" font-weight="bold" fill="#059669">B</text>
+                                <line x1="100" y1="40" x2="100" y2="25" stroke="#059669" stroke-width="2" />
+                                <polygon points="97,27 100,21 103,27" fill="#059669" />
+
+                                <!-- Baseline -->
+                                <line x1="10" y1="65" x2="490" y2="65" stroke="#cbd5e1" stroke-width="1"
+                                    stroke-dasharray="2,2" />
+                            </svg>
+                            <div class="flex justify-center gap-6 text-[11px] mt-2 font-mono">
+                                <span class="text-blue-700"><span
+                                        class="inline-block w-3 h-0.5 bg-blue-600 mr-1"></span>เส้นทึบ: รูปร่างคลื่น ณ
+                                    เวลา t = 0</span>
+                                <span class="text-emerald-700"><span
+                                        class="inline-block w-3 h-0.5 bg-emerald-600 mr-1"></span>เส้นประ:
+                                    รูปร่างคลื่นเมื่อเวลาผ่านไปเล็กน้อย</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-1">
+                            <div class="p-3 bg-white rounded-xl border border-emerald-200">
+                                <strong class="text-emerald-800 block mb-1">จุด B (อยู่ด้านหน้าของยอดคลื่น):</strong>
+                                เส้นประอยู่สูงกว่าเส้นทึบ → <strong>กำลังเคลื่อนที่สูงขึ้นกว่าเดิม</strong>
+                                เพื่อเตรียมตัวกลายเป็นยอดคลื่นถัดไป
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-rose-200">
+                                <strong class="text-rose-800 block mb-1">จุด A (อยู่ด้านหลังของยอดคลื่น):</strong>
+                                เส้นประอยู่ต่ำกว่าเส้นทึบ → <strong>กำลังเคลื่อนที่ต่ำลงกว่าเดิม</strong>
+                                เพื่อกลับคืนสู่แนวสมดุล
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Classifications of Waves -->
+                    <div class="space-y-4 pt-2">
+                        <h4 class="font-bold text-slate-900 text-base">การจำแนกประเภทของคลื่น (3 เกณฑ์สำคัญ)</h4>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Criterion 1 -->
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                                <span
+                                    class="text-[10px] font-bold bg-emerald-600 text-white px-2 py-0.5 rounded">เกณฑ์ที่
+                                    1</span>
+                                <h5 class="font-bold text-emerald-900 text-xs">แบ่งตามทิศการสั่นของตัวกลาง</h5>
+                                <ul class="text-xs text-slate-600 space-y-2">
+                                    <li>
+                                        <strong>1. คลื่นตามขวาง (Transverse Wave):</strong> อนุภาคสั่น <em>ตั้งฉาก
+                                            (90°)</em> กับทิศคลื่น เช่น คลื่นในเส้นเชือก, คลื่นผิวน้ำ,
+                                        คลื่นแสงและคลื่นแม่เหล็กไฟฟ้าทั้งหมด
+                                    </li>
+                                    <li>
+                                        <strong>2. คลื่นตามยาว (Longitudinal Wave):</strong> อนุภาคสั่น <em>ขนาน (0°,
+                                            180°)</em> กับทิศคลื่น เกิดเป็นส่วนอัด (Compression) และ ส่วนขยาย
+                                        (Rarefaction) เช่น คลื่นเสียง, คลื่นในลูกแก้ว, คลื่นในสปริงที่ถูกอัดดึง
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Criterion 2 -->
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                                <span
+                                    class="text-[10px] font-bold bg-emerald-600 text-white px-2 py-0.5 rounded">เกณฑ์ที่
+                                    2</span>
+                                <h5 class="font-bold text-emerald-900 text-xs">แบ่งตามการอาศัยตัวกลาง</h5>
+                                <ul class="text-xs text-slate-600 space-y-2">
+                                    <li>
+                                        <strong>1. คลื่นกล (Mechanical Wave):</strong> <em>ต้องอาศัยตัวกลาง</em>
+                                        ในการส่งผ่านพลังงาน (สุญญากาศคลื่นผ่านไม่ได้) เช่น คลื่นเสียง, คลื่นน้ำ,
+                                        คลื่นเชือก, คลื่นสปริง
+                                    </li>
+                                    <li>
+                                        <strong>2. คลื่นแม่เหล็กไฟฟ้า (Electromagnetic Wave):</strong>
+                                        <em>ไม่ต้องอาศัยตัวกลาง</em> วิ่งในสุญญากาศได้ด้วยความเร็ว c ≈ 3 × 10⁸ m/s
+                                        ได้แก่ รังสีแกมมา, รังสีเอกซ์, UV, แสง, อินฟราเรด, ไมโครเวฟ, วิทยุ,
+                                        ไฟฟ้ากระแสสลับ
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Criterion 3 -->
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                                <span
+                                    class="text-[10px] font-bold bg-emerald-600 text-white px-2 py-0.5 rounded">เกณฑ์ที่
+                                    3</span>
+                                <h5 class="font-bold text-emerald-900 text-xs">แบ่งตามความต่อเนื่องแหล่งกำเนิด</h5>
+                                <ul class="text-xs text-slate-600 space-y-2">
+                                    <li>
+                                        <strong>1. คลื่นดล (Pulse Wave):</strong> เกิดจากการรบกวนสั้นๆ 1-2 ครั้ง
+                                        ได้ลูกคลื่นเพียง 1 หรือ 2 ลูก เช่น สะบัดเชือกครั้งเดียว, หินตกกระทบน้ำ
+                                    </li>
+                                    <li>
+                                        <strong>2. คลื่นต่อเนื่อง (Periodic Wave):</strong>
+                                        แหล่งกำเนิดสั่นอย่างสม่ำเสมอเป็นจังหวะต่อเนื่อง เช่น มอเตอร์หมุนในถาดคลื่น,
+                                        ส้อมเสียงสั่น
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECTION 9.2: องค์ประกอบ, อัตราเร็ว และเฟส -->
+            <!-- ========================================== -->
+            <section id="sec-9-2"
+                class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6 scroll-mt-20">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">9.2</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">คลื่นผิวน้ำ องค์ประกอบ กราฟ
+                            และเฟสของคลื่น</h2>
+                        <p class="text-xs text-slate-500">Wave Anatomy, Wavefronts, Graphs Analysis, Phase Angle & Sine
+                            Wave Equation</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6 text-xs md:text-sm text-slate-700 leading-relaxed">
+                    <!-- Anatomy Diagram SVG -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-shapes text-emerald-600"></i> แผนภาพองค์ประกอบพื้นฐานของคลื่นตามขวาง
+                        </h4>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 flex justify-center">
+                            <svg viewBox="0 0 600 160" class="w-full max-w-xl h-auto">
+                                <!-- Baseline (Equilibrium) -->
+                                <line x1="20" y1="80" x2="580" y2="80" stroke="#94a3b8" stroke-width="1.5"
+                                    stroke-dasharray="4,4" />
+                                <text x="520" y="75" font-size="10" fill="#64748b">แนวสมดุล</text>
+
+                                <!-- Sine Wave Path -->
+                                <path
+                                    d="M 40 80 C 70 20, 110 20, 140 80 C 170 140, 210 140, 240 80 C 270 20, 310 20, 340 80 C 370 140, 410 140, 440 80 C 470 20, 510 20, 540 80"
+                                    fill="none" stroke="#059669" stroke-width="3" />
+
+                                <!-- Crest (สันคลื่น) -->
+                                <circle cx="90" cy="35" r="4" fill="#047857" />
+                                <text x="65" y="24" font-size="11" font-weight="bold" fill="#047857">สันคลื่น
+                                    (+A)</text>
+                                <circle cx="290" cy="35" r="4" fill="#047857" />
+                                <text x="265" y="24" font-size="11" font-weight="bold" fill="#047857">สันคลื่น
+                                    (+A)</text>
+
+                                <!-- Trough (ท้องคลื่น) -->
+                                <circle cx="190" cy="125" r="4" fill="#b91c1c" />
+                                <text x="165" y="145" font-size="11" font-weight="bold" fill="#b91c1c">ท้องคลื่น
+                                    (−A)</text>
+
+                                <!-- Amplitude Arrow -->
+                                <line x1="90" y1="80" x2="90" y2="38" stroke="#0284c7" stroke-width="2" />
+                                <polygon points="87,42 90,36 93,42" fill="#0284c7" />
+                                <text x="96" y="62" font-size="11" font-weight="bold" fill="#0284c7">A</text>
+
+                                <!-- Wavelength Arrow (Crest to Crest) -->
+                                <line x1="90" y1="35" x2="290" y2="35" stroke="#7c3aed" stroke-width="1.5"
+                                    stroke-dasharray="3,3" />
+                                <line x1="90" y1="30" x2="90" y2="40" stroke="#7c3aed" stroke-width="1.5" />
+                                <line x1="290" y1="30" x2="290" y2="40" stroke="#7c3aed" stroke-width="1.5" />
+                                <text x="175" y="28" font-size="12" font-weight="bold" fill="#7c3aed">λ
+                                    (ความยาวคลื่น)</text>
+
+                                <!-- Half Wavelength (Crest to Trough) -->
+                                <line x1="290" y1="80" x2="390" y2="80" stroke="#f59e0b" stroke-width="2" />
+                                <text x="325" y="98" font-size="10" font-weight="bold" fill="#d97706">λ / 2</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- 8 Definitions Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-emerald-700 font-bold block mb-1">1. สันคลื่น (Crest)</span>
+                            <p class="text-slate-600 text-[11px]">จุดสูงสุดที่คลื่นกระเพื่อมขึ้นไปได้ การกระจัด +A
+                                (มุมเฟส 90°)</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-rose-700 font-bold block mb-1">2. ท้องคลื่น (Trough)</span>
+                            <p class="text-slate-600 text-[11px]">จุดต่ำสุดที่คลื่นกระเพื่อมลงไปได้ การกระจัด −A (มุมเฟส
+                                270°)</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-sky-700 font-bold block mb-1">3. แอมพลิจูด (A)</span>
+                            <p class="text-slate-600 text-[11px]">ขนาดการกระจัดสูงสุดจากแนวสมดุล บอกค่าพลังงานของคลื่น
+                                (พลังงาน E แปลผันตรงกับ A²)</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-indigo-700 font-bold block mb-1">4. ความยาวคลื่น (λ)</span>
+                            <p class="text-slate-600 text-[11px]">ระยะ 1 ลูกคลื่น หรือระยะระหว่างสันถึงสัน
+                                หรือท้องถึงท้องที่ถัดกัน (เมตร)</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-slate-700 font-bold block mb-1">5. คาบ (Period : T)</span>
+                            <p class="text-slate-600 text-[11px]">เวลาที่คลื่นใช้เคลื่อนที่ครบ 1 ลูกคลื่น หน่วย: วินาที
+                                (s)</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-slate-700 font-bold block mb-1">6. ความถี่ (Frequency : f)</span>
+                            <p class="text-slate-600 text-[11px]">จำนวนลูกคลื่นใน 1 วินาที f = 1/T หน่วย: เฮิรตซ์ (Hz)
+                                หรือ รอบ/วินาที</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-slate-700 font-bold block mb-1">7. อัตราเร็วคลื่น (v)</span>
+                            <p class="text-slate-600 text-[11px]">ระยะทางคลื่นเคลื่อนที่ใน 1 วินาที v = s/t = f · λ =
+                                λ/T (m/s)</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <span class="text-slate-700 font-bold block mb-1">8. หน้าคลื่น & รังสี</span>
+                            <p class="text-slate-600 text-[11px]">แนวของสันคลื่น โดย
+                                <strong>รังสีคลื่นจะตั้งฉากกับหน้าคลื่นเสมอ</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- Pitfall Box: Counting Crests -->
+                    <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-950 space-y-1.5">
+                        <strong class="flex items-center gap-1.5 text-amber-900 font-bold text-sm">
+                            <i class="fa-solid fa-triangle-exclamation"></i> กับดักยอดฮิต:
+                            การนับจำนวนลูกคลื่นจากสันคลื่น (ข้อสอบ มช. & Entrance ออกประจำ)
+                        </strong>
+                        <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <li><strong>“ระยะห่างระหว่างสันคลื่นที่อยู่ถัดกัน”</strong> = 1λ</li>
+                            <li><strong>“ระยะห่างระหว่างสันคลื่นและท้องคลื่นที่อยู่ติดกัน”</strong> = λ / 2</li>
+                            <li><strong>“วัดระยะจากสันคลื่นที่ 1 ไปถึงสันคลื่นที่ N”</strong> จะมีระยะห่างเท่ากับ
+                                <strong>(N − 1)λ</strong> ไม่ใช่ Nλ! เช่น สันคลื่น 5 สันที่อยู่ถัดกัน = 4λ (ข้อ 16 ใน
+                                PDF)</li>
+                            <li><strong>การแปลงความถี่:</strong> ถ้าโจทย์บอก “สั่น 600 รอบ ใน 1 นาที” → f = 600 / 60 =
+                                10 Hz</li>
+                        </ul>
+                    </div>
+
+                    <!-- Wave Graphs Analysis (4 Types) -->
+                    <div
+                        class="p-5 bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 rounded-2xl border border-emerald-200 space-y-3">
+                        <h4 class="font-bold text-emerald-950 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-emerald-600"></i> การวิเคราะห์กราฟของคลื่น 4 รูปแบบ
+                            (Wave Graph Reading Masterclass)
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                            <div class="p-4 bg-white rounded-xl border border-emerald-200 space-y-2">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">แบบที่
+                                    1</span>
+                                <strong class="text-slate-900 block font-bold">กราฟการกระจัดกับตำแหน่ง (y − x):</strong>
+                                <p class="text-slate-600 text-xs">เป็นภาพถ่ายรูปร่างคลื่นจริง ณ ขณะเวลาใดเวลาหนึ่ง (Wave
+                                    Snapshot)</p>
+                                <div class="p-2 bg-emerald-50 rounded font-mono font-bold text-emerald-800 text-center">
+                                    ระยะ 1 รอบคลื่น = ความยาวคลื่น (λ)
+                                </div>
+                            </div>
+                            <div class="p-4 bg-white rounded-xl border border-emerald-200 space-y-2">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">แบบที่
+                                    2</span>
+                                <strong class="text-slate-900 block font-bold">กราฟการกระจัดกับเวลา (y − t):</strong>
+                                <p class="text-slate-600 text-xs">บันทึกการสั่นขึ้นลงของอนุภาคเดี่ยว ณ
+                                    ตำแหน่งหนึ่งตลอดเวลา</p>
+                                <div class="p-2 bg-emerald-50 rounded font-mono font-bold text-emerald-800 text-center">
+                                    ช่วงเวลา 1 รอบ = คาบเวลา (T) → หา f = 1/T
+                                </div>
+                            </div>
+                            <div class="p-4 bg-white rounded-xl border border-emerald-200 space-y-2">
+                                <span class="bg-teal-100 text-teal-800 font-bold px-2 py-0.5 rounded">แบบที่ 3</span>
+                                <strong class="text-slate-900 block font-bold">กราฟ 2 เวลา (t = 0 เส้นทึบ, t = Δt
+                                    เส้นประ):</strong>
+                                <p class="text-slate-600 text-xs">ดูว่ายอดคลื่นขยับไปข้างหน้าได้ระยะทาง Δx เท่าใดในเวลา
+                                    Δt</p>
+                                <div class="p-2 bg-teal-50 rounded font-mono font-bold text-teal-800 text-center">
+                                    อัตราเร็วคลื่น v = Δx / Δt
+                                </div>
+                            </div>
+                            <div class="p-4 bg-white rounded-xl border border-emerald-200 space-y-2">
+                                <span class="bg-teal-100 text-teal-800 font-bold px-2 py-0.5 rounded">แบบที่ 4</span>
+                                <strong class="text-slate-900 block font-bold">กราฟการแผ่ของคลื่นวงกลม (รัศมี r กับเวลา
+                                    t):</strong>
+                                <p class="text-slate-600 text-xs">ความชัน (Slope) ของกราฟ r − t คืออัตราเร็วคลื่น v = Δr
+                                    / Δt</p>
+                                <div class="p-2 bg-teal-50 rounded font-mono font-bold text-teal-800 text-center">
+                                    v = Slope = Δr / Δt &nbsp;→&nbsp; λ = v / f
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase of Waves and Phase Difference -->
+                    <div class="space-y-4 pt-2">
+                        <h4 class="font-bold text-slate-900 text-base">เฟสของคลื่น (Phase, Φ) และการคำนวณผลต่างเฟส</h4>
+                        <p class="text-xs text-slate-600">
+                            เฟสเป็นการบอกตำแหน่งและสถานะการเคลื่อนที่ของอนุภาคบนคลื่นในรูปของมุม (องศาหรือเรเดียน) โดย 1
+                            ลูกคลื่นสมบูรณ์จะเทียบเท่ากับมุม 360° หรือ 2π เรเดียน
+                        </p>
+
+                        <!-- Phase Table -->
+                        <div class="overflow-x-auto">
+                            <table
+                                class="w-full text-xs bg-white rounded-xl overflow-hidden border border-slate-200 text-center">
+                                <thead class="bg-slate-100 font-bold text-slate-700 border-b border-slate-200">
+                                    <tr>
+                                        <th class="p-2.5">ตำแหน่งบนคลื่น</th>
+                                        <th class="p-2.5">การกระจัด (y)</th>
+                                        <th class="p-2.5">ทิศทางการเคลื่อนที่</th>
+                                        <th class="p-2.5">มุมเฟส (องศา)</th>
+                                        <th class="p-2.5">มุมเฟส (เรเดียน)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 text-slate-600">
+                                    <tr>
+                                        <td class="p-2 font-medium text-slate-800">จุดสมดุล (เริ่มขึ้น)</td>
+                                        <td class="p-2 font-mono">0</td>
+                                        <td class="p-2 text-emerald-600 font-bold">กำลังเคลื่อนที่ขึ้น</td>
+                                        <td class="p-2 font-mono font-bold text-slate-800">0° / 360° / 720°</td>
+                                        <td class="p-2 font-mono">0 / 2π / 4π</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-medium text-slate-800">สันคลื่น (Crest)</td>
+                                        <td class="p-2 font-mono font-bold text-emerald-700">+A</td>
+                                        <td class="p-2 text-slate-400">หยุดชั่วขณะ (v = 0)</td>
+                                        <td class="p-2 font-mono font-bold text-slate-800">90° / 450° / 810°</td>
+                                        <td class="p-2 font-mono">π/2 / 5π/2 / 9π/2</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-medium text-slate-800">จุดสมดุล (เริ่มลง)</td>
+                                        <td class="p-2 font-mono">0</td>
+                                        <td class="p-2 text-rose-600 font-bold">กำลังเคลื่อนที่ลง</td>
+                                        <td class="p-2 font-mono font-bold text-slate-800">180° / 540° / 900°</td>
+                                        <td class="p-2 font-mono">π / 3π / 5π</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-medium text-slate-800">ท้องคลื่น (Trough)</td>
+                                        <td class="p-2 font-mono font-bold text-rose-700">−A</td>
+                                        <td class="p-2 text-slate-400">หยุดชั่วขณะ (v = 0)</td>
+                                        <td class="p-2 font-mono font-bold text-slate-800">270° / 630° / 990°</td>
+                                        <td class="p-2 font-mono">3π/2 / 7π/2 / 11π/2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 4 Phase Difference Formulas -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono text-center">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="text-slate-500 font-sans block mb-1">เทียบระยะห่าง (องศา)</span>
+                                <strong class="text-emerald-800 text-sm block">ΔΦ = (360°/λ) · Δx</strong>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="text-slate-500 font-sans block mb-1">เทียบระยะห่าง (เรเดียน)</span>
+                                <strong class="text-emerald-800 text-sm block">ΔΦ = (2π/λ) · Δx</strong>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="text-slate-500 font-sans block mb-1">เทียบช่วงเวลา (องศา)</span>
+                                <strong class="text-emerald-800 text-sm block">ΔΦ = 360° · f · Δt</strong>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="text-slate-500 font-sans block mb-1">เทียบช่วงเวลา (เรเดียน)</span>
+                                <strong class="text-emerald-800 text-sm block">ΔΦ = 2π · f · Δt</strong>
+                            </div>
+                        </div>
+
+                        <!-- In-Phase vs Opposite Phase -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-1">
+                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 space-y-2">
+                                <strong class="text-emerald-950 font-bold text-sm block">1. เฟสตรงกัน
+                                    (In-Phase):</strong>
+                                <p class="text-slate-700">มีการกระจัดเท่ากันและเคลื่อนที่ไปในทิศทางเดียวกันพร้อมกัน
+                                    (เช่น สันคลื่นกับสันคลื่น)</p>
+                                <div
+                                    class="p-2.5 bg-white rounded-xl font-mono text-center font-bold text-emerald-800 border border-emerald-100">
+                                    ระยะห่าง Δx = nλ &nbsp;|&nbsp; ΔΦ = n(360°) = 2nπ &nbsp;(n = 1, 2, 3...)
+                                </div>
+                            </div>
+                            <div class="p-4 bg-rose-50 rounded-2xl border border-rose-200 space-y-2">
+                                <strong class="text-rose-950 font-bold text-sm block">2. เฟสตรงข้ามกัน (Opposite
+                                    Phase):</strong>
+                                <p class="text-slate-700">มีการกระจัดขนาดเท่ากันแต่เครื่องหมายตรงข้าม
+                                    และทิศการเคลื่อนที่ตรงข้ามกัน (เช่น สันคลื่นกับท้องคลื่น)</p>
+                                <div
+                                    class="p-2.5 bg-white rounded-xl font-mono text-center font-bold text-rose-800 border border-rose-100">
+                                    ระยะห่าง Δx = (n − ½)λ &nbsp;|&nbsp; ΔΦ = (2n−1)(180°) = (2n−1)π
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sine Wave Equation -->
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs">
+                            <strong class="text-slate-900 block font-bold">สมการคลื่นรูปไซน์ (Sine Wave
+                                Equation):</strong>
+                            <div
+                                class="font-mono text-sm font-bold text-emerald-800 bg-white p-2.5 rounded-xl border border-slate-200 text-center">
+                                y(t) = A · sin(ωt) = A · sin(2πft) = A · sin((2π/T)t)
+                            </div>
+                            <p class="text-slate-600">
+                                เมื่อ y คือการกระจัดจากแนวสมดุล, A คือแอมพลิจูด, ω = 2πf คืออัตราเร็วเชิงมุม (rad/s)<br>
+                                💡 <strong>ตัวอย่าง (ข้อ 29 ใน PDF):</strong> คลื่นน้ำ f = 2 Hz, A = 10 cm ณ เวลา t = ⅜
+                                วินาที<br>
+                                y = 10 · sin(2π · 2 · ⅜) = 10 · sin(3π/2) = 10(−1) = <strong>−10 เซนติเมตร</strong>
+                                (หมายถึง อยู่ลึกลงไป 10 cm ที่ท้องคลื่นพอดี)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECTION 9.3: การซ้อนทับของคลื่น -->
+            <!-- ========================================== -->
+            <section id="sec-9-3"
+                class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6 scroll-mt-20">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">9.3</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">หลักการซ้อนทับของคลื่น (Principle
+                            of Superposition)</h2>
+                        <p class="text-xs text-slate-500">Constructive & Destructive Interference of Pulses</p>
+                    </div>
+                </div>
+
+                <div
+                    class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-4 text-xs md:text-sm text-slate-700 leading-relaxed">
+                    <p class="text-slate-800">
+                        <strong>หลักการซ้อนทับกล่าวว่า:</strong>
+                        “เมื่อคลื่นตั้งแต่สองคลื่นขึ้นไปเคลื่อนที่มาพบกันในตัวกลางเดียวกัน การกระจัดรวมของตัวกลาง ณ
+                        จุดใดๆ จะเท่ากับผลบวกแบบเวกเตอร์ (พีชคณิต) ของการกระจัดของแต่ละคลื่นที่มาพบกัน และ
+                        <strong>หลังจากคลื่นเคลื่อนที่ผ่านพ้นกันไปแล้ว แต่ละคลื่นจะยังคงมีรูปร่าง แอมพลิจูด ความเร็ว
+                            และทิศทางการเคลื่อนที่เหมือนเดิมทุกประการ</strong>”
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+                        <!-- Case 1 -->
+                        <div class="p-4 bg-white rounded-2xl border border-emerald-200 space-y-2">
+                            <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-[10px]">กรณี
+                                ก.</span>
+                            <strong class="text-emerald-900 block font-bold">สันคลื่นพบสันคลื่น (เสริมกัน)</strong>
+                            <p class="text-slate-600">
+                                คลื่นกระเพื่อมขึ้นทั้งคู่ มารวมกันทำให้แอมพลิจูดรวมสูงขึ้นเป็น y = A₁ + A₂
+                                เมื่อผ่านพ้นกันจะแยกย้ายด้วยขนาดเดิม
+                            </p>
+                        </div>
+                        <!-- Case 2 -->
+                        <div class="p-4 bg-white rounded-2xl border border-sky-200 space-y-2">
+                            <span class="bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded text-[10px]">กรณี
+                                ข.</span>
+                            <strong class="text-sky-900 block font-bold">ท้องคลื่นพบท้องคลื่น (เสริมกัน)</strong>
+                            <p class="text-slate-600">
+                                คลื่นกระเพื่อมลงทั้งคู่ มารวมกันทำให้แอมพลิจูดรวมลึกลงเป็น y = −(A₁ + A₂)
+                                เมื่อผ่านพ้นกันจะเคลื่อนที่ต่อไปในทิศเดิม
+                            </p>
+                        </div>
+                        <!-- Case 3 -->
+                        <div class="p-4 bg-white rounded-2xl border border-rose-200 space-y-2">
+                            <span class="bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded text-[10px]">กรณี
+                                ค.</span>
+                            <strong class="text-rose-900 block font-bold">สันคลื่นพบท้องคลื่น (หักล้างกัน)</strong>
+                            <p class="text-slate-600">
+                                คลื่นหนึ่งขึ้น อีกคลื่นหนึ่งลง การกระจัดหักล้างกัน y = A₁ − A₂
+                                ถ้าแอมพลิจูดเท่ากันจะราบเรียบชั่วขณะ แล้วแยกจากกันตามเดิม
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECTION 9.4: สมบัติของคลื่นทั้ง 4 ประการ -->
+            <!-- ========================================== -->
+            <section id="sec-9-4"
+                class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-8 scroll-mt-20">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">9.4</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">สมบัติของคลื่น 4 ประการ (Wave
+                            Properties)</h2>
+                        <p class="text-xs text-slate-500">Reflection, Refraction, Interference & Diffraction</p>
+                    </div>
+                </div>
+
+                <!-- Deep Observation Alert -->
+                <div
+                    class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs md:text-sm text-emerald-950 font-medium">
+                    🔍 <strong>ข้อสังเกตเชิงลึกระดับข้อสอบ:</strong> การสะท้อนและการหักเห ทั้ง “คลื่น” และ “อนุภาค”
+                    ต่างก็แสดงสมบัติสองข้อนี้ได้ (เช่น ลูกบอลกระดอนกำแพง = สะท้อน) แต่
+                    <strong>“การแทรกสอดและการเลี้ยวเบน” จัดเป็นคุณสมบัติเฉพาะตัวของคลื่นเท่านั้น</strong>
+                    อนุภาคคลาสสิกไม่สามารถแสดงการแทรกสอดและเลี้ยวเบนได้!
+                </div>
+
+                <!-- 9.4.1 Reflection -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-emerald-800 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-reply"></i> 9.4.1 การสะท้อนของคลื่น (Reflection)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        เมื่อคลื่นเคลื่อนที่ไปกระทบสิ่งกีดขวางหรือรอยต่อของตัวกลาง
+                        คลื่นจะสะท้อนกลับออกมาในตัวกลางเดิมภายใต้ <strong>กฎการสะท้อน 2 ข้อ</strong>:
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                            <strong class="text-slate-800 block font-bold">กฎการสะท้อนและปริมาณคลื่น:</strong>
+                            <ul class="text-xs text-slate-600 space-y-2 list-disc pl-5">
+                                <li><strong>ข้อ 1:</strong> มุมตกกระทบ (θ₁) เท่ากับ มุมสะท้อน (θ₂) เสมอ (θ₁ = θ₂)</li>
+                                <li><strong>ข้อ 2:</strong> รังสีตกกระทบ, เส้นปกติ (Normal line), และรังสีสะท้อน
+                                    ต้องอยู่ในระนาบเดียวกัน</li>
+                                <li><strong>สิ่งที่คงเดิม:</strong> อัตราเร็ว (v), ความถี่ (f), และความยาวคลื่น (λ)
+                                    เท่าเดิมทุกประการ เพราะยังอยู่ในตัวกลางเดิม</li>
+                                <li><strong>สิ่งที่อาจเปลี่ยน:</strong> แอมพลิจูด (A)
+                                    อาจลดลงเล็กน้อยเนื่องจากมีการสูญเสียพลังงานให้แก่สิ่งกีดขวาง</li>
+                            </ul>
+                        </div>
+
+                        <!-- Fixed vs Free End in String -->
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                            <strong class="text-slate-800 block font-bold">การสะท้อนของคลื่นในเส้นเชือก
+                                (ข้อสอบชอบออกมาก!):</strong>
+                            <div class="space-y-2.5 text-xs">
+                                <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                                    <strong class="text-rose-700 flex items-center gap-1.5"><i
+                                            class="fa-solid fa-lock"></i> 1. ปลายเชือกตรึงแน่น (จุดสะท้อนคงที่ / Fixed
+                                        End):</strong>
+                                    <p class="text-slate-600">ผนังออกแรงปฏิกิริยาดึงกลับ ทำให้คลื่นสะท้อน
+                                        <strong>กลับหัว เฟสเปลี่ยนไป 180°</strong> (ส่งสันคลื่นเข้าไป
+                                        สะท้อนกลับเป็นท้องคลื่นคว่ำลง)</p>
+                                </div>
+                                <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                                    <strong class="text-emerald-700 flex items-center gap-1.5"><i
+                                            class="fa-solid fa-lock-open"></i> 2. ปลายเชือกอิสระ / ผูกหลวม (Free
+                                        End):</strong>
+                                    <p class="text-slate-600">ปลายเชือกขยับขึ้นลงได้อิสระ คลื่นสะท้อน <strong>ไม่กลับหัว
+                                            เฟสคงเดิม (เปลี่ยน 0°)</strong> (ส่งสันคลื่นเข้าไป
+                                        สะท้อนกลับเป็นสันคลื่นหงายขึ้นเหมือนเดิม)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9.4.2 Refraction -->
+                <div class="space-y-4 pt-4 border-t border-slate-100">
+                    <h3 class="font-bold text-emerald-800 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-arrows-split-up-and-left"></i> 9.4.2 การหักเหของคลื่น (Refraction)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        การหักเหเกิดขึ้นเมื่อคลื่นเคลื่อนที่ข้ามรอยต่อจากตัวกลางหนึ่งไปยังอีกตัวกลางหนึ่งที่มีสมบัติทางกายภาพต่างกัน
+                        (เช่น คลื่นน้ำข้ามจากน้ำลึกไปน้ำตื้น)
+                    </p>
+
+                    <!-- Key Truth of Refraction -->
+                    <div
+                        class="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-xs md:text-sm text-amber-950 font-medium space-y-1">
+                        <div>⚠️ <strong>หัวใจสำคัญของการหักเห:</strong></div>
+                        <p class="text-slate-700 text-xs">
+                            1. <strong>สาเหตุของการหักเห:</strong> เกิดจาก
+                            <strong>“อัตราเร็วของคลื่นในตัวกลางทั้งสองไม่เท่ากัน”</strong> (v₁ ≠ v₂)<br>
+                            2. <strong>ความถี่ (f) และคาบ (T) คงเดิมเสมอ!</strong> เพราะขึ้นอยู่กับแหล่งกำเนิดเดิม<br>
+                            3. <strong>อัตราเร็ว (v), ความยาวคลื่น (λ), และแอมพลิจูด (A) จะเปลี่ยนไป</strong>
+                            ตามตัวกลางใหม่
+                        </p>
+                    </div>
+
+                    <!-- Snell's Law -->
+                    <div
+                        class="p-5 bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 rounded-2xl border border-emerald-200 text-center space-y-2">
+                        <span class="text-xs font-bold text-emerald-800">กฎของสเนลล์สำหรับการหักเหของคลื่น (Snell's
+                            Law)</span>
+                        <div class="text-xl md:text-2xl font-bold font-mono text-emerald-900 my-1">
+                            sin θ₁ / sin θ₂ = v₁ / v₂ = λ₁ / λ₂ = n₂₁
+                        </div>
+                        <p class="text-xs text-slate-600 font-mono">
+                            θ คือ มุมระหว่างรังสีคลื่นกับเส้นปกติ <u>หรือ</u> มุมระหว่างแนวหน้าคลื่นกับแนวรอยต่อตัวกลาง
+                        </p>
+                    </div>
+
+                    <!-- Comprehensive Deep vs Shallow Water Table -->
+                    <div class="overflow-x-auto">
+                        <table
+                            class="w-full text-xs md:text-sm border-collapse bg-white rounded-2xl overflow-hidden border border-slate-200">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                                    <th class="p-3 text-left">คุณสมบัติเปรียบเทียบ</th>
+                                    <th class="p-3 text-center bg-blue-50/50 text-blue-900">บริเวณน้ำลึก (Deep Water)
+                                    </th>
+                                    <th class="p-3 text-center bg-amber-50/50 text-amber-900">บริเวณน้ำตื้น (Shallow
+                                        Water)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700">
+                                <tr>
+                                    <td class="p-2.5 font-medium">1. อัตราเร็วคลื่น (v)</td>
+                                    <td class="p-2.5 text-center font-bold text-blue-600">มาก (v<sub>ลึก</sub> &gt;
+                                        v<sub>ตื้น</sub>)</td>
+                                    <td class="p-2.5 text-center font-bold text-amber-600">น้อย</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-medium">2. ความยาวคลื่น (λ)</td>
+                                    <td class="p-2.5 text-center font-bold text-blue-600">ยาว (λ<sub>ลึก</sub> &gt;
+                                        λ<sub>ตื้น</sub>)</td>
+                                    <td class="p-2.5 text-center font-bold text-amber-600">สั้น (หน้าคลื่นชิดกัน)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-medium">3. แอมพลิจูด (A)</td>
+                                    <td class="p-2.5 text-center font-bold text-blue-600">มากกว่า</td>
+                                    <td class="p-2.5 text-center font-bold text-amber-600">น้อยกว่า</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-medium">4. มุมเทียบเส้นปกติ (θ)</td>
+                                    <td class="p-2.5 text-center font-bold text-blue-600">มุมโตกว่า (θ<sub>ลึก</sub>
+                                        &gt; θ<sub>ตื้น</sub>)</td>
+                                    <td class="p-2.5 text-center font-bold text-amber-600">มุมแคบกว่า</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-medium">5. ความถี่คลื่น (f)</td>
+                                    <td class="p-2.5 text-center font-bold text-emerald-600">เท่ากันคงเดิม</td>
+                                    <td class="p-2.5 text-center font-bold text-emerald-600">เท่ากันคงเดิม</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-medium">6. การเบี่ยงเบนของแนวรังสีคลื่น</td>
+                                    <td class="p-2.5 text-center" colspan="2">
+                                        • เคลื่อนจาก <strong>น้ำลึก → น้ำตื้น:</strong> รังสีคลื่นจะ
+                                        <strong>หักเหเบนเข้าหาเส้นปกติ</strong> (θ₂ &lt; θ₁)<br>
+                                        • เคลื่อนจาก <strong>น้ำตื้น → น้ำลึก:</strong> รังสีคลื่นจะ
+                                        <strong>หักเหเบนออกจากเส้นปกติ</strong> (θ₂ &gt; θ₁)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Critical Angle & Total Internal Reflection -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs space-y-2">
+                        <strong class="text-slate-900 block font-bold">มุมวิกฤตและการสะท้อนกลับหมดของคลื่นน้ำ (Critical
+                            Angle):</strong>
+                        <p class="text-slate-600">
+                            เกิดขึ้นเมื่อคลื่นเคลื่อนที่จาก <strong>ตัวกลางความเร็วน้อย ไป ตัวกลางความเร็วมาก</strong>
+                            (เช่น <strong>น้ำตื้น → น้ำลึก</strong>) โดยมุมตกกระทบที่ทำให้มุมหักเหในน้ำลึกเป็น 90° พอดี
+                            เรียกว่า <strong>มุมวิกฤต (θ<sub>c</sub>)</strong>
+                        </p>
+                        <div
+                            class="p-2.5 bg-white rounded-xl font-mono font-bold text-center text-emerald-800 border border-slate-200">
+                            sin θ<sub>c</sub> = v<sub>ตื้น</sub> / v<sub>ลึก</sub> = λ<sub>ตื้น</sub> / λ<sub>ลึก</sub>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9.4.3 Interference -->
+                <div class="space-y-4 pt-4 border-t border-slate-100">
+                    <h3 class="font-bold text-emerald-800 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-code-merge"></i> 9.4.3 การแทรกสอดของคลื่น (Interference)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        การแทรกสอดเกิดขึ้นเมื่อคลื่น 2 ขบวนที่สร้างจาก <strong>แหล่งกำเนิดอาพันธ์ (Coherent
+                            Sources)</strong> ซึ่งมีความถี่เท่ากันและมีเฟสตรงกัน (หรือมีผลต่างเฟสคงที่ตลอดเวลา)
+                        เคลื่อนที่มาพบกันในตัวกลางเดียวกัน
+                    </p>
+
+                    <!-- Antinode & Node Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Antinode -->
+                        <div class="p-5 bg-emerald-50/80 rounded-2xl border border-emerald-200 space-y-3">
+                            <div class="font-bold text-emerald-950 text-sm flex items-center justify-between">
+                                <span>แนวปฏิบัพ (Antinode : Aₙ)</span>
+                                <span
+                                    class="text-xs bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded font-bold font-mono">แทรกสอดแบบเสริม</span>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                สันชนสัน หรือ ท้องชนท้อง ผิวน้ำกระเพื่อมขึ้นลงอย่างแรงที่สุด (แอมพลิจูดรวม = 2A):
+                            </p>
+                            <div
+                                class="p-3 bg-white rounded-xl font-mono text-center font-bold text-emerald-800 text-sm border border-emerald-100 space-y-1">
+                                <div>|S₁P − S₂P| = nλ</div>
+                                <div>d · sin θ = nλ</div>
+                            </div>
+                            <ul class="text-[11px] text-slate-600 space-y-1 pl-4 list-disc">
+                                <li>n = 0: แนวปฏิบัพกลาง (A₀) เป็นเส้นตรงอยู่กึ่งกลางระหว่าง S₁ และ S₂</li>
+                                <li>n = 1, 2, 3...: แนวปฏิบัพที่ 1 (A₁), ที่ 2 (A₂), ... กระจายออกสองข้างอย่างสมมาตร
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Node -->
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                            <div class="font-bold text-slate-900 text-sm flex items-center justify-between">
+                                <span>แนวบัพ (Node : Nₙ)</span>
+                                <span
+                                    class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-bold font-mono">แทรกสอดแบบหักล้าง</span>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                สันชนท้อง คลื่นทั้งสองหักล้างกันจนผิวน้ำราบเรียบสงบนิ่ง (แอมพลิจูดรวม = 0):
+                            </p>
+                            <div
+                                class="p-3 bg-white rounded-xl font-mono text-center font-bold text-slate-800 text-sm border border-slate-200 space-y-1">
+                                <div>|S₁P − S₂P| = (n − ½)λ</div>
+                                <div>d · sin θ = (n − ½)λ</div>
+                            </div>
+                            <ul class="text-[11px] text-slate-600 space-y-1 pl-4 list-disc">
+                                <li>n = 1: แนวบัพแรก (N₁) แทรกอยู่ถัดจากแนวปฏิบัพกลาง A₀</li>
+                                <li>n = 2, 3...: แนวบัพที่ 2 (N₂), ที่ 3 (N₃), ... กระจายออกสองข้าง</li>
+                                <li><strong>ไม่มี N₀!</strong> ลำดับแนวบัพเริ่มต้นที่ n = 1 เสมอ</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Formula for Phase Opposite Sources -->
+                    <div class="p-4 bg-rose-50 rounded-2xl border border-rose-200 text-xs text-rose-950 space-y-1">
+                        <strong class="font-bold block">💡 กรณีพิเศษ: แหล่งกำเนิดอาพันธ์ที่มี "เฟสตรงข้ามกัน" (Opposite
+                            Phase)</strong>
+                        <p class="text-slate-700">
+                            สูตรจะสลับกันทั้งหมด! แนวตรงกลางจะกลายเป็น <strong>แนวบัพกลาง (N₀)</strong><br>
+                            • แนวปฏิบัพจะใช้สูตร: |S₁P − S₂P| = (n − ½)λ และ d · sin θ = (n − ½)λ<br>
+                            • แนวบัพจะใช้สูตร: |S₁P − S₂P| = nλ และ d · sin θ = nλ
+                        </p>
+                    </div>
+
+                    <!-- Total Node / Antinode Counting Method -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 text-xs md:text-sm">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-list-ol text-emerald-600"></i>
+                            การหาจำนวนแนวบัพและปฏิบัพทั้งหมดระหว่างแหล่งกำเนิด S₁ และ S₂
+                        </h4>
+                        <p class="text-slate-600 text-xs leading-relaxed">
+                            บนเส้นตรงที่เชื่อมระหว่าง S₁ และ S₂ (ระยะห่าง d) ผลต่างระยะทาง |S₁P − S₂P|
+                            จะมีค่าได้สูงสุดไม่เกิน d (คิดที่ sin θ ≤ 1 หรือ θ = 90°):
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+                            <div class="p-3 bg-white rounded-xl border border-slate-200">
+                                <strong class="text-emerald-800 font-sans block mb-1">หาจำนวนแนวปฏิบัพ
+                                    (Antinodes):</strong>
+                                n ≤ d / λ<br>
+                                ได้ n<sub>max</sub> ด้านละกี่แนว แล้วรวมทั้งหมด = 2(n<sub>max</sub>) + 1 (รวมแนวกลาง A₀)
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-slate-200">
+                                <strong class="text-rose-800 font-sans block mb-1">หาจำนวนแนวบัพ (Nodes):</strong>
+                                n − ½ ≤ d / λ<br>
+                                ได้ n<sub>max</sub> ด้านละกี่แนว แล้วรวมทั้งหมด = 2(n<sub>max</sub>) (ไม่มีแนวกลาง)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9.4.4 Diffraction -->
+                <div class="space-y-4 pt-4 border-t border-slate-100">
+                    <h3 class="font-bold text-emerald-800 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-expand"></i> 9.4.4 การเลี้ยวเบนของคลื่น (Diffraction)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        การเลี้ยวเบนคือปรากฏการณ์ที่คลื่นเคลื่อนที่ไปพบสิ่งกีดขวางหรือช่องแคบ แล้วคลื่นบางส่วนสามารถ
+                        <strong>เลี้ยวอ้อมสิ่งกีดขวางหรือแผ่ออกจากขอบช่องเปิด</strong> ไปยังบริเวณด้านหลังสิ่งกีดขวางได้
+                    </p>
+
+                    <div
+                        class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs md:text-sm text-emerald-950 space-y-1">
+                        <strong>หลักของฮอยเกนส์ (Huygens' Principle):</strong>
+                        <p class="italic text-slate-700 text-xs">
+                            “ทุกๆ จุดบนหน้าคลื่น
+                            สามารถประพฤติตัวเสมือนเป็นแหล่งกำเนิดคลื่นใหม่ที่ปล่อยหน้าคลื่นวงกลมแผ่ออกไปข้างหน้าด้วยอัตราเร็วเท่าเดิม”
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs md:text-sm">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                            <strong class="text-slate-900 block font-bold">1. ช่องแคบขนาดเล็กกว่าหรือเท่ากับความยาวคลื่น
+                                (d ≤ λ):</strong>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                คลื่นที่ลอดผ่านช่องออกไปจะ <strong>เลี้ยวเบนได้ชัดเจนและสมบูรณ์ที่สุด</strong>
+                                หน้าคลื่นที่ออกจากช่องจะกระจายตัวเป็นรูป <em>ครึ่งวงกลม</em> แผ่ออกรอบทิศทาง
+                                และไม่มีแนวแทรกสอด (ไม่มีแนวบัพ)
+                            </p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                            <strong class="text-slate-900 block font-bold">2. ช่องเปิดขนาดกว้างกว่าความยาวคลื่น (d &gt;
+                                λ):</strong>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                คลื่นจะเลี้ยวเบนได้เฉพาะบริเวณขอบทั้งสองข้าง ส่วนบริเวณกึ่งกลางจะยังคงเป็นหน้าคลื่นตรง
+                                และคลื่นจากขอบทั้งสองจะเกิด <strong>การแทรกสอดกัน</strong>
+                                ปรากฏเป็นแนวบัพและปฏิบัพด้านหลังช่องเปิด
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECTION 9.5: คลื่นนิ่ง (Standing Waves) -->
+            <!-- ========================================== -->
+            <section id="sec-9-5"
+                class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6 scroll-mt-20">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">9.5</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">คลื่นนิ่ง (Standing Waves)</h2>
+                        <p class="text-xs text-slate-500">Nodes, Antinodes, Loops & String Resonance</p>
+                    </div>
+                </div>
+
+                <div class="space-y-5 text-xs md:text-sm text-slate-700 leading-relaxed">
+                    <p>
+                        คลื่นนิ่งเกิดขึ้นเมื่อนำคลื่น 2 ขบวนที่มี <strong>ความถี่ แอมพลิจูด
+                            และความยาวคลื่นเท่ากันทุกประการ</strong> แต่เคลื่อนที่ในทิศทาง <strong>สวนทางกัน</strong>
+                        เข้ามาแทรกสอดกันอย่างต่อเนื่อง เช่น การสะบัดเชือกต่อเนื่องไปกระทบเสาที่ตรึงแน่น
+                        คลื่นตกกระทบจะแทรกสอดกับคลื่นสะท้อน เกิดเป็นลวดลายคลื่นที่ตำแหน่งสั่นและไม่สั่นอยู่คงที่ตลอดเวลา
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 space-y-1">
+                            <strong class="text-emerald-900 text-sm block">จุดปฏิบัพ (Antinode : A)</strong>
+                            <p class="text-xs text-slate-600">จุดที่มีการสั่นขึ้นลงอย่างแรงที่สุด โดยมีแอมพลิจูดเป็น 2
+                                เท่าของคลื่นเดิม (2A)</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+                            <strong class="text-slate-900 text-sm block">จุดบัพ (Node : N)</strong>
+                            <p class="text-xs text-slate-600">จุดที่อยู่นิ่งกับที่ตลอดเวลา ไม่มีการสั่นขึ้นลงเลย
+                                แอมพลิจูดเป็นศูนย์ (0)</p>
+                        </div>
+                    </div>
+
+                    <!-- Standing Wave Distance Rules -->
+                    <div
+                        class="p-5 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl border border-emerald-200 space-y-3">
+                        <h4 class="font-bold text-emerald-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-ruler-combined"></i> กฎระยะห่าง 3 ประการในคลื่นนิ่ง (ต้องจำขึ้นใจ!)
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center font-mono">
+                            <div class="p-3 bg-white rounded-xl border border-emerald-200">
+                                <span class="text-slate-400 font-sans block mb-1">ระยะระหว่าง บัพ ถึง บัพ ถัดกัน</span>
+                                <span class="text-emerald-800 font-bold text-base">λ / 2</span>
+                                <span class="text-slate-400 font-sans text-[11px] block mt-1">(ครึ่งความยาวคลื่น = 1
+                                    Loop)</span>
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-emerald-200">
+                                <span class="text-slate-400 font-sans block mb-1">ระยะระหว่าง ปฏิบัพ ถึง ปฏิบัพ
+                                    ถัดกัน</span>
+                                <span class="text-emerald-800 font-bold text-base">λ / 2</span>
+                                <span class="text-slate-400 font-sans text-[11px] block mt-1">(ครึ่งความยาวคลื่น = 1
+                                    Loop)</span>
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-emerald-200">
+                                <span class="text-slate-400 font-sans block mb-1">ระยะระหว่าง บัพ ถึง ปฏิบัพ
+                                    ติดกัน</span>
+                                <span class="text-emerald-800 font-bold text-base">λ / 4</span>
+                                <span
+                                    class="text-slate-400 font-sans text-[11px] block mt-1">(หนึ่งในสี่ของความยาวคลื่น)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- String Standing Waves Formulas -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm">การคำนวณคลื่นนิ่งในเส้นเชือกยาว L
+                            ปลายตรึงแน่นทั้งสองข้าง</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+                            <div class="p-3.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                                <strong class="text-emerald-800 font-sans block">1. จำนวน Loop (n) และความยาวคลื่น
+                                    (λ):</strong>
+                                <div class="text-base font-bold text-slate-800">L = n · (λ / 2) &nbsp;→&nbsp; n = 2L / λ
+                                </div>
+                                <span class="text-slate-500 font-sans text-[11px] block">เมื่อ n คือจำนวน Loop
+                                    หรือจำนวนแนวปฏิบัพที่เกิดขึ้น (n = 1, 2, 3...)</span>
+                            </div>
+                            <div class="p-3.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                                <strong class="text-emerald-800 font-sans block">2. ความถี่คลื่นนิ่ง (fₙ):</strong>
+                                <div class="text-base font-bold text-slate-800">fₙ = n · v / (2L)</div>
+                                <span class="text-slate-500 font-sans text-[11px] block">• n = 1: ความถี่มูลฐาน
+                                    (Fundamental) หรือ ฮาร์มอนิกที่ 1<br>• n = 2, 3...: ฮาร์มอนิกที่ 2, 3...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECTION 9.6: คลังตัวอย่างโจทย์และการคำนวณ -->
+            <!-- ========================================== -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">คลังตัวอย่างโจทย์และการคำนวณแบบ
+                            Step-by-Step</h2>
+                        <p class="text-xs text-slate-500">Exhaustive Worked Examples from All 55 Textbook Pages</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-xs md:text-sm">
+                    <!-- Example 1: Basic Wave Speed -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <div class="font-bold text-slate-800 flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <span class="bg-emerald-600 text-white px-2 py-0.5 rounded text-[10px]">ตัวอย่างที่
+                                    1</span>
+                                <span>(แนว มช - ข้อ 10 ใน PDF) แหล่งกำเนิดคลื่นให้คลื่นความถี่ 400 Hz ความยาวคลื่น 12.5
+                                    cm คลื่นจะมีความเร็วเท่าใด และในระยะ 300 เมตร ใช้เวลากี่วินาที?</span>
+                            </span>
+                        </div>
+                        <div
+                            class="p-3 bg-white rounded-xl border border-slate-200 font-mono text-slate-700 text-xs leading-relaxed space-y-1">
+                            <div><strong>วิธีทำ:</strong></div>
+                            <div>1. หาอัตราเร็วคลื่น: v = f · λ = 400 Hz × 0.125 m = <strong
+                                    class="text-emerald-700 font-bold">50 m/s</strong></div>
+                            <div>2. หาเวลาในการเคลื่อนที่ระยะทาง s = 300 m: t = s / v = 300 / 50 = <strong
+                                    class="text-emerald-700 font-bold">6 วินาที</strong></div>
+                            <div class="text-emerald-800 font-bold pt-1">ตอบ: อัตราเร็วคลื่นเท่ากับ 50 เมตร/วินาที
+                                และใช้เวลาเคลื่อนที่ 6 วินาที</div>
+                        </div>
+                    </div>
+
+                    <!-- Example 2: Phase Difference between Two Points -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <div class="font-bold text-slate-800 flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <span class="bg-emerald-600 text-white px-2 py-0.5 rounded text-[10px]">ตัวอย่างที่
+                                    2</span>
+                                <span>(ข้อ 25 ใน PDF) แหล่งกำเนิด S ความถี่ 100 Hz ส่งคลื่นไปจุด P (ห่าง 15 m) และจุด Q
+                                    (ห่าง 18 m) ถ้าจุด P และ Q มีเฟสต่างกัน 3π/2 เรเดียน จงหาอัตราเร็วคลื่น</span>
+                            </span>
+                        </div>
+                        <div
+                            class="p-3 bg-white rounded-xl border border-slate-200 font-mono text-slate-700 text-xs leading-relaxed space-y-1">
+                            <div><strong>วิธีทำ:</strong></div>
+                            <div>1. ผลต่างระยะทางระหว่างจุด P และ Q: Δx = 18 − 15 = 3 เมตร</div>
+                            <div>2. ใช้สูตรผลต่างเฟส: ΔΦ = (2π / λ) · Δx</div>
+                            <div>&nbsp;&nbsp;&nbsp;แทนค่า: 3π/2 = (2π / λ) · (3) &nbsp;→&nbsp; λ = (2 × 3 × 2) / 3 =
+                                <strong class="text-emerald-700 font-bold">4 เมตร</strong></div>
+                            <div>3. หาอัตราเร็วคลื่น: v = f · λ = 100 Hz × 4 m = <strong
+                                    class="text-emerald-700 font-bold">400 m/s</strong></div>
+                            <div class="text-emerald-800 font-bold pt-1">ตอบ: อัตราเร็วคลื่นเท่ากับ 400 เมตร/วินาที
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 3: Snell's Law Deep to Shallow -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <div class="font-bold text-slate-800 flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <span class="bg-emerald-600 text-white px-2 py-0.5 rounded text-[10px]">ตัวอย่างที่
+                                    3</span>
+                                <span>(ข้อ 38 ใน PDF) คลื่นน้ำเคลื่อนที่จากน้ำตื้นไปน้ำลึก มุมตกกระทบ 30° มุมหักเห 45°
+                                    ถ้าความเร็วในน้ำตื้นเท่ากับ 10 cm/s จงหาความเร็วในน้ำลึก</span>
+                            </span>
+                        </div>
+                        <div
+                            class="p-3 bg-white rounded-xl border border-slate-200 font-mono text-slate-700 text-xs leading-relaxed space-y-1">
+                            <div><strong>วิธีทำ:</strong></div>
+                            <div>1. ใช้กฎของสเนลล์: sin θ<sub>ตื้น</sub> / sin θ<sub>ลึก</sub> = v<sub>ตื้น</sub> /
+                                v<sub>ลึก</sub></div>
+                            <div>2. แทนค่า: sin 30° / sin 45° = 10 / v<sub>ลึก</sub></div>
+                            <div>&nbsp;&nbsp;&nbsp;(1/2) / (1/√2) = 10 / v<sub>ลึก</sub> &nbsp;→&nbsp; √2 / 2 = 10 /
+                                v<sub>ลึก</sub></div>
+                            <div>3. คำนวณ: v<sub>ลึก</sub> = 20 / √2 = <strong class="text-emerald-700 font-bold">10√2
+                                    cm/s</strong> (ประมาณ 14.14 cm/s)</div>
+                            <div class="text-emerald-800 font-bold pt-1">ตอบ: ความเร็วคลื่นในน้ำลึกเท่ากับ 10√2
+                                เซนติเมตร/วินาที</div>
+                        </div>
+                    </div>
+
+                    <!-- Example 4: Interference Node / Antinode Identification -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <div class="font-bold text-slate-800 flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <span class="bg-emerald-600 text-white px-2 py-0.5 rounded text-[10px]">ตัวอย่างที่
+                                    4</span>
+                                <span>(ข้อ 50 ใน PDF) แหล่งกำเนิดอาพันธ์เฟสตรงกัน ให้คลื่น λ = 2 cm จุด P
+                                    อยู่ห่างจากแหล่งกำเนิดทั้งสอง 10 cm และ 19 cm จุด P
+                                    อยู่บนแนวบัพหรือปฏิบัพที่เท่าใด?</span>
+                            </span>
+                        </div>
+                        <div
+                            class="p-3 bg-white rounded-xl border border-slate-200 font-mono text-slate-700 text-xs leading-relaxed space-y-1">
+                            <div><strong>วิธีทำ:</strong></div>
+                            <div>1. หาผลต่างทางเดิน: |S₁P − S₂P| = |19 − 10| = 9 cm</div>
+                            <div>2. ทดสอบเทียบกับ λ = 2 cm: |S₁P − S₂P| / λ = 9 / 2 = 4.5</div>
+                            <div>3. เนื่องจากได้เลขลงท้ายด้วย .5 (4.5 = 5 − ½) ซึ่งตรงกับรูป (n − ½) โดย n = 5</div>
+                            <div class="text-emerald-800 font-bold pt-1">ตอบ: จุด P อยู่บนแนวบัพที่ 5 (N₅)</div>
+                        </div>
+                    </div>
+
+                    <!-- Example 5: Standing Waves in String -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <div class="font-bold text-slate-800 flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <span class="bg-emerald-600 text-white px-2 py-0.5 rounded text-[10px]">ตัวอย่างที่
+                                    5</span>
+                                <span>(ข้อ 58 ใน PDF) คลื่นนิ่งในเส้นเชือกปลายทั้งสองตรึงแน่นยาว 1.2 เมตร ปรากฏ 3 Loop
+                                    ถ้าความเร็วคลื่นในเชือกเท่ากับ 240 m/s จงหาความถี่คลื่น</span>
+                            </span>
+                        </div>
+                        <div
+                            class="p-3 bg-white rounded-xl border border-slate-200 font-mono text-slate-700 text-xs leading-relaxed space-y-1">
+                            <div><strong>วิธีทำ:</strong></div>
+                            <div>1. มี 3 Loop หมายถึง n = 3</div>
+                            <div>&nbsp;&nbsp;&nbsp;จากสูตร: L = n · (λ / 2) &nbsp;→&nbsp; 1.2 = 3 · (λ / 2)
+                                &nbsp;→&nbsp; λ = <strong class="text-emerald-700 font-bold">0.8 เมตร</strong></div>
+                            <div>2. คำนวณความถี่: f = v / λ = 240 / 0.8 = <strong class="text-emerald-700 font-bold">300
+                                    Hz</strong></div>
+                            <div class="text-emerald-800 font-bold pt-1">ตอบ: คลื่นมีความถี่เท่ากับ 300 เฮิรตซ์</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom Navigation & Action Bar -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                <a href="m5-ch09-quiz.html"
+                    class="py-4 px-10 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i> ฝึกทำคลังข้อสอบบทที่ 9 คลื่นกล (35 คะแนน)
+                </a>
+                <a href="m5-physics.html"
+                    class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-list"></i> กลับหน้ารวมบทเรียน ม.5
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 mt-16 text-center text-xs">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="font-bold text-slate-300">ฟิสิกส์ จารย์เปา — Visual Education Hub</p>
+            <p>หลักสูตรฟิสิกส์ มัธยมศึกษาตอนปลาย (ม.5 เล่ม 3) สอดคล้องตามหลักสูตร สสวท. และแนวข้อสอบเข้ามหาวิทยาลัย</p>
+        </div>
+    </footer>
+
 </body>
+
 </html>

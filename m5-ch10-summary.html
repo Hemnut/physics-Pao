@@ -1,19 +1,823 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุป บทที่ 10 เสียง | ฟิสิกส์ จารย์เปา</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปเจาะลึก บทที่ 10: เสียง (Sound) ฉบับสมบูรณ์ | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Courier New', 'monospace'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-<main class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-extrabold mb-6">สรุปเนื้อหา บทที่ 10: เสียง</h1>
-    <div class="bg-white p-6 rounded-2xl shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-sky-700">1. อัตราเร็วเสียงในอากาศ</h2>
-        <p class="text-sm">$v = 331 + 0.6t$ (เมื่อ $t$ คืออุณหภูมิในหน่วย Celsius)</p>
-        <h2 class="text-xl font-bold text-sky-700">2. ระดับเสียงและการบีต</h2>
-        <p class="text-sm">ระดับเสียง $\beta = 10 \log\left(\frac{I}{I_0}\right)$ (dB) | ความถี่บีต $f_{beat} = |f_1 - f_2|$</p>
-    </div>
-</main>
+
+<body class="bg-slate-100 text-slate-800 min-h-screen scroll-smooth font-sans">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm backdrop-blur-md bg-white/95">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="bg-gradient-to-br from-sky-500 to-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-sky-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-6 items-center">
+                <a href="index.html"
+                    class="text-sm font-medium text-slate-500 hover:text-sky-600 transition-colors">HOME</a>
+                <a href="m5-physics.html"
+                    class="text-sm font-semibold text-sky-600 border-b-2 border-sky-600 pb-0.5">บทเรียน ม.5</a>
+                <a href="m5-ch10-quiz.html"
+                    class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-xl shadow-sm transition-all">
+                    <i class="fa-solid fa-pen-to-square"></i> ทำแบบฝึกหัด (35 ข้อ)
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+
+        <!-- Breadcrumb & Quick Info -->
+        <div class="flex items-center justify-between mb-4">
+            <a href="m5-physics.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-sky-600 hover:text-sky-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+            </a>
+            <span class="text-xs text-slate-400 font-inter">CHAPTER 10 — COMPREHENSIVE SUMMARY</span>
+        </div>
+
+        <!-- Hero Card -->
+        <div
+            class="bg-gradient-to-r from-slate-900 via-sky-950 to-blue-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute w-72 h-72 bg-sky-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <div
+                    class="inline-flex items-center gap-2 bg-sky-500/20 border border-sky-400/30 text-sky-300 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-volume-high"></i> บทที่ 10 — ฟิสิกส์ ม.5 เล่ม 3
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">สรุปเจาะลึก: เสียงและปรากฏการณ์ของเสียง (Sound)
+                </h1>
+                <p class="text-sky-100 text-sm max-w-2xl leading-relaxed">
+                    ธรรมชาติและอัตราเร็วเสียง | สมบัติของเสียง สะท้อน หักเห เลี้ยวเบน แทรกสอด |
+                    ความเข้มเสียงและเดซิเบล | เสียงดนตรี บีต คุณภาพเสียง |
+                    การสั่นพ้องในท่อปิดและท่อเปิด | ปรากฏการณ์ดอปเพลอร์และคลื่นกระแทก
+                </p>
+            </div>
+        </div>
+
+        <!-- Master Formula Cheat Sheet -->
+        <div class="bg-white rounded-3xl p-6 border border-sky-200 shadow-md mb-8">
+            <h2 class="text-lg font-extrabold text-sky-800 flex items-center gap-2 mb-4">
+                <i class="fa-solid fa-sheet-plastic"></i> สูตรสำคัญประจำบท — Quick Reference
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 text-center">
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">อัตราเร็วเสียงในอากาศ</span>
+                    <strong class="text-sky-800 font-mono text-sm">v = 331 + 0.6t</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">สัดส่วนเคลวิน</span>
+                    <strong class="text-sky-800 font-mono text-sm">v₁/v₂ = √(T₁/T₂)</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">เสียงก้อง (โซนาร์)</span>
+                    <strong class="text-sky-800 font-mono text-sm">2s = vt</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">ความเข้มเสียง</span>
+                    <strong class="text-sky-800 font-mono text-sm">I = P/(4πR²)</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">ระดับเสียง (dB)</span>
+                    <strong class="text-sky-800 font-mono text-sm">β = 10 log(I/I₀)</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">ความถี่บีต</span>
+                    <strong class="text-sky-800 font-mono text-sm">f_B = |f₁ − f₂|</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">ท่อปลายปิด</span>
+                    <strong class="text-sky-800 font-mono text-sm">f_n = nv/(4L)<br>(n = 1,3,5...)</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">ท่อปลายเปิด</span>
+                    <strong class="text-sky-800 font-mono text-sm">f_n = nv/(2L)<br>(n = 1,2,3...)</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">ดอปเพลอร์</span>
+                    <strong class="text-sky-800 font-mono text-sm">f_L = [(v±v_L)/(v∓v_s)]f_s</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">คลื่นกระแทก</span>
+                    <strong class="text-sky-800 font-mono text-sm">sin θ = v/v_s = 1/M</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">แนวเสียงดัง (ปฏิบัพ)</span>
+                    <strong class="text-sky-800 font-mono text-sm">|S₁P − S₂P| = nλ</strong>
+                </div>
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">แนวเสียงค่อย (บัพ)</span>
+                    <strong class="text-sky-800 font-mono text-sm">|S₁P − S₂P| = (n−½)λ</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="space-y-8">
+
+            <!-- ========================================== -->
+            <!-- SECTION 10.1: ธรรมชาติและอัตราเร็วของเสียง -->
+            <!-- ========================================== -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-sky-100 text-sky-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">10.1</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">
+                            ธรรมชาติและอัตราเร็วของเสียง
+                        </h2>
+                        <p class="text-xs text-slate-500">Nature & Speed of Sound</p>
+                    </div>
+                </div>
+
+                <!-- นิยามคลื่นเสียง -->
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <h3 class="font-bold text-sky-700 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb"></i> นิยามคลื่นเสียง (Sound Wave)
+                    </h3>
+                    <p class="text-slate-800 text-sm leading-relaxed">
+                        เสียงเกิดจาก <strong>การสั่นสะเทือนของแหล่งกำเนิดเสียง</strong> (เช่น สายกีตาร์, ส้อมเสียง,
+                        สายเสียงในลำคอ)
+                        ส่งพลังงานผ่านตัวกลางในรูปของ <strong>ส่วนอัด (Compression)</strong> และ <strong>ส่วนขยาย
+                            (Rarefaction)</strong>
+                        สลับกันไป
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <strong class="text-sky-800">สมบัติสำคัญ:</strong>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>• เป็น <strong>คลื่นกล (Mechanical Wave)</strong> — ต้องอาศัยตัวกลาง</li>
+                                <li>• เป็น <strong>คลื่นตามยาว (Longitudinal Wave)</strong> —
+                                    อนุภาคตัวกลางสั่นในทิศเดียวกับทิศทางการเคลื่อนที่ของคลื่น</li>
+                                <li>• <strong>เสียงเดินทางผ่านสุญญากาศไม่ได้!</strong></li>
+                                <li>• ย่านความถี่ที่หูมนุษย์ได้ยิน: <strong>20 Hz ถึง 20,000 Hz</strong></li>
+                            </ul>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <strong class="text-sky-800">ประเภทคลื่นเสียง:</strong>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>• <strong>อินฟราซาวด์ (Infrasound):</strong> ความถี่ต่ำกว่า 20 Hz (ช้าง, แผ่นดินไหว)
+                                </li>
+                                <li>• <strong>เสียงที่ได้ยิน (Audible Sound):</strong> 20 – 20,000 Hz</li>
+                                <li>• <strong>อัลตราซาวด์ (Ultrasound):</strong> ความถี่สูงกว่า 20,000 Hz (ค้างคาว,
+                                    โซนาร์, อัลตราซาวด์ทางการแพทย์)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-sky-50 rounded-xl border border-sky-200 text-xs text-sky-900">
+                        <strong>⚠️ จุดที่ข้อสอบชอบถาม:</strong>
+                        ระยะจากจุดกึ่งกลางส่วนอัดถึงจุดกึ่งกลางส่วนอัดถัดไป หรือส่วนขยายถึงส่วนขยายถัดไป = <strong>1
+                            ความยาวคลื่น (λ)</strong>
+                        แต่ระยะจากส่วนอัดถึงส่วนขยายที่ติดกัน = <strong>λ/2</strong>
+                    </div>
+                </div>
+
+                <!-- อัตราเร็วเสียงในตัวกลาง -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs md:text-sm">
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 space-y-3">
+                        <h3 class="font-bold text-sky-700 flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-gauge-high"></i> อัตราเร็วของเสียงในตัวกลาง
+                        </h3>
+                        <p class="text-slate-700 leading-relaxed">
+                            อัตราเร็วเสียงขึ้นอยู่กับ <strong>ความหนาแน่นและสภาพยืดหยุ่น</strong> ของตัวกลาง:
+                        </p>
+                        <div
+                            class="p-3 bg-white rounded-xl border border-slate-200 text-center font-bold text-sky-800 font-mono">
+                            v(ของแข็ง) > v(ของเหลว) > v(ก๊าซ)
+                        </div>
+                        <ul class="text-slate-600 text-xs space-y-1">
+                            <li>• เหล็ก: ≈ 5,200 m/s</li>
+                            <li>• อะลูมิเนียม: ≈ 5,100 m/s</li>
+                            <li>• น้ำทะเล: ≈ 1,531 m/s | น้ำบริสุทธิ์: ≈ 1,498 m/s</li>
+                            <li>• อากาศ (ที่ 0°C): 331 m/s | อากาศ (ที่ 25°C): 346 m/s</li>
+                            <li>• ฮีเลียม (0°C): ≈ 965 m/s (เบากว่าอากาศ → v สูงกว่า)</li>
+                        </ul>
+                        <div class="p-2 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-900">
+                            <strong>⚠️ หมายเหตุ:</strong> ก๊าซที่มีมวลโมเลกุลน้อย (เช่น ฮีเลียม)
+                            จะมีอัตราเร็วเสียงสูงกว่าก๊าซมวลโมเลกุลมาก
+                        </div>
+                    </div>
+
+                    <!-- Temperature Formula -->
+                    <div
+                        class="bg-gradient-to-br from-sky-50 to-blue-50 border border-sky-200 rounded-2xl p-5 space-y-4">
+                        <h3 class="font-bold text-sky-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-temperature-half"></i> อัตราเร็วเสียงในอากาศกับอุณหภูมิ
+                        </h3>
+                        <div class="p-4 bg-white rounded-xl shadow-sm border border-sky-100 text-center">
+                            <span class="text-xs text-slate-400 font-bold block mb-1">สูตรโดยประมาณ (ช่วง −50°C ถึง
+                                50°C)</span>
+                            <div class="text-2xl font-extrabold text-sky-700 font-mono my-2">v = 331 + 0.6t</div>
+                            <span class="text-[11px] text-slate-500">t: อุณหภูมิในหน่วย °C | ทุกๆ 1°C ที่เพิ่มขึ้น
+                                อัตราเร็วเสียงเพิ่ม 0.6 m/s</span>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl shadow-sm border border-sky-100 text-center">
+                            <span class="text-xs text-slate-400 font-bold block mb-1">สัดส่วนทางอุณหพลศาสตร์
+                                (เคลวิน)</span>
+                            <div class="text-2xl font-extrabold text-sky-700 font-mono my-2">v₁/v₂ = √(T₁/T₂)</div>
+                            <span class="text-[11px] text-slate-500">T: อุณหภูมิสัมบูรณ์ในหน่วยเคลวิน (K = °C +
+                                273)</span>
+                        </div>
+
+                        <!-- ตัวอย่างโจทย์ -->
+                        <div class="p-3 bg-white rounded-xl border border-sky-200 text-xs text-slate-700 space-y-1">
+                            <strong class="text-sky-800">📝 ตัวอย่างโจทย์:</strong> อัตราเร็วเสียงในอากาศที่ 15°C
+                            เป็นเท่าใด?
+                            <div class="font-mono text-sky-700 mt-1">
+                                v = 331 + 0.6(15) = 331 + 9 = <strong>340 m/s</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION 10.2: สมบัติของคลื่นเสียง -->
+            <!-- ========================================== -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-sky-100 text-sky-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">10.2</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">
+                            สมบัติของคลื่นเสียงและการประยุกต์ใช้
+                        </h2>
+                        <p class="text-xs text-slate-500">Reflection, Echo, Sonar, Refraction, Diffraction &
+                            Interference</p>
+                    </div>
+                </div>
+
+                <!-- การสะท้อนและเสียงก้อง -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-satellite-dish text-sky-600"></i> การสะท้อนและเสียงก้อง (Reflection &
+                            Echo)
+                        </div>
+                        <ul class="text-slate-600 leading-relaxed space-y-2">
+                            <li>• วัตถุที่สะท้อนเสียงได้ดีต้องมี <strong>ขนาดใหญ่กว่าความยาวคลื่นเสียง</strong></li>
+                            <li>• <strong>เสียงก้อง (Echo):</strong>
+                                หูมนุษย์แยกเสียงสะท้อนจากเสียงตรงได้เมื่อเวลาห่างกัน ≥ <strong>0.1 วินาที</strong></li>
+                            <li>• ระยะห่างขั้นต่ำจากผนังเพื่อได้ยินเสียงก้อง (ที่ v = 340 m/s):<br>
+                                <span class="font-mono text-sky-700 font-bold">s = vt/2 = 340 × 0.1/2 = 17 เมตร</span>
+                            </li>
+                            <li>• <strong>เครื่องโซนาร์ (SONAR):</strong> ใช้คลื่นเหนือเสียง (Ultrasonic)
+                                คำนวณระยะทาง:<br>
+                                <span class="font-mono font-bold text-sky-700">2s = v · t → s = vt/2</span>
+                            </li>
+                        </ul>
+                        <div class="p-2 bg-sky-50 rounded-lg border border-sky-200 text-xs text-sky-900">
+                            <strong>📝 ตัวอย่าง:</strong> ส่งคลื่นเสียงใต้น้ำ ได้ยินเสียงสะท้อนกลับมาใน 0.4 s (v น้ำทะเล
+                            = 1,500 m/s)<br>
+                            ระยะทาง s = 1,500 × 0.4/2 = <strong>300 เมตร</strong>
+                        </div>
+                    </div>
+
+                    <!-- การหักเหและปรากฏการณ์ -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-cloud-bolt text-amber-500"></i>
+                            การหักเหของเสียงและปรากฏการณ์ที่เกี่ยวข้อง
+                        </div>
+                        <ul class="text-slate-600 leading-relaxed space-y-2">
+                            <li>• <strong>กฎของสเนลล์:</strong>
+                                <span
+                                    class="font-mono text-sky-700 font-bold block text-center my-1 bg-white p-2 rounded-lg border">sin
+                                    θ₁/sin θ₂ = v₁/v₂</span>
+                            </li>
+                            <li>• เสียงเดินทางจากบริเวณ <strong>อุณหภูมิสูง (v มาก)</strong> ไปยังบริเวณ
+                                <strong>อุณหภูมิต่ำ (v น้อย)</strong> จะหักเหเข้าหาเส้นปกติ</li>
+                            <li>• <strong>เหตุผลที่กลางวันฟ้าแลบไม่ได้ยินเสียงฟ้าร้อง:</strong><br>
+                                อากาศใกล้พื้นดินร้อนกว่า → เสียงเดินทางเร็วกว่า → หักเหเบนขึ้นไปด้านบน →
+                                เกิดการสะท้อนกลับหมด → เสียงไม่ลงมาถึงหูผู้ฟัง</li>
+                            <li>• <strong>กลางคืน:</strong> อากาศใกล้พื้นเย็นกว่าด้านบน → เสียงหักเหเบนลงมา →
+                                ได้ยินเสียงไกลกว่าปกติ</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- การเลี้ยวเบนและการแทรกสอด -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-door-open text-emerald-600"></i> การเลี้ยวเบนของเสียง (Diffraction)
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">
+                            คลื่นเสียงมีความยาวคลื่นในระดับ <strong>เซนติเมตรถึงเมตร</strong>
+                            ซึ่งใกล้เคียงกับขนาดประตู หน้าต่าง และตึก
+                            จึงสามารถ <strong>เลี้ยวเบนอ้อมมุมตึกหรือช่องเปิดได้ดีมาก</strong>
+                            ทำให้เราได้ยินเสียงคนพูดหลังมุมตึกได้ แม้มองไม่เห็นตัว
+                        </p>
+                        <div class="p-2 bg-emerald-50 rounded-lg border border-emerald-200 text-xs text-emerald-900">
+                            <strong>จำ:</strong> คลื่นจะเลี้ยวเบนได้ดีเมื่อ <strong>ขนาดช่องเปิด ≈ ความยาวคลื่น</strong>
+                            หรือเล็กกว่า
+                        </div>
+                    </div>
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-indigo-600"></i> การแทรกสอดของเสียง (Interference)
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">
+                            ลำโพง 2 ตัวส่งเสียงความถี่เท่ากัน เฟสตรงกัน (แหล่งกำเนิดอาพันธ์):
+                        </p>
+                        <div class="space-y-2">
+                            <div class="p-2 bg-white rounded-lg border border-emerald-200 text-center">
+                                <span class="text-xs text-slate-500 block">แนวเสียงดัง (ปฏิบัพ A<sub>n</sub>) —
+                                    แทรกสอดเสริม</span>
+                                <span class="font-mono text-emerald-700 font-bold">|S₁P − S₂P| = nλ</span>
+                            </div>
+                            <div class="p-2 bg-white rounded-lg border border-rose-200 text-center">
+                                <span class="text-xs text-slate-500 block">แนวเสียงค่อย (บัพ N<sub>n</sub>) —
+                                    แทรกสอดหักล้าง</span>
+                                <span class="font-mono text-rose-700 font-bold">|S₁P − S₂P| = (n − ½)λ</span>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500">
+                            n = 0, 1, 2, 3... สำหรับปฏิบัพ | n = 1, 2, 3... สำหรับบัพ
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION 10.3: ความเข้มเสียงและเดซิเบล -->
+            <!-- ========================================== -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-sky-100 text-sky-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">10.3</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">ความเข้มเสียงและระดับความเข้มเสียง
+                        </h2>
+                        <p class="text-xs text-slate-500">Sound Intensity & Decibel Scale</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- ความเข้มเสียง -->
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-sky-700 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-bullhorn"></i> 1. ความเข้มเสียง (Intensity: I)
+                        </h3>
+                        <p class="text-xs text-slate-600">กำลังเสียงที่ตกตั้งฉากต่อหนึ่งหน่วยพื้นที่ผิวทรงกลม:</p>
+                        <div
+                            class="p-3 bg-white rounded-xl border border-slate-200 text-center font-mono font-bold text-sky-800 text-base">
+                            I = P/A = P/(4πR²)
+                        </div>
+                        <ul class="text-xs text-slate-600 space-y-1">
+                            <li>• P: กำลังของแหล่งกำเนิดเสียง (วัตต์, W)</li>
+                            <li>• R: ระยะห่างจากแหล่งกำเนิดเสียงถึงผู้ฟัง (เมตร, m)</li>
+                            <li>• หน่วย: วัตต์ต่อตารางเมตร (W/m²)</li>
+                            <li>• เสียงเบาสุดที่หูเริ่มได้ยิน (I₀): <span
+                                    class="font-mono font-bold text-slate-800">10⁻¹² W/m²</span></li>
+                            <li>• เสียงดังสุดที่มนุษย์ทนได้ (I<sub>max</sub>): <span
+                                    class="font-mono font-bold text-slate-800">1 W/m²</span> (เจ็บปวด)</li>
+                        </ul>
+                        <div class="p-2 bg-sky-50 rounded-lg border border-sky-200 text-xs text-sky-900">
+                            <strong>สำคัญ:</strong> ถ้าเพิ่มระยะห่างเป็น 2 เท่า → ความเข้มเสียงลดลงเป็น <strong>1/4
+                                เท่า</strong> (แปรผกผันกับ R²)
+                        </div>
+                    </div>
+
+                    <!-- เดซิเบล -->
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-sky-700 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line"></i> 2. ระดับเสียง (Sound Level: β)
+                        </h3>
+                        <p class="text-xs text-slate-600">มาตราส่วนลอการิทึมเพื่อบอกระดับเสียง:</p>
+                        <div
+                            class="p-3 bg-white rounded-xl border border-slate-200 text-center font-mono font-bold text-sky-800 text-base">
+                            β = 10 log(I/I₀) = 10 log(I/10⁻¹²)
+                        </div>
+                        <div class="p-3 bg-sky-50 rounded-xl border border-sky-200 text-xs text-sky-900 space-y-1">
+                            <strong>สูตรเปรียบเทียบ 2 สภาวะ:</strong>
+                            <div class="font-mono text-center font-bold text-sky-800">
+                                β₂ − β₁ = 10 log(I₂/I₁)
+                            </div>
+                            <p class="text-[11px] text-slate-500">
+                                เมื่อ I₂/I₁ = (P₂/P₁)·(R₁/R₂)²
+                            </p>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 text-xs text-slate-700 space-y-1">
+                            <strong class="text-sky-800">สูตรรวมแหล่งกำเนิดเสียง N ตัว (เหมือนกัน):</strong>
+                            <div class="font-mono text-center font-bold text-sky-700">
+                                β(รวม) = β(เดี่ยว) + 10 log N
+                            </div>
+                            <span class="text-[11px] text-slate-500">เช่น 10 ตัว: β เพิ่มขึ้น 10 log 10 = 10 dB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ตัวอย่างโจทย์ -->
+                <div
+                    class="p-4 bg-gradient-to-r from-sky-50 to-blue-50 rounded-2xl border border-sky-200 text-xs space-y-2">
+                    <strong class="text-sky-900">📝 ตัวอย่างโจทย์:</strong>
+                    <p class="text-slate-700">แหล่งกำเนิดเสียง 1 ตัว วัดระดับเสียงได้ 70 dB ที่ระยะ R
+                        ถ้าเพิ่มแหล่งกำเนิดเสียงที่เหมือนกันเป็น 100 ตัว จะวัดระดับเสียงได้เท่าใด?</p>
+                    <div class="font-mono text-sky-700">
+                        β(รวม) = 70 + 10 log 100 = 70 + 10(2) = <strong>90 dB</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION 10.4: เสียงดนตรี บีต และคุณภาพเสียง -->
+            <!-- ========================================== -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-sky-100 text-sky-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">10.4</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">เสียงดนตรี การบีต
+                            และคุณภาพเสียง</h2>
+                        <p class="text-xs text-slate-500">Musical Sound, Beats & Timbre</p>
+                    </div>
+                </div>
+
+                <!-- 3 คุณลักษณะของเสียง -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+                        <span class="font-bold text-sky-800 block mb-1">1. ความดัง-ค่อย (Loudness)</span>
+                        <p class="text-slate-600">ขึ้นอยู่กับ <strong>แอมพลิจูด</strong> ของคลื่นเสียง
+                            แอมพลิจูดยิ่งมาก เสียงยิ่งดัง (พลังงานมาก)</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+                        <span class="font-bold text-sky-800 block mb-1">2. ระดับเสียงสูง-ต่ำ (Pitch)</span>
+                        <p class="text-slate-600">ขึ้นอยู่กับ <strong>ความถี่</strong><br>
+                            ความถี่สูง = เสียงแหลม | ความถี่ต่ำ = เสียงทุ้ม<br>
+                            หูมนุษย์ได้ยิน 20 – 20,000 Hz</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+                        <span class="font-bold text-sky-800 block mb-1">3. คุณภาพเสียง (Timbre)</span>
+                        <p class="text-slate-600">ขึ้นอยู่กับ <strong>จำนวนและความเข้มสัมพัทธ์ของฮาร์โมนิก</strong>
+                            ทำให้แยกเสียงเครื่องดนตรีต่างชนิดที่เล่นโน้ตเดียวกันได้</p>
+                    </div>
+                </div>
+
+                <!-- การบีต -->
+                <div class="p-5 bg-gradient-to-r from-sky-50 to-indigo-50 rounded-2xl border border-sky-200 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-wave-square"></i> การบีตของเสียง (Beats)
+                        </h3>
+                        <span class="text-xs bg-sky-200 text-sky-900 px-2 py-0.5 rounded font-mono font-bold">หูฟังทัน ≤
+                            7 Hz</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        เกิดจากคลื่นเสียง 2 ขบวนที่มีความถี่ <strong>ต่างกันเล็กน้อย</strong> มาซ้อนทับกัน
+                        เกิดเสียงดังค่อยสลับเป็นจังหวะ (วูบวาบ)
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-center font-mono">
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-xs text-slate-400 font-sans block mb-1">ความถี่บีต (จำนวนครั้งเสียงดังใน 1
+                                วินาที)</span>
+                            <span class="text-sky-700 font-bold text-lg">f<sub>B</sub> = |f₁ − f₂|</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-xs text-slate-400 font-sans block mb-1">ความถี่เสียงรวมที่หูได้ยิน</span>
+                            <span class="text-sky-700 font-bold text-lg">f<sub>รวม</sub> = (f₁ + f₂)/2</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-white rounded-xl border border-sky-200 text-xs text-slate-700 space-y-1">
+                        <strong class="text-sky-800">📝 ตัวอย่าง:</strong> ส้อมเสียง 2 อัน f₁ = 440 Hz, f₂ = 443 Hz<br>
+                        f<sub>B</sub> = |440 − 443| = <strong>3 ครั้ง/วินาที</strong> (ได้ยินเสียงดังค่อยสลับ 3
+                        ครั้ง/วินาที)<br>
+                        f<sub>รวม</sub> = (440 + 443)/2 = <strong>441.5 Hz</strong>
+                    </div>
+                    <div class="p-2 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-900">
+                        <strong>⚠️ การนำไปใช้:</strong> ช่างเปียโนใช้ปรากฏการณ์บีตในการตั้งเสียง
+                        ปรับจนความถี่บีตเป็นศูนย์
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION 10.5: การสั่นพ้องของเสียงในท่อ -->
+            <!-- ========================================== -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-sky-100 text-sky-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">10.5</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">การสั่นพ้องของเสียงในท่อ
+                            และคลื่นนิ่งในสายสั่น</h2>
+                        <p class="text-xs text-slate-500">Resonance in Air Columns & Standing Waves in Strings</p>
+                    </div>
+                </div>
+
+                <!-- ท่อปลายปิดและท่อปลายเปิด -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <!-- ท่อปลายปิด -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="font-bold text-slate-900 flex items-center justify-between">
+                            <span>1. ท่อปลายปิดข้างหนึ่ง (Closed Tube)</span>
+                            <span
+                                class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">ฮาร์โมนิกคี่เท่านั้น</span>
+                        </div>
+                        <p class="text-slate-600">ปากท่อ (เปิด) เป็นปฏิบัพ (A) | ก้นท่อ (ปิด) เป็นบัพ (N):</p>
+                        <div
+                            class="p-2.5 bg-white rounded-xl border border-slate-200 text-center font-mono font-bold text-sky-800">
+                            f<sub>n</sub> = nv/(4L) &nbsp;&nbsp;(n = 1, 3, 5, 7...)
+                        </div>
+                        <ul class="text-xs text-slate-600 space-y-1">
+                            <li>• ฮาร์โมนิกที่ 1 (ความถี่มูลฐาน f₁): <strong>L₁ = λ/4</strong></li>
+                            <li>• ฮาร์โมนิกที่ 3: L₂ = 3λ/4</li>
+                            <li>• ฮาร์โมนิกที่ 5: L₃ = 5λ/4</li>
+                            <li>• ระยะเลื่อนลูกสูบระหว่างเสียงดังถัดกัน: <strong>ΔL = λ/2</strong></li>
+                            <li>• <strong>มีเฉพาะฮาร์โมนิกคี่:</strong> f₁, 3f₁, 5f₁, 7f₁...</li>
+                        </ul>
+
+                        <!-- SVG Diagram ท่อปิด -->
+                        <div class="bg-white rounded-xl p-3 border border-slate-200">
+                            <svg viewBox="0 0 300 80" class="w-full h-auto">
+                                <rect x="20" y="15" width="260" height="50" fill="none" stroke="#475569"
+                                    stroke-width="2" rx="3" />
+                                <rect x="275" y="15" width="5" height="50" fill="#475569" />
+                                <text x="20" y="10" font-size="8" fill="#0369a1" font-weight="bold">ปากท่อ (A)</text>
+                                <text x="245" y="10" font-size="8" fill="#dc2626" font-weight="bold">ก้นท่อ (N)</text>
+                                <!-- Standing wave pattern -->
+                                <path d="M 25,40 Q 90,15 155,40 Q 220,65 275,40" fill="none" stroke="#0ea5e9"
+                                    stroke-width="2" stroke-dasharray="4" />
+                                <path d="M 25,40 Q 90,65 155,40 Q 220,15 275,40" fill="none" stroke="#0ea5e9"
+                                    stroke-width="2" opacity="0.4" />
+                                <text x="140" y="75" font-size="8" fill="#64748b" text-anchor="middle">ฮาร์โมนิกที่ 3
+                                    (n=3): L = 3λ/4</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- ท่อปลายเปิด -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="font-bold text-slate-900 flex items-center justify-between">
+                            <span>2. ท่อปลายเปิดทั้งสองข้าง (Open Tube)</span>
+                            <span
+                                class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-mono">ฮาร์โมนิกทุกตัว</span>
+                        </div>
+                        <p class="text-slate-600">ปากท่อทั้งสองข้างเป็นปฏิบัพ (A):</p>
+                        <div
+                            class="p-2.5 bg-white rounded-xl border border-slate-200 text-center font-mono font-bold text-sky-800">
+                            f<sub>n</sub> = nv/(2L) &nbsp;&nbsp;(n = 1, 2, 3, 4...)
+                        </div>
+                        <ul class="text-xs text-slate-600 space-y-1">
+                            <li>• ฮาร์โมนิกที่ 1 (ความถี่มูลฐาน f₁): <strong>L₁ = λ/2</strong></li>
+                            <li>• มีฮาร์โมนิกครบ: f₁, 2f₁, 3f₁, 4f₁...</li>
+                            <li>• <strong>ข้อควรระวัง:</strong> ท่อเปิดจะให้เสียงมากกว่าท่อปิด เพราะมีฮาร์โมนิกครบ</li>
+                        </ul>
+
+                        <!-- SVG Diagram ท่อเปิด -->
+                        <div class="bg-white rounded-xl p-3 border border-slate-200">
+                            <svg viewBox="0 0 300 80" class="w-full h-auto">
+                                <rect x="20" y="15" width="260" height="50" fill="none" stroke="#475569"
+                                    stroke-width="2" rx="3" />
+                                <text x="20" y="10" font-size="8" fill="#0369a1" font-weight="bold">A</text>
+                                <text x="270" y="10" font-size="8" fill="#0369a1" font-weight="bold">A</text>
+                                <!-- Standing wave pattern -->
+                                <path d="M 25,40 Q 90,15 155,40 Q 220,65 275,40" fill="none" stroke="#0ea5e9"
+                                    stroke-width="2" stroke-dasharray="4" />
+                                <path d="M 25,40 Q 90,65 155,40 Q 220,15 275,40" fill="none" stroke="#0ea5e9"
+                                    stroke-width="2" opacity="0.4" />
+                                <text x="140" y="75" font-size="8" fill="#64748b" text-anchor="middle">ฮาร์โมนิกที่ 2
+                                    (n=2): L = λ</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- สายสั่น -->
+                <div class="p-5 bg-gradient-to-r from-sky-50 to-blue-50 rounded-2xl border border-sky-200 space-y-3">
+                    <h3 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-guitar"></i> คลื่นนิ่งในสายสั่น (Standing Waves in Strings)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-center font-mono">
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-xs text-slate-400 font-sans block mb-1">อัตราเร็วคลื่นในสาย</span>
+                            <span class="text-sky-700 font-bold text-lg">v = √(T/μ)</span>
+                            <span class="text-[10px] text-slate-500 font-sans block mt-1">T = แรงตึงเส้นเชือก (N), μ =
+                                มวลต่อหน่วยความยาว (kg/m)</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200">
+                            <span class="text-xs text-slate-400 font-sans block mb-1">ความถี่ฮาร์โมนิกที่ n</span>
+                            <span class="text-sky-700 font-bold text-lg">f<sub>n</sub> = (n/2L)√(T/μ)</span>
+                            <span class="text-[10px] text-slate-500 font-sans block mt-1">ตรึง 2 ปลาย: n = 1, 2,
+                                3...</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-white rounded-xl border border-sky-200 text-xs text-slate-700 space-y-1">
+                        <strong class="text-sky-800">📝 ตัวอย่าง:</strong> สายกีตาร์ยาว 0.65 m ตึง 100 N
+                        มวลต่อหน่วยความยาว 0.001 kg/m
+                        <div class="font-mono text-sky-700 mt-1">
+                            v = √(100/0.001) = √100,000 ≈ 316.2 m/s<br>
+                            f₁ = (1/(2×0.65)) × 316.2 ≈ <strong>243 Hz</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- เปรียบเทียบท่อปิด ท่อเปิด สายสั่น -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs bg-white rounded-xl overflow-hidden border border-sky-200">
+                        <thead class="bg-sky-100 text-sky-900">
+                            <tr>
+                                <th class="p-2.5 text-left font-bold">ระบบ</th>
+                                <th class="p-2.5 text-center font-bold">สูตรความถี่</th>
+                                <th class="p-2.5 text-center font-bold">ฮาร์โมนิก</th>
+                                <th class="p-2.5 text-center font-bold">ปลาย</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-sky-100 text-slate-700">
+                            <tr>
+                                <td class="p-2.5 font-medium">ท่อปลายปิด</td>
+                                <td class="p-2.5 text-center font-mono font-bold text-sky-700">f<sub>n</sub> = nv/(4L)
+                                </td>
+                                <td class="p-2.5 text-center">คี่เท่านั้น (1,3,5...)</td>
+                                <td class="p-2.5 text-center">เปิด=A, ปิด=N</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-medium">ท่อปลายเปิด</td>
+                                <td class="p-2.5 text-center font-mono font-bold text-sky-700">f<sub>n</sub> = nv/(2L)
+                                </td>
+                                <td class="p-2.5 text-center">ทุกตัว (1,2,3...)</td>
+                                <td class="p-2.5 text-center">เปิดทั้ง 2 = A</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-medium">สายสั่น (ตรึง 2 ปลาย)</td>
+                                <td class="p-2.5 text-center font-mono font-bold text-sky-700">f<sub>n</sub> = nv/(2L)
+                                </td>
+                                <td class="p-2.5 text-center">ทุกตัว (1,2,3...)</td>
+                                <td class="p-2.5 text-center">ตรึง 2 ปลาย = N</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION 10.6: ปรากฏการณ์ดอปเพลอร์ -->
+            <!-- ========================================== -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-sky-100 text-sky-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">10.6</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">ปรากฏการณ์ดอปเพลอร์และคลื่นกระแทก
+                        </h2>
+                        <p class="text-xs text-slate-500">Doppler Effect, Sonic Boom & Shock Waves</p>
+                    </div>
+                </div>
+
+                <!-- ดอปเพลอร์ -->
+                <div class="space-y-3">
+                    <h3 class="font-bold text-sky-700 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-car-side"></i> 1. ปรากฏการณ์ดอปเพลอร์ (Doppler Effect)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        การเปลี่ยนแปลงความถี่และระดับเสียงที่ผู้สังเกตได้รับ
+                        เมื่อ <strong>แหล่งกำเนิดเสียงและผู้สังเกตเคลื่อนที่สัมพัทธ์กัน</strong>
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+                            <span class="text-xs font-bold text-slate-500">สูตรหลัก: ความถี่ที่ผู้ฟังได้รับ</span>
+                            <div class="text-xl font-bold font-mono text-sky-800 my-2">
+                                f<sub>L</sub> = [(v ± v<sub>L</sub>)/(v ∓ v<sub>s</sub>)] · f<sub>s</sub>
+                            </div>
+                            <div class="text-[11px] text-slate-500 text-left space-y-1">
+                                <p>• v = อัตราเร็วเสียงในอากาศ</p>
+                                <p>• v<sub>L</sub> = อัตราเร็วผู้ฟัง | v<sub>s</sub> = อัตราเร็วแหล่งกำเนิด</p>
+                                <p>• f<sub>s</sub> = ความถี่ที่แหล่งกำเนิดปล่อยออกมา</p>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                            <span class="text-xs font-bold text-slate-500 block">วิธีจำเครื่องหมาย:</span>
+                            <div class="text-xs text-slate-700 space-y-2">
+                                <div class="p-2 bg-emerald-50 rounded-lg border border-emerald-200">
+                                    <strong class="text-emerald-800">เข้าหากัน → f สูงขึ้น (เสียงแหลม):</strong><br>
+                                    ตัวเศษ: v + v<sub>L</sub> (ผู้ฟังวิ่งเข้าหา)<br>
+                                    ตัวส่วน: v − v<sub>s</sub> (แหล่งกำเนิดวิ่งเข้าหา)
+                                </div>
+                                <div class="p-2 bg-rose-50 rounded-lg border border-rose-200">
+                                    <strong class="text-rose-800">หนีจากกัน → f ต่ำลง (เสียงทุ้ม):</strong><br>
+                                    ตัวเศษ: v − v<sub>L</sub> (ผู้ฟังวิ่งหนี)<br>
+                                    ตัวส่วน: v + v<sub>s</sub> (แหล่งกำเนิดวิ่งหนี)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+                        <span
+                            class="text-xs font-bold text-slate-500">ความยาวคลื่นรอบแหล่งกำเนิดที่กำลังเคลื่อนที่</span>
+                        <div class="text-lg font-bold font-mono text-sky-800 my-2">
+                            λ<sub>หน้า</sub> = (v − v<sub>s</sub>)/f<sub>s</sub> &nbsp;|&nbsp; λ<sub>หลัง</sub> = (v +
+                            v<sub>s</sub>)/f<sub>s</sub>
+                        </div>
+                        <p class="text-[11px] text-slate-500">ด้านหน้าคลื่นอัดตัว (λ สั้น) | ด้านหลังคลื่นยืดออก (λ ยาว)
+                        </p>
+                    </div>
+
+                    <!-- ตัวอย่างโจทย์ดอปเพลอร์ -->
+                    <div
+                        class="p-4 bg-gradient-to-r from-sky-50 to-blue-50 rounded-2xl border border-sky-200 text-xs space-y-2">
+                        <strong class="text-sky-900">📝 ตัวอย่างโจทย์:</strong>
+                        <p class="text-slate-700">รถพยาบาลวิ่งเข้าหาผู้ฟังด้วยอัตราเร็ว 30 m/s ส่งเสียงไซเรนที่ 600 Hz
+                            อัตราเร็วเสียง = 340 m/s ผู้ฟังยืนนิ่ง จะได้ยินความถี่เท่าใด?</p>
+                        <div class="font-mono text-sky-700">
+                            f<sub>L</sub> = [(340 + 0)/(340 − 30)] × 600 = (340/310) × 600 ≈ <strong>658 Hz</strong>
+                            (สูงขึ้น)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- คลื่นกระแทก -->
+                <div class="space-y-3 pt-3 border-t border-slate-100">
+                    <h3 class="font-bold text-sky-700 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-jet-fighter"></i> 2. คลื่นกระแทกและโซนิกบูม (Shock Wave & Sonic Boom)
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        เกิดขึ้นเมื่อวัตถุเคลื่อนที่ด้วยอัตราเร็ว <strong>เร็วกว่าเสียง (v<sub>s</sub> > v)</strong>
+                        หน้าคลื่นเสียงซ้อนทับกันเป็นรูปกรวย (Mach Cone)
+                        เกิดแรงดันอากาศมหาศาลและเสียงดังคล้ายระเบิด (Sonic Boom)
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+                            <span class="text-xs font-bold text-slate-500">สมการมุมกรวยคลื่นกระแทก</span>
+                            <div class="text-xl font-bold font-mono text-sky-800 my-2">
+                                sin θ = v/v<sub>s</sub> = 1/M
+                            </div>
+                            <span class="text-xs text-slate-500">
+                                M = เลขมัค (Mach Number) = v<sub>s</sub>/v
+                            </span>
+                        </div>
+                        <div
+                            class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-700 space-y-1">
+                            <strong class="text-sky-800">เงื่อนไขการเกิดคลื่นกระแทก:</strong>
+                            <ul class="space-y-1">
+                                <li>• M > 1 (v<sub>s</sub> > v) — เร็วกว่าเสียง (Supersonic)</li>
+                                <li>• M = 1 — เร็วเท่าเสียง (กำแพงเสียง)</li>
+                                <li>• M < 1 — ช้ากว่าเสียง (Subsonic) → ไม่เกิดคลื่นกระแทก</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div
+                        class="p-4 bg-gradient-to-r from-sky-50 to-blue-50 rounded-2xl border border-sky-200 text-xs space-y-2">
+                        <strong class="text-sky-900">📝 ตัวอย่างโจทย์:</strong>
+                        <p class="text-slate-700">เครื่องบินบินด้วยอัตราเร็ว 680 m/s ในอากาศที่เสียงมีอัตราเร็ว 340 m/s
+                            จงหามุมกรวยคลื่นกระแทก</p>
+                        <div class="font-mono text-sky-700">
+                            M = 680/340 = 2<br>
+                            sin θ = 1/M = 1/2 = 0.5 → θ = <strong>30°</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Links -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <a href="m5-ch10-quiz.html"
+                    class="py-4 px-8 bg-sky-600 hover:bg-sky-700 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i> ทำแบบฝึกหัดท้ายบทที่ 10 (35 คะแนน)
+                </a>
+                <a href="m5-physics.html"
+                    class="py-4 px-8 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-list"></i> กลับหน้ารวมบทเรียน ม.5
+                </a>
+            </div>
+
+        </div>
+    </main>
 </body>
+
 </html>

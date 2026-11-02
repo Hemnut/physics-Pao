@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟิสิกส์ จารย์เปา LAB - การแกว่งของลูกตุ้มอย่างง่าย (Simple Pendulum)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Prompt & Kanit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Prompt', 'Kanit', sans-serif; user-select: none; }
+        body { background-color: #E0F2FE; }
+        
+        /* Glass Card Styling */
+        .phet-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border: 2px solid #E2E8F0;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+        }
+
+        /* PhET Sliders */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: #CBD5E1;
+            border-radius: 8px;
+            height: 7px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #0284C7;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+            border: 2px solid white;
+            transition: transform 0.15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- TOP HEADER NAVBAR -->
+    <header class="bg-[#0B192C] text-white px-4 py-3 flex justify-between items-center shadow-md z-20">
+        <div class="flex items-center gap-3">
+            <a href="experiments.html" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-sky-400 text-sm transition" title="ย้อนกลับ">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="w-8 h-8 rounded-full bg-rose-500 flex items-center justify-center text-white text-base shadow-sm">
+                🎯
+            </div>
+            <h1 class="text-base sm:text-lg font-bold font-kanit tracking-wide flex items-center gap-2">
+                ฟิสิกส์ จารย์เปา LAB <span class="text-xs font-normal text-sky-300 bg-sky-950 px-3 py-1 rounded-full border border-sky-800">การแกว่งของลูกตุ้มอย่างง่าย (Simple Pendulum)</span>
+            </h1>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <button id="btnToggleTheory" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-300 text-xs font-semibold transition flex items-center gap-2 border border-slate-700">
+                <i class="fa-solid fa-book-open"></i> สรุปเนื้อหา & สูตร SHM
+            </button>
+            <button onclick="resetAll()" class="px-3.5 py-1.5 rounded-xl bg-rose-950/80 hover:bg-rose-900 text-rose-300 text-xs font-semibold transition flex items-center gap-1.5 border border-rose-800">
+                <i class="fa-solid fa-rotate-left"></i> รีเซ็ต
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN WORKSPACE -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-4 items-start relative">
+
+        <!-- LEFT PANEL: DISPLAY TOGGLES -->
+        <div class="lg:col-span-3 phet-card p-4 text-xs font-medium space-y-3 z-10">
+            <div class="font-bold font-kanit text-slate-700 pb-2 border-b border-slate-200 flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-compass text-sky-600"></i> ตัวเลือกการแสดงผล
+            </div>
+            <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                <span>สเกลวัดมุม (Protractor)</span>
+                <input type="checkbox" id="chkProtractor" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                <span>เส้นสมดุล (Equilibrium)</span>
+                <input type="checkbox" id="chkEquilibrium" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                <span>เวกเตอร์ความเร็ว (v)</span>
+                <input type="checkbox" id="chkVectors" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                <span>แรงตึงเชือก (T)</span>
+                <input type="checkbox" id="chkTension" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                <span>เส้นทางการแกว่ง (Path)</span>
+                <input type="checkbox" id="chkPath" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                <span>แผนภูมิพลังงาน (Energy)</span>
+                <input type="checkbox" id="chkEnergy" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+            </label>
+        </div>
+
+        <!-- CENTER CANVAS STAGE -->
+        <div class="lg:col-span-6 relative flex flex-col items-center justify-center min-h-[460px]">
+            
+            <!-- TOP HUD -->
+            <div class="absolute top-0 z-10 bg-white/90 backdrop-blur px-6 py-2 rounded-2xl border border-slate-200/80 shadow-sm flex items-center gap-6 text-xs font-mono">
+                <div>มุม (θ): <span id="hudAngle" class="font-bold text-sky-600 text-sm">28.6°</span></div>
+                <div class="w-px h-4 bg-slate-300"></div>
+                <div>ความเร็ว (v): <span id="hudVelocity" class="font-bold text-amber-600 text-sm">0.48 m/s</span></div>
+                <div class="w-px h-4 bg-slate-300"></div>
+                <div>คาบคำนวณ (T): <span id="hudPeriod" class="font-bold text-emerald-600 text-sm">2.01 s</span></div>
+            </div>
+
+            <!-- CANVAS -->
+            <canvas id="simCanvas" class="w-full h-[450px] block cursor-grab active:cursor-grabbing"></canvas>
+        </div>
+
+        <!-- RIGHT PANEL: CONTROLS -->
+        <div class="lg:col-span-3 phet-card p-4 text-xs space-y-4 z-10">
+            
+            <!-- Object Picker -->
+            <div>
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold text-slate-700">เลือกวัตถุลูกตุ้ม</span>
+                    <span class="text-[10px] text-slate-400">*คลิกลากที่ลูกตุ้มเพื่อปรับมุมได้</span>
+                </div>
+                <div class="grid grid-cols-5 gap-1">
+                    <button class="obj-btn active p-1.5 rounded-xl border-2 border-sky-500 bg-sky-50 flex items-center justify-center text-lg" data-obj="sphere">🔮</button>
+                    <button class="obj-btn p-1.5 rounded-xl border-2 border-slate-200 hover:border-sky-300 flex items-center justify-center text-lg" data-obj="apple">🍎</button>
+                    <button class="obj-btn p-1.5 rounded-xl border-2 border-slate-200 hover:border-sky-300 flex items-center justify-center text-lg" data-obj="tennis">🎾</button>
+                    <button class="obj-btn p-1.5 rounded-xl border-2 border-slate-200 hover:border-sky-300 flex items-center justify-center text-lg" data-obj="bowling">🎳</button>
+                    <button class="obj-btn p-1.5 rounded-xl border-2 border-slate-200 hover:border-sky-300 flex items-center justify-center text-lg" data-obj="cat">😸</button>
+                </div>
+            </div>
+
+            <!-- Length Slider -->
+            <div class="pt-2 border-t border-slate-200 space-y-1">
+                <div class="flex justify-between items-center font-bold text-slate-700">
+                    <span>ความยาวเชือก (L)</span>
+                    <span class="font-mono text-sky-600 bg-sky-50 px-2 py-0.5 rounded border border-sky-200 text-xs" id="valLength">1.00 m</span>
+                </div>
+                <input type="range" id="sldLength" min="0.10" max="1.00" step="0.05" value="1.00" class="w-full">
+                <div class="flex justify-between text-[10px] text-slate-400 font-mono">
+                    <span>0.10 m</span>
+                    <span>0.50 m</span>
+                    <span>1.00 m</span>
+                </div>
+            </div>
+
+            <!-- Mass Slider -->
+            <div class="pt-2 border-t border-slate-200 space-y-1">
+                <div class="flex justify-between items-center font-bold text-slate-700">
+                    <span>มวลลูกตุ้ม (m)</span>
+                    <span class="font-mono text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 text-xs" id="valMass">1.00 kg</span>
+                </div>
+                <input type="range" id="sldMass" min="0.10" max="2.00" step="0.05" value="1.00" class="w-full">
+            </div>
+
+            <!-- Gravity Select -->
+            <div class="pt-2 border-t border-slate-200 space-y-1.5">
+                <span class="font-bold text-slate-700 block">ความเร่งโน้มถ่วง (g)</span>
+                <div class="grid grid-cols-2 gap-1.5">
+                    <button class="g-btn active py-1.5 px-2 rounded-xl border-2 border-sky-500 bg-sky-50 text-slate-800 font-medium text-center" data-g="9.8">โลก (9.8 m/s²)</button>
+                    <button class="g-btn py-1.5 px-2 rounded-xl border-2 border-slate-200 hover:border-sky-300 text-slate-700 text-center" data-g="10.0">โลก (10 m/s²)</button>
+                    <button class="g-btn py-1.5 px-2 rounded-xl border-2 border-slate-200 hover:border-sky-300 text-slate-700 text-center" data-g="1.62">ดวงจันทร์ (1.62)</button>
+                    <button class="g-btn py-1.5 px-2 rounded-xl border-2 border-slate-200 hover:border-sky-300 text-slate-700 text-center" data-g="24.79">ดาวพฤหัส (24.79)</button>
+                </div>
+            </div>
+
+            <!-- Damping Slider -->
+            <div class="pt-2 border-t border-slate-200 space-y-1">
+                <div class="flex justify-between items-center font-bold text-slate-700">
+                    <span>แรงเสียดทานอากาศ (Damping)</span>
+                    <span class="font-mono text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-200 text-[11px]" id="valDamping">ไม่มี (0.0)</span>
+                </div>
+                <input type="range" id="sldDamping" min="0" max="0.1" step="0.01" value="0" class="w-full">
+            </div>
+
+            <!-- Stopwatch Box -->
+            <div class="pt-2 border-t border-slate-200 bg-[#0F172A] text-white p-3 rounded-2xl flex items-center justify-between font-mono">
+                <div>
+                    <div class="text-[10px] text-slate-400 font-sans">เวลา (t)</div>
+                    <div class="text-emerald-400 font-bold text-base" id="hudTime">8.07 s</div>
+                </div>
+                <button onclick="resetTimer()" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700 font-sans">
+                    รีเซ็ตเวลา
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- BOTTOM FLOATING PLAYBACK CONTROLLER -->
+    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-20 phet-card px-6 py-2.5 flex items-center gap-5 shadow-xl">
+        <button onclick="resetPendulumPosition()" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-600 text-white flex items-center justify-center text-base shadow-md transition active:scale-95" title="กลับจุดเริ่มต้น">
+            <i class="fa-solid fa-rotate-left"></i>
+        </button>
+        <button id="btnPlayPause" onclick="togglePlay()" class="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center text-xl shadow-lg transition active:scale-95" title="เล่น / หยุด">
+            <i id="playIcon" class="fa-solid fa-play"></i>
+        </button>
+        <button onclick="stepSim()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-sm transition active:scale-95" title="ก้าวไปข้างหน้า">
+            <i class="fa-solid fa-forward-step"></i>
+        </button>
+
+        <div class="w-px h-6 bg-slate-300 my-auto"></div>
+
+        <!-- Simulation Speed Radio -->
+        <div class="flex items-center gap-3 text-xs text-slate-700 font-medium">
+            <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="radio" name="speed" value="1.0" checked class="text-sky-600">
+                <span>ปกติ (Normal)</span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="radio" name="speed" value="0.3" class="text-sky-600">
+                <span>ช้า (Slow Motion)</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- SIMULATION SCRIPT ENGINE -->
+    <script>
+        const state = {
+            length: 1.00,      // m
+            mass: 1.00,        // kg
+            g: 9.8,            // m/s2
+            damping: 0.0,
+            angle: 28.6 * Math.PI / 180, // initial angle rad
+            angularVel: 0,
+            angularAccel: 0,
+            time: 8.07,
+            speedMultiplier: 1.0,
+            isRunning: false,
+            isDragging: false,
+            selectedObject: 'sphere',
+            
+            // Toggles
+            showProtractor: true,
+            showEquilibrium: true,
+            showVectors: true,
+            showTension: true,
+            showPath: true,
+            showEnergy: true
+        };
+
+        const icons = { sphere: '🔮', apple: '🍎', tennis: '🎾', bowling: '🎳', cat: '😸' };
+
+        let canvas, ctx;
+
+        window.onload = function() {
+            canvas = document.getElementById('simCanvas');
+            ctx = canvas.getContext('2d');
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            setupInputs();
+            setupInteractiveDrag();
+            updateCalculations();
+            renderLoop();
+        };
+
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+        }
+
+        function setupInputs() {
+            document.getElementById('sldLength').addEventListener('input', (e) => {
+                state.length = parseFloat(e.target.value);
+                document.getElementById('valLength').innerText = state.length.toFixed(2) + ' m';
+                updateCalculations();
+            });
+
+            document.getElementById('sldMass').addEventListener('input', (e) => {
+                state.mass = parseFloat(e.target.value);
+                document.getElementById('valMass').innerText = state.mass.toFixed(2) + ' kg';
+            });
+
+            document.getElementById('sldDamping').addEventListener('input', (e) => {
+                state.damping = parseFloat(e.target.value);
+                document.getElementById('valDamping').innerText = state.damping === 0 ? 'ไม่มี (0.0)' : state.damping.toFixed(2);
+            });
+
+            // Toggles
+            document.getElementById('chkProtractor').addEventListener('change', e => state.showProtractor = e.target.checked);
+            document.getElementById('chkEquilibrium').addEventListener('change', e => state.showEquilibrium = e.target.checked);
+            document.getElementById('chkVectors').addEventListener('change', e => state.showVectors = e.target.checked);
+            document.getElementById('chkTension').addEventListener('change', e => state.showTension = e.target.checked);
+            document.getElementById('chkPath').addEventListener('change', e => state.showPath = e.target.checked);
+            document.getElementById('chkEnergy').addEventListener('change', e => state.showEnergy = e.target.checked);
+
+            // Speed Radios
+            document.querySelectorAll('input[name="speed"]').forEach(r => {
+                r.addEventListener('change', e => state.speedMultiplier = parseFloat(e.target.value));
+            });
+
+            // Object Buttons
+            document.querySelectorAll('.obj-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.obj-btn').forEach(b => b.classList.remove('active', 'border-sky-500', 'bg-sky-50'));
+                    btn.classList.add('active', 'border-sky-500', 'bg-sky-50');
+                    state.selectedObject = btn.dataset.obj;
+                });
+            });
+
+            // Gravity Buttons
+            document.querySelectorAll('.g-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.g-btn').forEach(b => b.classList.remove('active', 'border-sky-500', 'bg-sky-50'));
+                    btn.classList.add('active', 'border-sky-500', 'bg-sky-50');
+                    state.g = parseFloat(btn.dataset.g);
+                    updateCalculations();
+                });
+            });
+        }
+
+        // Mouse Dragging to set Pendulum Angle
+        function setupInteractiveDrag() {
+            const getCanvasCoords = (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            };
+
+            const startDrag = (e) => {
+                const p = getCanvasCoords(e);
+                const w = canvas.width / (window.devicePixelRatio || 1);
+                const pivotX = w / 2;
+                const pivotY = 90;
+                const scalePx = 220;
+                const armLen = state.length * scalePx;
+
+                const bobX = pivotX + armLen * Math.sin(state.angle);
+                const bobY = pivotY + armLen * Math.cos(state.angle);
+
+                const dist = Math.hypot(p.x - bobX, p.y - bobY);
+                if (dist < 40) {
+                    state.isDragging = true;
+                    state.isRunning = false;
+                    document.getElementById('playIcon').className = 'fa-solid fa-play';
+                }
+            };
+
+            const doDrag = (e) => {
+                if (!state.isDragging) return;
+                const p = getCanvasCoords(e);
+                const w = canvas.width / (window.devicePixelRatio || 1);
+                const pivotX = w / 2;
+                const pivotY = 90;
+
+                const dx = p.x - pivotX;
+                const dy = p.y - pivotY;
+
+                let newAngle = Math.atan2(dx, dy);
+                // Clamp max angle 60 deg
+                const maxRad = 60 * Math.PI / 180;
+                state.angle = Math.max(-maxRad, Math.min(maxRad, newAngle));
+                state.angularVel = 0;
+            };
+
+            const stopDrag = () => { state.isDragging = false; };
+
+            canvas.addEventListener('mousedown', startDrag);
+            canvas.addEventListener('mousemove', doDrag);
+            window.addEventListener('mouseup', stopDrag);
+
+            canvas.addEventListener('touchstart', startDrag);
+            canvas.addEventListener('touchmove', doDrag);
+            window.addEventListener('touchend', stopDrag);
+        }
+
+        function updateCalculations() {
+            const T = 2 * Math.PI * Math.sqrt(state.length / state.g);
+            document.getElementById('hudPeriod').innerText = T.toFixed(2) + ' s';
+        }
+
+        function togglePlay() {
+            state.isRunning = !state.isRunning;
+            document.getElementById('playIcon').className = state.isRunning ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+        }
+
+        function resetTimer() { state.time = 0; document.getElementById('hudTime').innerText = '0.00 s'; }
+        
+        function resetPendulumPosition() {
+            state.isRunning = false;
+            state.angle = 28.6 * Math.PI / 180;
+            state.angularVel = 0;
+            state.angularAccel = 0;
+            document.getElementById('playIcon').className = 'fa-solid fa-play';
+        }
+
+        function resetAll() {
+            resetPendulumPosition();
+            resetTimer();
+        }
+
+        function stepSim() {
+            state.isRunning = false;
+            document.getElementById('playIcon').className = 'fa-solid fa-play';
+            updatePhysics(0.02);
+        }
+
+        function updatePhysics(dt) {
+            const effectiveDt = dt * state.speedMultiplier;
+            state.angularAccel = (-state.g / state.length) * Math.sin(state.angle) - (state.damping * state.angularVel);
+            state.angularVel += state.angularAccel * effectiveDt;
+            state.angle += state.angularVel * effectiveDt;
+            state.time += effectiveDt;
+
+            // Update Readouts
+            const deg = (state.angle * 180 / Math.PI).toFixed(1);
+            const linearVel = Math.abs(state.angularVel * state.length).toFixed(2);
+            document.getElementById('hudAngle').innerText = `${deg}°`;
+            document.getElementById('hudVelocity').innerText = `${linearVel} m/s`;
+            document.getElementById('hudTime').innerText = `${state.time.toFixed(2)} s`;
+        }
+
+        function renderLoop() {
+            const w = canvas.width / (window.devicePixelRatio || 1);
+            const h = canvas.height / (window.devicePixelRatio || 1);
+
+            ctx.clearRect(0, 0, w, h);
+
+            const pivotX = w / 2;
+            const pivotY = 90;
+            const scalePx = 220; // 1m = 220px
+            const armLen = state.length * scalePx;
+
+            if (state.isRunning && !state.isDragging) {
+                updatePhysics(0.016);
+            }
+
+            const bobX = pivotX + armLen * Math.sin(state.angle);
+            const bobY = pivotY + armLen * Math.cos(state.angle);
+
+            // 1. PATH ARC DOTTED LINE (ถ้าติ๊ก)
+            if (state.showPath) {
+                const maxSwingRad = 35 * Math.PI / 180; // Arc path range
+                ctx.strokeStyle = '#0284C7';
+                ctx.lineWidth = 4;
+                ctx.setLineDash([1, 8]); // Distinct dotted path matching screenshot
+                ctx.beginPath();
+                ctx.arc(pivotX, pivotY, armLen, (Math.PI / 2) - maxSwingRad, (Math.PI / 2) + maxSwingRad);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            // 2. PROTRACTOR ARC (ถ้าติ๊ก)
+            if (state.showProtractor) {
+                ctx.strokeStyle = '#CBD5E1';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.arc(pivotX, pivotY, 150, (Math.PI / 2) - (60 * Math.PI / 180), (Math.PI / 2) + (60 * Math.PI / 180));
+                ctx.stroke();
+
+                ctx.font = '11px Prompt';
+                ctx.fillStyle = '#64748B';
+                ctx.textAlign = 'center';
+                [0, 20, 40, 60].forEach(deg => {
+                    const rad = deg * Math.PI / 180;
+                    // Center tick
+                    const px0 = pivotX + 150 * Math.sin(rad);
+                    const py0 = pivotY + 150 * Math.cos(rad);
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(pivotX + 145 * Math.sin(rad), pivotY + 145 * Math.cos(rad));
+                    ctx.lineTo(pivotX + 155 * Math.sin(rad), pivotY + 155 * Math.cos(rad));
+                    ctx.strokeStyle = '#94A3B8';
+                    ctx.stroke();
+
+                    ctx.fillText(`${deg}°`, pivotX + 168 * Math.sin(rad), pivotY + 168 * Math.cos(rad));
+                    
+                    if (deg !== 0) {
+                        ctx.beginPath();
+                        ctx.moveTo(pivotX - 145 * Math.sin(rad), pivotY + 145 * Math.cos(rad));
+                        ctx.lineTo(pivotX - 155 * Math.sin(rad), pivotY + 155 * Math.cos(rad));
+                        ctx.stroke();
+
+                        ctx.fillText(`${deg}°`, pivotX - 168 * Math.sin(rad), pivotY + 168 * Math.cos(rad));
+                    }
+                });
+            }
+
+            // 3. EQUILIBRIUM LINE (ถ้าติ๊ก)
+            if (state.showEquilibrium) {
+                ctx.strokeStyle = '#0284C7';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(pivotX, pivotY);
+                ctx.lineTo(pivotX, pivotY + armLen + 40);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            // 4. PIVOT MOUNT BAR
+            ctx.fillStyle = '#334155';
+            ctx.fillRect(pivotX - 55, pivotY - 12, 110, 12);
+            ctx.fillStyle = '#0284C7';
+            ctx.beginPath();
+            ctx.arc(pivotX, pivotY, 6, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 5. STRING
+            ctx.strokeStyle = '#1E293B';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(pivotX, pivotY);
+            ctx.lineTo(bobX, bobY);
+            ctx.stroke();
+
+            // 6. TENSION VECTOR (T) (ถ้าติ๊ก)
+            if (state.showTension) {
+                const tensionMag = state.mass * (state.g * Math.cos(state.angle) + (state.angularVel * state.angularVel * state.length));
+                const tLen = Math.min(50, tensionMag * 2.5);
+                const tx = bobX - tLen * Math.sin(state.angle);
+                const ty = bobY - tLen * Math.cos(state.angle);
+
+                drawArrow(ctx, bobX, bobY, tx, ty, '#EF4444', 3, 'T (แรงตึง)');
+            }
+
+            // 7. VELOCITY VECTOR (v) (ถ้าติ๊ก)
+            if (state.showVectors) {
+                const linearV = state.angularVel * state.length;
+                if (Math.abs(linearV) > 0.02 || state.isDragging) {
+                    const vLen = linearV * 40; // Arrow length scale
+                    const vx = bobX + vLen * Math.cos(state.angle);
+                    const vy = bobY - vLen * Math.sin(state.angle);
+
+                    drawArrow(ctx, bobX, bobY, vx, vy, '#F59E0B', 3, `v = ${Math.abs(linearV).toFixed(2)} m/s`);
+                }
+            }
+
+            // 8. BOB OBJECT WITH 3D GRADIENT
+            const r = 18 + state.mass * 3;
+            if (state.selectedObject === 'sphere') {
+                const grad = ctx.createRadialGradient(bobX - 5, bobY - 5, 2, bobX, bobY, r);
+                grad.addColorStop(0, '#FFFFFF');
+                grad.addColorStop(0.3, '#F3E8FF');
+                grad.addColorStop(0.7, '#D8B4FE');
+                grad.addColorStop(1, '#A855F7');
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(bobX, bobY, r, 0, Math.PI * 2);
+                ctx.fill();
+            } else {
+                ctx.font = `${r * 2}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(icons[state.selectedObject], bobX, bobY);
+            }
+
+            requestAnimationFrame(renderLoop);
+        }
+
+        function drawArrow(ctx, x1, y1, x2, y2, color, width, label) {
+            const headlen = 8;
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const angle = Math.atan2(dy, dx);
+
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = width;
+
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - headlen * Math.cos(angle - Math.PI / 6), y2 - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(x2 - headlen * Math.cos(angle + Math.PI / 6), y2 - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fill();
+
+            if (label) {
+                ctx.font = 'bold 11px Prompt';
+                ctx.textAlign = 'left';
+                ctx.fillText(label, x2 + 6, y2 + 3);
+            }
+            ctx.restore();
+        }
+    </script>
+</body>
+</html>

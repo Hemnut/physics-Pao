@@ -11,15 +11,21 @@
     --color-bg-light: #f8fafc;
     --color-text-dark: #0f172a;
     --color-text-muted: #475569;
-    
+
     /* สีหลักสำหรับธีมฟิสิกส์จารย์เปา */
-    --color-primary: #2563eb;          /* Royal Blue */
-    --color-primary-hover: #1d4ed8;    /* Royal Blue Hover */
-    --color-secondary: #3b82f6;        /* Light Blue */
-    --color-gold: #eab308;             /* Yellow Gold */
-    --color-gold-light: #fef9c3;       /* Gold Tag BG */
-    --color-deep-navy: #0b132b;        /* Deep Navy Blue for Footer */
-    
+    --color-primary: #2563eb;
+    /* Royal Blue */
+    --color-primary-hover: #1d4ed8;
+    /* Royal Blue Hover */
+    --color-secondary: #3b82f6;
+    /* Light Blue */
+    --color-gold: #eab308;
+    /* Yellow Gold */
+    --color-gold-light: #fef9c3;
+    /* Gold Tag BG */
+    --color-deep-navy: #0b132b;
+    /* Deep Navy Blue for Footer */
+
     /* สีพาสเทลเฉพาะการ์ดบทเรียน */
     --color-card-pink: #f43f5e;
     --color-card-pink-bg: #fff1f2;
@@ -130,8 +136,13 @@ button {
 }
 
 @keyframes pulseAtom {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .logo-text {
@@ -176,11 +187,13 @@ button {
     border-radius: 2px;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
     color: var(--color-primary);
 }
 
-.nav-link:hover::after, .nav-link.active::after {
+.nav-link:hover::after,
+.nav-link.active::after {
     width: 100%;
 }
 
@@ -209,7 +222,8 @@ button {
 
 .gold-badge {
     background-color: var(--color-gold-light);
-    color: #854d0e; /* สีเหลืองเข้มข้น */
+    color: #854d0e;
+    /* สีเหลืองเข้มข้น */
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -288,7 +302,8 @@ button {
     overflow: hidden;
     /* ไล่เฉดสีขอบฟ้า-น้ำเงินด้วยการใช้พื้นหลังและการทำไล่ระดับสี */
     background: linear-gradient(135deg, #60a5fa, #1d4ed8);
-    padding: 6px; /* ขอบเฉดสีรอบรูปภาพ */
+    padding: 6px;
+    /* ขอบเฉดสีรอบรูปภาพ */
     box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
     transition: var(--transition-smooth);
 }
@@ -310,7 +325,8 @@ button {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 15%; /* โฟกัสไปที่ใบหน้าด้านบนของภาพ */
+    object-position: center 15%;
+    /* โฟกัสไปที่ใบหน้าด้านบนของภาพ */
     transition: var(--transition-smooth);
 }
 
@@ -389,7 +405,8 @@ button {
     box-shadow: var(--shadow-soft);
     border: 2px solid transparent;
     transition: var(--transition-smooth);
-    width: calc(25% - 1.125rem); /* แถวละ 4 กล่อง (ลบ gap ส่วนเกิน) */
+    width: calc(25% - 1.125rem);
+    /* แถวละ 4 กล่อง (ลบ gap ส่วนเกิน) */
 }
 
 /* ไอคอนการ์ด */
@@ -423,40 +440,72 @@ button {
 .border-pink {
     border-color: rgba(244, 63, 94, 0.2);
 }
-.bg-pink-light { background-color: var(--color-card-pink-bg); }
-.text-pink { color: var(--color-card-pink); }
+
+.bg-pink-light {
+    background-color: var(--color-card-pink-bg);
+}
+
+.text-pink {
+    color: var(--color-card-pink);
+}
 
 .border-blue {
     border-color: rgba(59, 130, 246, 0.2);
 }
-.bg-blue-light { background-color: var(--color-card-blue-bg); }
-.text-blue { color: var(--color-card-blue); }
+
+.bg-blue-light {
+    background-color: var(--color-card-blue-bg);
+}
+
+.text-blue {
+    color: var(--color-card-blue);
+}
 
 .border-mint {
     border-color: rgba(16, 185, 129, 0.2);
 }
-.bg-mint-light { background-color: var(--color-card-mint-bg); }
-.text-mint { color: var(--color-card-mint); }
+
+.bg-mint-light {
+    background-color: var(--color-card-mint-bg);
+}
+
+.text-mint {
+    color: var(--color-card-mint);
+}
 
 .border-gold {
     border-color: rgba(245, 158, 11, 0.2);
 }
-.bg-gold-light { background-color: var(--color-card-gold-bg); }
-.text-gold { color: var(--color-card-gold); }
+
+.bg-gold-light {
+    background-color: var(--color-card-gold-bg);
+}
+
+.text-gold {
+    color: var(--color-card-gold);
+}
 
 .border-purple {
     border-color: rgba(139, 92, 246, 0.2);
 }
-.bg-purple-light { background-color: var(--color-card-purple-bg); }
-.text-purple { color: var(--color-card-purple); }
+
+.bg-purple-light {
+    background-color: var(--color-card-purple-bg);
+}
+
+.text-purple {
+    color: var(--color-card-purple);
+}
 
 /* สไตล์การ์ดเกมส์สีชมพูส้มสดใส */
 .border-pink-orange {
     border-color: rgba(244, 63, 94, 0.25);
 }
+
 .bg-pink-orange-light {
     background-color: var(--color-card-pink-bg);
 }
+
 .text-pink-orange {
     color: var(--color-card-pink);
 }
@@ -467,12 +516,29 @@ button {
     box-shadow: var(--shadow-card-hover);
 }
 
-.course-card.border-pink:hover { border-color: var(--color-card-pink); }
-.course-card.border-blue:hover { border-color: var(--color-card-blue); }
-.course-card.border-mint:hover { border-color: var(--color-card-mint); }
-.course-card.border-gold:hover { border-color: var(--color-card-gold); }
-.course-card.border-purple:hover { border-color: var(--color-card-purple); }
-.course-card.border-pink-orange:hover { border-color: var(--color-card-pink); }
+.course-card.border-pink:hover {
+    border-color: var(--color-card-pink);
+}
+
+.course-card.border-blue:hover {
+    border-color: var(--color-card-blue);
+}
+
+.course-card.border-mint:hover {
+    border-color: var(--color-card-mint);
+}
+
+.course-card.border-gold:hover {
+    border-color: var(--color-card-gold);
+}
+
+.course-card.border-purple:hover {
+    border-color: var(--color-card-purple);
+}
+
+.course-card.border-pink-orange:hover {
+    border-color: var(--color-card-pink);
+}
 
 .course-card:hover .card-icon-wrapper {
     transform: scale(1.1);
@@ -522,7 +588,7 @@ button {
     border-radius: 50px;
     letter-spacing: 1px;
     font-family: 'Inter', sans-serif;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 /* ==========================================================================
@@ -582,7 +648,8 @@ button {
 
 .footer-quote {
     font-size: 1.05rem;
-    color: #cbd5e1; /* สีเทาอ่อน */
+    color: #cbd5e1;
+    /* สีเทาอ่อน */
     font-style: italic;
     line-height: 1.7;
     margin-bottom: 2rem;
@@ -638,22 +705,6 @@ button {
     font-weight: 500;
 }
 
-/* เน้นสีพาสเทลเฉพาะสำหรับหัวข้อทางลัด */
-.color-orange {
-    background-color: rgba(249, 115, 22, 0.15);
-    color: var(--shortcut-orange);
-}
-
-.color-green {
-    background-color: rgba(16, 185, 129, 0.15);
-    color: var(--shortcut-green);
-}
-
-.color-pink {
-    background-color: rgba(236, 72, 153, 0.15);
-    color: var(--shortcut-pink);
-}
-
 /* ด้านล่างสุด */
 .footer-bottom-text {
     padding-top: 1.5rem;
@@ -671,11 +722,12 @@ button {
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .course-card {
-        width: calc(33.333% - 1rem); /* แถวละ 3 กล่อง */
+        width: calc(33.333% - 1rem);
+        /* แถวละ 3 กล่อง */
     }
-    
+
     .footer-layout {
         gap: 2.5rem;
     }
@@ -736,7 +788,8 @@ button {
 
     /* ปรับแต่งการ์ดบทเรียน */
     .course-card {
-        width: calc(50% - 0.625rem); /* แถวละ 2 กล่อง */
+        width: calc(50% - 0.625rem);
+        /* แถวละ 2 กล่อง */
     }
 
     /* ปรับแต่ง Footer */
@@ -774,7 +827,8 @@ button {
     }
 
     .course-card {
-        width: 100%; /* แถวละ 1 กล่องเต็มจอ */
+        width: 100%;
+        /* แถวละ 1 กล่องเต็มจอ */
     }
 
     .cta-button {
@@ -795,4 +849,111 @@ button {
         width: 100%;
         justify-content: center;
     }
+}
+
+/* ==========================================================================
+   8. สไตล์ป้ายทางลัด (Shortcut Labels) - รองรับทุกหน้าจอ
+   ========================================================================== */
+.shortcut-label.color-blue,
+.color-blue {
+    background-color: rgba(14, 165, 233, 0.2) !important;
+    color: #38bdf8 !important;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.shortcut-label.color-green,
+.color-green {
+    background-color: rgba(16, 185, 129, 0.2) !important;
+    color: #34d399 !important;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.shortcut-label.color-orange,
+.color-orange {
+    background-color: rgba(249, 115, 22, 0.2) !important;
+    color: #fb923c !important;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.shortcut-label.color-pink,
+.color-pink {
+    background-color: rgba(236, 72, 153, 0.2) !important;
+    color: #f472b6 !important;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* การจัดวางสัดส่วนส่วนท้าย Footer */
+.footer-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-profile-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-subtitle {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 0.2rem;
+}
+
+/* กลุ่มไอคอนช่องทางติดต่อด้านล่าง */
+.footer-contact-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-icon-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* สีเมื่อนำเมาส์ไปชี้ (Hover Colors) */
+.footer-icon-btn.facebook:hover {
+    background-color: #1877f2;
+    color: #ffffff;
+    border-color: #1877f2;
+}
+
+.footer-icon-btn.phone:hover {
+    background-color: #10b981;
+    color: #ffffff;
+    border-color: #10b981;
+}
+
+.footer-icon-btn.line:hover {
+    background-color: #06c755;
+    color: #ffffff;
+    border-color: #06c755;
 }

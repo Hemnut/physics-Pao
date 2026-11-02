@@ -1,20 +1,512 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุป บทที่ 11 แสงและทัศนอุปกรณ์ | ฟิสิกส์ จารย์เปา</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปเจาะลึก บทที่ 11: แสงและทัศนอุปกรณ์ (Geometrical Optics) ฉบับสมบูรณ์ | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Courier New', 'monospace'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-<main class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-extrabold mb-6">สรุปเนื้อหา บทที่ 11: แสงและทัศนอุปกรณ์</h1>
-    <div class="bg-white p-6 rounded-2xl shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-amber-700">1. การสะท้อนและการหักเห</h2>
-        <p class="text-sm">สูตรกระจก/เลนส์: $\frac{1}{f} = \frac{1}{s} + \frac{1}{s'}$[cite: 2]</p>
-        <p class="text-sm">กำลังขยาย: $m = \frac{s'}{s} = \frac{f}{s - f}$[cite: 2]</p>
-        <h2 class="text-xl font-bold text-amber-700">2. ความลึกจริง-ความลึกปรากฏ</h2>
-        <p class="text-sm">$\frac{\text{ลึกปรากฏ}}{\text{ลึกจริง}} = \frac{n_2}{n_1}$[cite: 2]</p>
-    </div>
-</main>
+
+<body class="bg-slate-100 text-slate-800 min-h-screen scroll-smooth font-sans">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm backdrop-blur-md bg-white/95">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="bg-gradient-to-br from-amber-500 to-orange-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-glasses"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-amber-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-6 items-center">
+                <a href="index.html"
+                    class="text-sm font-medium text-slate-500 hover:text-amber-600 transition-colors">HOME</a>
+                <a href="m5-physics.html"
+                    class="text-sm font-semibold text-amber-600 border-b-2 border-amber-600 pb-0.5">บทเรียน ม.5</a>
+                <a href="m5-ch11-quiz.html"
+                    class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold rounded-xl shadow-sm transition-all">
+                    <i class="fa-solid fa-pen-to-square"></i> ทำแบบฝึกหัด (35 ข้อ)
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+
+        <!-- Breadcrumb -->
+        <div class="flex items-center justify-between mb-4">
+            <a href="m5-physics.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-amber-600 hover:text-amber-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+            </a>
+            <span class="text-xs text-slate-400 font-inter">CHAPTER 11 — COMPREHENSIVE SUMMARY</span>
+        </div>
+
+        <!-- Hero Card -->
+        <div
+            class="bg-gradient-to-r from-slate-900 via-amber-950 to-orange-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute w-72 h-72 bg-amber-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <div
+                    class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/30 text-amber-300 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-glasses"></i> บทที่ 11 — ฟิสิกส์ ม.5 เล่ม 3
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">สรุปเจาะลึก: แสงและทัศนอุปกรณ์ (Geometrical Optics)
+                </h1>
+                <p class="text-amber-100 text-sm max-w-2xl leading-relaxed">
+                    การสะท้อนของแสง กระจกเงาราบและทรงกลม | การหักเห กฎสเนลล์ มุมวิกฤตและสะท้อนกลับหมด |
+                    ลึกจริง-ลึกปรากฏ | ปริซึม รุ้ง มิราจ | เลนส์บาง |
+                    ตาและสายตาสั้น-ยาว | กล้องจุลทรรศน์ กล้องโทรทรรศน์ | ความสว่างและการผสมแสงสี
+                </p>
+            </div>
+        </div>
+
+        <!-- Master Formula Cheat Sheet -->
+        <div class="bg-white rounded-3xl p-6 border border-amber-200 shadow-md mb-8">
+            <h2 class="text-lg font-extrabold text-amber-800 flex items-center gap-2 mb-4">
+                <i class="fa-solid fa-sheet-plastic"></i> สูตรสำคัญประจำบท — Quick Reference
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 text-center">
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">กฎการสะท้อน</span>
+                    <strong class="text-amber-800 font-mono text-sm">θ₁ = θ₂</strong>
+                </div>
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">สมการกระจก/เลนส์</span>
+                    <strong class="text-amber-800 font-mono text-sm">1/f = 1/s + 1/s'</strong>
+                </div>
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">กำลังขยาย</span>
+                    <strong class="text-amber-800 font-mono text-sm">m = s'/s = y'/y</strong>
+                </div>
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">กฎของสเนลล์</span>
+                    <strong class="text-amber-800 font-mono text-sm">n₁ sin θ₁ = n₂ sin θ₂</strong>
+                </div>
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">ดัชนีหักเห</span>
+                    <strong class="text-amber-800 font-mono text-sm">n = c/v</strong>
+                </div>
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">มุมวิกฤต</span>
+                    <strong class="text-amber-800 font-mono text-sm">sin θ<sub>c</sub> = n₂/n₁</strong>
+                </div>
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">ลึกจริง-ปรากฏ</span>
+                    <strong class="text-amber-800 font-mono text-sm">s'/s = n(ตา)/n(วัตถุ)</strong>
+                </div>
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                    <span class="text-[10px] text-slate-500 block mb-1">ความสว่าง</span>
+                    <strong class="text-amber-800 font-mono text-sm">E = I/R² (ลักซ์)</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="space-y-8">
+
+            <!-- ========================================== -->
+            <!-- SECTION 11.1: การสะท้อนของแสงและกระจกเงา -->
+            <!-- ========================================== -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">11.1</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">การสะท้อนของแสงและกระจกเงา</h2>
+                        <p class="text-xs text-slate-500">Law of Reflection & Spherical Mirrors</p>
+                    </div>
+                </div>
+
+                <!-- กระจกเงาราบ -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs md:text-sm">
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-square"></i> 1. กระจกเงาราบ (Plane Mirror)
+                        </h3>
+                        <ul class="text-slate-700 space-y-1.5 leading-relaxed">
+                            <li>• กฎการสะท้อน: <strong>มุมตกกระทบ = มุมสะท้อน</strong> (θ₁ = θ₂)</li>
+                            <li>• รังสีตกกระทบ เส้นปกติ และรังสีสะท้อน อยู่ในระนาบเดียวกัน</li>
+                            <li>• ภาพที่เกิดขึ้นเป็น <strong>ภาพเสมือน หัวตั้ง</strong> อยู่หลังกระจก</li>
+                            <li>• ระยะภาพ = ระยะวัตถุ (s' = s)</li>
+                            <li>• ขนาดภาพ = ขนาดวัตถุ (y' = y) → กำลังขยาย m = 1</li>
+                            <li>• เกิดการกลับข้างซ้าย-ขวา เรียกว่า <em>ปรัศวภาควิโลม</em></li>
+                        </ul>
+                        <div class="p-2 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-900">
+                            <strong>⚠️ กระจก 2 บานทำมุม θ:</strong> จำนวนภาพ = (360°/θ) − 1
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-circle-half-stroke"></i> 2. กระจกเงาทรงกลม (Spherical Mirrors)
+                        </h3>
+                        <ul class="text-slate-700 space-y-1.5 leading-relaxed">
+                            <li>• ความยาวโฟกัส f = R/2 เสมอ (R = รัศมีความโค้ง)</li>
+                            <li>• <strong>กระจกเว้า (Concave):</strong> <em>รวมแสง</em> (f > 0)
+                                ให้ทั้งภาพจริง (หัวกลับ) และภาพเสมือน (หัวตั้ง เมื่อ s < f)</li>
+                            <li>• <strong>กระจกนูน (Convex):</strong> <em>กระจายแสง</em> (f < 0) ให้เฉพาะ <strong></strong>
+                                    ภาพเสมือนหัวตั้งขนาดเล็กกว่าวัตถุ</strong> เสมอ</li>
+                            <li>• การใช้งาน: กระจกเว้า = จานดาวเทียม, ไฟหน้ารถ | กระจกนูน = กระจกมองหลัง, กระจกทางโค้ง
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- สูตรคำนวณ -->
+                <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-6 space-y-4">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> สูตรคำนวณกระจกโค้งและเลนส์บาง
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center font-mono">
+                        <div class="p-3 bg-white rounded-xl border border-amber-200">
+                            <span class="text-xs text-slate-400 font-sans block mb-1">สมการโฟกัส</span>
+                            <span class="text-amber-800 font-bold text-base">1/f = 1/s + 1/s'</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-amber-200">
+                            <span class="text-xs text-slate-400 font-sans block mb-1">กำลังขยาย (m)</span>
+                            <span class="text-amber-800 font-bold text-base">m = s'/s = y'/y</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-amber-200">
+                            <span class="text-xs text-slate-400 font-sans block mb-1">สูตรลัด</span>
+                            <span class="text-amber-800 font-bold text-base">m = f/(s − f)</span>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-white rounded-xl border border-amber-100 text-xs text-slate-600 space-y-1">
+                        <strong>ข้อตกลงเครื่องหมาย:</strong>
+                        <p>• กระจกเว้า / เลนส์นูน: f, R เป็น <strong>บวก (+)</strong></p>
+                        <p>• กระจกนูน / เลนส์เว้า: f, R เป็น <strong>ลบ (−)</strong></p>
+                        <p>• ภาพจริง (หัวกลับ อยู่หน้ากระจก/หลังเลนส์): s' เป็น <strong>บวก (+)</strong></p>
+                        <p>• ภาพเสมือน (หัวตั้ง อยู่หลังกระจก/หน้าเลนส์): s' เป็น <strong>ลบ (−)</strong></p>
+                        <p>• |m| > 1 = ภาพขยาย | |m| < 1=ภาพย่อ | m> 0 = หัวตั้ง | m < 0=หัวกลับ</p>
+                    </div>
+                </div>
+
+                <!-- ตัวอย่างโจทย์ -->
+                <div
+                    class="p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-200 text-xs space-y-2">
+                    <strong class="text-amber-900">📝 ตัวอย่างโจทย์:</strong>
+                    <p class="text-slate-700">วัตถุอยู่ห่างจากกระจกเว้า 30 cm กระจกมีความยาวโฟกัส 10 cm
+                        จงหาตำแหน่งภาพและกำลังขยาย</p>
+                    <div class="font-mono text-amber-700">
+                        1/f = 1/s + 1/s' → 1/10 = 1/30 + 1/s' → 1/s' = 1/10 − 1/30 = 2/30 = 1/15<br>
+                        s' = <strong>15 cm</strong> (บวก = ภาพจริง หัวกลับ)<br>
+                        m = s'/s = 15/30 = <strong>0.5</strong> (ขนาดครึ่งหนึ่ง หัวกลับ)
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION 11.2: การหักเห การสะท้อนกลับหมด -->
+            <!-- ========================================== -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">11.2</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">การหักเห การสะท้อนกลับหมด
+                            และลึกจริง-ปรากฏ</h2>
+                        <p class="text-xs text-slate-500">Refraction, Total Internal Reflection & Apparent Depth</p>
+                    </div>
+                </div>
+
+                <!-- กฎสเนลล์ -->
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                    <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-water"></i> กฎของสเนลล์และดัชนีหักเห (Snell's Law)
+                    </h3>
+                    <div
+                        class="p-3 bg-white rounded-xl font-mono text-center font-bold text-amber-900 text-base border border-slate-200">
+                        n₁ sin θ₁ = n₂ sin θ₂ &nbsp;→&nbsp; sin θ₁/sin θ₂ = v₁/v₂ = λ₁/λ₂ = n₂/n₁
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <strong class="text-amber-800">ดัชนีหักเห (n):</strong>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>• n = c/v (c = 3 × 10⁸ m/s)</li>
+                                <li>• n(อากาศ) ≈ 1.00 | n(น้ำ) ≈ 1.33 | n(แก้ว) ≈ 1.50</li>
+                                <li>• n(เพชร) ≈ 2.42</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <strong class="text-amber-800">ทิศทางการหักเห:</strong>
+                            <ul class="text-slate-600 space-y-1">
+                                <li>• จาก n น้อย → n มาก: <strong>หักเหเข้าหาเส้นปกติ</strong> (θ₂ < θ₁)</li>
+                                <li>• จาก n มาก → n น้อย: <strong>หักเหออกจากเส้นปกติ</strong> (θ₂ > θ₁)</li>
+                                <li>• <strong>ความถี่ไม่เปลี่ยน!</strong> เปลี่ยนเฉพาะ v และ λ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- สะท้อนกลับหมดและลึกปรากฏ -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-rotate-left text-orange-600"></i> การสะท้อนกลับหมดและมุมวิกฤต
+                            (θ<sub>c</sub>)
+                        </h3>
+                        <ul class="text-slate-600 leading-relaxed space-y-1.5">
+                            <li>• เกิดเมื่อแสงเดินทางจากตัวกลาง <strong>n มาก → n น้อย</strong> เท่านั้น</li>
+                            <li>• มุมวิกฤต (θ<sub>c</sub>): มุมตกกระทบที่ทำให้มุมหักเห = 90°</li>
+                        </ul>
+                        <div
+                            class="font-mono font-bold text-amber-800 text-center bg-white p-2 rounded-lg border border-slate-200">
+                            sin θ<sub>c</sub> = n₂/n₁ &nbsp;&nbsp;(เมื่อ n₁ > n₂)
+                        </div>
+                        <ul class="text-slate-600 space-y-1">
+                            <li>• ถ้า θ > θ<sub>c</sub> → เกิดการสะท้อนกลับหมด 100%</li>
+                            <li>• <strong>การประยุกต์:</strong> เส้นใยนำแสง (Fiber Optics), เพชรแวววาว</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-eye text-sky-600"></i> ลึกจริง - ลึกปรากฏ (Apparent Depth)
+                        </h3>
+                        <div
+                            class="font-mono font-bold text-amber-800 text-center bg-white p-2 rounded-lg border border-slate-200">
+                            ลึกปรากฏ(s') / ลึกจริง(s) = n(ตา) / n(วัตถุ)
+                        </div>
+                        <ul class="text-slate-600 space-y-1.5 leading-relaxed">
+                            <li>• มองปลาในน้ำ (n=4/3) จากอากาศ (n=1):<br>
+                                s' = s/(4/3) = (3/4)s → <strong>เห็นปลาอยู่ตื้นกว่าจริง</strong></li>
+                            <li>• ปลาในน้ำมองนกในอากาศ:<br>
+                                s' = s×(4/3)/1 = (4/3)s → <strong>เห็นนกอยู่ไกลกว่าจริง</strong></li>
+                        </ul>
+                        <div class="p-2 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-900">
+                            <strong>📝 โจทย์:</strong> ปลาอยู่ลึก 2 m มองจากอากาศ<br>
+                            s' = (1/(4/3)) × 2 = (3/4) × 2 = <strong>1.5 m</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION 11.3: ปรากฏการณ์ทางแสง เลนส์บาง สายตา -->
+            <!-- ========================================== -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">11.3</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">ปรากฏการณ์ของแสง เลนส์บาง และสายตา
+                        </h2>
+                        <p class="text-xs text-slate-500">Dispersion, Rainbow, Thin Lenses & Vision</p>
+                    </div>
+                </div>
+
+                <!-- ปรากฏการณ์ทางแสง -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+                        <span class="font-bold text-amber-800 block text-sm">การกระจายแสงในปริซึม</span>
+                        <p class="text-slate-600">
+                            แสงขาวแยกเป็น 7 สี โดย <strong>แสงสีม่วง</strong> มี λ สั้นสุด
+                            หักเหและเบี่ยงเบนมากที่สุด ส่วน <strong>แสงสีแดง</strong> มี λ ยาวสุด
+                            หักเหน้อยที่สุด
+                        </p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+                        <span class="font-bold text-amber-800 block text-sm">รุ้งกินน้ำ (Rainbow)</span>
+                        <p class="text-slate-600">
+                            • <strong>รุ้งปฐมภูมิ:</strong> สะท้อนกลับหมด 1 ครั้งภายในเม็ดน้ำ (สีแดงอยู่บน
+                            สีม่วงอยู่ล่าง)<br>
+                            • <strong>รุ้งทุติยภูมิ:</strong> สะท้อนกลับหมด 2 ครั้ง (สีกลับกัน: สีม่วงอยู่บน
+                            สีแดงอยู่ล่าง อยู่สูงกว่าและจางกว่า)
+                        </p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+                        <span class="font-bold text-amber-800 block text-sm">มิราจ (Mirage)</span>
+                        <p class="text-slate-600">
+                            อากาศใกล้พื้นถนนร้อนและเบาบาง (n น้อย)
+                            แสงจากท้องฟ้าหักเหต่อเนื่องจนเกิดการสะท้อนกลับหมดเข้าสู่ตา
+                            เห็นภาพเสมือนของท้องฟ้าคล้ายมีแอ่งน้ำบนถนน
+                        </p>
+                    </div>
+                </div>
+
+                <!-- เลนส์บาง -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-circle"></i> เลนส์นูน (Converging Lens)
+                        </h3>
+                        <ul class="text-slate-600 space-y-1.5">
+                            <li>• กลางหนา ขอบบาง → <strong>รวมแสง</strong> (f > 0)</li>
+                            <li>• s > 2f: ภาพจริง หัวกลับ เล็กกว่าวัตถุ</li>
+                            <li>• s = 2f: ภาพจริง หัวกลับ ขนาดเท่าวัตถุ</li>
+                            <li>• f < s < 2f: ภาพจริง หัวกลับ ใหญ่กว่าวัตถุ</li>
+                            <li>• s = f: ไม่เกิดภาพ (รังสีขนาน)</li>
+                            <li>• s < f: ภาพเสมือน หัวตั้ง ขนาดใหญ่กว่าวัตถุ</li>
+                        </ul>
+                    </div>
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-circle-notch"></i> เลนส์เว้า (Diverging Lens)
+                        </h3>
+                        <ul class="text-slate-600 space-y-1.5">
+                            <li>• กลางบาง ขอบหนา → <strong>กระจายแสง</strong> (f < 0)</li>
+                            <li>• ให้เฉพาะ <strong>ภาพเสมือน หัวตั้ง ขนาดเล็กกว่าวัตถุ</strong> เสมอ
+                                ไม่ว่าวัตถุจะอยู่ที่ใด</li>
+                            <li>• กำลังของเลนส์: P = 1/f (หน่วย: ไดออปเตอร์, D)</li>
+                            <li>• เลนส์นูน: P เป็นบวก | เลนส์เว้า: P เป็นลบ</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- สายตาสั้น-ยาว -->
+                <div
+                    class="p-5 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-200 space-y-3">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-glasses"></i> ตาและการแก้ไขสายตาผิดปกติ
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs md:text-sm">
+                        <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-1.5">
+                            <strong class="text-slate-900">คนสายตาสั้น (Myopia):</strong>
+                            <p class="text-slate-600">
+                                กระบอกตายาวเกินไป หรือเลนส์ตาโค้งนูนมากเกินไป ทำให้ภาพตก <strong>ก่อนถึงเรตินา</strong>
+                                มองไกลไม่ชัด → แก้ด้วย <strong>แว่นเลนส์เว้า</strong> (กระจายแสงก่อนเข้าตา)
+                            </p>
+                            <div class="font-mono text-xs text-amber-800 bg-amber-50 p-2 rounded-lg">
+                                s = ∞, s' = −d(ไกล) → 1/f = 1/∞ + 1/(−d) = −1/d
+                            </div>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-1.5">
+                            <strong class="text-slate-900">คนสายตายาว (Hyperopia):</strong>
+                            <p class="text-slate-600">
+                                กระบอกตาสั้นเกินไป ทำให้ภาพตก <strong>เลยหลังเรตินา</strong>
+                                มองใกล้ไม่ชัด → แก้ด้วย <strong>แว่นเลนส์นูน</strong> (รวมแสงก่อนเข้าตา)
+                            </p>
+                            <div class="font-mono text-xs text-amber-800 bg-amber-50 p-2 rounded-lg">
+                                s = 25 cm, s' = −d(ใกล้) → 1/f = 1/25 + 1/(−d)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2 bg-white rounded-lg border border-amber-200 text-xs text-slate-600">
+                        <strong>คนสายตาปกติ:</strong> ระยะใกล้สุด (Near Point) = 25 cm | ระยะไกลสุด (Far Point) = ∞
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SECTION 11.4: ทัศนอุปกรณ์ ความสว่าง แสงสี -->
+            <!-- ========================================== -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">11.4</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">ทัศนอุปกรณ์ ความสว่าง
+                            และการผสมแสงสี</h2>
+                        <p class="text-xs text-slate-500">Optical Instruments, Illuminance & Color Addition</p>
+                    </div>
+                </div>
+
+                <!-- อุปกรณ์ทางแสง -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                        <strong class="text-amber-800 block mb-1">แว่นขยาย</strong>
+                        <p class="text-slate-600">เลนส์นูน 1 ตัว วางวัตถุ s < f ได้ภาพเสมือนหัวตั้งขนาดใหญ่กว่าวัตถุ</p>
+                                <span class="text-[10px] text-slate-500 font-mono block mt-1">M = 25/f
+                                    (กำลังขยาย)</span>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                        <strong class="text-amber-800 block mb-1">กล้องถ่ายรูป</strong>
+                        <p class="text-slate-600">เลนส์นูน วางวัตถุ s > 2f ได้ภาพจริงหัวกลับย่อส่วนบนเซนเซอร์</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                        <strong class="text-amber-800 block mb-1">กล้องจุลทรรศน์</strong>
+                        <p class="text-slate-600">เลนส์ใกล้วัตถุ (f<sub>o</sub> สั้น) สร้างภาพจริงขยาย +
+                            เลนส์ตา (f<sub>e</sub>) ขยายเป็นภาพเสมือนหัวกลับขนาดมหึมา</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                        <strong class="text-amber-800 block mb-1">กล้องโทรทรรศน์</strong>
+                        <p class="text-slate-600">เลนส์ใกล้วัตถุ (f<sub>o</sub> ยาว) + เลนส์ตา (f<sub>e</sub> สั้น)</p>
+                        <span class="text-[10px] text-slate-500 font-mono block mt-1">L ≈ f<sub>o</sub> + f<sub>e</sub>
+                            | M = f<sub>o</sub>/f<sub>e</sub></span>
+                    </div>
+                </div>
+
+                <!-- ความสว่างและแสงสี -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm pt-2">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb"></i> ความสว่าง (Illuminance: E)
+                        </h3>
+                        <div
+                            class="p-2.5 bg-white rounded-xl font-mono text-center font-bold text-amber-900 border border-slate-200">
+                            E = F/A = I/R² &nbsp;(ลักซ์, lux = lm/m²)
+                        </div>
+                        <ul class="text-slate-600 text-xs space-y-1">
+                            <li>• F: ฟลักซ์ส่องสว่าง (ลูเมน, lm)</li>
+                            <li>• I: ความเข้มแห่งการส่องสว่าง (แคนเดลา, cd)</li>
+                            <li>• R: ระยะห่างตั้งฉากจากหลอดไฟถึงพื้นผิว (m)</li>
+                            <li>• <strong>แสงตกเฉียงมุม θ:</strong> E = I cos θ/R²</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-palette"></i> แสงสีปฐมภูมิและสีเติมเต็ม
+                        </h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">
+                            • <strong>แสงสีปฐมภูมิ:</strong> แดง (R) + เขียว (G) + น้ำเงิน (B)<br>
+                            • แดง + เขียว = <strong>เหลือง</strong> | แดง + น้ำเงิน = <strong>แดงม่วง (Magenta)</strong>
+                            | เขียว + น้ำเงิน = <strong>น้ำเงินเขียว (Cyan)</strong><br>
+                            • ทั้ง 3 สีปฐมภูมิรวมกัน = <strong>แสงขาว</strong><br>
+                            • <strong>สีเติมเต็ม:</strong> แดง+Cyan, เขียว+Magenta, น้ำเงิน+เหลือง → ได้แสงขาว
+                        </p>
+                        <div class="p-2 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-900">
+                            <strong>สีของวัตถุ:</strong> วัตถุ <strong>สะท้อน</strong> แสงสีที่ตรงกับสีของตัวเอง
+                            และ <strong>ดูดกลืน</strong> แสงสีอื่น
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Links -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <a href="m5-ch11-quiz.html"
+                    class="py-4 px-8 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i> ทำแบบฝึกหัดท้ายบทที่ 11 (35 คะแนน)
+                </a>
+                <a href="m5-physics.html"
+                    class="py-4 px-8 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-list"></i> กลับหน้ารวมบทเรียน ม.5
+                </a>
+            </div>
+
+        </div>
+    </main>
 </body>
+
 </html>

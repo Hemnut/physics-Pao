@@ -1,95 +1,382 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุป บทที่ 13 ไฟฟ้าสถิต | ฟิสิกส์ จารย์เปา</title>
+    <title>สรุปบทที่ 13: ไฟฟ้าสถิต (Electrostatics) | ฟิสิกส์ จารย์เปา</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Prompt', 'Inter', 'sans-serif'], inter: ['Inter', 'sans-serif'] } } } }</script>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen">
-<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <div class="bg-gradient-to-br from-amber-500 to-yellow-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
-                <i class="fa-solid fa-bolt"></i>
+
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="bg-gradient-to-br from-amber-500 to-yellow-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-amber-600">VISUAL EDUCATION HUB</span>
+                </span>
             </div>
-            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-amber-600">VISUAL EDUCATION HUB</span></span>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-amber-600">HOME</a>
+                <a href="m5-physics.html"
+                    class="text-sm font-semibold text-amber-600 border-b-2 border-amber-600">บทเรียน ม.5</a>
+                <a href="m5-ch13-quiz.html" class="text-sm font-medium text-slate-500 hover:text-amber-600">แบบฝึกหัด Ch
+                    13</a>
+            </nav>
         </div>
-        <nav class="hidden md:flex gap-8 items-center">
-            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-amber-600">HOME</a>
-            <a href="m5-physics.html" class="text-sm font-semibold text-amber-600 border-b-2 border-amber-600">บทเรียน ม.5</a>
-        </nav>
-    </div>
-</header>
+    </header>
 
-<main class="max-w-4xl mx-auto px-4 py-8">
-    <div class="flex items-center justify-between mb-6">
-        <a href="m5-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-amber-600 hover:text-amber-800">
-            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
-        </a>
-        <span class="text-xs text-slate-400 font-inter">CH13 SUMMARY</span>
-    </div>
-
-    <div class="bg-gradient-to-r from-slate-900 via-amber-950 to-yellow-950 text-white rounded-3xl p-8 mb-8 shadow-xl">
-        <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/30 text-amber-200 px-3 py-1 rounded-full text-xs font-semibold mb-4">
-            <i class="fa-solid fa-atom"></i> บทที่ 13 — ฟิสิกส์ ม.5
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center justify-between mb-4">
+            <a href="m5-physics.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-amber-600 hover:text-amber-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+            </a>
+            <span class="text-xs text-slate-400 font-inter">CHAPTER 13 VISUAL SUMMARY</span>
         </div>
-        <h1 class="text-3xl md:text-4xl font-extrabold mb-3">สรุปเนื้อหา: ไฟฟ้าสถิต</h1>
-        <p class="text-amber-100 text-sm max-w-2xl leading-relaxed">
-            ประจุไฟฟ้า | กฎของคูลอมบ์ | สนามไฟฟ้า | ศักย์ไฟฟ้า & พลังงานศักย์ | ตัวเก็บประจุและการต่อวงจร
-        </p>
-    </div>
 
-    <div class="space-y-6">
-        <!-- Section 1 -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-            <h2 class="text-lg font-bold text-amber-700 mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-[#000]">1. ประจุไฟฟ้าและกฎของคูลอมบ์</i>
-            </h2>
-            <ul class="list-disc pl-5 text-sm space-y-2 text-slate-700">
-                <li><strong>การถ่ายโอนประจุ:</strong> เกิดจากการเคลื่อนที่ของอิเล็กตรอนอิสระเท่านั้น ($Q = ne$) โดยประจุบวกเกิดจากการเสียอิเล็กตรอน[cite: 11]</li>
-                <li><strong>ลำดับการจ่ายอิเล็กตรอน (มากไปน้อย):</strong> แก้ว > เส้นผมคน > เปอร์สเปกซ์ > ไนลอน > ผ้าสักหลาด > ผ้าไหม > ผ้าฝ้าย > อำพัน > พีวีซี > เทฟลอน[cite: 11]</li>
-                <li><strong>กฎของคูลอมบ์:</strong> แรงระหว่างจุดประจุหาได้จาก 
-                    <div class="my-2 p-3 bg-slate-50 rounded-xl font-mono text-center text-amber-800 font-bold">
-                        F = (K · Q₁ · Q₂) / R²
+        <!-- Hero Card -->
+        <div
+            class="bg-gradient-to-r from-slate-900 via-amber-950 to-yellow-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute w-72 h-72 bg-amber-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <div
+                    class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/30 text-amber-300 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-bolt"></i> บทที่ 13 — ฟิสิกส์ ม.5 เล่ม 4
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">สรุปเนื้อหา: ไฟฟ้าสถิต (Electrostatics)</h1>
+                <p class="text-amber-100 text-sm max-w-2xl leading-relaxed">
+                    การเหนี่ยวนำไฟฟ้าสถิต อิเล็กโทรสโคป สายดิน | กฎของคูลอมบ์ | สนามไฟฟ้า & จุดสะเทิน | ศักย์ไฟฟ้า &
+                    งานเลื่อนประจุ | ตัวนำทรงกลม | มิลลิแกน & สนามสม่ำเสมอ | ตัวเก็บประจุ & การต่อวงจร
+                </p>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="space-y-8">
+
+            <!-- Section 1: Charges, Induction & Grounding -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">13.1</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">ประจุไฟฟ้า การเหนี่ยวนำ
+                            อิเล็กโทรสโคป และสายดิน</h2>
+                        <p class="text-xs text-slate-500">Electric Charges, Induction, Electroscopes & Grounding</p>
                     </div>
-                    โดย $K = 9 \times 10^9 \text{ N}\cdot\text{m}^2/\text{C}^2$[cite: 11]
-                </li>
-            </ul>
-        </div>
+                </div>
 
-        <!-- Section 2 -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-            <h2 class="text-lg font-bold text-amber-700 mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-[#000]">2. สนามไฟฟ้า (E) และศักย์ไฟฟ้า (V)</i>
-            </h2>
-            <ul class="list-disc pl-5 text-sm space-y-2 text-slate-700">
-                <li><strong>สนามไฟฟ้ารอบจุดประจุ:</strong> $E = KQ / R^2$ (พุ่งออกจากประจุบวก เข้าหาประจุลบ)[cite: 11]</li>
-                <li><strong>แรงกระทำต่อประจุในสนามไฟฟ้า:</strong> $F = qE$[cite: 11]</li>
-                <li><strong>ศักย์ไฟฟ้า:</strong> $V = KQ / R$ (เป็นปริมาณสเกลาร์ ต้องคิดเครื่องหมายประจุ $+/-$)[cite: 11]</li>
-                <li><strong>งานในการเคลื่อนประจุ:</strong> $W_{1 \to 2} = q(V_2 - V_1)$[cite: 11]</li>
-                <li><strong>ทรงกลมตัวนำ:</strong> ภายในทรงกลมตัวนำ $E = 0$ แต่ $V = V_{\text{ผิว}}$[cite: 11]</li>
-            </ul>
-        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs md:text-sm">
+                    <!-- Charge & Friction -->
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-atom"></i> 1. การถ่ายโอนประจุไฟฟ้า
+                        </h3>
+                        <ul class="text-slate-700 space-y-2 leading-relaxed">
+                            <li>• <strong>การทำให้เกิดประจุ:</strong> เกิดจากการเคลื่อนย้ายของ <em>อิเล็กตรอนอิสระ</em>
+                                เท่านั้น (โปรตอนอยู่ในนิวเคลียสไม่หลุดออกมา)</li>
+                            <li>• <strong>วัตถุเสียอิเล็กตรอน:</strong> แสดงประจุไฟฟ้าสุทธิเป็น <strong>บวก (+)</strong>
+                            </li>
+                            <li>• <strong>วัตถุรับอิเล็กตรอน:</strong> แสดงประจุไฟฟ้าสุทธิเป็น <strong>ลบ (−)</strong>
+                            </li>
+                            <li>• <strong>ปริมาณประจุไฟฟ้า:</strong> <span class="font-mono font-bold text-amber-800">Q
+                                    = n · e</span> (เมื่อ $e = 1.6 \times 10^{-19}\text{ C}$)</li>
+                            <li>• <strong>ลำดับการจ่ายอิเล็กตรอน (มาก → น้อย):</strong><br>
+                                <span class="font-medium text-slate-600 text-xs">แก้ว > ผมคน > เปอร์สเปกซ์ > ไนลอน >
+                                    ผ้าสักหลาด > ผ้าไหม > ผ้าฝ้าย > อำพัน > พีวีซี > เทฟลอน</span>
+                            </li>
+                        </ul>
+                    </div>
 
-        <!-- Section 3 -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-            <h2 class="text-lg font-bold text-amber-700 mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-[#000]">3. ตัวเก็บประจุและความจุ (C)</i>
-            </h2>
-            <ul class="list-disc pl-5 text-sm space-y-2 text-slate-700">
-                <li><strong>ความจุไฟฟ้า:</strong> $C = Q / V$ (หน่วย: ฟารัด, F)[cite: 11]</li>
-                <li><strong>พลังงานสะสมในตัวเก็บประจุ:</strong> $U = \frac{1}{2}QV = \frac{1}{2}CV^2 = \frac{1}{2}\frac{Q^2}{C}$[cite: 11]</li>
-                <li><strong>การต่ออนุกรม:</strong> $Q_{\text{รวม}} = Q_1 = Q_2$, $\frac{1}{C_{\text{รวม}}} = \frac{1}{C_1} + \frac{1}{C_2}$[cite: 11]</li>
-                <li><strong>การต่อขนาน:</strong> $V_{\text{รวม}} = V_1 = V_2$, $C_{\text{รวม}} = C_1 + C_2$[cite: 11]</li>
-            </ul>
+                    <!-- Electroscopes & Grounding -->
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-arrows-turn-to-dots"></i> 2. อิเล็กโทรสโคป & การต่อสายดิน
+                        </h3>
+                        <ul class="text-slate-700 space-y-2 leading-relaxed">
+                            <li>• <strong>อิเล็กโทรสโคปแบบลูกพิธ:</strong> เม็ดโฟมฉาบอะลูมิเนียม
+                                ถูกดูดเข้าหาวัตถุมีประจุเสมอจากการเหนี่ยวนำ</li>
+                            <li>• <strong>อิเล็กโทรสโคปแบบแผ่นทองคำเปลว:</strong> จานโลหะด้านบนต่อแกนถึงแผ่นโลหะบาง 2
+                                แผ่นด้านล่าง เมื่อมีประจุเข้าใกล้ แผ่นล่างจะกางออกเสมอ</li>
+                            <li>• <strong>การต่อสายดิน (Grounding):</strong> โลกเป็นตัวนำขนาดใหญ่มาก
+                                ทำหน้าที่จ่ายหรือรับอิเล็กตรอนเพื่อให้วัตถุมีศักย์ไฟฟ้าเป็นศูนย์</li>
+                            <li>• <strong>การเหนี่ยวนำให้เกิดประจุถาวร:</strong><br>
+                                นำแท่งประจุเข้าใกล้ → ต่อสายดิน (แผ่นหุบ) → ปลดสายดินออก → เลื่อนแท่งประจุออกไป →
+                                แผ่นจะกางออกอีกครั้งและได้ <strong>ประจุชนิดตรงข้ามกับแท่งที่นำมาล่อ</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Coulomb's Law & Electric Force -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">13.2</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">แรงระหว่างประจุและกฎของคูลอมบ์
+                            (Coulomb's Law)</h2>
+                        <p class="text-xs text-slate-500">Electrostatic Force Between Point Charges</p>
+                    </div>
+                </div>
+
+                <!-- Coulomb Formula Card -->
+                <div
+                    class="p-6 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl border border-amber-200 space-y-3">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> กฎแรงคูลอมบ์ระหว่างจุดประจุ
+                    </h3>
+                    <div
+                        class="p-4 bg-white rounded-xl border border-amber-200 text-center font-mono font-bold text-amber-900 text-2xl shadow-sm">
+                        F = k · Q₁ · Q₂ / R²
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700 pt-2">
+                        <div>
+                            • $k$: ค่าคงที่คูลอมบ์ $= 9 \times 10^9\text{ N}\cdot\text{m}^2/\text{C}^2$<br>
+                            • $Q_1, Q_2$: ขนาดของประจุไฟฟ้า (คูลอมบ์, C)<br>
+                            • $R$: ระยะห่างระหว่างประจุทั้งสอง (เมตร, m)
+                        </div>
+                        <div>
+                            • <strong>ประจุชนิดเดียวกัน:</strong> เกิดแรง <em>ผลักกัน</em><br>
+                            • <strong>ประจุต่างชนิดกัน:</strong> เกิดแรง <em>ดูดกัน</em><br>
+                            • <strong>ข้อควรจำ:</strong> การคำนวณแรง <u>ไม่ต้องใส่เครื่องหมายบวกลบ</u> ในสมการ
+                            ให้คิดขนาดแล้วรวมแบบเวกเตอร์
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Electric Field & Neutral Points -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">13.3</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">สนามไฟฟ้าและจุดสะเทิน (Electric
+                            Field)</h2>
+                        <p class="text-xs text-slate-500">Electric Field of Point Charges & Neutral Points</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <!-- Field Definition -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-compass"></i> นิยาม & ทิศทางสนามไฟฟ้า
+                        </h3>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-amber-800 text-base border border-slate-200">
+                            E = F / q &nbsp;→&nbsp; E = kQ / R²
+                        </div>
+                        <ul class="text-slate-600 space-y-1.5">
+                            <li>• สนามไฟฟ้า $E$ เป็น <strong>ปริมาณเวกเตอร์</strong> (หน่วย N/C หรือ V/m)</li>
+                            <li>• <strong>ประจุบวก (+Q):</strong> สนามไฟฟ้ามีทิศ <strong>พุ่งออก</strong> จากประจุ</li>
+                            <li>• <strong>ประจุลบ (−Q):</strong> สนามไฟฟ้ามีทิศ <strong>พุ่งเข้าหา</strong> ประจุ</li>
+                            <li>• <strong>แรงกระทำ $F = qE$:</strong> ถ้าประจุบวกแรงทิศเดียวกับ $E$,
+                                ประจุลบแรงทิศตรงข้ามกับ $E$</li>
+                        </ul>
+                    </div>
+
+                    <!-- Neutral Point -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-bullseye"></i> จุดสะเทินทางไฟฟ้า (Neutral Point)
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            ตำแหน่งที่ <strong>สนามไฟฟ้าลัพธ์เป็นศูนย์ ($E_{รวม} = 0$)</strong>:
+                        </p>
+                        <ul class="text-slate-600 space-y-1.5">
+                            <li>• <strong>ประจุชนิดเดียวกัน (+,+ หรือ −,−):</strong> จุดสะเทินจะอยู่
+                                <em>ระหว่างประจุทั้งสอง</em> และอยู่ใกล้ประจุที่มีขนาดเล็กกว่า</li>
+                            <li>• <strong>ประจุต่างชนิดกัน (+,−):</strong> จุดสะเทินจะอยู่ <em>ภายนอกแนวประจุ</em>
+                                ทางฝั่งประจุที่มีขนาดเล็กกว่า</li>
+                            <li>• ที่จุดสะเทิน: $E_1 = E_2 \implies \frac{kQ_1}{R_1^2} = \frac{kQ_2}{R_2^2}$</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Electric Potential & Work -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">13.4-13.5</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">ศักย์ไฟฟ้า งานในการเลื่อนประจุ
+                            และตัวนำทรงกลม</h2>
+                        <p class="text-xs text-slate-500">Electric Potential, Work & Spherical Conductors</p>
+                    </div>
+                </div>
+
+                <!-- Potential & Work -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <!-- Potential -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-chart-simple"></i> ศักย์ไฟฟ้ารอบจุดประจุ (V)
+                        </h3>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-amber-800 text-base border border-slate-200">
+                            V = kQ / R
+                        </div>
+                        <ul class="text-slate-600 space-y-1.5">
+                            <li>• ศักย์ไฟฟ้าเป็น <strong>ปริมาณสเกลาร์</strong> (หน่วย: โวลต์, V)</li>
+                            <li>• <strong>ต้องแทนเครื่องหมายบวกลบของประจุเสมอ!</strong></li>
+                            <li>• หลายประจุรวมกัน: รวมแบบพีชคณิต $V_{รวม} = \sum \frac{kQ_i}{R_i}$</li>
+                        </ul>
+                    </div>
+
+                    <!-- Work Done -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-person-walking"></i> งานในการเลื่อนประจุ (Work)
+                        </h3>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-amber-800 text-base border border-slate-200">
+                            W_{A → B} = q (V_B − V_A)
+                        </div>
+                        <ul class="text-slate-600 space-y-1.5">
+                            <li>• เลื่อนจากอนันต์มาจุด B: $W_{\infty \to B} = q V_B$</li>
+                            <li>• พลังงานศักย์ไฟฟ้าสะสม: $E_p = \frac{kQq}{R}$</li>
+                            <li>• เลื่อนประจุบนผิวสมศักย์ (Equipotential): $W = 0$ เพราะความต่างศักย์เป็นศูนย์</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Spherical Conductor Box -->
+                <div
+                    class="p-5 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl border border-amber-200 space-y-3">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-circle-dot"></i> สนามและศักย์ไฟฟ้าของตัวนำทรงกลม (รัศมี R)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <strong class="text-slate-800">สนามไฟฟ้า (E):</strong>
+                            <p>• ภายในทรงกลม ($r < R$): <span class="font-bold text-rose-600 font-mono">E = 0
+                                    เสมอ!</span></p>
+                            <p>• ที่ผิวทรงกลม ($r = R$): <span class="font-bold text-slate-800 font-mono">E_ผิว = kQ /
+                                    R²</span> (มีค่าสูงสุด)</p>
+                            <p>• ภายนอกทรงกลม ($r > R$): <span class="font-bold text-slate-800 font-mono">E = kQ /
+                                    r²</span></p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <strong class="text-slate-800">ศักย์ไฟฟ้า (V):</strong>
+                            <p>• ภายในและที่ผิว ($r \le R$): <span class="font-bold text-emerald-700 font-mono">V =
+                                    V_ผิว = kQ / R คงที่เท่ากันทุกจุด!</span></p>
+                            <p>• ภายนอกทรงกลม ($r > R$): <span class="font-bold text-slate-800 font-mono">V = kQ /
+                                    r</span> (ลดลงตามระยะ)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Uniform Field & Millikan & Capacitors -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">13.6-13.7</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">สนามไฟฟ้าสม่ำเสมอ มิลลิแกน
+                            และตัวเก็บประจุ</h2>
+                        <p class="text-xs text-slate-500">Uniform E-Field, Millikan's Experiment & Capacitors</p>
+                    </div>
+                </div>
+
+                <!-- Uniform Field & Millikan -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-grip-lines"></i> แผ่นตัวนำคู่ขนาน & มิลลิแกน
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            • สนามไฟฟ้าสม่ำเสมอระหว่างแผ่นคู่ขนาน: <span class="font-mono font-bold text-amber-800">E =
+                                V / d</span><br>
+                            • แรงกระทำต่อประจุ: <span class="font-mono font-bold text-amber-800">F = qE = q(V /
+                                d)</span><br>
+                            • <strong>หยดน้ำมันของมิลลิแกน (ลอยนิ่งสมดุล):</strong><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;แรงไฟฟ้าขึ้น = น้ำหนักลง $\implies qE = mg$<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;$q(V / d) = mg \implies q = \frac{mgd}{V} = ne$
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-battery-half"></i> พลังงานสะสมในตัวเก็บประจุ (U)
+                        </h3>
+                        <div
+                            class="p-2.5 bg-white rounded-xl font-mono text-center font-bold text-amber-800 text-sm border border-slate-200">
+                            U = ½ QV = ½ CV² = ½ (Q² / C)
+                        </div>
+                        <p class="text-slate-600 text-xs leading-relaxed">
+                            • ความจุไฟฟ้า: <span class="font-mono font-bold text-slate-800">C = Q / V</span> (ฟารัด,
+                            F)<br>
+                            • ตัวนำทรงกลมรัศมี $a$: <span class="font-mono font-bold text-slate-800">C = a / k</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Series & Parallel Capacitors -->
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-amber-800 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-network-wired"></i> การต่อตัวเก็บประจุและการถ่ายโอนประจุ
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-1.5">
+                            <strong class="text-slate-900 block text-sm">การต่อแบบอนุกรม (Series):</strong>
+                            <p>• ประจุเท่ากันทุกตัว: $Q_{รวม} = Q_1 = Q_2 = ...$</p>
+                            <p>• ความต่างศักย์รวม: $V_{รวม} = V_1 + V_2 + ...$</p>
+                            <p>• ความจุรวมลดลง: $\frac{1}{C_{รวม}} = \frac{1}{C_1} + \frac{1}{C_2} + ...$</p>
+                            <p class="text-[11px] text-slate-500">ต่อ 2 ตัว: $C_{รวม} = \frac{C_1 C_2}{C_1 + C_2}$</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-1.5">
+                            <strong class="text-slate-900 block text-sm">การต่อแบบขนาน (Parallel):</strong>
+                            <p>• ความต่างศักย์เท่ากันทุกตัว: $V_{รวม} = V_1 = V_2 = ...$</p>
+                            <p>• ประจุรวม: $Q_{รวม} = Q_1 + Q_2 + ...$</p>
+                            <p>• ความจุรวมเพิ่มขึ้น: $C_{รวม} = C_1 + C_2 + ...$</p>
+                            <p class="text-[11px] text-slate-500">ความจุรวมเท่ากับผลบวกของทุกตัวเก็บประจุ</p>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900">
+                        <strong>การถ่ายโอนประจุระหว่างตัวนำทรงกลมเมื่อแตะกัน:</strong><br>
+                        1. หลังแตะ <strong>ศักย์ไฟฟ้าของทรงกลมทุกตัวจะเท่ากัน</strong> ($V_1' = V_2'$)<br>
+                        2. ประจุรวมก่อนแตะ = ประจุรวมหลังแตะ ($\sum Q_{ก่อน} = \sum Q_{หลัง}$)<br>
+                        3. ประจุจะแบ่งตามอัตราส่วนของรัศมี: $Q_1' / Q_2' = r_1 / r_2$
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Links -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <a href="m5-ch13-quiz.html"
+                    class="py-4 px-8 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i> ทำแบบฝึกหัดท้ายบทที่ 13 (35 คะแนน)
+                </a>
+                <a href="m5-physics.html"
+                    class="py-4 px-8 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-list"></i> กลับหน้ารวมบทเรียน ม.5
+                </a>
+            </div>
+
         </div>
-    </div>
-</main>
+    </main>
 </body>
+
 </html>

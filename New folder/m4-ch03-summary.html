@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปเนื้อหา บทที่ 3: แรงและกฎการเคลื่อนที่ - PhysicsHub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 font-bold text-xl text-blue-600">
+                <span>PhysicsHub</span>
+            </a>
+            <nav class="flex items-center gap-4 font-medium text-sm sm:text-base">
+                <a href="m4-mechanics.html" class="text-slate-600 hover:text-blue-600 transition">← กลับหน้ากลศาสตร์</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-4xl w-full px-4 sm:px-6 lg:px-8 mx-auto py-8">
+        
+        <!-- Header บทเรียน -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-8">
+            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold uppercase tracking-wider">สรุปเนื้อหาบทเรียน</span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">บทที่ 03: แรงและกฎการเคลื่อนที่</h1>
+            <p class="text-slate-600 text-sm mt-1">สรุปกฎ 3 ข้อของนิวตัน แรงเสียดทาน และแรงดึงดูดระหว่างมวล</p>
+        </div>
+
+        <div class="space-y-6">
+            <!-- ส่วนที่ 1: กฎการเคลื่อนที่ของนิวตัน -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold text-emerald-600 mb-3">1. กฎการเคลื่อนที่ 3 ข้อของนิวตัน (Newton's Laws)</h2>
+                <div class="space-y-3 text-sm text-slate-700">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <strong class="text-slate-900 block mb-1">กฎข้อที่ 1: กฎแห่งความเฉื่อย (Law of Inertia)</strong>
+                        วัตถุจะรักษาสภาพหยุดนิ่งหรือเคลื่อนที่ด้วยความเร็วคงตัวในแนวเส้นตรง ตราบใดที่ไม่มีแรงลัพธ์มากระทำ<br>
+                        <span class="font-bold text-emerald-700">สูตร: ∑F = 0 → v คงที่ (หรือ v = 0)</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <strong class="text-slate-900 block mb-1">กฎข้อที่ 2: กฎของความเร่ง (Law of Acceleration)</strong>
+                        เมื่อมีแรงลัพธ์ที่ไม่เป็นศูนย์มากระทำต่อวัตถุ วัตถุจะเคลื่อนที่ด้วยความเร่งในทิศทางเดียวกับแรงลัพธ์ โดยขนาดของความเร่งแปรผันตรงกับแรงลัพธ์และแปรผกผันกับมวล<br>
+                        <span class="font-bold text-emerald-700">สูตร: ∑F = ma</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <strong class="text-slate-900 block mb-1">กฎข้อที่ 3: แรงกิริยาและแรงปฏิกิริยา (Action = Reaction)</strong>
+                        ทุกแรงกิริยาจะมีแรงปฏิกิริยาที่มีขนาดเท่ากัน แต่มีทิศทางตรงกันข้ามเสมอ (ทำบนวัตถุคนละก้อน)<br>
+                        <span class="font-bold text-emerald-700">สูตร: F_action = -F_reaction</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ส่วนที่ 2: แรงเสียดทาน -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold text-emerald-600 mb-3">2. แรงเสียดทาน (Friction Force: f)</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-700">
+                    <div class="bg-emerald-50/60 p-4 rounded-xl border border-emerald-100">
+                        <strong class="text-slate-900 block mb-1">แรงเสียดทานสถิต (fs)</strong>
+                        • เกิดขณะวัตถุ<strong>ยังไม่เคลื่อนที่</strong><br>
+                        • มีค่าได้หลายค่า ตั้งแต่ 0 จนถึงค่าสูงสุด (fs max)<br>
+                        • <strong class="text-emerald-800">สูตรสูงสุด: fs(max) = μs N</strong>
+                    </div>
+                    <div class="bg-emerald-50/60 p-4 rounded-xl border border-emerald-100">
+                        <strong class="text-slate-900 block mb-1">แรงเสียดทานจลน์ (fk)</strong>
+                        • เกิดขณะวัตถุ<strong>กำลังเคลื่อนที่</strong><br>
+                        • มีค่าคงที่เสมอสำหรับพื้นผิวคู่นั้นๆ<br>
+                        • <strong class="text-emerald-800">สูตร: fk = μk N</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ส่วนที่ 3: แรงดึงดูดระหว่างมวล -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold text-emerald-600 mb-3">3. กฎแรงดึงดูดระหว่างมวลของนิวตัน</h2>
+                <p class="text-sm text-slate-700 mb-3">
+                    วัตถุสองก้อนในจักรวาลจะดึงดูดซึ่งกันและกันด้วยแรงที่แปรผันตรงกับผลคูณของมวล และแปรผกผันกับกำลังสองของระยะห่างระหว่างจุดศูนย์กลางมวล
+                </p>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center font-bold text-slate-800">
+                    สูตร: Fg = G (m1 × m2) / r²
+                </div>
+            </div>
+        </div>
+
+        <!-- ปุ่มไปทำข้อสอบ -->
+        <div class="mt-8 text-center flex justify-center gap-4">
+            <a href="m4-ch03-quiz.html" class="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition">
+                ไปทำตะลุยโจทย์ บทที่ 3 (20 ข้อ) →
+            </a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-500 mt-12">
+        <div class="max-w-7xl mx-auto px-4">&copy; 2026 PhysicsHub. สรุปเนื้อหาฟิสิกส์ออนไลน์ ม.4</div>
+    </footer>
+</body>
+</html>

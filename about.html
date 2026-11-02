@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกี่ยวกับอาจารย์เปา | ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB</title>
+    <!-- โหลดฟอนต์ Prompt และ Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- โหลด FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Inter', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between font-sans">
+
+    <!-- 1. แถบเมนูบนสุด (Navigation Bar) -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-blue-500 to-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-md">
+                    <i class="fa-solid fa-atom"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-blue-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">HOME</a>
+                <a href="courses.html" class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">คลังความรู้</a>
+                <a href="exams.html" class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">คลังข้อสอบ</a>
+                <a href="about.html" class="text-sm font-semibold text-blue-600 border-b-2 border-blue-600 pb-1">เกี่ยวกับอาจารย์เปา</a>
+            </nav>
+            <button class="md:hidden text-2xl text-slate-800 p-2" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+            <a href="index.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">HOME</a>
+            <a href="courses.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">คลังความรู้</a>
+            <a href="exams.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">คลังข้อสอบ</a>
+            <a href="about.html" class="text-blue-600 font-semibold py-1">เกี่ยวกับอาจารย์เปา</a>
+        </div>
+    </header>
+
+    <!-- 2. คอนเทนเนอร์หลัก (Main Content Zone) -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+
+        <!-- การ์ดโปรไฟล์หลัก (Main Profile Card) -->
+        <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl mb-10 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl -z-0 pointer-events-none"></div>
+
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <!-- ฝั่งซ้าย: รูปภาพเน้นความสง่างาม -->
+                <div class="md:col-span-5 flex flex-col items-center">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-300"></div>
+                        <img src="assets/images/teacher_pao_official.png" alt="นายพิชิต เห็มนุช" class="relative rounded-2xl w-full max-w-[280px] h-auto object-cover border border-slate-100 shadow-md">
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 bg-blue-50 text-blue-700 font-semibold text-xs px-3 py-1 rounded-full mt-4 border border-blue-100">
+                        <i class="fa-solid fa-circle-check text-blue-600"></i> ข้าราชการครู
+                    </span>
+                </div>
+
+                <!-- ฝั่งขวา: ข้อมูลส่วนตัว & ประวัติการศึกษา -->
+                <div class="md:col-span-7 space-y-6">
+                    <div>
+                        <span class="text-xs font-bold text-blue-600 tracking-wider uppercase font-inter">PROFILE & EDUCATION</span>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">นายพิชิต เห็มนุช</h1>
+                        <p class="text-slate-500 font-medium text-sm mt-1">อาชีพ: ข้าราชการครู (ครูผู้สอนวิชาฟิสิกส์)</p>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- การศึกษา -->
+                    <div class="space-y-4">
+                        <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap text-blue-600"></i> ประวัติการศึกษา
+                        </h2>
+
+                        <div class="space-y-3">
+                            <!-- ปริญญาโท -->
+                            <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-100 flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
+                                    ป.โท
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-900 text-sm">ครุศาสตรมหาบัณฑิต (ค.ม.)</p>
+                                    <p class="text-xs text-slate-600 font-medium mt-0.5">สาขาวิชาวิทยาศาสตร์ศึกษา</p>
+                                </div>
+                            </div>
+
+                            <!-- ปริญญาตรี -->
+                            <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-100 flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
+                                    ป.ตรี
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-900 text-sm">วิทยาศาสตรบัณฑิต (วท.บ.)</p>
+                                    <p class="text-xs text-slate-600 font-medium mt-0.5">สาขาฟิสิกส์</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- โซนปุ่มผลงานทางวิชาการและสื่อการสอน (Action Buttons) -->
+        <div class="mb-12">
+            <h2 class="text-xl font-extrabold text-slate-900 mb-6 text-center">
+                ผลงานและเอกสารเผยแพร่ทางวิชาการ
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                <!-- ปุ่มที่ 1: แผนการสอน -->
+                <a href="https://drive.google.com/drive/folders/1WZsMUZqfPSuZz2Ax7x_qL_t2t0w_uWjy?usp=drive_link" target="_blank" class="group bg-white hover:bg-blue-600 border-2 border-blue-200 hover:border-blue-600 rounded-2xl p-6 text-center transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 flex flex-col items-center justify-center">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-50 group-hover:bg-white/20 text-blue-600 group-hover:text-white flex items-center justify-center text-2xl mb-3 transition-colors">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-white text-base mb-1 transition-colors">แผนการสอน</h3>
+                    <p class="text-xs text-slate-400 group-hover:text-blue-100 transition-colors">LESSON PLANS</p>
+                </a>
+
+                <!-- ปุ่มที่ 2: วิจัยในชั้นเรียน -->
+                <a href="#" class="group bg-white hover:bg-indigo-600 border-2 border-indigo-200 hover:border-indigo-600 rounded-2xl p-6 text-center transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 flex flex-col items-center justify-center">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-50 group-hover:bg-white/20 text-indigo-600 group-hover:text-white flex items-center justify-center text-2xl mb-3 transition-colors">
+                        <i class="fa-solid fa-microscope"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-white text-base mb-1 transition-colors">วิจัยในชั้นเรียน</h3>
+                    <p class="text-xs text-slate-400 group-hover:text-indigo-100 transition-colors">CLASSROOM RESEARCH</p>
+                </a>
+
+                <!-- ปุ่มที่ 3: สื่อและนวัตกรรม -->
+                <a href="media-innovations.html" class="group bg-white hover:bg-emerald-600 border-2 border-emerald-200 hover:border-emerald-600 rounded-2xl p-6 text-center transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 flex flex-col items-center justify-center">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 group-hover:bg-white/20 text-emerald-600 group-hover:text-white flex items-center justify-center text-2xl mb-3 transition-colors">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-white text-base mb-1 transition-colors">สื่อและนวัตกรรม</h3>
+                    <p class="text-xs text-slate-400 group-hover:text-emerald-100 transition-colors">MEDIA & INNOVATIONS</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- โกลเลอรีรูปภาพภาพกิจกรรม/การแต่งกาย -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-images text-blue-600"></i> แกลเลอรีอาจารย์เปา
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div class="overflow-hidden rounded-xl bg-slate-100 aspect-square border border-slate-200">
+                    <img src="assets/images/teacher_pao_official.png" alt="นายพิชิต เห็มนุช ชุดชุดข้าราชการ" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="overflow-hidden rounded-xl bg-slate-100 aspect-square border border-slate-200">
+                    <img src="assets/images/teacher_pao_grad.png" alt="นายพิชิต เห็มนุช ชุดครุย" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="overflow-hidden rounded-xl bg-slate-100 aspect-square border border-slate-200 col-span-2 sm:col-span-1">
+                    <img src="assets/images/teacher_pao.jpg" alt="นายพิชิต เห็มนุช แอ็กชั่นสอน" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 3. ส่วนท้ายดีไซน์เข้ม (Deep Footer Card) -->
+    <footer class="bg-slate-900 text-white mt-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช" class="w-14 h-14 rounded-full object-cover border-2 border-blue-500 shadow-md">
+                    <div>
+                        <h3 class="font-bold text-base text-white">คุยกับ จารย์เปา</h3>
+                        <p class="text-xs text-slate-400">ครูพิชิต เห็มนุช @ ฟิสิกส์จารย์เปา</p>
+                    </div>
+                </div>
+                <!-- ช่องทางการติดต่อ -->
+                <div class="flex items-center gap-3">
+                    <a href="https://www.facebook.com/profile.php?id=100076034031908#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 text-white flex items-center justify-center transition-colors">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="tel:0982727834" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-emerald-600 text-white flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                    <a href="https://line.me/ti/p/_TtCVxnlIh" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-emerald-500 text-white flex items-center justify-center transition-colors">
+                        <i class="fa-brands fa-line"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-8 pt-6 text-center text-xs text-slate-500">
+                <p>&copy; 2026 Gemini Antigravity - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- สคริปต์สลับเปิด-ปิดเมนูบนอุปกรณ์พกพา -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+
+</html>

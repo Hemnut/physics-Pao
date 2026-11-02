@@ -1,17 +1,813 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบฝึกหัด บทที่ 14 ไฟฟ้ากระแส | ฟิสิกส์ จารย์เปา</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 14: ไฟฟ้ากระแส | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Prompt', 'Inter', 'sans-serif'], inter: ['Inter', 'sans-serif'] } } } }</script>
+    <style>
+        .tab-btn {
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #e11d48;
+            color: white;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .choice-btn {
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 2px solid #e2e8f0;
+        }
+
+        .choice-btn:hover {
+            border-color: #fecdd3;
+            background: #fff1f2;
+        }
+
+        .choice-btn.selected {
+            border-color: #e11d48;
+            background: #fff1f2;
+            color: #9f1239;
+            font-weight: 600;
+        }
+
+        .choice-btn.correct {
+            border-color: #10b981 !important;
+            background: #ecfdf5 !important;
+            color: #065f46 !important;
+            font-weight: bold;
+        }
+
+        .choice-btn.wrong {
+            border-color: #ef4444 !important;
+            background: #fef2f2 !important;
+            color: #991b1b !important;
+        }
+
+        .match-select {
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.85rem;
+            width: 100%;
+            outline: none;
+        }
+
+        .match-select.correct {
+            border-color: #10b981;
+            background: #ecfdf5;
+            color: #065f46;
+        }
+
+        .match-select.wrong {
+            border-color: #ef4444;
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        .fill-input {
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .fill-input.correct {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+
+        .fill-input.wrong {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .answer-key {
+            display: none;
+        }
+
+        .answer-key.show {
+            display: block;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-<main class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-extrabold mb-6">แบบฝึกหัด Interactive: ไฟฟ้ากระแส</h1>
-    <div class="bg-white p-6 rounded-2xl border border-slate-200">
-        <p class="font-bold mb-2">ข้อ 1. ตัวต้านทาน 10 โอห์ม ต่อกับแรงดัน 20 โวลต์ มีกระแสไหลผ่านกี่แอมแปร์?</p>
-        <p class="text-sm text-slate-600">วิธีคิด: $I = \frac{V}{R} = \frac{20}{10} = 2\text{ A}$</p>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="bg-gradient-to-br from-rose-500 to-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-plug"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-rose-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html"
+                    class="text-sm font-medium text-slate-500 hover:text-rose-600 transition-colors">HOME</a>
+                <a href="m5-physics.html"
+                    class="text-sm font-semibold text-rose-600 border-b-2 border-rose-600 pb-1">บทเรียน ม.5</a>
+                <a href="m5-ch14-summary.html"
+                    class="text-sm font-medium text-slate-500 hover:text-rose-600 transition-colors">สรุป Ch 14</a>
+            </nav>
+            <button class="md:hidden text-2xl text-slate-800 p-2" id="mobile-menu-btn"><i
+                    class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+            <a href="index.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">HOME</a>
+            <a href="m5-physics.html" class="text-rose-600 font-semibold py-1 border-b border-slate-100">บทเรียน ม.5</a>
+            <a href="m5-ch14-summary.html" class="text-slate-600 font-medium py-1">สรุปเนื้อหา Ch 14</a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center justify-between mb-6">
+            <a href="m5-physics.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-rose-600 hover:text-rose-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+            </a>
+            <span class="text-xs text-slate-400 font-inter">CH14 QUIZ ENGINE</span>
+        </div>
+
+        <!-- Hero -->
+        <div
+            class="bg-gradient-to-r from-slate-900 via-rose-950 to-red-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute w-72 h-72 bg-rose-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <div
+                    class="inline-flex items-center gap-2 bg-rose-500/20 border border-rose-400/30 text-rose-300 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-plug"></i> แบบฝึกหัดมาตรฐาน บทที่ 14 — ฟิสิกส์ ม.5
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด & คลังข้อสอบ: ไฟฟ้ากระแส (Current
+                    Electricity)</h1>
+                <p class="text-rose-100 text-sm max-w-2xl leading-relaxed">
+                    กระแสไฟฟ้า & ความเร็วลอยเลื่อน | กฎของโอห์ม | สภาพต้านทาน | วงจรความต้านทาน & วีตสโตนบริดจ์ |
+                    แรงเคลื่อนไฟฟ้า & เซลล์ไฟฟ้า | กำลังไฟฟ้า & เคอร์ชอฟฟ์<br>
+                    ส่วนที่ 1: ปรนัย 20 ข้อ | ส่วนที่ 2: จับคู่ 10 ข้อ | ส่วนที่ 3: เติมคำ 5 ข้อ | ส่วนที่ 4: อัตนัย 5
+                    ข้อ &nbsp;|&nbsp; <strong>คะแนนเต็ม 35 คะแนน</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+            <button onclick="showTab(1)"
+                class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600"
+                id="tab-btn-1">
+                <i class="fa-solid fa-circle-dot mr-1"></i> ส่วนที่ 1 ปรนัย (20)
+            </button>
+            <button onclick="showTab(2)"
+                class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600"
+                id="tab-btn-2">
+                <i class="fa-solid fa-link mr-1"></i> ส่วนที่ 2 จับคู่ (10)
+            </button>
+            <button onclick="showTab(3)"
+                class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600"
+                id="tab-btn-3">
+                <i class="fa-solid fa-pen-to-square mr-1"></i> ส่วนที่ 3 เติมคำ (5)
+            </button>
+            <button onclick="showTab(4)"
+                class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600"
+                id="tab-btn-4">
+                <i class="fa-solid fa-file-pen mr-1"></i> ส่วนที่ 4 อัตนัย (5)
+            </button>
+        </div>
+
+        <!-- TAB 1: MULTIPLE CHOICE -->
+        <div id="tab-1" class="tab-content active space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-rose-800 text-base mb-1 flex items-center gap-2"><i
+                        class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย 4 ตัวเลือก</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 20 ข้อ ข้อละ 1 คะแนน | เลือกตัวเลือกที่ถูกต้องที่สุด</p>
+                <div id="mc-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- TAB 2: MATCHING -->
+        <div id="tab-2" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-rose-800 text-base mb-1 flex items-center gap-2"><i
+                        class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่ความสัมพันธ์</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 10 ข้อ ข้อละ 1 คะแนน | เลือกนิยามหรือสูตรที่ถูกต้องจาก
+                    Dropdown</p>
+                <div id="match-questions" class="space-y-3"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: FILL IN THE BLANK -->
+        <div id="tab-3" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-rose-800 text-base mb-1 flex items-center gap-2"><i
+                        class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำตอบคำนวณ</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 5 ข้อ ข้อละ 1 คะแนน | คำนวณและกรอกตัวเลขคำตอบลงในช่องว่าง
+                </p>
+                <div id="fill-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- TAB 4: SUBJECTIVE -->
+        <div id="tab-4" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-rose-800 text-base mb-1 flex items-center gap-2"><i
+                        class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย แสดงวิธีทำอย่างละเอียด</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 5 ข้อ | เขียนวิธีทำอย่างเป็นขั้นตอน
+                    แล้วกดปุ่มเฉลยเพื่อตรวจคำตอบ</p>
+                <div id="subj-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- Submit Button Area -->
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <button onclick="submitAll()"
+                class="py-4 px-10 bg-gradient-to-r from-rose-600 to-red-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม
+            </button>
+            <a href="m5-physics.html"
+                class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+                <i class="fa-solid fa-list"></i> กลับหน้ารวม ม.5
+            </a>
+        </div>
+    </main>
+
+    <!-- Score Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+            <div class="bg-gradient-to-r from-rose-600 to-red-600 p-6 text-white text-center">
+                <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+                <h2 class="text-2xl font-extrabold">ผลการทดสอบ</h2>
+                <p class="text-rose-100 text-sm mt-1">บทที่ 14: ไฟฟ้ากระแส (Current Electricity)</p>
+            </div>
+            <div class="p-6 space-y-3">
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20 คะแนน)</span>
+                    <span class="font-bold text-rose-700" id="modal-p1">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (10 คะแนน)</span>
+                    <span class="font-bold text-rose-700" id="modal-p2">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5 คะแนน)</span>
+                    <span class="font-bold text-rose-700" id="modal-p3">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-500 text-xs">ส่วนที่ 4 อัตนัย (ประเมินตนเอง)</span>
+                    <span class="text-xs text-slate-400">ดูเฉลยวิธีทำ</span>
+                </div>
+                <div class="bg-rose-50 rounded-xl p-4 text-center mt-2 border border-rose-100">
+                    <p class="text-xs text-rose-600 font-semibold mb-1">คะแนนรวมทั้งหมด</p>
+                    <p class="text-4xl font-extrabold text-rose-700" id="modal-total">0/35</p>
+                    <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+                </div>
+            </div>
+            <div class="px-6 pb-6 flex gap-3">
+                <button onclick="closeModal()"
+                    class="flex-1 py-3 bg-rose-600 text-white rounded-xl font-bold text-sm hover:bg-rose-700 transition-colors">
+                    ดูเฉลยละเอียดทุกข้อ
+                </button>
+                <a href="m5-physics.html"
+                    class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300 transition-colors">
+                    กลับหน้ารวม ม.5
+                </a>
+            </div>
+        </div>
     </div>
-</main>
+
+    <script>
+        // ===== DATA: CHAPTER 14 CURRENT ELECTRICITY =====
+        const mcData = [
+            {
+                q: "กระแสไฟฟ้า 2 แอมแปร์ ไหลผ่านลวดตัวนำเป็นเวลา 1 นาที มีประจุไฟฟ้าเคลื่อนที่ผ่านพื้นที่หน้าตัดของลวดตัวนำนี้กี่คูลอมบ์?",
+                choices: [
+                    "2 C",
+                    "60 C",
+                    "120 C",
+                    "240 C"
+                ],
+                ans: 2
+            },
+            {
+                q: "ลวดทองแดงมีพื้นที่หน้าตัด 1 ตารางมิลลิเมตร มีกระแส 1.6 A ไหลผ่าน ถ้าความหนาแน่นอิเล็กตรอนอิสระเท่ากับ 8 × 10²⁸ ต่อลูกบาศก์เมตร ความเร็วลอยเลื่อนของอิเล็กตรอนมีค่ากี่เมตร/วินาที?",
+                choices: [
+                    "1.25 × 10⁻⁴ m/s",
+                    "2.50 × 10⁻⁴ m/s",
+                    "5.00 × 10⁻⁴ m/s",
+                    "1.00 × 10⁻³ m/s"
+                ],
+                ans: 0
+            },
+            {
+                q: "ลวดโลหะเส้นหนึ่งมีความต้านทาน R ถ้านำมารีดให้มีความยาวเป็น 3 เท่าของความยาวเดิม โดยที่มวลและปริมาตรคงที่ ความต้านทานใหม่จะมีค่าเป็นกี่เท่าของ R เดิม?",
+                choices: [
+                    "3 เท่า",
+                    "6 เท่า",
+                    "9 เท่า",
+                    "12 เท่า"
+                ],
+                ans: 2
+            },
+            {
+                q: "ลวดตัวนำ A และ B ทำจากโลหะชนิดเดียวกัน ลวด A มีความยาวเป็น 2 เท่าของ B แต่มีรัศมีเป็น 2 เท่าของ B อัตราส่วนความต้านทาน R_A / R_B มีค่าเท่าใด?",
+                choices: [
+                    "1/4",
+                    "1/2",
+                    "1",
+                    "2"
+                ],
+                ans: 1
+            },
+            {
+                q: "ตัวต้านทาน 3 ตัว ขนาด 6 โอห์ม, 12 โอห์ม และ 4 โอห์ม นำมาต่อขนานกัน ความต้านทานรวมของวงจรมีค่ากี่โอห์ม?",
+                choices: [
+                    "2 โอห์ม",
+                    "3 โอห์ม",
+                    "4 โอห์ม",
+                    "22 โอห์ม"
+                ],
+                ans: 0
+            },
+            {
+                q: "ตัวต้านทาน 4 โอห์ม ต่ออนุกรมกับ 6 โอห์ม แล้วต่อเข้ากับแบตเตอรี่ 20 โวลต์ กระแสไฟฟ้าที่ไหลผ่านตัวต้านทาน 4 โอห์ม มีค่ากี่แอมแปร์?",
+                choices: [
+                    "1 A",
+                    "2 A",
+                    "4 A",
+                    "5 A"
+                ],
+                ans: 1
+            },
+            {
+                q: "แบตเตอรี่มีแรงเคลื่อนไฟฟ้า E = 12 V และความต้านทานภายใน r = 2 Ω ต่อกับตัวต้านทานภายนอก R = 10 Ω ความต่างศักย์ระหว่างขั้วแบตเตอรี่มีค่ากี่โวลต์?",
+                choices: [
+                    "2 V",
+                    "10 V",
+                    "12 V",
+                    "14 V"
+                ],
+                ans: 1
+            },
+            {
+                q: "วงจรสะพานวีตสโตนมีตัวต้านทาน 4 ตัว R₁ = 10 Ω, R₂ = 20 Ω, R₃ = 15 Ω และ R₄ ต่อเป็นสะพาน ถ้าไม่มีกระแสไหลผ่านกัลวาโนมิเตอร์ R₄ ต้องมีค่ากี่โอห์ม?",
+                choices: [
+                    "15 Ω",
+                    "25 Ω",
+                    "30 Ω",
+                    "45 Ω"
+                ],
+                ans: 2
+            },
+            {
+                q: "หลอดไฟหลอดหนึ่งระบุพิกัด 100 W 220 V เมื่อนำมาต่อกับแหล่งจ่ายไฟ 220 V หลอดไฟนี้จะมีความต้านทานกี่โอห์ม?",
+                choices: [
+                    "220 Ω",
+                    "484 Ω",
+                    "100 Ω",
+                    "2,200 Ω"
+                ],
+                ans: 1
+            },
+            {
+                q: "เตารีดไฟฟ้าขนาด 1,000 วัตต์ เปิดใช้งานวันละ 2 ชั่วโมง ในเวลา 30 วัน จะสิ้นเปลืองพลังงานไฟฟ้าไปกี่หน่วย (ยูนิต, kWh)?",
+                choices: [
+                    "30 ยูนิต",
+                    "60 ยูนิต",
+                    "90 ยูนิต",
+                    "120 ยูนิต"
+                ],
+                ans: 1
+            },
+            {
+                q: "เซลล์ไฟฟ้า 2 เซลล์ แต่ละเซลล์มี E = 1.5 V, r = 0.5 Ω นำมาต่อขนานกัน แรงเคลื่อนไฟฟ้ารวมและความต้านทานภายในรวมมีค่าเท่าใด?",
+                choices: [
+                    "3.0 V , 1.0 Ω",
+                    "1.5 V , 1.0 Ω",
+                    "1.5 V , 0.25 Ω",
+                    "3.0 V , 0.25 Ω"
+                ],
+                ans: 2
+            },
+            {
+                q: "กฎข้อที่ 1 ของเคอร์ชอฟฟ์ (Kirchhoff's Current Law: KCL) ตั้งอยู่บนพื้นฐานของกฎการอนุรักษ์ใด?",
+                choices: [
+                    "การอนุรักษ์โมเมนตัม",
+                    "การอนุรักษ์พลังงาน",
+                    "การอนุรักษ์ประจุไฟฟ้า",
+                    "การอนุรักษ์มวล"
+                ],
+                ans: 2
+            },
+            {
+                q: "กฎข้อที่ 2 ของเคอร์ชอฟฟ์ (Kirchhoff's Voltage Law: KVL) ในลูปปิด ตั้งอยู่บนพื้นฐานของกฎการอนุรักษ์ใด?",
+                choices: [
+                    "การอนุรักษ์พลังงาน",
+                    "การอนุรักษ์ประจุไฟฟ้า",
+                    "การอนุรักษ์แรง",
+                    "การอนุรักษ์สนามแม่เหล็ก"
+                ],
+                ans: 0
+            },
+            {
+                q: "การดัดแปลงกัลวาโนมิเตอร์ให้เป็นแอมมิเตอร์สำหรับวัดกระแสไฟฟ้า ทำได้โดยวิธีใด?",
+                choices: [
+                    "นำตัวต้านทานชันต์ค่าต่ำมาต่อขนานกับกัลวาโนมิเตอร์",
+                    "นำตัวต้านทานชันต์ค่าสูงมาต่ออนุกรมกับกัลวาโนมิเตอร์",
+                    "นำตัวต้านทานมัลติพลายเออร์มาต่อขนานกับกัลวาโนมิเตอร์",
+                    "นำตัวเก็บประจุมาต่ออนุกรมกับกัลวาโนมิเตอร์"
+                ],
+                ans: 0
+            },
+            {
+                q: "การดัดแปลงกัลวาโนมิเตอร์ให้เป็นโวลต์มิเตอร์สำหรับวัดความต่างศักย์ ทำได้โดยวิธีใด?",
+                choices: [
+                    "นำตัวต้านทานค่าต่ำมาต่อขนานกับกัลวาโนมิเตอร์",
+                    "นำตัวต้านทานมัลติพลายเออร์ค่าสูงมาต่ออนุกรมกับกัลวาโนมิเตอร์",
+                    "นำแบตเตอรี่มาต่ออนุกรมกับกัลวาโนมิเตอร์",
+                    "ต่อไดโอดแบบขนานกับกัลวาโนมิเตอร์"
+                ],
+                ans: 1
+            },
+            {
+                q: "เมื่ออุณหภูมิของลวดตัวนำโลหะเพิ่มสูงขึ้น ความต้านทานไฟฟ้าของลวดจะเปลี่ยนแปลงอย่างไร?",
+                choices: [
+                    "ลดลง",
+                    "เพิ่มขึ้น",
+                    "คงที่เท่าเดิม",
+                    "เป็นศูนย์"
+                ],
+                ans: 1
+            },
+            {
+                q: "ตัวต้านทาน 20 โอห์ม และ 30 โอห์ม ต่อขนานกัน แล้วต่อเข้ากับความต่างศักย์ 60 โวลต์ กระแสไฟฟ้ารวมที่ไหลออกจากแหล่งจ่ายไฟมีค่ากี่แอมแปร์?",
+                choices: [
+                    "1.2 A",
+                    "2.5 A",
+                    "5.0 A",
+                    "10.0 A"
+                ],
+                ans: 2
+            },
+            {
+                q: "พลังงานความร้อนที่เกิดขึ้นในตัวต้านทาน 5 โอห์ม ซึ่งมีกระแสไฟฟ้า 2 แอมแปร์ ไหลผ่านเป็นเวลา 10 วินาที มีค่ากี่จูล?",
+                choices: [
+                    "100 จูล",
+                    "150 จูล",
+                    "200 จูล",
+                    "250 จูล"
+                ],
+                ans: 2
+            },
+            {
+                q: "หลอดไฟ 2 หลอด ระบุ 60 W 220 V และ 100 W 220 V เมื่อนำมาต่ออนุกรมกันเข้ากับไฟ 220 V หลอดใดจะสว่างกว่ากัน?",
+                choices: [
+                    "หลอด 60 W สว่างกว่า",
+                    "หลอด 100 W สว่างกว่า",
+                    "สว่างเท่ากัน",
+                    "ไม่สว่างทั้งสองหลอด"
+                ],
+                ans: 0
+            },
+            {
+                q: "เหตุใดเมื่อเปิดเครื่องใช้ไฟฟ้ากำลังสูงในบ้านพร้อมกันหลายเครื่อง เบรกเกอร์จึงตัดวงจร?",
+                choices: [
+                    "เพราะการต่อแบบขนานทำให้ความต้านทานรวมลดลง กระแสไฟฟ้ารวมจึงสูงเกินพิกัด",
+                    "เพราะความต่างศักย์ในบ้านเพิ่มสูงเกิน 220 โวลต์",
+                    "เพราะการต่อแบบอนุกรมทำให้กระแสไฟฟ้าลดลง",
+                    "เพราะความถี่ของกระแสสลับเปลี่ยนไป"
+                ],
+                ans: 0
+            }
+        ];
+
+        const matchData = [
+            { left: "1. กระแสไฟฟ้า (Current)", right: "I = Q / t = neAv (แอมแปร์, A)" },
+            { left: "2. กฎของโอห์ม (Ohm's Law)", right: "V = IR (ความต่างศักย์แปรผันตรงกับกระแส)" },
+            { left: "3. สภาพต้านทานไฟฟ้า (Resistivity)", right: "R = ρL / A (หน่วยโอห์ม·เมตร)" },
+            { left: "4. ความต้านทานต่ออนุกรม", right: "R_รวม = R₁ + R₂ + ... (กระแสเท่ากันทุกตัว)" },
+            { left: "5. ความต้านทานต่อขนาน", right: "1/R_รวม = 1/R₁ + 1/R₂ + ... (ความต่างศักย์เท่ากัน)" },
+            { left: "6. วงจรบริดจ์วีตสโตนสมดุล", right: "R₁ / R₂ = R₃ / R₄ (กระแสผ่านกัลวาโนมิเตอร์เป็นศูนย์)" },
+            { left: "7. แรงเคลื่อนไฟฟ้า (EMF)", right: "E = I(R + r) หรือ V = E − Ir" },
+            { left: "8. กำลังไฟฟ้า (Electric Power)", right: "P = IV = I²R = V² / R (วัตต์, W)" },
+            { left: "9. แอมมิเตอร์", right: "วัดกระแส ต่ออนุกรม ใช้ตัวต้านทานชันต์ต่อขนาน" },
+            { left: "10. โวลต์มิเตอร์", right: "วัดความต่างศักย์ ต่อขนาน ใช้ตัวต้านทานมัลติพลายเออร์ต่ออนุกรม" }
+        ];
+
+        const matchOptions = [
+            "I = Q / t = neAv (แอมแปร์, A)",
+            "V = IR (ความต่างศักย์แปรผันตรงกับกระแส)",
+            "R = ρL / A (หน่วยโอห์ม·เมตร)",
+            "R_รวม = R₁ + R₂ + ... (กระแสเท่ากันทุกตัว)",
+            "1/R_รวม = 1/R₁ + 1/R₂ + ... (ความต่างศักย์เท่ากัน)",
+            "R₁ / R₂ = R₃ / R₄ (กระแสผ่านกัลวาโนมิเตอร์เป็นศูนย์)",
+            "E = I(R + r) หรือ V = E − Ir",
+            "P = IV = I²R = V² / R (วัตต์, W)",
+            "วัดกระแส ต่ออนุกรม ใช้ตัวต้านทานชันต์ต่อขนาน",
+            "วัดความต่างศักย์ ต่อขนาน ใช้ตัวต้านทานมัลติพลายเออร์ต่ออนุกรม"
+        ];
+
+        const fillData = [
+            {
+                q: "ลวดตัวนำมีความต้านทาน 10 โอห์ม ต่อกับแรงดันไฟฟ้า 50 โวลต์ กระแสไฟฟ้าที่ไหลผ่านลวดนี้มีค่ากี่แอมแปร์",
+                unit: "A",
+                ans: "5.0",
+                tol: 0.1
+            },
+            {
+                q: "ตัวต้านทานสองตัวขนาด 20 โอห์ม และ 30 โอห์ม ต่อขนานกัน ความต้านทานรวมมีค่ากี่โอห์ม",
+                unit: "Ω",
+                ans: "12",
+                tol: 0.1
+            },
+            {
+                q: "แบตเตอรี่แรงเคลื่อนไฟฟ้า 12 V ความต้านทานภายใน 1 Ω ต่อกับตัวต้านทาน 5 Ω กระแสไฟฟ้าที่ไหลในวงจรมีค่ากี่แอมแปร์",
+                unit: "A",
+                ans: "2.0",
+                tol: 0.1
+            },
+            {
+                q: "เครื่องปรับอากาศขนาด 2,000 วัตต์ เปิดใช้งานวันละ 5 ชั่วโมง ใน 1 วัน จะใช้พลังงานไฟฟ้าไปกี่หน่วย (kWh)",
+                unit: "ยูนิต (kWh)",
+                ans: "10",
+                tol: 0.1
+            },
+            {
+                q: "ลวดทองแดงยาว 100 เมตร พื้นที่หน้าตัด 1 ตารางมิลลิเมตร มีสภาพต้านทาน 1.7 × 10⁻⁸ Ω·m ลวดนี้จะมีความต้านทานกี่โอห์ม",
+                unit: "Ω",
+                ans: "1.7",
+                tol: 0.1
+            }
+        ];
+
+        const subjData = [
+            {
+                q: "1. ลวดตัวนำอะลูมิเนียมเส้นหนึ่งยาว 50 เมตร มีพื้นที่หน้าตัด $2.5 \\times 10^{-6}\\text{ m}^2$ และมีสภาพต้านทาน $2.8 \\times 10^{-8}\\text{ }\\Omega\\cdot\\text{m}$ จงคำนวณหา (1) ความต้านทานของลวดเส้นนี้ (2) หากนำลวดนี้ไปต่อกับแบตเตอรี่ 28 โวลต์ จะมีกระแสไฟฟ้าไหลผ่านกี่แอมแปร์?",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. หาความต้านทาน $R$ จากสูตร $R = \\rho \\frac{L}{A}$:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$R = (2.8 \\times 10^{-8}\\text{ }\\Omega\\cdot\\text{m}) \\times \\frac{50\\text{ m}}{2.5 \\times 10^{-6}\\text{ m}^2}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$R = \\frac{140 \\times 10^{-8}}{2.5 \\times 10^{-6}} = \\frac{1.4 \\times 10^{-6}}{2.5 \\times 10^{-6}} = \\mathbf{0.56\\text{ โอห์ม}}$<br>
+        2. หากระแสไฟฟ้า $I$ จากกฎของโอห์ม $I = \\frac{V}{R}$:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$I = \\frac{28\\text{ V}}{0.56\\text{ }\\Omega} = \\mathbf{50\\text{ แอมแปร์}}$`
+            },
+            {
+                q: "2. วงจรไฟฟ้าประกอบด้วยตัวต้านทาน 3 ตัว $R_1 = 6\\text{ }\\Omega, R_2 = 12\\text{ }\\Omega$ ต่อขนานกัน แล้วนำชุดนี้ไปต่ออนุกรมกับ $R_3 = 4\\text{ }\\Omega$ จากนั้นต่อเข้ากับแหล่งจ่ายไฟความต่างศักย์ 24 โวลต์ จงหา (1) ความต้านทานรวมของวงจร (2) กระแสไฟฟ้ารวมที่ไหลผ่าน $R_3$ (3) กระแสไฟฟ้าที่ไหลแยกผ่าน $R_1$",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. หาความต้านทานขนานระหว่าง $R_1$ และ $R_2$ ($R_{12}$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$R_{12} = \\frac{R_1 R_2}{R_1 + R_2} = \\frac{6 \\times 12}{6 + 12} = \\frac{72}{18} = 4\\text{ }\\Omega$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;ความต้านทานรวมทั้งวงจร $R_{รวม} = R_{12} + R_3 = 4 + 4 = \\mathbf{8\\text{ โอห์ม}}$<br>
+        2. หากระแสไฟฟ้ารวม $I_{รวม}$:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$I_{รวม} = \\frac{V}{R_{รวม}} = \\frac{24\\text{ V}}{8\\text{ }\\Omega} = \\mathbf{3\\text{ แอมแปร์}}$ (ไหลผ่าน $R_3$ เต็ม 3 A)<br>
+        3. หากระแสที่ไหลผ่าน $R_1$ ($I_1$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;ความต่างศักย์คร่อมชุดขนาน $V_{12} = I_{รวม} \\times R_{12} = 3\\text{ A} \\times 4\\text{ }\\Omega = 12\\text{ V}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$I_1 = \\frac{V_{12}}{R_1} = \\frac{12\\text{ V}}{6\\text{ }\\Omega} = \\mathbf{2\\text{ แอมแปร์}}$ (และไหลผ่าน $R_2$ เท่ากับ $12/12 = 1\\text{ A}$)`
+            },
+            {
+                q: "3. แบตเตอรี่รถยนต์ลูกหนึ่งมีแรงเคลื่อนไฟฟ้า $E = 12.0\\text{ โวลต์}$ และมีความต้านทานภายใน $r = 0.05\\text{ โอห์ม}$ ขณะที่สตาร์ทเครื่องยนต์ มอเตอร์สตาร์ทต้องการกระแสไฟฟ้า 100 แอมแปร์ จงคำนวณหา (1) ความต่างศักย์ระหว่างขั้วแบตเตอรี่ขณะสตาร์ทเครื่องยนต์ (2) กำลังไฟฟ้าที่สูญเสียไปภายในแบตเตอรี่ในรูปความร้อน",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. ความต่างศักย์ระหว่างขั้วแบตเตอรี่ ($V$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$V = E - Ir$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$V = 12.0 - (100 \\times 0.05) = 12.0 - 5.0 = \\mathbf{7.0\\text{ โวลต์}}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;(ความต่างศักย์ตกวูบลงเหลือเพียง 7.0 V ทำให้ไฟหน้ารถหรี่ลงขณะสตาร์ท)<br>
+        2. กำลังไฟฟ้าที่สูญเสียภายในแบตเตอรี่ ($P_{สูญเสีย}$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$P = I^2 r = (100)^2 \\times 0.05 = 10,000 \\times 0.05 = \\mathbf{500\\text{ วัตต์}}$`
+            },
+            {
+                q: "4. บ้านหลังหนึ่งใช้เครื่องใช้ไฟฟ้าดังต่อไปนี้: (1) หลอดไฟ 40 W จำนวน 5 หลอด เปิดวันละ 6 ชั่วโมง (2) ตู้เย็น 150 W ทำงานเฉลี่ยวันละ 10 ชั่วโมง (3) โทรทัศน์ 100 W เปิดวันละ 4 ชั่วโมง จงคำนวณหาพลังงานไฟฟ้ารวมที่ใช้ใน 1 เดือน (30 วัน) เป็นกี่ยูนิต และถ้าค่าไฟยูนิตละ 4.50 บาท จะต้องจ่ายค่าไฟเดือนนี้เท่าใด?",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. คำนวณพลังงานไฟฟ้าต่อวัน ($E_{วัน}$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• หลอดไฟ: $5 \\times 40\\text{ W} \\times 6\\text{ h} = 1,200\\text{ Wh}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• ตู้เย็น: $150\\text{ W} \\times 10\\text{ h} = 1,500\\text{ Wh}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• โทรทัศน์: $100\\text{ W} \\times 4\\text{ h} = 400\\text{ Wh}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;รวมต่อวัน $= 1,200 + 1,500 + 400 = 3,100\\text{ Wh} = 3.1\\text{ kWh (ยูนิต/วัน)}$<br>
+        2. พลังงานไฟฟ้ารวมใน 30 วัน:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$3.1\\text{ ยูนิต/วัน} \\times 30\\text{ วัน} = \\mathbf{93\\text{ ยูนิต (kWh)}}$<br>
+        3. คำนวณค่าไฟฟ้า:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$93\\text{ ยูนิต} \\times 4.50\\text{ บาท} = \\mathbf{418.50\\text{ บาท}}$`
+            },
+            {
+                q: "5. กัลวาโนมิเตอร์เครื่องหนึ่งมีความต้านทาน $R_g = 50\\text{ }\\Omega$ และทนกระแสสูงสุดได้ $I_g = 2\\text{ mA}$ (1) ถ้าต้องการดัดแปลงเป็นแอมมิเตอร์วัดกระแสได้สูงสุด 5 แอมแปร์ ต้องใช้ความต้านทานชันต์ $R_s$ กี่โอห์ม (2) ถ้าต้องการดัดแปลงเป็นโวลต์มิเตอร์วัดได้สูงสุด 10 โวลต์ ต้องใช้ความต้านทานมัลติพลายเออร์ $R_m$ กี่โอห์ม?",
+                key: `<strong>วิธีทำ:</strong><br>
+        กำหนด: $R_g = 50\\text{ }\\Omega, I_g = 2 \\times 10^{-3}\\text{ A}$<br>
+        1. <strong>ดัดแปลงเป็นแอมมิเตอร์ ($I = 5\\text{ A}$):</strong><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;กระแสผ่านชันต์ $I_s = I - I_g = 5 - 0.002 = 4.998\\text{ A}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;ต่อขนาน: $I_s R_s = I_g R_g$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$4.998 \\times R_s = (2 \\times 10^{-3}) \\times 50 = 0.10$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$R_s = \\frac{0.10}{4.998} \\approx \\mathbf{0.02\\text{ โอห์ม}}$ (ใช้ชันต์ค่าต่ำมากต่อขนาน)<br>
+        2. <strong>ดัดแปลงเป็นโวลต์มิเตอร์ ($V = 10\\text{ V}$):</strong><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;ต่ออนุกรม: $V = I_g (R_g + R_m)$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$10 = (2 \\times 10^{-3}) (50 + R_m)$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$50 + R_m = \\frac{10}{2 \\times 10^{-3}} = 5,000$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$R_m = 5,000 - 50 = \\mathbf{4,950\\text{ โอห์ม}}$ (ใช้มัลติพลายเออร์ค่าสูงต่ออนุกรม)`
+            }
+        ];
+
+        // ===== RENDER SCRIPT =====
+        let userAnswers = new Array(mcData.length).fill(-1);
+
+        function renderMC() {
+            const container = document.getElementById('mc-questions');
+            mcData.forEach((q, qi) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-rose-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi + 1}</span>
+                ${q.q}
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="mc-choices-${qi}">
+                ${q.choices.map((c, ci) => `
+                    <button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-xs md:text-sm flex items-center gap-3 bg-white">
+                        <span class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center font-bold font-inter text-xs flex-shrink-0 text-slate-500">${ci + 1}</span>
+                        <span>${c}</span>
+                    </button>
+                `).join('')}
+            </div>`;
+                container.appendChild(div);
+            });
+        }
+
+        function selectMC(qi, ci) {
+            if (document.getElementById(`mc-${qi}-0`).classList.contains('correct') || document.getElementById(`mc-${qi}-0`).classList.contains('wrong')) return;
+            const prev = userAnswers[qi];
+            if (prev !== -1) {
+                document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+            }
+            userAnswers[qi] = ci;
+            document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+        }
+
+        function renderMatch() {
+            const container = document.getElementById('match-questions');
+            matchData.forEach((m, mi) => {
+                const div = document.createElement('div');
+                div.className = 'flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+                const opts = matchOptions.map(o => `<option value="${o}">${o}</option>`).join('');
+                div.innerHTML = `
+            <div class="flex items-center gap-2 flex-1">
+                <span class="w-6 h-6 bg-rose-700 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 font-inter">${mi + 1}</span>
+                <span class="text-xs md:text-sm font-medium text-slate-700">${m.left}</span>
+            </div>
+            <select class="match-select sm:w-80" id="match-${mi}">
+                <option value="">-- เลือกสูตรหรือนิยามที่ถูกต้อง --</option>${opts}
+            </select>`;
+                container.appendChild(div);
+            });
+        }
+
+        function renderFill() {
+            const container = document.getElementById('fill-questions');
+            fillData.forEach((f, fi) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-red-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi + 1}</span>
+                ${f.q}
+            </p>
+            <div class="flex items-center gap-2 max-w-md">
+                <input type="text" class="fill-input flex-1 outline-none bg-white font-mono" id="fill-${fi}" placeholder="พิมพ์ตัวเลขคำตอบ...">
+                <span class="text-xs md:text-sm text-slate-500 font-medium whitespace-nowrap">${f.unit}</span>
+                <span class="text-sm ml-2" id="fill-icon-${fi}"></span>
+            </div>`;
+                container.appendChild(div);
+            });
+        }
+
+        function renderSubj() {
+            const container = document.getElementById('subj-questions');
+            subjData.forEach((s, si) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-amber-500 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si + 1}</span>
+                ${s.q}
+            </p>
+            <textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-rose-400 transition-colors min-h-[100px] bg-white resize-y" id="subj-${si}" placeholder="พิมพ์แสดงแนวคิดหรือบันทึกวิธีทำของคุณที่นี่..."></textarea>
+            <div class="answer-key mt-3 p-4 bg-rose-50 border border-rose-200 rounded-xl text-xs md:text-sm text-rose-950 leading-relaxed" id="key-${si}">${s.key}</div>
+            <button onclick="toggleKey(${si})" class="mt-2 text-xs text-rose-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}">
+                <i class="fa-solid fa-eye"></i> แสดงเฉลยและวิธีคิดละเอียด
+            </button>`;
+                container.appendChild(div);
+            });
+        }
+
+        function toggleKey(si) {
+            const key = document.getElementById(`key-${si}`);
+            const btn = document.getElementById(`key-btn-${si}`);
+            key.classList.toggle('show');
+            btn.innerHTML = key.classList.contains('show')
+                ? '<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย'
+                : '<i class="fa-solid fa-eye"></i> แสดงเฉลยและวิธีคิดละเอียด';
+        }
+
+        function showTab(n) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`tab-${n}`).classList.add('active');
+            document.getElementById(`tab-btn-${n}`).classList.add('active');
+        }
+
+        function submitAll() {
+            let p1 = 0;
+            mcData.forEach((q, qi) => {
+                const chosen = userAnswers[qi];
+                for (let ci = 0; ci < 4; ci++) {
+                    const btn = document.getElementById(`mc-${qi}-${ci}`);
+                    btn.classList.remove('selected');
+                    if (ci === q.ans) btn.classList.add('correct');
+                    else if (ci === chosen && chosen !== q.ans) btn.classList.add('wrong');
+                }
+                if (chosen === q.ans) p1++;
+            });
+
+            let p2 = 0;
+            matchData.forEach((m, mi) => {
+                const sel = document.getElementById(`match-${mi}`);
+                sel.classList.remove('correct', 'wrong');
+                if (sel.value === m.right) { sel.classList.add('correct'); p2++; }
+                else sel.classList.add('wrong');
+            });
+
+            let p3 = 0;
+            fillData.forEach((f, fi) => {
+                const input = document.getElementById(`fill-${fi}`);
+                const icon = document.getElementById(`fill-icon-${fi}`);
+                const val = parseFloat(input.value.trim());
+                const correct = Math.abs(val - parseFloat(f.ans)) <= f.tol;
+                input.classList.remove('correct', 'wrong');
+                if (correct) { input.classList.add('correct'); icon.textContent = '✅'; p3++; }
+                else { input.classList.add('wrong'); icon.textContent = '❌'; }
+            });
+
+            // Show subjective keys
+            subjData.forEach((_, si) => document.getElementById(`key-${si}`).classList.add('show'));
+
+            const total = p1 + p2 + p3;
+            document.getElementById('modal-p1').textContent = `${p1}/20`;
+            document.getElementById('modal-p2').textContent = `${p2}/10`;
+            document.getElementById('modal-p3').textContent = `${p3}/5`;
+            document.getElementById('modal-total').textContent = `${total}/35`;
+            const pct = Math.round(total / 35 * 100);
+            let grade = '', emoji = '';
+            if (pct >= 80) { grade = `ยอดเยี่ยมมาก! (${pct}%) ความเข้าใจไฟฟ้ากระแสระดับสูง`; emoji = '🏆'; }
+            else if (pct >= 60) { grade = `ผ่านเกณฑ์ (${pct}%) ทบทวนวงจรไฟฟ้าและเคอร์ชอฟฟ์เพิ่มเติม`; emoji = '👍'; }
+            else { grade = `ควรทบทวนเนื้อหา (${pct}%) ลองอ่านสรุปอีกครั้งนะ`; emoji = '📚'; }
+            document.getElementById('modal-grade').textContent = grade;
+            document.getElementById('modal-emoji').textContent = emoji;
+            document.getElementById('score-modal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('score-modal').classList.remove('show');
+        }
+
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        renderMC();
+        renderMatch();
+        renderFill();
+        renderSubj();
+    </script>
 </body>
+
 </html>

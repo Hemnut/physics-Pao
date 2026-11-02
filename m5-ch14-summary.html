@@ -1,19 +1,322 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุป บทที่ 14 ไฟฟ้ากระแส | ฟิสิกส์ จารย์เปา</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปบทที่ 14: ไฟฟ้ากระแส (Current Electricity) | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Prompt', 'Inter', 'sans-serif'], inter: ['Inter', 'sans-serif'] } } } }</script>
 </head>
-<body class="bg-slate-50 text-slate-800">
-<main class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-extrabold mb-6">สรุปเนื้อหา บทที่ 14: ไฟฟ้ากระแส</h1>
-    <div class="bg-white p-6 rounded-2xl shadow-sm space-y-4">
-        <h2 class="text-xl font-bold text-rose-700">1. กฎของโอห์มและสภาพต้านทาน</h2>
-        <p class="text-sm">$V = IR$ | $R = \rho \frac{L}{A}$</p>
-        <h2 class="text-xl font-bold text-rose-700">2. วงจรไฟฟ้าและแรงเคลื่อนไฟฟ้า</h2>
-        <p class="text-sm">$E = I(R + r)$ (เมื่อ $r$ คือความต้านทานภายใน)</p>
-    </div>
-</main>
+
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="bg-gradient-to-br from-rose-500 to-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-plug"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-rose-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-rose-600">HOME</a>
+                <a href="m5-physics.html" class="text-sm font-semibold text-rose-600 border-b-2 border-rose-600">บทเรียน
+                    ม.5</a>
+                <a href="m5-ch14-quiz.html" class="text-sm font-medium text-slate-500 hover:text-rose-600">แบบฝึกหัด Ch
+                    14</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center justify-between mb-4">
+            <a href="m5-physics.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-rose-600 hover:text-rose-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+            </a>
+            <span class="text-xs text-slate-400 font-inter">CHAPTER 14 VISUAL SUMMARY</span>
+        </div>
+
+        <!-- Hero Card -->
+        <div
+            class="bg-gradient-to-r from-slate-900 via-rose-950 to-red-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute w-72 h-72 bg-rose-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <div
+                    class="inline-flex items-center gap-2 bg-rose-500/20 border border-rose-400/30 text-rose-300 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-plug"></i> บทที่ 14 — ฟิสิกส์ ม.5 เล่ม 4
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">สรุปเนื้อหา: ไฟฟ้ากระแส (Current Electricity)</h1>
+                <p class="text-rose-100 text-sm max-w-2xl leading-relaxed">
+                    กระแสไฟฟ้า I = Q/t = neAv | กฎของโอห์ม V = IR | สภาพต้านทาน R = ρL/A | วงจรความต้านทาน &
+                    วีตสโตนบริดจ์ | แรงเคลื่อนไฟฟ้า E = I(R+r) | กำลังไฟฟ้า & เคอร์ชอฟฟ์
+                </p>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="space-y-8">
+
+            <!-- Section 1: Current & Drift Velocity -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-rose-100 text-rose-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">14.1</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">กระแสไฟฟ้าและความเร็วลอยเลื่อน
+                        </h2>
+                        <p class="text-xs text-slate-500">Electric Current & Electron Drift Velocity</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs md:text-sm">
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-rose-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-bolt"></i> 1. นิยามกระแสไฟฟ้า (Current: I)
+                        </h3>
+                        <p class="text-slate-700 leading-relaxed">
+                            ปริมาณประจุไฟฟ้าที่เคลื่อนที่ผ่านพื้นที่หน้าตัดของตัวนำในหนึ่งหน่วยเวลา:
+                        </p>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-rose-700 text-base border border-slate-200">
+                            I = Q / t = n · e / t
+                        </div>
+                        <ul class="text-slate-600 space-y-1">
+                            <li>• หน่วย: แอมแปร์ (Ampere: $\text{A} = \text{C/s}$)</li>
+                            <li>• ทิศของกระแสไฟฟ้าสมมติ ($I$): ไหลจาก <strong>ศักย์สูง (+) ไป ศักย์ต่ำ (−)</strong></li>
+                            <li>• ทิศการเคลื่อนที่ของอิเล็กตรอนอิสระ: สวนทางกับกระแสสมมติ ($e^-$ ไหลจากลบไปบวก)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-rose-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-person-running"></i> 2. ความเร็วลอยเลื่อน (Drift Velocity: v)
+                        </h3>
+                        <p class="text-slate-700 leading-relaxed">
+                            ความเร็วเฉลี่ยของอิเล็กตรอนอิสระที่เคลื่อนที่ในสนามไฟฟ้าภายในเส้นลวด:
+                        </p>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-rose-700 text-base border border-slate-200">
+                            I = n · e · A · v
+                        </div>
+                        <ul class="text-slate-600 space-y-1">
+                            <li>• $n$: จำนวนอิเล็กตรอนอิสระต่อหนึ่งหน่วยปริมาตร ($\text{m}^{-3}$)</li>
+                            <li>• $e$: ประจุของอิเล็กตรอน $= 1.6 \times 10^{-19}\text{ C}$</li>
+                            <li>• $A$: พื้นที่หน้าตัดลวดตัวนำ ($\text{m}^2$) โดย $A = \pi r^2$</li>
+                            <li>• $v$: อัตราเร็วลอยเลื่อนของอิเล็กตรอน (m/s)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Ohm's Law & Resistance -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-rose-100 text-rose-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">14.2</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">กฎของโอห์มและสภาพต้านทาน (Ohm's
+                            Law & Resistivity)</h2>
+                        <p class="text-xs text-slate-500">Resistance, Resistivity & Temperature Effects</p>
+                    </div>
+                </div>
+
+                <!-- Ohm and Resistivity Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <!-- Ohm's Law -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-rose-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-calculator"></i> 1. กฎของโอห์ม (Ohm's Law)
+                        </h3>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-rose-800 text-xl border border-slate-200">
+                            V = I · R &nbsp;→&nbsp; I = V / R
+                        </div>
+                        <p class="text-slate-600 text-xs">
+                            ที่อุณหภูมิคงที่ อัตราส่วนระหว่างความต่างศักย์ $V$ กับกระแสไฟฟ้า $I$
+                            ที่ไหลผ่านตัวนำจะมีค่าคงที่ เรียกว่า <strong>ความต้านทานไฟฟ้า (Resistance: R)</strong> หน่วย
+                            โอห์ม ($\Omega$)
+                        </p>
+                    </div>
+
+                    <!-- Resistivity -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-rose-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-ruler"></i> 2. สภาพต้านทานไฟฟ้า (Resistivity: ρ)
+                        </h3>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-rose-800 text-xl border border-slate-200">
+                            R = ρ · L / A
+                        </div>
+                        <ul class="text-slate-600 text-xs space-y-1">
+                            <li>• $\rho$: สภาพต้านทานของสาร ($\Omega\cdot\text{m}$) ขึ้นกับชนิดของวัสดุ</li>
+                            <li>• $L$: ความยาวลวด (ยาวมาก $R$ มาก)</li>
+                            <li>• $A$: พื้นที่หน้าตัด (เส้นใหญ่ $R$ น้อย, เส้นเล็ก $R$ มาก)</li>
+                            <li>• <strong>ยืด/รีดลวดให้ยาวเป็น $n$ เท่า (ปริมาตรคงที่):</strong> ความต้านทานจะกลายเป็น
+                                <span class="font-mono font-bold text-rose-700">R' = n² · R</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Resistor Circuits & Wheatstone Bridge -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-rose-100 text-rose-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">14.3</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">
+                            การต่อตัวต้านทานและวงจรสะพานวีตสโตน</h2>
+                        <p class="text-xs text-slate-500">Series, Parallel & Wheatstone Bridge</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <!-- Series -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <strong class="text-rose-900 font-bold text-sm block">1. การต่อแบบอนุกรม (Series):</strong>
+                        <ul class="text-slate-600 space-y-1">
+                            <li>• กระแสเท่ากันทุกตัว: <span class="font-mono font-bold text-slate-800">I_{รวม} = I_1 =
+                                    I_2 = ...</span></li>
+                            <li>• ความต่างศักย์แบ่งกัน: <span class="font-mono font-bold text-slate-800">V_{รวม} = V_1 +
+                                    V_2 + ...</span></li>
+                            <li>• ความต้านทานรวมเพิ่มขึ้น: <span class="font-mono font-bold text-rose-700">R_{รวม} = R_1
+                                    + R_2 + ...</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Parallel -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <strong class="text-rose-900 font-bold text-sm block">2. การต่อแบบขนาน (Parallel):</strong>
+                        <ul class="text-slate-600 space-y-1">
+                            <li>• ความต่างศักย์เท่ากันทุกสาย: <span class="font-mono font-bold text-slate-800">V_{รวม} =
+                                    V_1 = V_2 = ...</span></li>
+                            <li>• กระแสรวมแยกไหล: <span class="font-mono font-bold text-slate-800">I_{รวม} = I_1 + I_2 +
+                                    ...</span></li>
+                            <li>• ความต้านทานรวมลดลง: <span class="font-mono font-bold text-rose-700">1/R_{รวม} = 1/R_1
+                                    + 1/R_2 + ...</span></li>
+                            <li>• ขนาน 2 ตัว: <span class="font-mono font-bold text-rose-700">R_{รวม} = R_1 R_2 / (R_1 +
+                                    R_2)</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Wheatstone Bridge -->
+                <div
+                    class="p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-2xl border border-rose-200 text-xs md:text-sm">
+                    <strong class="text-rose-950 font-bold block mb-1">วงจรสะพานวีตสโตน (Wheatstone Bridge):</strong>
+                    <p class="text-slate-600">
+                        เมื่อไม่มีกระแสไหลผ่านกัลวาโนมิเตอร์ตรงกลาง ($I_g = 0$) แสดงว่าศักย์ไฟฟ้าสองฝั่งเท่ากัน
+                        และอัตราส่วนความต้านทานไขว้กันจะเท่ากันพอดี:
+                    </p>
+                    <div
+                        class="p-2.5 bg-white rounded-xl font-mono text-center font-bold text-rose-800 text-base my-2 border border-rose-200">
+                        R₁ / R₂ = R₃ / R₄ &nbsp;หรือ&nbsp; R₁ · R₄ = R₂ · R₃
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: EMF, Electric Power & Meters -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span
+                        class="w-10 h-10 bg-rose-100 text-rose-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">14.4-14.5</span>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-slate-900">แรงเคลื่อนไฟฟ้า กำลังไฟฟ้า
+                            และเครื่องมือวัด</h2>
+                        <p class="text-xs text-slate-500">Electromotive Force, Power & Electrical Meters</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                    <!-- EMF -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-rose-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-car-battery"></i> แรงเคลื่อนไฟฟ้า (EMF: E)
+                        </h3>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-rose-800 text-base border border-slate-200">
+                            E = I · (R + r) &nbsp;→&nbsp; I = ΣE / (ΣR + Σr)
+                        </div>
+                        <ul class="text-slate-600 text-xs space-y-1">
+                            <li>• $E$: แรงเคลื่อนไฟฟ้าของแหล่งกำเนิด (โวลต์, V)</li>
+                            <li>• $r$: ความต้านทานภายในแหล่งกำเนิด ($\Omega$)</li>
+                            <li>• ความต่างศักย์ระหว่างขั้วแบตเตอรี่: <span class="font-mono font-bold text-slate-800">V
+                                    = E − Ir = IR</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Power & Units -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="font-bold text-rose-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-bolt-lightning"></i> พลังงาน & กำลังไฟฟ้า (P)
+                        </h3>
+                        <div
+                            class="p-3 bg-white rounded-xl font-mono text-center font-bold text-rose-800 text-base border border-slate-200">
+                            P = I · V = I² R = V² / R
+                        </div>
+                        <ul class="text-slate-600 text-xs space-y-1">
+                            <li>• พลังงานไฟฟ้า: $W = P \cdot t$ (หน่วยจูล, J)</li>
+                            <li>• <strong>การคิดค่าไฟฟ้า (Unit):</strong> 1 ยูนิต $= 1\text{ kWh} = \frac{\text{วัตต์}
+                                \times \text{ชั่วโมง}}{1000}$</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Meters Conversion -->
+                <div
+                    class="p-5 bg-gradient-to-r from-rose-50 to-orange-50 rounded-2xl border border-rose-200 space-y-3 text-xs md:text-sm">
+                    <h3 class="font-bold text-rose-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-gauge"></i> การดัดแปลงกัลวาโนมิเตอร์เป็นแอมมิเตอร์และโวลต์มิเตอร์
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <strong class="text-slate-900">แอมมิเตอร์ (Ammeter):</strong>
+                            <p class="text-slate-600">ใช้วัดกระแส ต่อ <strong>อนุกรม</strong> ในวงจร โดยนำตัวต้านทาน
+                                <strong>ชันต์ ($R_s$) มาต่อขนานกับกัลวาโนมิเตอร์</strong></p>
+                            <span
+                                class="font-mono font-bold text-rose-800 block text-center bg-slate-50 p-1.5 rounded">I_s
+                                · R_s = I_g · R_g</span>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <strong class="text-slate-900">โวลต์มิเตอร์ (Voltmeter):</strong>
+                            <p class="text-slate-600">ใช้วัดความต่างศักย์ ต่อ <strong>ขนาน</strong> กับวงจร
+                                โดยนำตัวต้านทาน <strong>มัลติพลายเออร์ ($R_m$) มาต่ออนุกรมกับกัลวาโนมิเตอร์</strong></p>
+                            <span
+                                class="font-mono font-bold text-rose-800 block text-center bg-slate-50 p-1.5 rounded">V
+                                = I_g · (R_g + R_m)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Links -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <a href="m5-ch14-quiz.html"
+                    class="py-4 px-8 bg-rose-600 hover:bg-rose-700 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i> ทำแบบฝึกหัดท้ายบทที่ 14 (35 คะแนน)
+                </a>
+                <a href="m5-physics.html"
+                    class="py-4 px-8 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-list"></i> กลับหน้ารวมบทเรียน ม.5
+                </a>
+            </div>
+
+        </div>
+    </main>
 </body>
+
 </html>

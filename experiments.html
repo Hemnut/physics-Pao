@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลังห้องทดลองเสมือนจริง | ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB</title>
+    <!-- โหลดฟอนต์ Prompt และ Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- โหลด FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Inter', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between font-sans">
+
+    <!-- 1. แถบเมนูบนสุด (Navigation Bar) -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-blue-500 to-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-md">
+                    <i class="fa-solid fa-atom"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-blue-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">HOME</a>
+                <a href="courses.html" class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">คลังความรู้</a>
+                <a href="exams.html" class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">คลังข้อสอบ</a>
+            </nav>
+            <button class="md:hidden text-2xl text-slate-800 p-2" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+            <a href="index.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">HOME</a>
+            <a href="courses.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">คลังความรู้</a>
+            <a href="exams.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">คลังข้อสอบ</a>
+            <a href="about.html" class="text-blue-600 font-semibold py-1">เกี่ยวกับอาจารย์เปา</a>
+        </div>
+    </header>
+
+    <!-- 2. คอนเทนเนอร์หลัก (Main Content Zone) -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow">
+
+        <div class="mb-10 text-center">
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
+                ห้องปฏิบัติการเสมือนจริง (Virtual Physics Labs)
+            </h1>
+            <p class="text-slate-500 text-sm max-w-xl mx-auto">
+                เลือกปฏิบัติการทดลองจำลองเชิงโต้ตอบ เพื่อเรียนรู้และทดลองปรากฏการณ์ทางฟิสิกส์ด้วยตนเอง
+            </p>
+            <div class="w-16 h-1 bg-purple-600 mx-auto rounded-full mt-4"></div>
+        </div>
+
+        <!-- โซนผังการ์ดทดลอง (Grid Experiments Selection) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- LAB 01: ถ้วยยูรีกา -->
+            <a href="eureka-lab.html" class="group relative bg-white border-2 border-purple-200 hover:border-purple-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-purple-100 text-purple-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 01</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-glass-water"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-purple-600 transition-colors">ถ้วยยูรีกา (Eureka Can)</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">การหาปริมาตรและความหนาแน่นของวัตถุรูปทรงไม่แน่นอนด้วยการแทนที่น้ำ</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-purple-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 02: การตกแบบเสรี -->
+            <a href="freefall-lab.html" class="group relative bg-white border-2 border-blue-200 hover:border-blue-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-blue-100 text-blue-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 02</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-arrows-up-to-line"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">การตกแบบเสรี (Free Fall)</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ศึกษาความก้าวหน้าการเคลื่อนที่ภายใต้แรงโน้มถ่วงของโลกและค่า g</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-blue-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 03: การแกว่งลูกตุ้มอย่างง่าย -->
+            <a href="pendulum-lab.html" class="group relative bg-white border-2 border-emerald-200 hover:border-emerald-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-emerald-100 text-emerald-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 03</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-stopwatch"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-emerald-600 transition-colors">การแกว่งลูกตุ้มอย่างง่าย</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ศึกษาความสัมพันธ์ระหว่างความยาวสายแขวนกับคาบการแกว่งของเพนดูลัม</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-emerald-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 04: กฎของฮุค -->
+            <a href="#" class="group relative bg-white border-2 border-amber-200 hover:border-amber-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-amber-100 text-amber-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 04</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-ring"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-amber-600 transition-colors">กฎของฮุค (Hooke's Law)</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ทดลองหาค่านิจสปริง (k) จากระยะยืดของสปริงเมื่อถ่วงด้วยมวลต่างๆ</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-amber-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 05: การหักเหของแสงและสเนลล์ -->
+            <a href="#" class="group relative bg-white border-2 border-rose-200 hover:border-rose-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-rose-100 text-rose-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 05</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-icons"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-rose-600 transition-colors">การหักเหของแสงและสเนลล์</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ศึกษาดรรชนีหักเหของตัวกลาง มุมตกกระทบ มุมหักเห และมุมกฤต</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-rose-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 06: วงจรไฟฟ้าอนุกรม-ขนาน -->
+            <a href="#" class="group relative bg-white border-2 border-indigo-200 hover:border-indigo-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-indigo-100 text-indigo-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 06</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">วงจรไฟฟ้าอนุกรม-ขนาน</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ต่อวงจรไฟฟ้าจำลอง วัดค่ากระแสไฟฟ้า และความต่างศักย์ตกคร่อมตามกฎของโอห์ม</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-indigo-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 07: เส้นแรงแม่เหล็กเหนี่ยวนำ -->
+            <a href="#" class="group relative bg-white border-2 border-teal-200 hover:border-teal-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-teal-100 text-teal-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 07</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-magnet"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-teal-600 transition-colors">เส้นแรงแม่เหล็กเหนี่ยวนำ</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ส่องดูทิศทางของเส้นแรงแม่เหล็กรอบแท่งแม่เหล็กและขดลวดตัวนำ</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-teal-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 08: แรงพยุงของของเหลว -->
+            <a href="#" class="group relative bg-white border-2 border-sky-200 hover:border-sky-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-sky-100 text-sky-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 08</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-water"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-sky-600 transition-colors">แรงพยุงของของเหลว</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ศึกษาแรงพยุงตามหลักของอาร์คิมีดีส เมื่อวัตถุจมหรือลอยในของเหลว</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-sky-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 09: การแทรกแทรกของคลื่นน้ำ -->
+            <a href="#" class="group relative bg-white border-2 border-cyan-200 hover:border-cyan-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-cyan-100 text-cyan-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 09</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-water-ladder"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-cyan-600 transition-colors">การแทรกสอดของคลื่นน้ำ</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ถาดคลื่นจำลองเพื่อสังเกตรูปแบบแนวบัพ (Node) และแนวปฏิบัพ (Antinode)</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-cyan-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 10: แสงและทัศนอุปกรณ์ -->
+            <a href="#" class="group relative bg-white border-2 border-amber-200 hover:border-amber-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-amber-100 text-amber-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 10</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-glasses"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-amber-600 transition-colors">แสงและทัศนอุปกรณ์</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ศึกษาการเกิดภาพจากเลนส์นูน เลนส์เว้า กระจกเงา และหลักการของกล้องทัศนอุปกรณ์</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-amber-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 11: โมเมนตัมและการชน -->
+            <a href="#" class="group relative bg-white border-2 border-red-200 hover:border-red-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-red-100 text-red-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 11</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-car-burst"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-red-600 transition-colors">โมเมนตัมและการชน</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">การอนุรักษ์โมเมนตัม การชนแบบยืดหยุ่น การชนแบบไม่ยืดหยุ่น และแรงดล</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-red-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 12: คลื่นเสียง -->
+            <a href="#" class="group relative bg-white border-2 border-blue-200 hover:border-blue-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-blue-100 text-blue-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 12</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">คลื่นเสียงและความเข้มเสียง</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">อัตราเร็วเสียง การเรโซแนนซ์ในท่อกำทอน ความเข้มเสียง และระดับเดซิเบล</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-blue-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 13: ปรากฏการณ์ดอปเพลอร์ -->
+            <a href="#" class="group relative bg-white border-2 border-violet-200 hover:border-violet-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-violet-100 text-violet-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 13</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-violet-100 text-violet-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-violet-600 transition-colors">ปรากฏการณ์ดอปเพลอร์</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">การเปลี่ยนแปลงความถี่และความยาวคลื่นเสียงเมื่อแหล่งกำเนิดหรือผู้ฟังเคลื่อนที่</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-violet-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 14: การเคลื่อนที่แบบโพรเจกไทล์ -->
+            <a href="#" class="group relative bg-white border-2 border-orange-200 hover:border-orange-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-orange-100 text-orange-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 14</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-person-skiing-nordic"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-orange-600 transition-colors">การเคลื่อนที่แบบโพรเจกไทล์</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ศึกษาการยิงวัตถุวิถีโค้ง 2 มิติ อิทธิพลของมุมยิง ความเร็วต้น และระยะตกไกลสุด</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-orange-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 15: คลื่นกระแทกและโซนิคบูม -->
+            <a href="#" class="group relative bg-white border-2 border-rose-200 hover:border-rose-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-rose-100 text-rose-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 15</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-plane-lock"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-rose-600 transition-colors">คลื่นกระแทก (Sonic Boom)</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">การเกิดคลื่นกระแทกเมื่อวัตถุเคลื่อนที่เร็วกว่าเสียง เลขมัค (Mach Number) และมุมหน้าคลื่น</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-rose-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 16: การเคลื่อนที่ของสปริง -->
+            <a href="#" class="group relative bg-white border-2 border-emerald-200 hover:border-emerald-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-emerald-100 text-emerald-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 16</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-arrows-left-right-to-line"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-emerald-600 transition-colors">การสั่นของระบบมวลติดสปริง</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">การเคลื่อนที่กลับไปกลับมาของสปริง คาบการสั่น ความถี่ และพลังงานศักย์ยืดหยุ่น</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-emerald-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 17: การเคลื่อนที่แบบ SHM -->
+            <a href="#" class="group relative bg-white border-2 border-teal-200 hover:border-teal-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-teal-100 text-teal-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 17</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-wave-square"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-teal-600 transition-colors">การเคลื่อนที่แบบฮาร์มอนิกอย่างง่าย (SHM)</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">เปรียบเทียบการสั่นแบบ SHM กับการเคลื่อนที่วงกลม สมการการกระจัด ความเร็ว และความเร่ง</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-teal-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 18: การเคลื่อนที่แบบวงกลม -->
+            <a href="#" class="group relative bg-white border-2 border-indigo-200 hover:border-indigo-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-indigo-100 text-indigo-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 18</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-rotate"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">การเคลื่อนที่แบบวงกลม</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">แรงสู่ศูนย์กลาง ความเร็วเชิงมุม อัตราเร็วเชิงเส้น และการเข้าโค้งของยานพาหนะ</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-indigo-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 19: สมดุลของคาน -->
+            <a href="#" class="group relative bg-white border-2 border-fuchsia-200 hover:border-fuchsia-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-fuchsia-100 text-fuchsia-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 19</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-fuchsia-100 text-fuchsia-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-fuchsia-600 transition-colors">สมดุลของคานและโมเมนต์</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ทดลองวางมวลบนคานเพื่อสร้างสมดุล คำนวณโมเมนต์ตามเข็มและโมเมนต์ทวนเข็มนาฬิกา</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-fuchsia-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 20: แรงลอยตัว -->
+            <a href="#" class="group relative bg-white border-2 border-sky-200 hover:border-sky-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-sky-100 text-sky-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 20</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-life-ring"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-sky-600 transition-colors">แรงลอยตัวและตัวกลาง</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">ความหนาแน่นของของเหลวชนิดต่างๆ ผลกระทบต่อแรงลอยตัว และปริมาตรส่วนที่จม</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-sky-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 21: กฎของอาร์คิมีดีส -->
+            <a href="#" class="group relative bg-white border-2 border-cyan-200 hover:border-cyan-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-cyan-100 text-cyan-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 21</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-cyan-600 transition-colors">กฎของอาร์คิมีดีส (Archimedes)</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">พิสูจน์ขนาดของแรงพยุงที่เท่ากับน้ำหนักของของเหลวที่ถูกวัตถุนั้นแทนที่</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-cyan-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- LAB 22: คลื่นแม่เหล็กไฟฟ้า -->
+            <a href="#" class="group relative bg-white border-2 border-purple-200 hover:border-purple-500 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[220px]">
+                <span class="absolute top-4 right-4 bg-purple-100 text-purple-700 text-[0.65rem] font-bold font-inter px-2.5 py-0.5 rounded-full uppercase tracking-wider">LAB 22</span>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-tower-broadcast"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-purple-600 transition-colors">คลื่นแม่เหล็กไฟฟ้า</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">สเปกตรัมคลื่นแม่เหล็กไฟฟ้า การแผ่รังสี สนามไฟฟ้า และสนามแม่เหล็กที่ตั้งฉากกัน</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-purple-600">
+                    <span>เปิดห้องทดลอง</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- 3. ส่วนท้ายดีไซน์เข้ม (Deep Footer Card) -->
+    <footer class="bg-slate-900 text-white mt-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช" class="w-14 h-14 rounded-full object-cover border-2 border-blue-500 shadow-md">
+                    <div>
+                        <h3 class="font-bold text-base text-white">คุยกับ จารย์เปา</h3>
+                        <p class="text-xs text-slate-400">ครูพิชิต เห็มนุช @ ฟิสิกส์จารย์เปา</p>
+                    </div>
+                </div>
+                <!-- ช่องทางการติดต่อ -->
+                <div class="flex items-center gap-3">
+                    <a href="https://www.facebook.com/profile.php?id=100076034031908#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 text-white flex items-center justify-center transition-colors">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="tel:0982727834" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-emerald-600 text-white flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                    <a href="https://line.me/ti/p/_TtCVxnlIh" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-emerald-500 text-white flex items-center justify-center transition-colors">
+                        <i class="fa-brands fa-line"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-8 pt-6 text-center text-xs text-slate-500">
+                <p>&copy; 2026 Gemini Antigravity - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- สคริปต์สลับเปิด-ปิดเมนูบนอุปกรณ์พกพา -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,17 +1,746 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบฝึกหัด บทที่ 10 เสียง | ฟิสิกส์ จารย์เปา</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 10: เสียง (Sound) | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Prompt', 'Inter', 'sans-serif'], inter: ['Inter', 'sans-serif'] } } } }</script>
+    
+    <!-- MathJax CDN สำหรับแสดงผลสมการ LaTeX -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        .tab-btn { transition: all 0.2s; }
+        .tab-btn.active {
+            background: #0284c7;
+            color: white;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .choice-btn {
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 2px solid #e2e8f0;
+        }
+        .choice-btn:hover { border-color: #bae6fd; background: #f0f9ff; }
+        .choice-btn.selected { border-color: #0284c7; background: #f0f9ff; color: #0369a1; font-weight: 600; }
+        .choice-btn.correct { border-color: #10b981 !important; background: #ecfdf5 !important; color: #065f46 !important; font-weight: bold; }
+        .choice-btn.wrong { border-color: #ef4444 !important; background: #fef2f2 !important; color: #991b1b !important; }
+
+        .match-select {
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.85rem;
+            width: 100%;
+            outline: none;
+        }
+        .match-select.correct { border-color: #10b981; background: #ecfdf5; color: #065f46; }
+        .match-select.wrong { border-color: #ef4444; background: #fef2f2; color: #991b1b; }
+
+        .fill-input { border: 2px solid #e2e8f0; border-radius: 0.5rem; padding: 0.4rem 0.6rem; font-size: 0.9rem; }
+        .fill-input.correct { border-color: #10b981; background: #ecfdf5; }
+        .fill-input.wrong { border-color: #ef4444; background: #fef2f2; }
+
+        .answer-key { display: none; }
+        .answer-key.show { display: block; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.show { display: flex; }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-<main class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-extrabold mb-6">แบบฝึกหัด Interactive: เสียง</h1>
-    <div class="bg-white p-6 rounded-2xl border border-slate-200">
-        <p class="font-bold mb-2">ข้อ 1. ที่อุณหภูมิ 25 องศาเซลเซียส อัตราเร็วเสียงในอากาศมีค่ากี่ m/s?</p>
-        <p class="text-sm text-slate-600">วิธีคิด: $v = 331 + 0.6(25) = 346\text{ m/s}$</p>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-sky-500 to-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-sky-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-sky-600 transition-colors">HOME</a>
+                <a href="m5-physics.html" class="text-sm font-semibold text-sky-600 border-b-2 border-sky-600 pb-1">บทเรียน ม.5</a>
+                <a href="m5-ch10-summary.html" class="text-sm font-medium text-slate-500 hover:text-sky-600 transition-colors">สรุป Ch 10</a>
+            </nav>
+            <button class="md:hidden text-2xl text-slate-800 p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+            <a href="index.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">HOME</a>
+            <a href="m5-physics.html" class="text-sky-600 font-semibold py-1 border-b border-slate-100">บทเรียน ม.5</a>
+            <a href="m5-ch10-summary.html" class="text-slate-600 font-medium py-1">สรุปเนื้อหา Ch 10</a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center justify-between mb-6">
+            <a href="m5-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-sky-600 hover:text-sky-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+            </a>
+            <span class="text-xs text-slate-400 font-inter">CH10 QUIZ ENGINE</span>
+        </div>
+
+        <!-- Hero -->
+        <div class="bg-gradient-to-r from-slate-900 via-sky-950 to-blue-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute w-72 h-72 bg-sky-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <div class="inline-flex items-center gap-2 bg-sky-500/20 border border-sky-400/30 text-sky-300 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-volume-high"></i> แบบฝึกหัดมาตรฐาน บทที่ 10 — ฟิสิกส์ ม.5
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด & คลังข้อสอบ: เสียง (Sound)</h1>
+                <p class="text-sky-100 text-sm max-w-2xl leading-relaxed">
+                    ครอบคลุมอัตราเร็วเสียง | เสียงก้อง-โซนาร์ | ความเข้มเสียง & เดซิเบล | บีต | การสั่นพ้องในท่อ | ดอปเพลอร์ & คลื่นกระแทก<br>
+                    ส่วนที่ 1: ปรนัย 20 ข้อ | ส่วนที่ 2: จับคู่ 10 ข้อ | ส่วนที่ 3: เติมคำ 5 ข้อ | ส่วนที่ 4: อัตนัย 5 ข้อ &nbsp;|&nbsp; <strong>คะแนนเต็ม 35 คะแนน</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+            <button onclick="showTab(1)" class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-1">
+                <i class="fa-solid fa-circle-dot mr-1"></i> ส่วนที่ 1 ปรนัย (20)
+            </button>
+            <button onclick="showTab(2)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-2">
+                <i class="fa-solid fa-link mr-1"></i> ส่วนที่ 2 จับคู่ (10)
+            </button>
+            <button onclick="showTab(3)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-3">
+                <i class="fa-solid fa-pen-to-square mr-1"></i> ส่วนที่ 3 เติมคำ (5)
+            </button>
+            <button onclick="showTab(4)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-4">
+                <i class="fa-solid fa-file-pen mr-1"></i> ส่วนที่ 4 อัตนัย (5)
+            </button>
+        </div>
+
+        <!-- TAB 1: MULTIPLE CHOICE -->
+        <div id="tab-1" class="tab-content active space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-sky-800 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย 4 ตัวเลือก</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 20 ข้อ ข้อละ 1 คะแนน | เลือกตัวเลือกที่ถูกต้องที่สุด</p>
+                <div id="mc-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- TAB 2: MATCHING -->
+        <div id="tab-2" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-sky-800 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่ความสัมพันธ์</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 10 ข้อ ข้อละ 1 คะแนน | เลือกนิยาม/สูตรที่ถูกต้องจาก Dropdown</p>
+                <div id="match-questions" class="space-y-3"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: FILL IN THE BLANK -->
+        <div id="tab-3" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-sky-800 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำตอบคำนวณ</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 5 ข้อ ข้อละ 1 คะแนน | คำนวณและกรอกตัวเลขคำตอบลงในช่องว่าง</p>
+                <div id="fill-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- TAB 4: SUBJECTIVE -->
+        <div id="tab-4" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-sky-800 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย แสดงวิธีทำอย่างละเอียด</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 5 ข้อ | ฝึกเขียนวิธีทำอย่างเป็นขั้นตอน แล้วกดปุ่มเฉลยเพื่อตรวจคำตอบ</p>
+                <div id="subj-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- Submit Button Area -->
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <button onclick="submitAll()" class="py-4 px-10 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม
+            </button>
+            <a href="m5-physics.html" class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+                <i class="fa-solid fa-list"></i> กลับหน้ารวม ม.5
+            </a>
+        </div>
+    </main>
+
+    <!-- Score Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+            <div class="bg-gradient-to-r from-sky-600 to-blue-600 p-6 text-white text-center">
+                <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+                <h2 class="text-2xl font-extrabold">ผลการทดสอบ</h2>
+                <p class="text-sky-100 text-sm mt-1">บทที่ 10: เสียง (Sound)</p>
+            </div>
+            <div class="p-6 space-y-3">
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20 คะแนน)</span>
+                    <span class="font-bold text-sky-700" id="modal-p1">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (10 คะแนน)</span>
+                    <span class="font-bold text-sky-700" id="modal-p2">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5 คะแนน)</span>
+                    <span class="font-bold text-sky-700" id="modal-p3">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-500 text-xs">ส่วนที่ 4 อัตนัย (ประเมินตนเอง)</span>
+                    <span class="text-xs text-slate-400">ดูเฉลยวิธีทำ</span>
+                </div>
+                <div class="bg-sky-50 rounded-xl p-4 text-center mt-2 border border-sky-100">
+                    <p class="text-xs text-sky-600 font-semibold mb-1">คะแนนรวมทั้งหมด</p>
+                    <p class="text-4xl font-extrabold text-sky-700" id="modal-total">0/35</p>
+                    <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+                </div>
+            </div>
+            <div class="px-6 pb-6 flex gap-3">
+                <button onclick="closeModal()" class="flex-1 py-3 bg-sky-600 text-white rounded-xl font-bold text-sm hover:bg-sky-700 transition-colors">
+                    ดูเฉลยละเอียดทุกข้อ
+                </button>
+                <a href="m5-physics.html" class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300 transition-colors">
+                    กลับหน้ารวม ม.5
+                </a>
+            </div>
+        </div>
     </div>
-</main>
+
+    <script>
+        // ===== DATA: CHAPTER 10 SOUND =====
+        const mcData = [
+            {
+                q: "(แนว มช) วางกระดิ่งไฟฟ้าที่ส่งเสียงดังตลอดเวลาและหลอดไฟฟ้าในครอบแก้วที่สูบอากาศจนเป็นสุญญากาศแล้ว ข้อใดถูกต้องที่สุด?",
+                choices: [
+                    "ไม่ได้ยินเสียงกระดิ่ง แต่เห็นแสงจากหลอดไฟ",
+                    "ไม่ได้ยินเสียงกระดิ่ง และไม่เห็นแสงจากหลอดไฟ",
+                    "ได้ยินเสียงกระดิ่ง และเห็นแสงจากหลอดไฟ",
+                    "ได้ยินเสียงกระดิ่ง แต่ไม่เห็นแสงหลอดไฟ"
+                ],
+                ans: 0
+            },
+            {
+                q: "อัตราเร็วของเสียงในอากาศที่อุณหภูมิ 25 องศาเซลเซียส มีค่ากี่เมตรต่อวินาที?",
+                choices: [
+                    "346 เมตร/วินาที",
+                    "375 เมตร/วินาที",
+                    "412 เมตร/วินาที",
+                    "546 เมตร/วินาที"
+                ],
+                ans: 0
+            },
+            {
+                q: "แหล่งกำเนิดเสียงสั่นด้วยความถี่ 692 Hz วางไว้ในอากาศที่อุณหภูมิ 25°C คลื่นเสียงที่ส่งออกมาจะมีความยาวคลื่นเท่าใด?",
+                choices: [
+                    "0.50 เมตร",
+                    "0.75 เมตร",
+                    "0.92 เมตร",
+                    "1.20 เมตร"
+                ],
+                ans: 0
+            },
+            {
+                q: "ส่วนอัดกับส่วนอัดที่ติดกันของคลื่นเสียงในอากาศวัดได้ 0.5 เมตร ถ้าแหล่งกำเนิดเสียงมีความถี่ 680 Hz อุณหภูมิของอากาศขณะนั้นเป็นกี่องศาเซลเซียส?",
+                choices: [
+                    "10°C",
+                    "15°C",
+                    "20°C",
+                    "25°C"
+                ],
+                ans: 1
+            },
+            {
+                q: "คลื่นเสียงความถี่ 170 Hz เคลื่อนที่ในอากาศด้วยอัตราเร็ว 340 m/s ระยะห่างระหว่างส่วนอัดกับส่วนขยายที่อยู่ใกล้กันที่สุดมีค่ากี่เมตร?",
+                choices: [
+                    "1.0 เมตร",
+                    "1.5 เมตร",
+                    "2.2 เมตร",
+                    "2.8 เมตร"
+                ],
+                ans: 0
+            },
+            {
+                q: "ถ้าเห็นฟ้าแลบแล้วได้ยินเสียงฟ้าร้องในเวลา 5 วินาทีต่อมา ตำแหน่งที่เกิดฟ้าแลบอยู่ไกลเท่าใด (อัตราเร็วเสียงในอากาศ 340 m/s)?",
+                choices: [
+                    "1,200 เมตร",
+                    "1,450 เมตร",
+                    "1,500 เมตร",
+                    "1,700 เมตร"
+                ],
+                ans: 3
+            },
+            {
+                q: "(แนว En) ต้องการคัดแยกผลไม้ที่มีขนาดใหญ่กว่าและเล็กกว่า 5 cm โดยอาศัยการสะท้อนของคลื่นโซนาร์ในน้ำ (v = 1500 m/s) ความถี่ที่เหมาะสมของโซนาร์ควรมีค่าอย่างน้อยเท่าใด?",
+                choices: [
+                    "1 kHz",
+                    "3 kHz",
+                    "10 kHz",
+                    "30 kHz"
+                ],
+                ans: 3
+            },
+            {
+                q: "เรือส่งคลื่นสัญญาณเสียงโซนาร์ลงไปในน้ำทะเล และได้รับสัญญาณสะท้อนกลับมาในเวลา 0.6 วินาที ถ้าอัตราเร็วเสียงในน้ำทะเลเท่ากับ 1,500 m/s ทะเลบริเวณนี้ลึกกี่เมตร?",
+                choices: [
+                    "300 เมตร",
+                    "400 เมตร",
+                    "450 เมตร",
+                    "900 เมตร"
+                ],
+                ans: 2
+            },
+            {
+                q: "ถ้าต้องการให้ได้ยินเสียงสะท้อนจากกำแพงเป็นเสียงก้อง (Echo) ชายคนหนึ่งจะต้องยืนอยู่ห่างจากกำแพงอย่างน้อยกี่เมตร (ให้อัตราเร็วเสียง 340 m/s และหูคนแยกเสียงได้เมื่อห่างกัน 0.1 s)?",
+                choices: [
+                    "14 เมตร",
+                    "15 เมตร",
+                    "17 เมตร",
+                    "19 เมตร"
+                ],
+                ans: 2
+            },
+            {
+                q: "เสียงเคลื่อนที่จากบริเวณที่มีอุณหภูมิ 27°C (300 K) ไปสู่บริเวณที่มีอุณหภูมิเท่าใด จึงจะทำให้อัตราเร็วเสียงเพิ่มขึ้นเป็น 2 เท่า?",
+                choices: [
+                    "327°C",
+                    "600°C",
+                    "927°C",
+                    "1,200°C"
+                ],
+                ans: 2
+            },
+            {
+                q: "ลำโพง A และ B วางห่างกัน 2 เมตร ในที่โล่งส่งเสียงความถี่เดียวกันและเฟสตรงกัน จุด P ห่างจาก A 4 m และห่างจาก B 3 m เสียงความถี่ต่ำสุดที่หักล้างกันจนเกิดเสียงเบาที่สุดมีค่ากี่เฮิรตซ์ (v = 340 m/s)?",
+                choices: [
+                    "85 Hz",
+                    "170 Hz",
+                    "230 Hz",
+                    "340 Hz"
+                ],
+                ans: 1
+            },
+            {
+                q: "หวูดรถไฟมีกำลังเสียง 20 วัตต์ แผ่พลังงานออกรอบทิศทางเป็นทรงกลมสม่ำเสมอ จงหาความเข้มเสียงที่ระยะห่าง 150 เมตร ในหน่วยวัตต์ต่อตารางเมตร",
+                choices: [
+                    "3.02 × 10⁻⁵ W/m²",
+                    "5.12 × 10⁻⁵ W/m²",
+                    "7.07 × 10⁻⁵ W/m²",
+                    "9.01 × 10⁻⁵ W/m²"
+                ],
+                ans: 2
+            },
+            {
+                q: "จงหาระดับเสียง (Sound Level) ณ จุดซึ่งมีความเข้มเสียง 1 × 10⁻⁷ วัตต์ต่อตารางเมตร (กำหนด I₀ = 10⁻¹² W/m²)",
+                choices: [
+                    "30 เดซิเบล",
+                    "40 เดซิเบล",
+                    "50 เดซิเบล",
+                    "70 เดซิเบล"
+                ],
+                ans: 2
+            },
+            {
+                q: "(แนว มช) เสียงที่มีระดับเสียง 80 เดซิเบล จะมีความเข้มเสียงในหน่วยวัตต์ต่อตารางเมตรเท่าใด?",
+                choices: [
+                    "10⁻² W/m²",
+                    "10⁻⁴ W/m²",
+                    "10⁻⁶ W/m²",
+                    "10⁻⁸ W/m²"
+                ],
+                ans: 1
+            },
+            {
+                q: "(แนว มช) ยุงตัวหนึ่งบินมาทำให้ระดับความดังถึงหู 20 dB ถ้ายุง 100,000 ตัว บินมาพร้อมกันที่ตำแหน่งเดิม ระดับความดังที่มาถึงหูจะมีขนาดกี่เดซิเบล?",
+                choices: [
+                    "50 dB",
+                    "60 dB",
+                    "70 dB",
+                    "100 dB"
+                ],
+                ans: 2
+            },
+            {
+                q: "(แนว มช) เมื่ออยู่ห่างจากแหล่งกำเนิดเสียง 5 เมตร วัดระดับเสียงได้ 50 dB ถ้าถอยไปอยู่ที่ระยะ 50 เมตร ระดับเสียงจะมีค่ากี่เดซิเบล?",
+                choices: [
+                    "20 dB",
+                    "30 dB",
+                    "40 dB",
+                    "100 dB"
+                ],
+                ans: 1
+            },
+            {
+                q: "นักเรียนคนหนึ่งเล่นไวโอลินความถี่ 507 Hz และนักดนตรีอีกคนเล่นกีตาร์ความถี่ 512 Hz ถ้าทั้งสองคนเล่นพร้อมกัน จะเกิดปรากฏการณ์บีตที่ความถี่กี่เฮิรตซ์?",
+                choices: [
+                    "5 Hz",
+                    "10 Hz",
+                    "50 Hz",
+                    "75 Hz"
+                ],
+                ans: 0
+            },
+            {
+                q: "ท่อปลายปิดข้างหนึ่งยาว 25 cm (0.25 m) ความถี่ 3 ลำดับแรกที่ทำให้เกิดการสั่นพ้องของเสียงในท่อนี้มีค่ากี่เฮิรตซ์ (กำหนด v = 350 m/s)?",
+                choices: [
+                    "350 , 700 , 1050 Hz",
+                    "350 , 1050 , 1750 Hz",
+                    "700 , 1400 , 2100 Hz",
+                    "700 , 2100 , 3500 Hz"
+                ],
+                ans: 1
+            },
+            {
+                q: "รถไฟวิ่งด้วยความเร็ว 30 m/s บีบหวูดความถี่ 500 Hz เข้าหาผู้สังเกตที่ยืนอยู่นิ่งบนชานชาลา ถ้าอัตราเร็วเสียงในอากาศเป็น 330 m/s ผู้สังเกตจะได้ยินความถี่กี่เฮิรตซ์?",
+                choices: [
+                    "458.3 Hz",
+                    "475.0 Hz",
+                    "550.0 Hz",
+                    "600.0 Hz"
+                ],
+                ans: 2
+            },
+            {
+                q: "เครื่องบินไอพ่น บินด้วยความเร็ว 2.2 มัค ในอากาศที่มีอัตราเร็วเสียง 350 เมตรต่อวินาที เครื่องบินนี้บินด้วยความเร็วกี่เมตรต่อวินาที?",
+                choices: [
+                    "160 m/s",
+                    "385 m/s",
+                    "700 m/s",
+                    "770 m/s"
+                ],
+                ans: 3
+            }
+        ];
+
+        const matchData = [
+            { left: "1. คลื่นเสียง", right: "คลื่นกลตามยาว ประกอบด้วยส่วนอัดและส่วนขยาย" },
+            { left: "2. อัตราเร็วเสียงในอากาศช่วงอุณหภูมิปกติ", right: "v = 331 + 0.6t" },
+            { left: "3. เงื่อนไขการเกิดเสียงก้อง (Echo)", right: "เสียงสะท้อนกลับมาถึงหูเกิน 0.1 วินาที" },
+            { left: "4. ความเข้มเสียงจากแหล่งกำเนิดจุด", right: "I = P / (4πR²)" },
+            { left: "5. ระดับความเข้มเสียง (เดซิเบล)", right: "β = 10 log(I / 10⁻¹²)" },
+            { left: "6. คุณภาพเสียง (Timbre)", right: "ขึ้นกับจำนวนฮาร์โมนิกและความเข้มสัมพัทธ์" },
+            { left: "7. ความถี่บีต (Beat Frequency)", right: "f_B = |f₁ − f₂|" },
+            { left: "8. ความถี่สั่นพ้องท่อปลายตัน", right: "f_n = n v / (4L) เมื่อ n = 1, 3, 5..." },
+            { left: "9. ความถี่สั่นพ้องท่อปลายเปิด", right: "f_n = n v / (2L) เมื่อ n = 1, 2, 3..." },
+            { left: "10. เลขมัคและมุมคลื่นกระแทก", right: "sin θ = 1 / M = v / v_s" }
+        ];
+
+        const matchOptions = [
+            "คลื่นกลตามยาว ประกอบด้วยส่วนอัดและส่วนขยาย",
+            "v = 331 + 0.6t",
+            "เสียงสะท้อนกลับมาถึงหูเกิน 0.1 วินาที",
+            "I = P / (4πR²)",
+            "β = 10 log(I / 10⁻¹²)",
+            "ขึ้นกับจำนวนฮาร์โมนิกและความเข้มสัมพัทธ์",
+            "f_B = |f₁ − f₂|",
+            "f_n = n v / (4L) เมื่อ n = 1, 3, 5...",
+            "f_n = n v / (2L) เมื่อ n = 1, 2, 3...",
+            "sin θ = 1 / M = v / v_s"
+        ];
+
+        const fillData = [
+            {
+                q: "อัตราเร็วของเสียงในอากาศที่อุณหภูมิ 15 องศาเซลเซียส มีค่ากี่เมตรต่อวินาที",
+                unit: "m/s",
+                ans: "340",
+                tol: 0.5
+            },
+            {
+                q: "ลำโพงส่งกำลังเสียง 4π × 10⁻² วัตต์ ที่ระยะห่าง 10 เมตร ความเข้มเสียงมีค่าเท่ากับ ___ × 10⁻⁵ W/m² (กรอกเฉพาะตัวเลขสัมประสิทธิ์)",
+                unit: "× 10⁻⁵ W/m²",
+                ans: "10",
+                tol: 0.5
+            },
+            {
+                q: "เครื่องตัดหญ้า 1 เครื่องมีระดับเสียง 80 dB ถ้าเปิดเครื่องตัดหญ้าที่เหมือนกัน 10 เครื่องพร้อมกัน ระดับเสียงรวมจะเท่ากับกี่เดซิเบล",
+                unit: "dB",
+                ans: "90",
+                tol: 0.5
+            },
+            {
+                q: "ส้อมเสียงสองอันทำให้เกิดเสียงบีต 4 ครั้งต่อวินาที ถ้าส้อมเสียงอันแรกมีความถี่ 256 Hz ส้อมเสียงอีกอันที่ให้เสียงแหลมกว่าจะมีความถี่กี่เฮิรตซ์",
+                unit: "Hz",
+                ans: "260",
+                tol: 0.5
+            },
+            {
+                q: "เครื่องบินบินด้วยความเร็วเหนือเสียง 510 m/s ในอากาศที่มีความเร็วเสียง 340 m/s เลขมัค (Mach number) มีค่าเท่ากับ",
+                unit: "มัค",
+                ans: "1.5",
+                tol: 0.05
+            }
+        ];
+
+        // ปรับแต่งข้อความ LaTeX อัตนัยบทที่ 10 ให้เป๊ะ 100%
+        const subjData = [
+            {
+                q: "1. นักเรียนเคาะท่อเหล็กยาว 1,700 เมตรหนึ่งครั้ง ผู้ฟังที่อยู่อีกฟากของท่อเหล็กได้ยินเสียงเคาะ 2 ครั้ง ในเวลาต่างกัน 4.67 วินาที ถ้าอัตราเร็วเสียงในอากาศคือ 340 m/s จงคำนวณหาอัตราเร็วของเสียงในท่อเหล็ก",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. คำนวณเวลาที่เสียงเดินทางผ่านอากาศ ($t_{\\text{อากาศ}}$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$t_{\\text{อากาศ}} = \\frac{s}{v_{\\text{อากาศ}}} = \\frac{1700\\text{ m}}{340\\text{ m/s}} = 5.0\\text{ วินาที}$<br>
+        2. เสียงในท่อเหล็กเดินทางเร็วกว่าและมาถึงก่อน โดยเวลาต่างกัน $4.67\\text{ วินาที}$:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$t_{\\text{เหล็ก}} = t_{\\text{อากาศ}} - 4.67 = 5.0 - 4.67 = 0.33\\text{ วินาที}$<br>
+        3. คำนวณอัตราเร็วเสียงในท่อเหล็ก:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$v_{\\text{เหล็ก}} = \\frac{s}{t_{\\text{เหล็ก}}} = \\frac{1700\\text{ m}}{0.333\\text{ s}} \\approx \\mathbf{5,100\\text{ เมตร/วินาที}}$`
+            },
+            {
+                q: "2. วางลำโพงส่งเสียงแผ่ออกรอบทิศทางเป็นทรงกลมสม่ำเสมอ ผู้ฟังอยู่ที่จุด A ระยะห่าง 10 เมตร วัดระดับเสียงได้ 80 เดซิเบล อยากทราบว่า (1) ความเข้มเสียงที่จุด A เป็นเท่าใด และ (2) ถ้าผู้ฟังเดินถอยหลังไปอยู่ที่ระยะ 100 เมตร จะได้ยินระดับเสียงกี่เดซิเบล?",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. หาความเข้มเสียงที่จุด A ($R_1 = 10\\text{ m}, \\beta_1 = 80\\text{ dB}$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\beta = 10\\log\\left(\\frac{I}{I_0}\\right) \\implies 80 = 10\\log\\left(\\frac{I_1}{10^{-12}}\\right)$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$8 = \\log\\left(\\frac{I_1}{10^{-12}}\\right) \\implies \\frac{I_1}{10^{-12}} = 10^8 \\implies I_1 = \\mathbf{10^{-4}\\text{ W/m}^2}$<br>
+        2. หาระดับเสียงที่ระยะ $R_2 = 100\\text{ m}$:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\beta_2 - \\beta_1 = 10\\log\\left(\\frac{R_1}{R_2}\\right)^2 = 20\\log\\left(\\frac{10}{100}\\right) = 20\\log(0.1) = -20\\text{ dB}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\beta_2 = \\beta_1 - 20 = 80 - 20 = \\mathbf{60\\text{ เดซิเบล}}$`
+            },
+            {
+                q: "3. ในการทดลองเรโซแนนซ์ด้วยหลอดกำทอนปลายปิดที่มีลูกสูบปรับความยาวได้ โดยใช้ส้อมเสียงความถี่ 680 Hz อุณหภูมิห้องขณะนั้น 20°C จงหาว่าตำแหน่งลูกสูบที่ทำให้เกิดเสียงดังครั้งแรก และครั้งที่สอง จะอยู่ห่างจากปากหลอดกี่เซนติเมตร?",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. หาอัตราเร็วเสียงที่ 20°C:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$v = 331 + 0.6(20) = 331 + 12 = 343\\text{ m/s}$ (เพื่อความสะดวกในการคิดคำนวณมาตรฐาน มักใช้ $340\\text{ m/s}$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\lambda = \\frac{v}{f} = \\frac{340}{680} = 0.50\\text{ เมตร} = 50\\text{ เซนติเมตร}$<br>
+        2. ตำแหน่งเกิดการสั่นพ้องในท่อปลายปิด:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• ครั้งแรก ($L_1$): $L_1 = \\frac{\\lambda}{4} = \\frac{50}{4} = \\mathbf{12.5\\text{ เซนติเมตร}}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• ครั้งที่สอง ($L_2$): $L_2 = \\frac{3\\lambda}{4} = \\frac{3 \\times 50}{4} = \\mathbf{37.5\\text{ เซนติเมตร}}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;ระยะห่างระหว่างลูกสูบสองครั้งที่ถัดกัน: $\\Delta L = L_2 - L_1 = \\frac{\\lambda}{2} = 25\\text{ เซนติเมตร}$`
+            },
+            {
+                q: "4. รถพยาบาลเปิดไซเรนส่งเสียงความถี่ 600 Hz วิ่งด้วยความเร็ว 30 m/s บนถนนตรง ชายคนหนึ่งยืนนิ่งอยู่ริมถนน จงหาความถี่เสียงที่ชายคนนี้จะได้ยินเมื่อ (1) รถพยาบาลกำลังวิ่งเข้าหา และ (2) รถพยาบาลวิ่งผ่านพ้นไปแล้ว (กำหนดอัตราเร็วเสียง 330 m/s)",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. กรณีรถพยาบาลวิ่งเข้าหาผู้ฟัง ($v_L = 0, v_s = 30\\text{ m/s}$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$f_L = \\left(\\frac{v}{v - v_s}\\right) f_s = \\left(\\frac{330}{330 - 30}\\right) \\times 600 = \\left(\\frac{330}{300}\\right) \\times 600 = 1.1 \\times 600 = \\mathbf{660\\text{ เฮิรตซ์}}$<br>
+        2. กรณีรถพยาบาลวิ่งออกจากผู้ฟัง ($v_L = 0, v_s = 30\\text{ m/s}$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$f_L = \\left(\\frac{v}{v + v_s}\\right) f_s = \\left(\\frac{330}{330 + 30}\\right) \\times 600 = \\left(\\frac{330}{360}\\right) \\times 600 = \\frac{11}{12} \\times 600 = \\mathbf{550\\text{ เฮิรตซ์}}$`
+            },
+            {
+                q: "5. เครื่องบินความเร็วเหนือเสียงบินในแนวระดับเหนือพื้นดิน 4 กิโลเมตร ด้วยความเร็ว 510 m/s ถ้าอัตราเร็วเสียงในอากาศเป็น 340 m/s จงหา (1) เลขมัค (2) มุมของหน้าคลื่นกระแทก และ (3) ขณะที่ผู้ฟังบนพื้นดินได้ยินเสียงโซนิกบูม เครื่องบินอยู่ห่างจากผู้ฟังเป็นระยะขจัดกี่กิโลเมตร?",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. หาเลขมัค ($M$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$M = \\frac{v_s}{v} = \\frac{510}{340} = \\mathbf{1.5}$<br>
+        2. หามุมหน้าคลื่นกระแทก ($\\theta$):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\sin\\theta = \\frac{1}{M} = \\frac{1}{1.5} = \\frac{2}{3} \\implies \\theta = \\mathbf{\\arcsin\\left(\\frac{2}{3}\\right)} \\approx 41.8^\\circ$<br>
+        3. หาระยะห่าง $x$ จากผู้ฟังถึงเครื่องบินขณะได้ยินเสียง:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\sin\\theta = \\frac{h}{x} \\implies \\frac{2}{3} = \\frac{4\\text{ km}}{x}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$x = \\frac{4 \\times 3}{2} = \\mathbf{6\\text{ กิโลเมตร}}$`
+            }
+        ];
+
+        // ===== RENDER SCRIPT =====
+        let userAnswers = new Array(mcData.length).fill(-1);
+
+        function renderMC() {
+            const container = document.getElementById('mc-questions');
+            mcData.forEach((q, qi) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-sky-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi + 1}</span>
+                ${q.q}
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="mc-choices-${qi}">
+                ${q.choices.map((c, ci) => `
+                    <button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-xs md:text-sm flex items-center gap-3 bg-white">
+                        <span class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center font-bold font-inter text-xs flex-shrink-0 text-slate-500">${ci + 1}</span>
+                        <span>${c}</span>
+                    </button>
+                `).join('')}
+            </div>`;
+                container.appendChild(div);
+            });
+        }
+
+        function selectMC(qi, ci) {
+            if (document.getElementById(`mc-${qi}-0`).classList.contains('correct') || document.getElementById(`mc-${qi}-0`).classList.contains('wrong')) return;
+            const prev = userAnswers[qi];
+            if (prev !== -1) {
+                document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+            }
+            userAnswers[qi] = ci;
+            document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+        }
+
+        function renderMatch() {
+            const container = document.getElementById('match-questions');
+            matchData.forEach((m, mi) => {
+                const div = document.createElement('div');
+                div.className = 'flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+                const opts = matchOptions.map(o => `<option value="${o}">${o}</option>`).join('');
+                div.innerHTML = `
+            <div class="flex items-center gap-2 flex-1">
+                <span class="w-6 h-6 bg-sky-700 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 font-inter">${mi + 1}</span>
+                <span class="text-xs md:text-sm font-medium text-slate-700">${m.left}</span>
+            </div>
+            <select class="match-select sm:w-80" id="match-${mi}">
+                <option value="">-- เลือกความสัมพันธ์ที่ถูกต้อง --</option>${opts}
+            </select>`;
+                container.appendChild(div);
+            });
+        }
+
+        function renderFill() {
+            const container = document.getElementById('fill-questions');
+            fillData.forEach((f, fi) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-blue-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi + 1}</span>
+                ${f.q}
+            </p>
+            <div class="flex items-center gap-2 max-w-xl flex-wrap">
+                <input type="text" class="fill-input w-48 outline-none bg-white font-mono" id="fill-${fi}" placeholder="พิมพ์ตัวเลขคำตอบ...">
+                <span class="text-xs md:text-sm text-slate-500 font-medium whitespace-nowrap">${f.unit}</span>
+                <span class="text-sm font-bold" id="fill-icon-${fi}"></span>
+            </div>`;
+                container.appendChild(div);
+            });
+        }
+
+        function renderSubj() {
+            const container = document.getElementById('subj-questions');
+            subjData.forEach((s, si) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-amber-500 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si + 1}</span>
+                ${s.q}
+            </p>
+            <textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-sky-400 transition-colors min-h-[100px] bg-white resize-y" id="subj-${si}" placeholder="พิมพ์แสดงแนวคิดหรือบันทึกวิธีทำของคุณที่นี่..."></textarea>
+            <div class="answer-key mt-3 p-4 bg-sky-50 border border-sky-200 rounded-xl text-xs md:text-sm text-sky-950 leading-relaxed" id="key-${si}">${s.key}</div>
+            <button onclick="toggleKey(${si})" class="mt-2 text-xs text-sky-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}">
+                <i class="fa-solid fa-eye"></i> แสดงเฉลยและวิธีคิดละเอียด
+            </button>`;
+                container.appendChild(div);
+            });
+        }
+
+        function toggleKey(si) {
+            const key = document.getElementById(`key-${si}`);
+            const btn = document.getElementById(`key-btn-${si}`);
+            key.classList.toggle('show');
+            btn.innerHTML = key.classList.contains('show')
+                ? '<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย'
+                : '<i class="fa-solid fa-eye"></i> แสดงเฉลยและวิธีคิดละเอียด';
+
+            if (key.classList.contains('show') && window.MathJax) {
+                MathJax.typesetPromise([key]);
+            }
+        }
+
+        function showTab(n) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`tab-${n}`).classList.add('active');
+            document.getElementById(`tab-btn-${n}`).classList.add('active');
+        }
+
+        function submitAll() {
+            // 1. ตรวจปรนัย
+            let p1 = 0;
+            mcData.forEach((q, qi) => {
+                const chosen = userAnswers[qi];
+                for (let ci = 0; ci < 4; ci++) {
+                    const btn = document.getElementById(`mc-${qi}-${ci}`);
+                    btn.classList.remove('selected');
+                    if (ci === q.ans) btn.classList.add('correct');
+                    else if (ci === chosen && chosen !== q.ans) btn.classList.add('wrong');
+                }
+                if (chosen === q.ans) p1++;
+            });
+
+            // 2. ตรวจจับคู่
+            let p2 = 0;
+            matchData.forEach((m, mi) => {
+                const sel = document.getElementById(`match-${mi}`);
+                sel.classList.remove('correct', 'wrong');
+                if (sel.value === m.right) { sel.classList.add('correct'); p2++; }
+                else sel.classList.add('wrong');
+            });
+
+            // 3. ตรวจเติมคำ (พร้อมแสดงเฉลยตัวเลขที่ถูกต้อง)
+            let p3 = 0;
+            fillData.forEach((f, fi) => {
+                const input = document.getElementById(`fill-${fi}`);
+                const icon = document.getElementById(`fill-icon-${fi}`);
+                
+                let rawVal = input.value.trim().replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[๐-๙]/g, d => '๐๑٢٣٤٥٦٧٨๙'.indexOf(d));
+                const val = parseFloat(rawVal);
+                const correct = !isNaN(val) && Math.abs(val - parseFloat(f.ans)) <= f.tol;
+                
+                input.classList.remove('correct', 'wrong');
+                if (correct) { 
+                    input.classList.add('correct'); 
+                    icon.innerHTML = '<span class="text-emerald-600">✅ ถูกต้อง</span>'; 
+                    p3++; 
+                } else { 
+                    input.classList.add('wrong'); 
+                    icon.innerHTML = `<span class="text-rose-600">❌ (เฉลยที่ถูกต้อง: <strong class="text-sky-700">${f.ans}</strong>)</span>`; 
+                }
+            });
+
+            // 4. แสดงเฉลยอัตนัยพร้อมคำนวณสูตร MathJax
+            subjData.forEach((_, si) => {
+                const key = document.getElementById(`key-${si}`);
+                key.classList.add('show');
+            });
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+
+            // คำนวณสรุปผลคะแนน
+            const total = p1 + p2 + p3;
+            document.getElementById('modal-p1').textContent = `${p1}/20`;
+            document.getElementById('modal-p2').textContent = `${p2}/10`;
+            document.getElementById('modal-p3').textContent = `${p3}/5`;
+            document.getElementById('modal-total').textContent = `${total}/35`;
+            const pct = Math.round(total / 35 * 100);
+            let grade = '', emoji = '';
+            if (pct >= 80) { grade = `ยอดเยี่ยมมาก! (${pct}%) เชี่ยวชาญฟิสิกส์คลื่นเสียง`; emoji = '🏆'; }
+            else if (pct >= 60) { grade = `ผ่านเกณฑ์ (${pct}%) ทบทวนสูตรเดซิเบลและท่อเรโซแนนซ์เพิ่มเติม`; emoji = '👍'; }
+            else { grade = `ควรทบทวนเนื้อหา (${pct}%) ลองอ่านสรุปอีกครั้งนะ`; emoji = '📚'; }
+            document.getElementById('modal-grade').textContent = grade;
+            document.getElementById('modal-emoji').textContent = emoji;
+            document.getElementById('score-modal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('score-modal').classList.remove('show');
+        }
+
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        renderMC();
+        renderMatch();
+        renderFill();
+        renderSubj();
+    </script>
 </body>
+
 </html>

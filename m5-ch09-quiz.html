@@ -1,19 +1,720 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบฝึกหัด บทที่ 9 คลื่นกล | ฟิสิกส์ จารย์เปา</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 09: คลื่นกล | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Prompt', 'Inter', 'sans-serif'], inter: ['Inter', 'sans-serif'] } } } }</script>
+    
+    <!-- MathJax CDN สำหรับแสดงผลสมการ LaTeX -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        .tab-btn { transition: all 0.2s; }
+        .tab-btn.active {
+            background: #059669;
+            color: white;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .choice-btn {
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 2px solid #e2e8f0;
+        }
+        .choice-btn:hover { border-color: #a7f3d0; background: #ecfdf5; }
+        .choice-btn.selected { border-color: #059669; background: #ecfdf5; color: #065f46; font-weight: 600; }
+        .choice-btn.correct { border-color: #10b981 !important; background: #ecfdf5 !important; color: #065f46 !important; font-weight: bold; }
+        .choice-btn.wrong { border-color: #ef4444 !important; background: #fef2f2 !important; color: #991b1b !important; }
+        
+        .match-select {
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.85rem;
+            width: 100%;
+            outline: none;
+        }
+        .match-select.correct { border-color: #10b981; background: #ecfdf5; color: #065f46; }
+        .match-select.wrong { border-color: #ef4444; background: #fef2f2; color: #991b1b; }
+        
+        .fill-input { border: 2px solid #e2e8f0; border-radius: 0.5rem; padding: 0.4rem 0.6rem; font-size: 0.9rem; }
+        .fill-input.correct { border-color: #10b981; background: #ecfdf5; }
+        .fill-input.wrong { border-color: #ef4444; background: #fef2f2; }
+        
+        .answer-key { display: none; }
+        .answer-key.show { display: block; }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.show { display: flex; }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-<main class="max-w-4xl mx-auto px-4 py-8">
-    <a href="m5-physics.html" class="text-emerald-600 font-bold text-sm mb-4 inline-block"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5</a>
-    <h1 class="text-3xl font-extrabold mb-6">แบบฝึกหัด Interactive: คลื่นกล</h1>
-    <div class="bg-white p-6 rounded-2xl border border-slate-200">
-        <p class="font-bold mb-2">ข้อ 1. แหล่งกำเนิดคลื่นความถี่ 50 Hz ความยาวคลื่น 0.4 m อัตราเร็วคลื่นเท่าใด?</p>
-        <p class="text-sm text-slate-600">วิธีคิด: $v = f\lambda = 50 \times 0.4 = 20\text{ m/s}$</p>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                    <i class="fa-solid fa-water"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">
+                    ฟิสิกส์ จารย์เปา
+                    <span class="text-[0.6rem] tracking-widest font-inter text-emerald-600">VISUAL EDUCATION HUB</span>
+                </span>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors">HOME</a>
+                <a href="m5-physics.html" class="text-sm font-semibold text-emerald-600 border-b-2 border-emerald-600 pb-1">บทเรียน ม.5</a>
+                <a href="m5-ch09-summary.html" class="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors">สรุป Ch 09</a>
+            </nav>
+            <button class="md:hidden text-2xl text-slate-800 p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+            <a href="index.html" class="text-slate-600 font-medium py-1 border-b border-slate-100">HOME</a>
+            <a href="m5-physics.html" class="text-emerald-600 font-semibold py-1 border-b border-slate-100">บทเรียน ม.5</a>
+            <a href="m5-ch09-summary.html" class="text-slate-600 font-medium py-1">สรุปเนื้อหา Ch 09</a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center justify-between mb-6">
+            <a href="m5-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-800 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.5
+            </a>
+            <span class="text-xs text-slate-400 font-inter">CH09 QUIZ ENGINE</span>
+        </div>
+
+        <!-- Hero -->
+        <div class="bg-gradient-to-r from-slate-900 via-emerald-950 to-teal-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute w-72 h-72 bg-emerald-500/10 rounded-full -top-20 -right-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-wave-square"></i> แบบฝึกหัดมาตรฐาน บทที่ 09 — ฟิสิกส์ ม.5
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด & คลังข้อสอบ: คลื่นกล (Mechanical Waves)</h1>
+                <p class="text-emerald-100 text-sm max-w-2xl leading-relaxed">
+                    คัดสรรจากข้อสอบเข้ามหาวิทยาลัยและโจทย์มาตรฐานประจำบท<br>
+                    ส่วนที่ 1: ปรนัย 20 ข้อ | ส่วนที่ 2: จับคู่ 5 ข้อ | ส่วนที่ 3: เติมคำ 5 ข้อ | ส่วนที่ 4: อัตนัย 3 ข้อ
+                    &nbsp;|&nbsp; <strong>คะแนนรวม 30 คะแนน</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+            <button onclick="showTab(1)" class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-1">
+                <i class="fa-solid fa-circle-dot mr-1"></i> ส่วนที่ 1 ปรนัย (20)
+            </button>
+            <button onclick="showTab(2)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-2">
+                <i class="fa-solid fa-link mr-1"></i> ส่วนที่ 2 จับคู่ (5)
+            </button>
+            <button onclick="showTab(3)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-3">
+                <i class="fa-solid fa-pen-to-square mr-1"></i> ส่วนที่ 3 เติมคำ (5)
+            </button>
+            <button onclick="showTab(4)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-4">
+                <i class="fa-solid fa-file-pen mr-1"></i> ส่วนที่ 4 อัตนัย (3)
+            </button>
+        </div>
+
+        <!-- TAB 1: MULTIPLE CHOICE (20) -->
+        <div id="tab-1" class="tab-content active space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-emerald-800 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย 4 ตัวเลือก</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 20 ข้อ ข้อละ 1 คะแนน | เลือกคำตอบที่ถูกต้องที่สุด</p>
+                <div id="mc-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- TAB 2: MATCHING (5) -->
+        <div id="tab-2" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-emerald-800 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่ความสัมพันธ์</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 5 ข้อ ข้อละ 1 คะแนน | เลือกคำอธิบายหรือสูตรที่ถูกต้องสำหรับข้อนั้นๆ</p>
+                <div id="match-questions" class="space-y-3"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: FILL IN THE BLANK (5) -->
+        <div id="tab-3" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-emerald-800 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำตอบคำนวณ</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 5 ข้อ ข้อละ 1 คะแนน | คำนวณและกรอกตัวเลขคำตอบลงในช่องว่าง</p>
+                <div id="fill-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- TAB 4: SUBJECTIVE (3) -->
+        <div id="tab-4" class="tab-content space-y-5">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h2 class="font-bold text-emerald-800 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย แสดงวิธีทำอย่างละเอียด</h2>
+                <p class="text-xs text-slate-500 mb-4">จำนวน 3 ข้อ | ฝึกเขียนวิธีทำอย่างสมบูรณ์ แล้วกดปุ่มเพื่อดูเฉลยวิธีทำ</p>
+                <div id="subj-questions" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- Submit Button Area -->
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <button onclick="submitAll()" class="py-4 px-10 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม
+            </button>
+            <a href="m5-physics.html" class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2 transition-all">
+                <i class="fa-solid fa-list"></i> กลับหน้ารวม ม.5
+            </a>
+        </div>
+    </main>
+
+    <!-- Score Modal -->
+    <div class="modal-overlay" id="score-modal">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 text-white text-center">
+                <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+                <h2 class="text-2xl font-extrabold">ผลการทดสอบ</h2>
+                <p class="text-emerald-100 text-sm mt-1">บทที่ 09: คลื่นกล (Mechanical Waves)</p>
+            </div>
+            <div class="p-6 space-y-3">
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20 คะแนน)</span>
+                    <span class="font-bold text-emerald-700" id="modal-p1">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (5 คะแนน)</span>
+                    <span class="font-bold text-emerald-700" id="modal-p2">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5 คะแนน)</span>
+                    <span class="font-bold text-emerald-700" id="modal-p3">-</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-sm text-slate-500 text-xs">ส่วนที่ 4 อัตนัย (ประเมินตนเอง)</span>
+                    <span class="text-xs text-slate-400">ดูเฉลยวิธีทำ</span>
+                </div>
+                <div class="bg-emerald-50 rounded-xl p-4 text-center mt-2 border border-emerald-100">
+                    <p class="text-xs text-emerald-600 font-semibold mb-1">คะแนนรวมทั้งหมด</p>
+                    <p class="text-4xl font-extrabold text-emerald-700" id="modal-total">0/30</p>
+                    <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+                </div>
+            </div>
+            <div class="px-6 pb-6 flex gap-3">
+                <button onclick="closeModal()" class="flex-1 py-3 bg-emerald-600 text-white rounded-xl font-bold text-sm hover:bg-emerald-700 transition-colors">
+                    ดูเฉลยละเอียดทุกข้อ
+                </button>
+                <a href="m5-physics.html" class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300 transition-colors">
+                    กลับหน้ารวม ม.5
+                </a>
+            </div>
+        </div>
     </div>
-</main>
+
+    <script>
+        // ===== DATA: CHAPTER 9 MECHANICAL WAVES =====
+        const mcData = [
+            {
+                q: "การเคลื่อนที่แบบคลื่น หมายถึงการเคลื่อนที่ในลักษณะใด?",
+                choices: [
+                    "พลังงานถูกถ่ายโอนไปข้างหน้าพร้อมกับการเคลื่อนที่ของอนุภาคตัวกลาง",
+                    "พลังงานถูกถ่ายโอนไปข้างหน้า ก่อนการเคลื่อนที่ของอนุภาคตัวกลาง",
+                    "พลังงานถูกถ่ายโอนไปข้างหน้า หลังการเคลื่อนที่ของอนุภาคตัวกลาง",
+                    "พลังงานถูกถ่ายโอนไปข้างหน้าได้ โดยที่อนุภาคตัวกลางสั่นอยู่ที่เดิม"
+                ],
+                ans: 3
+            },
+            {
+                q: "เมื่อมีคลื่นผิวน้ำแผ่ไปถึงเศษไม้ที่ลอยอยู่ที่ผิวน้ำ เศษไม้จะมีการเคลื่อนที่อย่างไร?",
+                choices: [
+                    "อยู่นิ่งๆ เหมือนเดิม",
+                    "กระเพื่อมขึ้นลงและอยู่กับที่เดิมเมื่อคลื่นผ่านไปแล้ว",
+                    "เคลื่อนที่ลอยตามคลื่นไปข้างหน้า",
+                    "ขยับไปข้างหน้าแล้วถอยหลังกลับสลับกันตลอดเวลา"
+                ],
+                ans: 1
+            },
+            {
+                q: "คลื่นในเส้นเชือกกำลังเคลื่อนที่จากซ้ายไปขวา จุด A อยู่ด้านหลังยอดคลื่น และจุด B อยู่ด้านหน้ายอดคลื่น เมื่อเวลาผ่านไปเล็กน้อย จุด A และ B จะเคลื่อนที่อย่างไร?",
+                choices: [
+                    "ทั้ง A และ B เคลื่อนที่ไปทางขวามือ",
+                    "A ต่ำกว่าเดิม B สูงกว่าเดิม",
+                    "A สูงกว่าเดิม B ต่ำกว่าเดิม",
+                    "ทั้ง A และ B อยู่ที่เดิมไม่ขยับ"
+                ],
+                ans: 1
+            },
+            {
+                q: "คลื่นตามยาวและคลื่นตามขวาง แตกต่างกันที่สิ่งใด?",
+                choices: [
+                    "ต่างกันที่ความยาวคลื่น",
+                    "ต่างกันที่แอมพลิจูดของคลื่น",
+                    "ต่างกันที่ประเภทของแหล่งกำเนิด",
+                    "ต่างกันที่ทิศทางการสั่นของอนุภาคตัวกลางเทียบกับทิศทางคลื่น"
+                ],
+                ans: 3
+            },
+            {
+                q: "คลื่นชนิดใดต่อไปนี้จัดเป็นคลื่นกลทั้งหมด?",
+                choices: [
+                    "คลื่นน้ำ, คลื่นในเส้นเชือก, คลื่นเสียง",
+                    "คลื่นเสียง, คลื่นวิทยุ, คลื่นไมโครเวฟ",
+                    "คลื่นในสปริง, คลื่นน้ำ, แสงเลเซอร์",
+                    "แสง, รังสีเอกซ์, รังสีแกมมา"
+                ],
+                ans: 0
+            },
+            {
+                q: "คลื่นชนิดหนึ่งเกิดจากการสั่น 3,000 รอบต่อนาที คลื่นนี้มีความถี่และคาบเท่าใด?",
+                choices: [
+                    "50 Hz , 0.02 วินาที",
+                    "100 Hz , 0.04 วินาที",
+                    "150 Hz , 0.06 วินาที",
+                    "300 Hz , 0.08 วินาที"
+                ],
+                ans: 0
+            },
+            {
+                q: "คลื่นน้ำมีความยาวคลื่น 2 เมตร เคลื่อนที่ได้ระยะทาง 40 เมตร ในเวลา 5 วินาที จงหาความเร็วคลื่น, ความถี่, และเวลาที่ใช้เคลื่อนที่ได้ 1 ลูกคลื่น (คาบ)",
+                choices: [
+                    "8 m/s , 4 Hz , 0.25 s",
+                    "8 m/s , 8 Hz , 0.50 s",
+                    "4 m/s , 4 Hz , 0.25 s",
+                    "4 m/s , 8 Hz , 0.50 s"
+                ],
+                ans: 0
+            },
+            {
+                q: "(แนว มช) แหล่งกำเนิดคลื่นให้คลื่นความถี่ 400 Hz ความยาวคลื่น 12.5 cm คลื่นที่เกิดจะมีอัตราเร็วเท่าใด และในระยะทาง 300 เมตร คลื่นนี้จะใช้เวลาเคลื่อนที่กี่วินาที?",
+                choices: [
+                    "25 m/s , 3 วินาที",
+                    "25 m/s , 6 วินาที",
+                    "50 m/s , 3 วินาที",
+                    "50 m/s , 6 วินาที"
+                ],
+                ans: 3
+            },
+            {
+                q: "เมื่อสังเกตคลื่นผิวน้ำกระเพื่อมขึ้นลง 600 รอบ ใน 1 นาที และระยะระหว่างสันคลื่นที่ถัดกันวัดได้ 20 เซนติเมตร ใน 1 นาที คลื่นลูกหนึ่งจะเคลื่อนที่ได้ระยะทางกี่เมตร?",
+                choices: [
+                    "60 เมตร",
+                    "120 เมตร",
+                    "180 เมตร",
+                    "240 เมตร"
+                ],
+                ans: 1
+            },
+            {
+                q: "กราฟระหว่างการกระจัดกับระยะทางให้ระยะ 1 ลูกคลื่นเท่ากับ 20 cm และกราฟการกระจัดกับเวลาให้คาบคลื่นเท่ากับ 2 วินาที อัตราเร็วของคลื่นนี้เป็นเท่าใด?",
+                choices: [
+                    "0.1 m/s",
+                    "0.2 m/s",
+                    "0.3 m/s",
+                    "0.4 m/s"
+                ],
+                ans: 0
+            },
+            {
+                q: "คลื่นความถี่ 500 Hz มีอัตราเร็ว 300 m/s จุด 2 จุดบนคลื่นซึ่งอยู่ห่างกัน 0.06 เมตร จะมีเฟสต่างกันกี่องศา?",
+                choices: [
+                    "30°",
+                    "36°",
+                    "42°",
+                    "45°"
+                ],
+                ans: 1
+            },
+            {
+                q: "คลื่นขบวนหนึ่งมีความถี่ 150 Hz และอัตราเร็ว 300 m/s จุดสองจุดบนคลื่นที่มีเฟสต่างกัน 90 องศา จะอยู่ห่างกันกี่เมตร?",
+                choices: [
+                    "0.2 เมตร",
+                    "0.5 เมตร",
+                    "0.06 เมตร",
+                    "1.5 เมตร"
+                ],
+                ans: 1
+            },
+            {
+                q: "แหล่งกำเนิดคลื่น S ส่งคลื่นความถี่ 100 Hz ไปถึงจุด P (ห่าง 15 m) และ Q (ห่าง 18 m) พบว่าจุด P และ Q มีเฟสต่างกัน 3π/2 เรเดียน อัตราเร็วคลื่นมีค่ากี่เมตร/วินาที?",
+                choices: [
+                    "400 m/s",
+                    "500 m/s",
+                    "600 m/s",
+                    "700 m/s"
+                ],
+                ans: 0
+            },
+            {
+                q: "เชือกเส้นหนึ่งมีปลายข้างหนึ่งผูกแน่นติดกับเสา เมื่อสะบัดปลายอีกข้างส่งคลื่นดลเข้าไปกระทบเสา คลื่นสะท้อนจะมีเฟสเปลี่ยนไปกี่องศา?",
+                choices: [
+                    "0 องศา",
+                    "90 องศา",
+                    "180 องศา",
+                    "360 องศา"
+                ],
+                ans: 2
+            },
+            {
+                q: "เมื่อคลื่นเคลื่อนที่จากตัวกลางหนึ่งเข้าไปในอีกตัวกลางหนึ่ง ปริมาณใดของคลื่นที่มีค่าคงเดิมเสมอ?",
+                choices: [
+                    "อัตราเร็วคลื่น",
+                    "ความยาวคลื่น",
+                    "แอมพลิจูดคลื่น",
+                    "ความถี่คลื่น"
+                ],
+                ans: 3
+            },
+            {
+                q: "(แนว En) ถ้าคลื่นน้ำเคลื่อนที่จากเขตน้ำลึกไปยังเขตน้ำตื้น แล้วทำให้ความยาวคลื่นลดลงเหลือครึ่งหนึ่ง อัตราส่วนอัตราเร็วคลื่นในน้ำลึกต่ออัตราเร็วในน้ำตื้นเป็นเท่าใด?",
+                choices: [
+                    "0.5",
+                    "1.0",
+                    "2.0",
+                    "4.0"
+                ],
+                ans: 2
+            },
+            {
+                q: "คลื่นน้ำเคลื่อนที่จากน้ำตื้นไปน้ำลึก มุมตกกระทบและมุมหักเหเท่ากับ 30° และ 45° ตามลำดับ ถ้าความเร็วคลื่นในน้ำตื้นเท่ากับ 10 cm/s จงหาความเร็วในน้ำลึกในหน่วย cm/s",
+                choices: [
+                    "2 cm/s",
+                    "√2 cm/s",
+                    "10 cm/s",
+                    "10√2 cm/s"
+                ],
+                ans: 3
+            },
+            {
+                q: "แหล่งกำเนิดอาพันธ์ S₁ และ S₂ ให้คลื่นเฟสตรงกัน จุด P อยู่บนแนวปฏิบัพที่ 2 (A₂) โดย S₁P = 5 เมตร และ S₂P = 1 เมตร ถ้าคลื่นมีความถี่ 100 Hz ความเร็วคลื่นมีค่ากี่ m/s?",
+                choices: [
+                    "150 m/s",
+                    "200 m/s",
+                    "250 m/s",
+                    "400 m/s"
+                ],
+                ans: 1
+            },
+            {
+                q: "หลักการที่กล่าวว่า 'ทุกๆ จุดบนหน้าคลื่นสามารถประพฤติตัวเป็นแหล่งกำเนิดคลื่นใหม่ได้' คือหลักการของใคร และใช้อธิบายปรากฏการณ์ใด?",
+                choices: [
+                    "หลักของฮอยเกนส์ อธิบายการเลี้ยวเบน",
+                    "หลักของฮอยเกนส์ อธิบายการแทรกสอด",
+                    "หลักการซ้อนทับ อธิบายการรวมคลื่น",
+                    "กฎของสเนลล์ อธิบายการหักเห"
+                ],
+                ans: 0
+            },
+            {
+                q: "ในการทดลองคลื่นนิ่งในเส้นเชือก ความถี่ 475 Hz และอัตราเร็วคลื่น 380 m/s ตำแหน่งบัพสองตำแหน่งที่อยู่ถัดกันจะห่างกันกี่เมตร?",
+                choices: [
+                    "0.4 เมตร",
+                    "0.8 เมตร",
+                    "1.6 เมตร",
+                    "2.0 เมตร"
+                ],
+                ans: 0
+            }
+        ];
+
+        // 5 Matching Items
+        const matchData = [
+            { left: "1. คลื่นตามขวาง (Transverse Wave)", right: "อนุภาคตัวกลางสั่นตั้งฉากกับทิศทางคลื่น" },
+            { left: "2. คลื่นตามยาว (Longitudinal Wave)", right: "อนุภาคตัวกลางสั่นขนานกับทิศทางคลื่น" },
+            { left: "3. คลื่นกล (Mechanical Wave)", right: "ต้องอาศัยตัวกลางในการถ่ายโอนพลังงาน" },
+            { left: "4. ปลายเชือกตรึงแน่นสะท้อนกลับ", right: "คลื่นสะท้อนกลับมีเฟสเปลี่ยนไป 180°" },
+            { left: "5. ปลายเชือกอิสระสะท้อนกลับ", right: "คลื่นสะท้อนกลับมีเฟสเท่าเดิม (0°)" }
+        ];
+
+        const matchOptions = [
+            "อนุภาคตัวกลางสั่นตั้งฉากกับทิศทางคลื่น",
+            "อนุภาคตัวกลางสั่นขนานกับทิศทางคลื่น",
+            "ต้องอาศัยตัวกลางในการถ่ายโอนพลังงาน",
+            "คลื่นสะท้อนกลับมีเฟสเปลี่ยนไป 180°",
+            "คลื่นสะท้อนกลับมีเฟสเท่าเดิม (0°)"
+        ];
+
+        // 5 Fill-in-the-blank Items
+        const fillData = [
+            {
+                q: "คลื่นน้ำความถี่ 10 Hz มีความยาวคลื่น 0.25 เมตร อัตราเร็วของคลื่นมีค่าเท่ากับ",
+                unit: "m/s",
+                ans: "2.5",
+                tol: 0.1
+            },
+            {
+                q: "คลื่นน้ำเคลื่อนที่จากน้ำตื้น (มุม 30°) สู่น้ำลึก (มุม 45°) ถ้าความยาวคลื่นในน้ำตื้นเท่ากับ 2 cm ความยาวคลื่นในน้ำลึกมีค่ากี่เซนติเมตร (ตอบทศนิยม 2 ตำแหน่ง)",
+                unit: "cm",
+                ans: "2.83",
+                tol: 0.1
+            },
+            {
+                q: "แหล่งกำเนิดอาพันธ์เฟสตรงกันห่างกัน 10 cm ให้คลื่นความเร็ว 40 cm/s ความถี่ 20 Hz (λ = 2 cm) จุด P อยู่ห่างจาก S₁ 16 cm และห่างจาก S₂ 24 cm (|S₁P - S₂P| = 8 cm) จุด P จะอยู่บนแนวปฏิบัพที่เท่าใด",
+                unit: "ลำดับแนวปฏิบัพ",
+                ans: "4",
+                tol: 0.1
+            },
+            {
+                q: "เชือกยาว 1.2 เมตร ปลายทั้งสองยึดแน่น เกิดคลื่นนิ่ง 2 loop อัตราเร็วคลื่นในเชือก 240 m/s ความถี่ของคลื่นนิ่งนี้มีค่าเท่ากับ",
+                unit: "Hz",
+                ans: "200",
+                tol: 2
+            },
+            {
+                q: "จุด 2 จุดบนคลื่นขบวนหนึ่งอยู่ห่างกัน 3 เมตร มีเฟสต่างกัน 240 องศา คลื่นขบวนนี้มีความยาวคลื่นเท่ากับ",
+                unit: "m",
+                ans: "4.5",
+                tol: 0.2
+            }
+        ];
+
+        // 3 Subjective Items
+        const subjData = [
+            {
+                q: "1. คลื่นน้ำขบวนหนึ่งมีความยาวคลื่น 2 เมตร เคลื่อนที่ได้ระยะทาง 40 เมตร ในเวลา 5 วินาที จงคำนวณหา (1) อัตราเร็วคลื่น (2) ความถี่คลื่น และ (3) คาบเวลาในการเคลื่อนที่ครบ 1 ลูกคลื่น",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. หาอัตราเร็วคลื่นจากนิยาม $v = \\frac{s}{t}$:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$v = \\frac{40\\text{ m}}{5\\text{ s}} = \\mathbf{8\\text{ m/s}}$<br>
+        2. หาความถี่จากสมการคลื่น $v = f\\lambda$:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$f = \\frac{v}{\\lambda} = \\frac{8\\text{ m/s}}{2\\text{ m}} = \\mathbf{4\\text{ Hz}}$<br>
+        3. หาคาบเวลา $T$ จาก $T = \\frac{1}{f}$:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$T = \\frac{1}{4} = \\mathbf{0.25\\text{ วินาที}}$`
+            },
+            {
+                q: "2. คลื่นน้ำเคลื่อนที่จากบริเวณน้ำตื้นไปยังบริเวณน้ำลึก โดยทำมุมตกกระทบ 30° และมุมหักเหในน้ำลึกเป็น 45° ถ้าความยาวคลื่นในน้ำตื้นเท่ากับ 5 เซนติเมตร จงหาความยาวคลื่นในน้ำลึก และอธิบายว่าความถี่ของคลื่นในน้ำลึกเปลี่ยนไปหรือไม่",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. ใช้กฎของสเนลล์สำหรับการหักเห:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\frac{\\sin\\theta_{\\text{ตื้น}}}{\\sin\\theta_{\\text{ลึก}}} = \\frac{\\lambda_{\\text{ตื้น}}}{\\lambda_{\\text{ลึก}}}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\frac{\\sin 30^\\circ}{\\sin 45^\\circ} = \\frac{5}{\\lambda_{\\text{ลึก}}}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\frac{0.5}{\\frac{1}{\\sqrt{2}}} = \\frac{5}{\\lambda_{\\text{ลึก}}} \\implies \\frac{\\sqrt{2}}{2} = \\frac{5}{\\lambda_{\\text{ลึก}}}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\lambda_{\\text{ลึก}} = 5\\sqrt{2} \\approx \\mathbf{7.07\\text{ เซนติเมตร}}$<br>
+        2. <strong>ความถี่คลื่น:</strong> ความถี่คลื่นจะ <strong>คงเดิมเสมอ (ไม่เปลี่ยนแปลง)</strong> เพราะขึ้นอยู่กับแหล่งกำเนิดคลื่นเท่านั้น`
+            },
+            {
+                q: "3. เชือกเส้นหนึ่งยาว 1.5 เมตร ถูกขึงตึง ปลายข้างหนึ่งตรึงแน่น ปลายอีกข้างต่อกับเครื่องสั่นสะเทือนความถี่ 30 Hz ปรากฏว่าเกิดคลื่นนิ่งเห็นเป็น 3 Loop พอดี จงหา (1) ความยาวคลื่นในเส้นเชือก (2) อัตราเร็วของคลื่นในเส้นเชือก",
+                key: `<strong>วิธีทำ:</strong><br>
+        1. ความยาวเชือก $L = 1.5\\text{ m}$, จำนวน Loop $n = 3$:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;ในคลื่นนิ่ง 1 Loop มีความยาวเท่ากับ $\\frac{\\lambda}{2}$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$L = n\\left(\\frac{\\lambda}{2}\\right) \\implies 1.5 = 3\\left(\\frac{\\lambda}{2}\\right)$<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$\\lambda = \\frac{1.5 \\times 2}{3} = \\mathbf{1.0\\text{ เมตร}}$<br>
+        2. หาอัตราเร็วคลื่นในเส้นเชือกจาก $v = f\\lambda$:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$v = 30\\text{ Hz} \\times 1.0\\text{ m} = \\mathbf{30\\text{ เมตร/วินาที}}$`
+            }
+        ];
+
+        // ===== RENDER SCRIPT =====
+        let userAnswers = new Array(mcData.length).fill(-1);
+
+        function renderMC() {
+            const container = document.getElementById('mc-questions');
+            mcData.forEach((q, qi) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-emerald-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi + 1}</span>
+                ${q.q}
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="mc-choices-${qi}">
+                ${q.choices.map((c, ci) => `
+                    <button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-xs md:text-sm flex items-center gap-3 bg-white">
+                        <span class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center font-bold font-inter text-xs flex-shrink-0 text-slate-500">${ci + 1}</span>
+                        <span>${c}</span>
+                    </button>
+                `).join('')}
+            </div>`;
+                container.appendChild(div);
+            });
+        }
+
+        function selectMC(qi, ci) {
+            if (document.getElementById(`mc-${qi}-0`).classList.contains('correct') || document.getElementById(`mc-${qi}-0`).classList.contains('wrong')) return;
+            const prev = userAnswers[qi];
+            if (prev !== -1) {
+                document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+            }
+            userAnswers[qi] = ci;
+            document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+        }
+
+        function renderMatch() {
+            const container = document.getElementById('match-questions');
+            matchData.forEach((m, mi) => {
+                const div = document.createElement('div');
+                div.className = 'flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+                const opts = matchOptions.map(o => `<option value="${o}">${o}</option>`).join('');
+                div.innerHTML = `
+            <div class="flex items-center gap-2 flex-1">
+                <span class="w-6 h-6 bg-emerald-700 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 font-inter">${mi + 1}</span>
+                <span class="text-xs md:text-sm font-medium text-slate-700">${m.left}</span>
+            </div>
+            <select class="match-select sm:w-80" id="match-${mi}">
+                <option value="">-- เลือกข้อความที่ตรงกัน --</option>${opts}
+            </select>`;
+                container.appendChild(div);
+            });
+        }
+
+        function renderFill() {
+            const container = document.getElementById('fill-questions');
+            fillData.forEach((f, fi) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-teal-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi + 1}</span>
+                ${f.q}
+            </p>
+            <div class="flex items-center gap-2 max-w-xl flex-wrap">
+                <input type="text" class="fill-input w-48 outline-none bg-white font-mono" id="fill-${fi}" placeholder="พิมพ์ตัวเลขคำตอบ...">
+                <span class="text-xs md:text-sm text-slate-500 font-medium whitespace-nowrap">${f.unit}</span>
+                <span class="text-sm font-bold" id="fill-icon-${fi}"></span>
+            </div>`;
+                container.appendChild(div);
+            });
+        }
+
+        function renderSubj() {
+            const container = document.getElementById('subj-questions');
+            subjData.forEach((s, si) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200';
+                div.innerHTML = `
+            <p class="font-semibold text-slate-800 text-sm mb-3">
+                <span class="inline-flex w-7 h-7 bg-amber-500 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si + 1}</span>
+                ${s.q}
+            </p>
+            <textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-emerald-400 transition-colors min-h-[100px] bg-white resize-y" id="subj-${si}" placeholder="พิมพ์แสดงแนวคิดหรือบันทึกคำตอบของคุณที่นี่..."></textarea>
+            <div class="answer-key mt-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs md:text-sm text-emerald-950 leading-relaxed" id="key-${si}">${s.key}</div>
+            <button onclick="toggleKey(${si})" class="mt-2 text-xs text-emerald-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}">
+                <i class="fa-solid fa-eye"></i> แสดงเฉลยและวิธีคิดละเอียด
+            </button>`;
+                container.appendChild(div);
+            });
+        }
+
+        function toggleKey(si) {
+            const key = document.getElementById(`key-${si}`);
+            const btn = document.getElementById(`key-btn-${si}`);
+            key.classList.toggle('show');
+            btn.innerHTML = key.classList.contains('show')
+                ? '<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย'
+                : '<i class="fa-solid fa-eye"></i> แสดงเฉลยและวิธีคิดละเอียด';
+
+            if (key.classList.contains('show') && window.MathJax) {
+                MathJax.typesetPromise([key]);
+            }
+        }
+
+        function showTab(n) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`tab-${n}`).classList.add('active');
+            document.getElementById(`tab-btn-${n}`).classList.add('active');
+        }
+
+        function submitAll() {
+            // 1. ตรวจปรนัย
+            let p1 = 0;
+            mcData.forEach((q, qi) => {
+                const chosen = userAnswers[qi];
+                for (let ci = 0; ci < 4; ci++) {
+                    const btn = document.getElementById(`mc-${qi}-${ci}`);
+                    btn.classList.remove('selected');
+                    if (ci === q.ans) btn.classList.add('correct');
+                    else if (ci === chosen && chosen !== q.ans) btn.classList.add('wrong');
+                }
+                if (chosen === q.ans) p1++;
+            });
+
+            // 2. ตรวจจับคู่
+            let p2 = 0;
+            matchData.forEach((m, mi) => {
+                const sel = document.getElementById(`match-${mi}`);
+                sel.classList.remove('correct', 'wrong');
+                if (sel.value === m.right) { sel.classList.add('correct'); p2++; }
+                else sel.classList.add('wrong');
+            });
+
+            // 3. ตรวจเติมคำ (พร้อมแสดงเฉลยตัวเลขที่ถูกต้อง)
+            let p3 = 0;
+            fillData.forEach((f, fi) => {
+                const input = document.getElementById(`fill-${fi}`);
+                const icon = document.getElementById(`fill-icon-${fi}`);
+                
+                // แปลงเลขไทยเป็นอารบิกและลบเว้นวรรค
+                let rawVal = input.value.trim().replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[๐-๙]/g, d => '๐๑๒๓๔๕๖๗๘๙'.indexOf(d));
+                const val = parseFloat(rawVal);
+                const correct = !isNaN(val) && Math.abs(val - parseFloat(f.ans)) <= f.tol;
+                
+                input.classList.remove('correct', 'wrong');
+                if (correct) { 
+                    input.classList.add('correct'); 
+                    icon.innerHTML = '<span class="text-emerald-600">✅ ถูกต้อง</span>'; 
+                    p3++; 
+                } else { 
+                    input.classList.add('wrong'); 
+                    icon.innerHTML = `<span class="text-rose-600">❌ (เฉลยที่ถูกต้อง: <strong class="text-emerald-700">${f.ans}</strong>)</span>`; 
+                }
+            });
+
+            // 4. แสดงเฉลยอัตนัย
+            subjData.forEach((_, si) => {
+                const key = document.getElementById(`key-${si}`);
+                key.classList.add('show');
+            });
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+
+            // คำนวณสรุปผลคะแนน
+            const total = p1 + p2 + p3;
+            document.getElementById('modal-p1').textContent = `${p1}/20`;
+            document.getElementById('modal-p2').textContent = `${p2}/5`;
+            document.getElementById('modal-p3').textContent = `${p3}/5`;
+            document.getElementById('modal-total').textContent = `${total}/30`;
+            const pct = Math.round(total / 30 * 100);
+            let grade = '', emoji = '';
+            if (pct >= 80) { grade = `ยอดเยี่ยมมาก! (${pct}%) ความเข้าใจคลื่นกลระดับสูง`; emoji = '🏆'; }
+            else if (pct >= 60) { grade = `ผ่านเกณฑ์ (${pct}%) ทบทวนสูตรเพิ่มเติมอีกนิดจะเก่งมาก`; emoji = '👍'; }
+            else { grade = `ควรทบทวนเนื้อหา (${pct}%) ลองอ่านสรุปอีกครั้งนะ`; emoji = '📚'; }
+            document.getElementById('modal-grade').textContent = grade;
+            document.getElementById('modal-emoji').textContent = emoji;
+            document.getElementById('score-modal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('score-modal').classList.remove('show');
+        }
+
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        renderMC();
+        renderMatch();
+        renderFill();
+        renderSubj();
+    </script>
 </body>
+
 </html>

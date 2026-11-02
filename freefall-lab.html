@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟิสิกส์ จารย์เปา LAB - การตกแบบเสรี (Free Fall Motion)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Prompt & Kanit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        prompt: ['Prompt', 'sans-serif'],
+                        kanit: ['Kanit', 'sans-serif'],
+                    },
+                    colors: {
+                        phet: {
+                            blue: '#38BDF8',
+                            darkBlue: '#0284C7',
+                            bgSky: '#E0F2FE',
+                            panelBg: 'rgba(255, 255, 255, 0.92)',
+                            accentGreen: '#10B981',
+                            accentOrange: '#F59E0B',
+                            ground: '#854D0E',
+                            grass: '#22C55E'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #0F172A;
+            color: #1E293B;
+            user-select: none;
+            overflow-x: hidden;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F1F5F9;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 8px;
+        }
+
+        .phet-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border: 2px solid #E2E8F0;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+        }
+
+        /* PhET Style Slider */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: #CBD5E1;
+            border-radius: 8px;
+            height: 8px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: #0284C7;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+            border: 2px solid white;
+            transition: transform 0.15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            background: #0369A1;
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col justify-between bg-slate-900 text-slate-800 font-prompt overflow-hidden">
+
+    <!-- TOP HEADER NAVBAR -->
+    <header class="bg-slate-900 border-b border-slate-800 px-4 py-2.5 flex justify-between items-center text-white shrink-0 z-20">
+        <div class="flex items-center gap-3">
+            <!-- ปุ่มย้อนกลับไปคลังห้องทดลอง -->
+            <a href="experiments.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-400 text-xs font-semibold transition flex items-center gap-2 border border-slate-700">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span class="hidden sm:inline">คลังห้องทดลอง</span>
+            </a>
+            <div class="w-8 h-8 rounded-xl bg-sky-500 flex items-center justify-center font-bold font-kanit text-slate-900 text-lg shadow-md">
+                ⚡
+            </div>
+            <div>
+                <h1 class="text-base sm:text-lg font-bold font-kanit text-white tracking-wide flex items-center gap-2">
+                    ฟิสิกส์ จารย์เปา LAB <span class="text-xs font-normal text-sky-400 bg-sky-950/80 px-2.5 py-0.5 rounded-full border border-sky-800">การตกแบบเสรี (Free Fall)</span>
+                </h1>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button id="btnToggleTheory" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-300 text-xs font-medium transition flex items-center gap-2 border border-slate-700">
+                <i class="fa-solid fa-book-open"></i>
+                <span>สรุปเนื้อหา & กฎเครื่องหมาย</span>
+            </button>
+            <button id="btnResetAll" class="px-3 py-1.5 rounded-xl bg-rose-950/60 hover:bg-rose-900 text-rose-300 text-xs font-medium transition flex items-center gap-1.5 border border-rose-800">
+                <i class="fa-solid fa-arrow-rotate-left"></i>
+                <span class="hidden sm:inline">รีเซ็ต</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN WORKSPACE STAGE -->
+    <main class="flex-1 relative w-full h-full overflow-hidden flex flex-col">
+
+        <!-- TAB VIEW 1: INTRO SIMULATION STAGE -->
+        <div id="tabIntroView" class="w-full h-full relative flex-1">
+            
+            <!-- CANVAS INTERACTIVE SIMULATOR -->
+            <canvas id="simCanvas" class="w-full h-full block cursor-crosshair"></canvas>
+
+            <!-- TOP LEFT: DISPLAY TOGGLES (PhET FLOATING CARD) -->
+            <div class="absolute top-4 left-4 z-10 phet-card p-3 sm:p-4 text-xs font-medium flex flex-col gap-2.5 min-w-[210px]">
+                <div class="font-bold font-kanit text-slate-700 pb-1.5 border-b border-slate-200 flex items-center gap-1.5">
+                    <i class="fa-solid fa-eye text-sky-600"></i> ตัวเลือกการแสดงผล
+                </div>
+                <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                    <span>เส้นพิกัดตาราง (Grid)</span>
+                    <input type="checkbox" id="chkGrid" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                </label>
+                <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                    <span>เส้นระดับอ้างอิง (Height)</span>
+                    <input type="checkbox" id="chkHeightLine" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                </label>
+                <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                    <span>เวกเตอร์ความเร็ว (v)</span>
+                    <input type="checkbox" id="chkVectors" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                </label>
+                <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                    <span>เวกเตอร์แรงโน้มถ่วง (g)</span>
+                    <input type="checkbox" id="chkGravityVector" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                </label>
+                <label class="flex items-center justify-between cursor-pointer text-slate-700 hover:text-sky-700">
+                    <span>รอยทางการเคลื่อนที่</span>
+                    <input type="checkbox" id="chkTrail" checked class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                </label>
+            </div>
+
+            <!-- TOP CENTER: SPEEDOMETER & HUD DISPLAY -->
+            <div class="absolute top-4 left-1/2 -translate-x-1/2 z-10 phet-card px-5 py-2.5 flex items-center gap-6 text-xs font-mono">
+                <div class="flex items-center gap-2">
+                    <span class="text-slate-500 font-sans font-medium">ความเร็ว (v):</span>
+                    <span id="hudVelocity" class="text-amber-600 font-bold text-sm sm:text-base">0.0 m/s</span>
+                </div>
+                <div class="w-px h-5 bg-slate-300"></div>
+                <div class="flex items-center gap-2">
+                    <span class="text-slate-500 font-sans font-medium">ความสูง (y):</span>
+                    <span id="hudHeight" class="text-sky-600 font-bold text-sm sm:text-base">25.0 m</span>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: CONTROL VARIABLES (PhET PANEL) -->
+            <div class="absolute top-4 right-4 z-10 phet-card p-4 text-xs flex flex-col gap-4 w-[280px] sm:w-[320px] max-h-[calc(100%-80px)] overflow-y-auto custom-scrollbar">
+                
+                <!-- Object Picker -->
+                <div>
+                    <div class="font-bold text-slate-700 mb-2 flex justify-between items-center">
+                        <span>เลือกวัตถุการทดลอง</span>
+                        <span class="text-[10px] text-slate-400 font-normal">*ขนาดวัตถุขยายใหญ่</span>
+                    </div>
+                    <div class="grid grid-cols-5 gap-1.5">
+                        <button class="obj-btn active p-2 rounded-xl border-2 border-sky-500 bg-sky-50 flex items-center justify-center text-xl transition hover:scale-105" data-obj="apple" title="แอปเปิ้ล">🍎</button>
+                        <button class="obj-btn p-2 rounded-xl border-2 border-slate-200 hover:border-sky-300 flex items-center justify-center text-xl transition hover:scale-105" data-obj="skater" title="สเก็ตบอร์ด">🛹</button>
+                        <button class="obj-btn p-2 rounded-xl border-2 border-slate-200 hover:border-sky-300 flex items-center justify-center text-xl transition hover:scale-105" data-obj="ball" title="เทนนิส">🎾</button>
+                        <button class="obj-btn p-2 rounded-xl border-2 border-slate-200 hover:border-sky-300 flex items-center justify-center text-xl transition hover:scale-105" data-obj="dog" title="น้องหมา">🐶</button>
+                        <button class="obj-btn p-2 rounded-xl border-2 border-slate-200 hover:border-sky-300 flex items-center justify-center text-xl transition hover:scale-105" data-obj="cat" title="น้องแมว">🐱</button>
+                    </div>
+                </div>
+
+                <!-- Initial Height y0 -->
+                <div class="pt-2 border-t border-slate-200">
+                    <div class="flex justify-between items-center mb-1 font-semibold text-slate-700">
+                        <span>ความสูงเริ่มต้น (y₀)</span>
+                        <span class="font-mono text-sky-600 bg-sky-50 px-2 py-0.5 rounded border border-sky-200" id="valHeight">25.0 m</span>
+                    </div>
+                    <input type="range" id="sldHeight" min="0" max="50" step="0.5" value="25" class="w-full cursor-pointer">
+                </div>
+
+                <!-- Initial Velocity u -->
+                <div class="pt-2 border-t border-slate-200">
+                    <div class="flex justify-between items-center mb-1 font-semibold text-slate-700">
+                        <span>ความเร็วต้น (u)</span>
+                        <span class="font-mono text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200" id="valVelocity">0.0 m/s</span>
+                    </div>
+                    <input type="range" id="sldVelocity" min="-20" max="25" step="1" value="0" class="w-full cursor-pointer">
+                    <div class="flex justify-between text-[10px] text-slate-400 mt-1 font-mono">
+                        <span>-20 (ขว้างลง)</span>
+                        <span>0 (ปล่อยตก)</span>
+                        <span>+25 (โยนขึ้น)</span>
+                    </div>
+                </div>
+
+                <!-- Gravity Select -->
+                <div class="pt-2 border-t border-slate-200">
+                    <div class="font-semibold text-slate-700 mb-2">ความเร่งโน้มถ่วง (g)</div>
+                    <div class="grid grid-cols-2 gap-1.5">
+                        <button class="g-btn active py-1.5 px-2 rounded-xl border-2 border-sky-500 bg-sky-50 text-slate-800 font-medium transition text-center" data-g="9.8">โลก (9.8 m/s²)</button>
+                        <button class="g-btn py-1.5 px-2 rounded-xl border-2 border-slate-200 hover:border-sky-300 text-slate-700 font-medium transition text-center" data-g="10.0">โลก (10 m/s²)</button>
+                        <button class="g-btn py-1.5 px-2 rounded-xl border-2 border-slate-200 hover:border-sky-300 text-slate-700 font-medium transition text-center" data-g="1.62">ดวงจันทร์ (1.62)</button>
+                        <button class="g-btn py-1.5 px-2 rounded-xl border-2 border-slate-200 hover:border-sky-300 text-slate-700 font-medium transition text-center" data-g="3.71">ดาวอังคาร (3.71)</button>
+                    </div>
+                </div>
+
+                <!-- Stopwatch & Math Readouts -->
+                <div class="pt-2 border-t border-slate-200 bg-slate-900 text-white p-3 rounded-xl flex items-center justify-between font-mono">
+                    <div>
+                        <div class="text-[10px] text-slate-400">เวลา (t)</div>
+                        <div class="text-emerald-400 font-bold text-lg" id="hudTime">0.00 s</div>
+                    </div>
+                    <button id="btnResetTimer" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700 font-sans">
+                        ตั้งเวลาใหม่
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- BOTTOM FLOATING PLAYBACK CONTROLLER -->
+            <div class="absolute bottom-6 left-[62%] -translate-x-1/2 z-10 phet-card px-6 py-2.5 flex items-center gap-4">
+                <button id="btnRestart" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-600 text-white flex items-center justify-center text-base shadow-md transition active:scale-95" title="กลับจุดเริ่มต้น">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
+                <button id="btnPlayPause" class="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center text-xl shadow-lg transition active:scale-95" title="เล่น / หยุด">
+                    <i id="playIcon" class="fa-solid fa-play"></i>
+                </button>
+                <button id="btnStep" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-sm transition active:scale-95" title="ก้าวไปข้างหน้า">
+                    <i class="fa-solid fa-forward-step"></i>
+                </button>
+
+                <div class="w-px h-6 bg-slate-300 my-auto"></div>
+
+                <!-- Simulation Speed -->
+                <div class="flex items-center gap-3 text-xs text-slate-700 font-medium">
+                    <label class="flex items-center gap-1.5 cursor-pointer">
+                        <input type="radio" name="speed" value="1.0" checked class="text-sky-600">
+                        <span>ปกติ (Normal)</span>
+                    </label>
+                    <label class="flex items-center gap-1.5 cursor-pointer">
+                        <input type="radio" name="speed" value="0.3" class="text-sky-600">
+                        <span>ช้า (Slow Motion)</span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TAB VIEW 2: GRAPHS ANALYSIS STAGE -->
+        <div id="tabGraphsView" class="hidden w-full h-full relative flex-1 bg-slate-950 p-4 sm:p-6 flex flex-col gap-4 overflow-y-auto custom-scrollbar">
+            
+            <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-4 rounded-2xl text-white">
+                <div>
+                    <h2 class="text-lg font-bold font-kanit text-sky-400 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line"></i> กราฟวิเคราะห์การเคลื่อนที่ (Motion Graphs)
+                    </h2>
+                    <p class="text-xs text-slate-400">แสดงความสัมพันธ์ Real-time ของการตกแบบเสรี (y-t, v-t, a-t)</p>
+                </div>
+                <div class="flex gap-2">
+                    <button class="graph-selector-btn active px-3.5 py-1.5 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs" data-gtype="all">แสดงทั้งหมด</button>
+                    <button class="graph-selector-btn px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700" data-gtype="y">y - t (ความสูง)</button>
+                    <button class="graph-selector-btn px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700" data-gtype="v">v - t (ความเร็ว)</button>
+                    <button class="graph-selector-btn px-3.5 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700" data-gtype="a">a - t (ความเร่ง)</button>
+                </div>
+            </div>
+
+            <!-- Graphs Display Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 flex-1">
+                <!-- Graph 1: Position y-t -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col h-[280px]">
+                    <div class="text-xs font-bold text-emerald-400 mb-2 flex justify-between">
+                        <span>กราฟตำแหน่ง-เวลา (y - t)</span>
+                        <span class="font-mono text-slate-400">หน่วย: m vs s</span>
+                    </div>
+                    <div class="flex-1 w-full relative">
+                        <canvas id="graphYCanvas" class="w-full h-full block"></canvas>
+                    </div>
+                </div>
+
+                <!-- Graph 2: Velocity v-t -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col h-[280px]">
+                    <div class="text-xs font-bold text-amber-400 mb-2 flex justify-between">
+                        <span>กราฟความเร็ว-เวลา (v - t)</span>
+                        <span class="font-mono text-slate-400">หน่วย: m/s vs s</span>
+                    </div>
+                    <div class="flex-1 w-full relative">
+                        <canvas id="graphVCanvas" class="w-full h-full block"></canvas>
+                    </div>
+                </div>
+
+                <!-- Graph 3: Acceleration a-t -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col h-[280px]">
+                    <div class="text-xs font-bold text-rose-400 mb-2 flex justify-between">
+                        <span>กราฟความเร่ง-เวลา (a - t)</span>
+                        <span class="font-mono text-slate-400">หน่วย: m/s² vs s</span>
+                    </div>
+                    <div class="flex-1 w-full relative">
+                        <canvas id="graphACanvas" class="w-full h-full block"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Analysis Readouts -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-xs text-slate-300 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <div class="text-slate-400 mb-1">ความสูงสูงสุด (s_max)</div>
+                    <div class="text-base font-bold text-emerald-400 font-mono" id="graphMaxH">25.00 m</div>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <div class="text-slate-400 mb-1">เวลารวมในอากาศ (t_total)</div>
+                    <div class="text-base font-bold text-sky-400 font-mono" id="graphTotalT">2.26 s</div>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <div class="text-slate-400 mb-1">เวลาถึงจุดสูงสุด (t_peak)</div>
+                    <div class="text-base font-bold text-amber-400 font-mono" id="graphPeakT">0.00 s</div>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <div class="text-slate-400 mb-1">ความเร็วขณะกระทบพื้น (v_impact)</div>
+                    <div class="text-base font-bold text-rose-400 font-mono" id="graphImpactV">-22.14 m/s</div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- BOTTOM PhET NAVIGATION BAR (SWITCH TABS) -->
+    <footer class="bg-slate-950 border-t border-slate-800 px-4 py-2 flex items-center justify-between text-white shrink-0 z-20">
+        <div class="flex items-center gap-1 sm:gap-2">
+            <button class="phet-tab-btn active px-4 py-1.5 rounded-xl bg-sky-500 text-slate-900 font-bold text-xs sm:text-sm flex items-center gap-2 transition" data-tab="intro">
+                <i class="fa-solid fa-flask"></i>
+                <span>หน้าการทดลอง (Intro)</span>
+            </button>
+            <button class="phet-tab-btn px-4 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs sm:text-sm flex items-center gap-2 transition" data-tab="graphs">
+                <i class="fa-solid fa-chart-simple"></i>
+                <span>กราฟวิเคราะห์ (Graphs)</span>
+            </button>
+        </div>
+
+        <!-- Brand Name -->
+        <div class="flex items-center gap-2 text-xs font-bold text-slate-400">
+            <span>ฟิสิกส์ จารย์เปา LAB</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        </div>
+    </footer>
+
+    <!-- THEORY MODAL -->
+    <div id="theoryModal" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-6 text-slate-800 shadow-2xl relative border border-slate-200 custom-scrollbar">
+            <button id="btnCloseTheory" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h2 class="text-xl font-bold font-kanit text-slate-900 mb-3 flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-lg bg-sky-100 text-sky-800 text-base">03</span>
+                การตกแบบเสรี (Free Fall Motion)
+            </h2>
+
+            <p class="text-sm text-slate-600 mb-4 leading-relaxed bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
+                <strong>การตกแบบเสรี</strong> คือ การเคลื่อนที่ของวัตถุในแนวดิ่งภายใต้แรงดึงดูดของโลกเพียงแรงเดียว (ไม่มีแรงต้านอากาศ) วัตถุจะเคลื่อนที่ด้วยความเร่งคงตัวเท่ากับความเร่งเนื่องจากแรงโน้มถ่วงของโลก <code class="bg-sky-100 text-sky-900 px-1 py-0.5 rounded font-mono">g ≈ 9.8 m/s²</code> (หรือประมาณ <code class="bg-sky-100 text-sky-900 px-1 py-0.5 rounded font-mono">10 m/s²</code>)
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 text-xs">
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl">
+                    <h3 class="font-bold text-emerald-900 mb-2 text-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-compass"></i> กฎการกำหนดเครื่องหมาย Vector (+/-)
+                    </h3>
+                    <ol class="space-y-2 text-slate-700 list-decimal list-inside leading-relaxed">
+                        <li><strong>ยึดทิศทางของความเร็วต้น (u) เป็นบวก (+) เสมอ</strong></li>
+                        <li>ปริมาณใดที่มีทิศทางเดียวกับ <strong>u</strong> ให้ใส่เครื่องหมายเป็น <strong>บวก (+)</strong></li>
+                        <li>ปริมาณใดที่มีทิศทางสวนทางกับ <strong>u</strong> ให้ใส่เครื่องหมายเป็น <strong>ลบ (-)</strong></li>
+                    </ol>
+                </div>
+
+                <div class="bg-sky-50 border border-sky-200 p-4 rounded-2xl">
+                    <h3 class="font-bold text-sky-900 mb-2 text-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-info"></i> ข้อควรจำ ณ จุดสูงสุด
+                    </h3>
+                    <ul class="space-y-2 text-slate-700 leading-relaxed list-disc list-inside">
+                        <li>ความเร็ว ณ จุดสูงสุดมีค่าเป็นศูนย์ (<strong>v = 0</strong>)</li>
+                        <li>เวลาขาขึ้น = เวลาขาลง (เมื่อตกกลับถึงระดับเดิม)</li>
+                        <li>ขนาดความเร็วขาลง = ขนาดความเร็วขาขึ้น ณ ระดับเดียวกัน</li>
+                        <li>ความสูงสูงสุด: <code class="bg-white px-1.5 py-0.5 rounded border border-sky-300 font-mono font-bold">s_max = u² / 2g</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-indigo-50 border border-indigo-100 p-3 rounded-2xl flex justify-around text-xs font-mono font-bold text-indigo-900 text-center">
+                <span>v = u + gt</span>
+                <span>s = ut + ½gt²</span>
+                <span>v² = u² + 2gs</span>
+                <span>s = ((u + v)/2)t</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- State Management ---
+        const state = {
+            y0: 25.0,           // Initial height (m)
+            u: 0.0,             // Initial velocity (m/s) [Up positive]
+            g: 9.8,             // Gravity (m/s^2)
+            
+            t: 0.0,             // Current simulation time
+            y: 25.0,            // Current height (m)
+            v: 0.0,             // Current velocity (m/s)
+            
+            isRunning: false,
+            speedMultiplier: 1.0,
+            selectedObject: 'apple', // 'apple', 'skater', 'ball', 'dog', 'cat'
+            
+            // Visual Options
+            showGrid: true,
+            showHeightLine: true,
+            showVectors: true,
+            showGravityVector: true,
+            showTrail: true,
+
+            activeTab: 'intro', // 'intro', 'graphs'
+
+            history: [],        // {t, y, v, a}
+            
+            // Theoretical values
+            tTotal: 0,
+            tPeak: 0,
+            sMax: 25,
+            vImpact: 0,
+
+            objectIcons: {
+                apple: '🍎',
+                skater: '🛹',
+                ball: '🎾',
+                dog: '🐶',
+                cat: '🐱'
+            }
+        };
+
+        // --- DOM Elements ---
+        const simCanvas = document.getElementById('simCanvas');
+        const simCtx = simCanvas.getContext('2d');
+
+        const graphYCanvas = document.getElementById('graphYCanvas');
+        const graphYCtx = graphYCanvas.getContext('2d');
+
+        const graphVCanvas = document.getElementById('graphVCanvas');
+        const graphVCtx = graphVCanvas.getContext('2d');
+
+        const graphACanvas = document.getElementById('graphACanvas');
+        const graphACTX = graphACanvas.getContext('2d');
+
+        const btnPlayPause = document.getElementById('btnPlayPause');
+        const playIcon = document.getElementById('playIcon');
+        const btnRestart = document.getElementById('btnRestart');
+        const btnStep = document.getElementById('btnStep');
+        const btnResetAll = document.getElementById('btnResetAll');
+        const btnResetTimer = document.getElementById('btnResetTimer');
+
+        const sldHeight = document.getElementById('sldHeight');
+        const valHeight = document.getElementById('valHeight');
+        const sldVelocity = document.getElementById('sldVelocity');
+        const valVelocity = document.getElementById('valVelocity');
+
+        const hudVelocity = document.getElementById('hudVelocity');
+        const hudHeight = document.getElementById('hudHeight');
+        const hudTime = document.getElementById('hudTime');
+
+        const theoryModal = document.getElementById('theoryModal');
+        const btnToggleTheory = document.getElementById('btnToggleTheory');
+        const btnCloseTheory = document.getElementById('btnCloseTheory');
+
+        // --- Physics Calculations ---
+        function updatePhysicsCalculations() {
+            const u = state.u;
+            const g = state.g;
+            const y0 = state.y0;
+
+            let tPeak = 0;
+            if (u > 0) tPeak = u / g;
+            state.tPeak = tPeak;
+
+            let sMax = y0;
+            if (u > 0) sMax = y0 + (u * u) / (2 * g);
+            state.sMax = sMax;
+
+            const disc = u * u + 2 * g * y0;
+            let tTotal = 0;
+            if (disc >= 0) tTotal = (u + Math.sqrt(disc)) / g;
+            state.tTotal = tTotal;
+
+            const vImpact = u - g * tTotal;
+            state.vImpact = vImpact;
+
+            // Update Graph Analysis Readouts
+            document.getElementById('graphMaxH').textContent = `${sMax.toFixed(2)} m`;
+            document.getElementById('graphTotalT').textContent = `${tTotal.toFixed(2)} s`;
+            document.getElementById('graphPeakT').textContent = `${tPeak.toFixed(2)} s`;
+            document.getElementById('graphImpactV').textContent = `${vImpact.toFixed(2)} m/s`;
+        }
+
+        function resetSimulation() {
+            state.isRunning = false;
+            state.t = 0.0;
+            state.y = state.y0;
+            state.v = state.u;
+            state.history = [];
+
+            updatePhysicsCalculations();
+            updateHUD();
+            updatePlayButtonUI();
+            renderSimCanvas();
+            renderAllGraphs();
+        }
+
+        function updateHUD() {
+            hudTime.textContent = `${state.t.toFixed(2)} s`;
+            hudHeight.textContent = `${state.y.toFixed(1)} m`;
+            hudVelocity.textContent = `${state.v.toFixed(1)} m/s`;
+        }
+
+        function updatePlayButtonUI() {
+            if (state.isRunning) {
+                playIcon.className = 'fa-solid fa-pause';
+            } else {
+                playIcon.className = 'fa-solid fa-play';
+            }
+        }
+
+        // --- Step Physics ---
+        function stepPhysics(dt) {
+            if (!state.isRunning) return;
+
+            state.t += dt * state.speedMultiplier;
+
+            if (state.t >= state.tTotal) {
+                state.t = state.tTotal;
+                state.isRunning = false;
+                updatePlayButtonUI();
+            }
+
+            // Kinematic Equations
+            state.y = Math.max(0, state.y0 + state.u * state.t - 0.5 * state.g * state.t * state.t);
+            state.v = state.u - state.g * state.t;
+
+            // Record history
+            if (state.history.length === 0 || (state.t - state.history[state.history.length - 1].t) >= 0.03) {
+                state.history.push({
+                    t: state.t,
+                    y: state.y,
+                    v: state.v,
+                    a: -state.g
+                });
+            }
+
+            updateHUD();
+        }
+
+        // --- Render Main Simulation Canvas ---
+        function renderSimCanvas() {
+            const width = simCanvas.width / window.devicePixelRatio;
+            const height = simCanvas.height / window.devicePixelRatio;
+
+            simCtx.clearRect(0, 0, width, height);
+
+            // Shift object fall position to x = 30% of width
+            const objectX = width * 0.30;
+            
+            // Ground level low
+            const groundY = height * 0.85;
+            const maxMetersScale = Math.max(55, Math.ceil((state.sMax + 10) / 10) * 10);
+            
+            const meterToPx = (groundY - 60) / maxMetersScale;
+            const yToPx = (m) => groundY - m * meterToPx;
+
+            // 1. SKY & MOUNTAIN BACKGROUND
+            const skyGrad = simCtx.createLinearGradient(0, 0, 0, groundY);
+            skyGrad.addColorStop(0, '#BAE6FD');
+            skyGrad.addColorStop(0.7, '#E0F2FE');
+            skyGrad.addColorStop(1, '#F0F9FF');
+            simCtx.fillStyle = skyGrad;
+            simCtx.fillRect(0, 0, width, groundY);
+
+            // Minimalist Mountains Background
+            simCtx.fillStyle = '#CBD5E1';
+            simCtx.beginPath();
+            simCtx.moveTo(width * 0.6, groundY);
+            simCtx.lineTo(width * 0.72, groundY - 80);
+            simCtx.lineTo(width * 0.84, groundY);
+            simCtx.fill();
+
+            simCtx.fillStyle = '#94A3B8';
+            simCtx.beginPath();
+            simCtx.moveTo(width * 0.75, groundY);
+            simCtx.lineTo(width * 0.88, groundY - 120);
+            simCtx.lineTo(width, groundY);
+            simCtx.fill();
+
+            // 2. GRID LINES (If checked)
+            if (state.showGrid) {
+                simCtx.strokeStyle = 'rgba(226, 232, 240, 0.8)';
+                simCtx.lineWidth = 1;
+                simCtx.font = '11px Prompt, sans-serif';
+                simCtx.fillStyle = '#64748B';
+
+                for (let m = 0; m <= maxMetersScale; m += 5) {
+                    const py = yToPx(m);
+                    simCtx.beginPath();
+                    simCtx.setLineDash([3, 3]);
+                    simCtx.moveTo(40, py);
+                    simCtx.lineTo(width - 40, py);
+                    simCtx.stroke();
+                    simCtx.setLineDash([]);
+
+                    simCtx.fillText(`${m} m`, 15, py + 4);
+                }
+            }
+
+            // 3. GROUND BASE
+            simCtx.fillStyle = '#854D0E';
+            simCtx.fillRect(0, groundY, width, height - groundY);
+
+            simCtx.fillStyle = '#22C55E';
+            simCtx.fillRect(0, groundY - 6, width, 6);
+
+            // 4. LAUNCH REFERENCE LINE (If checked)
+            if (state.showHeightLine) {
+                const py0 = yToPx(state.y0);
+                simCtx.beginPath();
+                simCtx.setLineDash([4, 4]);
+                simCtx.strokeStyle = '#0284C7';
+                simCtx.lineWidth = 2;
+                simCtx.moveTo(objectX - 120, py0);
+                simCtx.lineTo(objectX + 120, py0);
+                simCtx.stroke();
+                simCtx.setLineDash([]);
+
+                simCtx.fillStyle = '#0284C7';
+                simCtx.font = 'bold 11px Prompt, sans-serif';
+                simCtx.fillText(`ระดับปล่อย y₀ = ${state.y0.toFixed(1)} m`, objectX + 130, py0 + 4);
+            }
+
+            // 5. MOTION TRAIL (If checked)
+            if (state.showTrail && state.history.length > 0) {
+                state.history.forEach((pt, idx) => {
+                    const py = yToPx(pt.y);
+                    simCtx.beginPath();
+                    simCtx.arc(objectX, py, 4, 0, Math.PI * 2);
+                    simCtx.fillStyle = `rgba(2, 132, 199, ${0.2 + (idx / state.history.length) * 0.7})`;
+                    simCtx.fill();
+                });
+            }
+
+            // 6. OBJECT DRAWING
+            const currentObjYPx = yToPx(state.y);
+            const icon = state.objectIcons[state.selectedObject] || '🍎';
+
+            simCtx.save();
+            simCtx.font = '48px sans-serif';
+            simCtx.textAlign = 'center';
+            simCtx.textBaseline = 'middle';
+
+            if (state.y <= 0.05 && state.t >= state.tTotal) {
+                simCtx.translate(objectX, currentObjYPx);
+                simCtx.scale(1.2, 0.7);
+                simCtx.fillText(icon, 0, 0);
+            } else {
+                simCtx.fillText(icon, objectX, currentObjYPx);
+            }
+            simCtx.restore();
+
+            // 7. VECTORS (If checked)
+            if (state.showVectors && Math.abs(state.v) > 0.1) {
+                const vLen = -state.v * 2.2;
+                drawArrow(simCtx, objectX + 45, currentObjYPx, objectX + 45, currentObjYPx + vLen, '#F59E0B', 3.5, `v = ${state.v.toFixed(1)} m/s`);
+            }
+
+            if (state.showGravityVector) {
+                const gLen = state.g * 3.0;
+                drawArrow(simCtx, objectX - 45, currentObjYPx, objectX - 45, currentObjYPx + gLen, '#EF4444', 3.5, `g = ${state.g} m/s²`);
+            }
+        }
+
+        // Helper Arrow Draw Function
+        function drawArrow(ctx, x1, y1, x2, y2, color, width, label) {
+            const headlen = 10;
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const angle = Math.atan2(dy, dx);
+
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = width;
+
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - headlen * Math.cos(angle - Math.PI / 6), y2 - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(x2 - headlen * Math.cos(angle + Math.PI / 6), y2 - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fill();
+
+            if (label) {
+                ctx.font = 'bold 11px Prompt, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(label, x2 + 8, y2);
+            }
+            ctx.restore();
+        }
+
+        // --- Render Graphs Canvas ---
+        function renderSingleGraph(canvasEl, ctxEl, typeColor, dataKey, titleText) {
+            const w = canvasEl.width / window.devicePixelRatio;
+            const h = canvasEl.height / window.devicePixelRatio;
+
+            ctxEl.clearRect(0, 0, w, h);
+
+            const pad = { top: 20, bottom: 25, left: 45, right: 15 };
+            const gW = w - pad.left - pad.right;
+            const gH = h - pad.top - pad.bottom;
+
+            const maxT = Math.max(3, Math.ceil(state.tTotal));
+            const tToPx = (t) => pad.left + (t / maxT) * gW;
+
+            let minY = 0, maxY = 50;
+            if (dataKey === 'y') {
+                minY = 0;
+                maxY = Math.max(30, Math.ceil(state.sMax / 10) * 10);
+            } else if (dataKey === 'v') {
+                minY = Math.min(-25, Math.floor(state.vImpact / 10) * 10);
+                maxY = Math.max(25, Math.ceil((state.u + 5) / 10) * 10);
+            } else if (dataKey === 'a') {
+                minY = -15;
+                maxY = 5;
+            }
+
+            const yToPx = (val) => pad.top + gH * (1 - (val - minY) / (maxY - minY));
+
+            // Grid & Zero Line
+            ctxEl.strokeStyle = '#334155';
+            ctxEl.lineWidth = 1;
+
+            const zeroPx = yToPx(0);
+            ctxEl.beginPath();
+            ctxEl.setLineDash([2, 2]);
+            ctxEl.moveTo(pad.left, zeroPx);
+            ctxEl.lineTo(w - pad.right, zeroPx);
+            ctxEl.stroke();
+            ctxEl.setLineDash([]);
+
+            // Plot curve
+            if (state.history.length > 1) {
+                ctxEl.beginPath();
+                ctxEl.strokeStyle = typeColor;
+                ctxEl.lineWidth = 2.5;
+
+                state.history.forEach((pt, idx) => {
+                    const px = tToPx(pt.t);
+                    const py = yToPx(pt[dataKey]);
+
+                    if (idx === 0) ctxEl.moveTo(px, py);
+                    else ctxEl.lineTo(px, py);
+                });
+                ctxEl.stroke();
+            }
+        }
+
+        function renderAllGraphs() {
+            if (state.activeTab !== 'graphs') return;
+            renderSingleGraph(graphYCanvas, graphYCtx, '#10B981', 'y', 'y - t');
+            renderSingleGraph(graphVCanvas, graphVCtx, '#F59E0B', 'v', 'v - t');
+            renderSingleGraph(graphACanvas, graphACTX, '#EF4444', 'a', 'a - t');
+        }
+
+        // --- Canvas Resizing ---
+        function resizeAllCanvases() {
+            const dpr = window.devicePixelRatio || 1;
+
+            const simRect = simCanvas.getBoundingClientRect();
+            simCanvas.width = simRect.width * dpr;
+            simCanvas.height = simRect.height * dpr;
+            simCtx.scale(dpr, dpr);
+
+            [graphYCanvas, graphVCanvas, graphACanvas].forEach(c => {
+                const r = c.getBoundingClientRect();
+                c.width = r.width * dpr;
+                c.height = r.height * dpr;
+                const cCtx = c.getContext('2d');
+                cCtx.scale(dpr, dpr);
+            });
+
+            renderSimCanvas();
+            renderAllGraphs();
+        }
+
+        window.addEventListener('resize', resizeAllCanvases);
+
+        // --- Event Listeners ---
+        sldHeight.addEventListener('input', (e) => {
+            state.y0 = parseFloat(e.target.value);
+            valHeight.textContent = `${state.y0.toFixed(1)} m`;
+            resetSimulation();
+        });
+
+        sldVelocity.addEventListener('input', (e) => {
+            state.u = parseFloat(e.target.value);
+            valVelocity.textContent = `${state.u > 0 ? '+' : ''}${state.u.toFixed(1)} m/s`;
+            resetSimulation();
+        });
+
+        btnPlayPause.addEventListener('click', () => {
+            if (state.t >= state.tTotal) resetSimulation();
+            state.isRunning = !state.isRunning;
+            updatePlayButtonUI();
+        });
+
+        btnRestart.addEventListener('click', resetSimulation);
+        btnResetTimer.addEventListener('click', resetSimulation);
+
+        btnStep.addEventListener('click', () => {
+            state.isRunning = false;
+            updatePlayButtonUI();
+            stepPhysics(0.04);
+            renderSimCanvas();
+            renderAllGraphs();
+        });
+
+        btnResetAll.addEventListener('click', () => {
+            sldHeight.value = 25;
+            sldVelocity.value = 0;
+            state.y0 = 25;
+            state.u = 0;
+            state.g = 9.8;
+            valHeight.textContent = '25.0 m';
+            valVelocity.textContent = '0.0 m/s';
+
+            document.querySelectorAll('.g-btn').forEach(b => {
+                b.classList.remove('active', 'border-sky-500', 'bg-sky-50');
+                if (b.dataset.g === '9.8') b.classList.add('active', 'border-sky-500', 'bg-sky-50');
+            });
+
+            resetSimulation();
+        });
+
+        // Object Buttons
+        document.querySelectorAll('.obj-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.obj-btn').forEach(b => b.classList.remove('active', 'border-sky-500', 'bg-sky-50'));
+                btn.classList.add('active', 'border-sky-500', 'bg-sky-50');
+                state.selectedObject = btn.dataset.obj;
+                renderSimCanvas();
+            });
+        });
+
+        // Gravity Buttons
+        document.querySelectorAll('.g-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.g-btn').forEach(b => b.classList.remove('active', 'border-sky-500', 'bg-sky-50'));
+                btn.classList.add('active', 'border-sky-500', 'bg-sky-50');
+                state.g = parseFloat(btn.dataset.g);
+                resetSimulation();
+            });
+        });
+
+        // Toggles
+        document.getElementById('chkGrid').addEventListener('change', (e) => { state.showGrid = e.target.checked; renderSimCanvas(); });
+        document.getElementById('chkHeightLine').addEventListener('change', (e) => { state.showHeightLine = e.target.checked; renderSimCanvas(); });
+        document.getElementById('chkVectors').addEventListener('change', (e) => { state.showVectors = e.target.checked; renderSimCanvas(); });
+        document.getElementById('chkGravityVector').addEventListener('change', (e) => { state.showGravityVector = e.target.checked; renderSimCanvas(); });
+        document.getElementById('chkTrail').addEventListener('change', (e) => { state.showTrail = e.target.checked; renderSimCanvas(); });
+
+        // Speed Radio
+        document.querySelectorAll('input[name="speed"]').forEach(r => {
+            r.addEventListener('change', (e) => {
+                state.speedMultiplier = parseFloat(e.target.value);
+            });
+        });
+
+        // Tab Switcher
+        document.querySelectorAll('.phet-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.phet-tab-btn').forEach(b => b.classList.remove('active', 'bg-sky-500', 'text-slate-900'));
+                btn.classList.add('active', 'bg-sky-500', 'text-slate-900');
+
+                state.activeTab = btn.dataset.tab;
+                if (state.activeTab === 'intro') {
+                    document.getElementById('tabIntroView').classList.remove('hidden');
+                    document.getElementById('tabGraphsView').classList.add('hidden');
+                    renderSimCanvas();
+                } else {
+                    document.getElementById('tabIntroView').classList.add('hidden');
+                    document.getElementById('tabGraphsView').classList.remove('hidden');
+                    resizeAllCanvases();
+                    renderAllGraphs();
+                }
+            });
+        });
+
+        // Theory Modal
+        btnToggleTheory.addEventListener('click', () => theoryModal.classList.remove('hidden'));
+        btnCloseTheory.addEventListener('click', () => theoryModal.classList.add('hidden'));
+
+        // Animation Frame
+        let lastTime = 0;
+        function animLoop(timestamp) {
+            if (!lastTime) lastTime = timestamp;
+            const dt = (timestamp - lastTime) / 1000;
+            lastTime = timestamp;
+
+            if (state.isRunning) {
+                stepPhysics(Math.min(dt, 0.1));
+                renderSimCanvas();
+                renderAllGraphs();
+            }
+
+            requestAnimationFrame(animLoop);
+        }
+
+        // Init App
+        window.onload = function() {
+            resizeAllCanvases();
+            resetSimulation();
+            requestAnimationFrame(animLoop);
+        };
+    </script>
+</body>
+</html>
