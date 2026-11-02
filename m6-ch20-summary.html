@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปบทที่ 20: ฟิสิกส์นิวเคลียร์ | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+                <i class="fa-solid fa-radiation"></i>
+            </div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-emerald-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-emerald-600">HOME</a>
+            <a href="m6-physics.html" class="text-sm font-semibold text-emerald-600 border-b-2 border-emerald-600">ม.6 บทเรียน</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="hidden md:hidden bg-white border-b px-4 py-4 flex flex-col gap-3" id="mobile-menu">
+        <a href="index.html" class="text-slate-600 py-1 border-b">HOME</a>
+        <a href="m6-physics.html" class="text-emerald-600 font-semibold py-1">ม.6 บทเรียน</a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-4">
+        <a href="m6-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.6
+        </a>
+        <span class="text-xs text-slate-400 font-inter">CHAPTER 20 VISUAL SUMMARY</span>
+    </div>
+
+    <!-- Outer Container Matching Visual Style -->
+    <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md space-y-8">
+        
+        <!-- Header Title with Number Badge -->
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+            <span class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-2xl flex items-center justify-center font-inter text-lg">20</span>
+            <div>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900">ฟิสิกส์นิวเคลียร์ (Nuclear Physics)</h1>
+                <p class="text-xs text-slate-500 mt-0.5">โครงสร้างนิวเคลียส, กัมมันตรังสี, กฎการสลายตัว, ครึ่งชีวิต, มวลพร่อง และปฏิกิริยานิวเคลียร์</p>
+            </div>
+        </div>
+
+        <!-- Section 1: Nuclear Symbols & Structure -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Nuclear Symbol Box -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-emerald-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-atom"></i> 1. สัญลักษณ์นิวเคลียร์ & นิวคลีออน
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        เขียนแทนด้วย <strong><sup>A</sup><sub>Z</sub>X</strong> โดยที่ <strong>A = เลขมวล</strong> (โปรตอน + นิวตรอน) และ <strong>Z = เลขอะตอม</strong> (จำนวนโปรตอน)
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex justify-center items-center">
+                    <div class="flex items-center gap-3 text-lg md:text-xl font-bold font-inter text-slate-800">
+                        <div class="inline-flex items-center">
+                            <span class="flex flex-col text-xs text-right mr-1 text-emerald-600 font-bold">
+                                <span>A</span>
+                                <span>Z</span>
+                            </span>
+                            <span class="text-2xl font-black text-slate-900">X</span>
+                        </div>
+                        <span class="text-slate-400 font-normal">|</span>
+                        <span class="text-sm md:text-base font-semibold text-emerald-700">จำนวนนิวตรอน N = A - Z</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="bg-white border border-slate-200 rounded-xl p-2.5">
+                        <strong class="text-emerald-700">ไอโซโทป (Isotope):</strong> Z เท่ากัน เช่น <sup>12</sup><sub>6</sub>C, <sup>14</sup><sub>6</sub>C
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-xl p-2.5">
+                        <strong class="text-emerald-700">ไอโซโทน (Isotone):</strong> N เท่ากัน เช่น <sup>14</sup><sub>6</sub>C, <sup>15</sup><sub>7</sub>N (N=8)
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-xl p-2.5">
+                        <strong class="text-emerald-700">ไอโซบาร์ (Isobar):</strong> A เท่ากัน เช่น <sup>14</sup><sub>6</sub>C, <sup>14</sup><sub>7</sub>N
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-xl p-2.5">
+                        <strong class="text-emerald-700">รัศมีนิวเคลียส:</strong> R = R<sub>0</sub> · A<sup>1/3</sup> (R<sub>0</sub> ≈ 1.2 fm)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Radiation Types Box -->
+            <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-3 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-emerald-600 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-radiation"></i> 2. รังสี 3 ชนิด & สมบัติสำคัญ
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        การแผ่รังสีเพื่อเปลี่ยนรูปไปสู่สภาวะที่มีเสถียรภาพมากกว่าเดิม
+                    </p>
+                </div>
+
+                <div class="space-y-2 text-xs">
+                    <div class="bg-white rounded-xl p-3 border border-slate-200 flex items-center justify-between">
+                        <div>
+                            <strong class="text-rose-600">รังสีแอลฟา (α : <sup>4</sup><sub>2</sub>He):</strong>
+                            <p class="text-slate-600 mt-0.5">ประจุ +2e, มวล 4 u, แตกตัวไอออนสูงสุด, ทะลุผ่านต่ำ (กระดาษกั้นได้)</p>
+                        </div>
+                        <span class="text-xs font-bold bg-rose-50 text-rose-600 px-2 py-1 rounded-md border border-rose-200">+2e</span>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-3 border border-slate-200 flex items-center justify-between">
+                        <div>
+                            <strong class="text-sky-600">รังสีบีตา (β<sup>-</sup> : <sup>0</sup><sub>-1</sub>e / β<sup>+</sup> : <sup>0</sup><sub>+1</sub>e):</strong>
+                            <p class="text-slate-600 mt-0.5">อิเล็กตรอนความเร็วสูง, ประจุ -1e หรือ +1e, ทะลุผ่านปานกลาง (แผ่น Al กั้นได้)</p>
+                        </div>
+                        <span class="text-xs font-bold bg-sky-50 text-sky-600 px-2 py-1 rounded-md border border-sky-200">±1e</span>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-3 border border-slate-200 flex items-center justify-between">
+                        <div>
+                            <strong class="text-emerald-700">รังสีแกมมา (γ : <sup>0</sup><sub>0</sub>γ):</strong>
+                            <p class="text-slate-600 mt-0.5">คลื่นแม่เหล็กไฟฟ้าพลังงานสูง ไม่มีประจุและมวล ทะลุผ่านสูงสุด (ตะกั่ว/คอนกรีต)</p>
+                        </div>
+                        <span class="text-xs font-bold bg-emerald-50 text-emerald-700 px-2 py-1 rounded-md border border-emerald-200">0</span>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-50/80 border border-emerald-200/80 text-emerald-900 rounded-xl p-3 text-xs flex items-start gap-2">
+                    <span class="text-base">💡</span>
+                    <div><strong>เบี่ยงเบนในสนามแม่เหล็ก/ไฟฟ้า:</strong> แอลฟาและบีตาเบี่ยงเบนในทิศตรงข้าม (บีตาเบนมากกว่าเพราะมวลเบากว่า) ส่วนแกมมาพุ่งตรงไม่เบี่ยงเบน</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Section 2: Nuclear Decay & Half-life -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-emerald-600 flex items-center gap-2">
+                <i class="fa-solid fa-hourglass-half"></i> 3. กฎการสลายตัว & ครึ่งชีวิต (Half-life: T<sub>1/2</sub>)
+            </h3>
+            <p class="text-xs md:text-sm text-slate-700">
+                กัมมันตภาพ (Activity: A) คืออัตราการสลายตัวของนิวเคลียสต่อหนึ่งหน่วยเวลา มีหน่วยเป็น เบ็กเคอเรล (Bq = ครั้ง/s) หรือ คูรี (Ci = 3.7 × 10<sup>10</sup> Bq)
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-inter text-slate-800">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">กัมมันตภาพ & ค่าคงตัวการสลายตัว (λ)</span>
+                    <div class="text-lg md:text-xl font-bold text-emerald-700">
+                        A = λ · N &nbsp;&nbsp;|&nbsp;&nbsp; T<sub>1/2</sub> = <div class="inline-flex flex-col items-center text-center align-middle"><span class="border-b border-slate-700 px-1 text-sm">ln 2</span><span class="text-sm">λ</span></div> ≈ <div class="inline-flex flex-col items-center text-center align-middle"><span class="border-b border-slate-700 px-1 text-sm">0.693</span><span class="text-sm">λ</span></div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">การคำนวณปริมาณที่เหลือเมื่อเวลาผ่านไป t</span>
+                    <div class="text-base md:text-lg font-bold text-emerald-700">
+                        N = N<sub>0</sub> · (1/2)<sup>n</sup> &nbsp;&nbsp;|&nbsp;&nbsp; m = m<sub>0</sub> · (1/2)<sup>n</sup>
+                    </div>
+                    <span class="text-xs text-slate-500 mt-1">โดย n = t / T<sub>1/2</sub> (จำนวนรอบครึ่งชีวิต)</span>
+                </div>
+            </div>
+
+            <div class="bg-amber-50/80 border border-amber-200/80 text-amber-900 rounded-xl p-3.5 text-xs flex items-start gap-2.5">
+                <span class="text-base">⚠️</span>
+                <div><strong>ข้อควรระวังในการทำโจทย์:</strong> สังเกตโจทย์ถามว่า <em>"เหลืออยู่เท่าใด"</em> (ใช้สูตรตรงๆ) หรือถามว่า <em>"สลายตัวไปเท่าใด"</em> (ต้องนำค่าเริ่มต้นลบด้วยปริมาณที่เหลือ ΔN = N<sub>0</sub> - N)</div>
+            </div>
+        </div>
+
+        <!-- Section 3: Mass Defect & Binding Energy -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-emerald-600 flex items-center gap-2">
+                <i class="fa-solid fa-weight-hanging"></i> 4. มวลพร่อง (Mass Defect: Δm) & พลังงานยึดเหนี่ยว (BE)
+            </h3>
+            <p class="text-xs md:text-sm text-slate-700">
+                เมื่อนิวคลีออนอิสระมารวมตัวกันเป็นนิวเคลียส มวลรวมจะหายไปบางส่วนกลายเป็นพลังงานยึดเหนี่ยวตามสมการ E = mc²
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-inter text-slate-800">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">มวลพร่อง (Mass Defect: Δm)</span>
+                    <div class="text-sm md:text-base font-bold text-slate-800 text-center">
+                        Δm = [Z · m<sub>p</sub> + (A - Z) · m<sub>n</sub>] - M<sub>nucleus</sub>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center justify-center">
+                    <span class="text-xs font-bold text-slate-400 mb-1">พลังงานยึดเหนี่ยว (Binding Energy: BE)</span>
+                    <div class="text-lg md:text-xl font-bold text-emerald-700">
+                        BE = Δm (u) × 931.5 MeV
+                    </div>
+                    <span class="text-xs text-slate-500 mt-1">1 u = 931.5 MeV / c² = 1.66 × 10<sup>-27</sup> kg</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm text-xs leading-relaxed">
+                <strong class="text-emerald-700 text-sm block mb-1">ความเสถียรของนิวเคลียส (Nuclear Stability):</strong>
+                นิวเคลียสจะเสถียรมากหรือน้อยพิจารณาจาก <strong>พลังงานยึดเหนี่ยวต่อนิวคลีออน (BE / A)</strong> ยิ่งมีค่าสูง ยิ่งเสถียร นิวเคลียสของ <strong>เหล็ก (<sup>56</sup><sub>26</sub>Fe)</strong> มีค่า BE/A สูงที่สุดประมาณ 8.8 MeV/nucleon ซึ่งมีความเสถียรสูงสุดในธรรมชาติ
+            </div>
+        </div>
+
+        <!-- Section 4: Nuclear Fission & Fusion -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-emerald-600 flex items-center gap-2">
+                <i class="fa-solid fa-burst"></i> 5. ปฏิกิริยานิวเคลียร์: ฟิชชัน vs ฟิวชัน & พลังงานปฏิกิริยา (Q)
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-2 mb-2 text-emerald-700 font-bold text-sm">
+                        <i class="fa-solid fa-arrows-split-up-and-left"></i> ฟิชชัน (Nuclear Fission)
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        นิวเคลียสหนักแตกตัวเป็นนิวเคลียสขนาดกลาง 2 ตัว พร้อมนิวตรอนเร็ว 2-3 ตัว และพลังงานมหาศาล ก่อให้เกิด <em>ปฏิกิริยาลูกโซ่ (Chain Reaction)</em> เช่นในเครื่องปฏิกรณ์นิวเคลียร์
+                    </p>
+                    <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 font-inter text-xs text-center font-semibold text-slate-800">
+                        <sup>235</sup><sub>92</sub>U + <sup>1</sup><sub>0</sub>n → <sup>141</sup><sub>56</sub>Ba + <sup>92</sup><sub>36</sub>Kr + 3(<sup>1</sup><sub>0</sub>n) + Q
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-2 mb-2 text-teal-700 font-bold text-sm">
+                        <i class="fa-solid fa-sun"></i> ฟิวชัน (Nuclear Fusion)
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        นิวเคลียสเบาหลอมรวมเป็นนิวเคลียสหนักขึ้น เกิดที่อุณหภูมิและความดันสูงมาก (บนดวงอาทิตย์ / ระเบิดไฮโดรเจน) ให้พลังงานต่อนิวคลีออนสูงกว่าฟิชชัน และไม่มีกากกัมมันตรังสีอันตราย
+                    </p>
+                    <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 font-inter text-xs text-center font-semibold text-slate-800">
+                        <sup>2</sup><sub>1</sub>H + <sup>3</sup><sub>1</sub>H → <sup>4</sup><sub>2</sub>He + <sup>1</sup><sub>0</sub>n + 17.6 MeV
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q value calculation -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="text-xs text-slate-700">
+                    <strong class="text-emerald-700 text-sm block mb-1">การคำนวณพลังงานปฏิกิริยา (Q-value):</strong>
+                    Q = (∑m<sub>ก่อน</sub> - ∑m<sub>หลัง</sub>) × 931.5 MeV
+                </div>
+                <div class="flex gap-2">
+                    <span class="px-3 py-1.5 bg-emerald-50 text-emerald-800 font-bold text-xs rounded-xl border border-emerald-200">
+                        Q > 0 : คายพลังงาน (Exothermic)
+                    </span>
+                    <span class="px-3 py-1.5 bg-amber-50 text-amber-800 font-bold text-xs rounded-xl border border-amber-200">
+                        Q < 0 : ดูดพลังงาน (Endothermic)
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Applications of Radioisotopes -->
+        <div class="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 space-y-4">
+            <h3 class="text-base font-bold text-emerald-600 flex items-center gap-2">
+                <i class="fa-solid fa-hand-holding-medical"></i> 6. ประโยชน์ของไอโซโทปกัมมันตรังสีในชีวิตจริง
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                <div class="bg-white p-3 rounded-xl border border-slate-200 text-center">
+                    <span class="font-bold text-emerald-700 block text-sm mb-1"><sup>14</sup>C</span>
+                    <p class="text-slate-600">หาอายุวัตถุโบราณและซากดึกดำบรรพ์</p>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 text-center">
+                    <span class="font-bold text-emerald-700 block text-sm mb-1"><sup>60</sup>Co</span>
+                    <p class="text-slate-600">ฉายรังสีรักษามะเร็ง และถนอมอาหาร</p>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 text-center">
+                    <span class="font-bold text-emerald-700 block text-sm mb-1"><sup>131</sup>I</span>
+                    <p class="text-slate-600">ตรวจวินิจฉัยและรักษาโรคต่อมไทรอยด์</p>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 text-center">
+                    <span class="font-bold text-emerald-700 block text-sm mb-1"><sup>24</sup>Na</span>
+                    <p class="text-slate-600">ตรวจระบบการไหลเวียนโลหิตและรอยรั่วท่อ</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Button to Quiz -->
+        <div class="flex justify-center gap-4 pt-4 border-t border-slate-100">
+            <a href="m6-ch20-quiz.html" class="py-3 px-8 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl shadow-lg text-sm flex items-center gap-2 transition-all">
+                <i class="fa-solid fa-pen-to-square"></i> ไปทำแบบฝึกหัด บทที่ 20 (35 ข้อ)
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-slate-900 text-slate-400 py-6 mt-12 text-center text-xs">
+    © 2026 ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB
+</footer>
+<script>
+    document.getElementById('mobile-menu-btn').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
+</script>
+</body>
+</html>
