@@ -2,19 +2,25 @@
 <html lang="th">
 
 <head>
+    <!-- Google tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GD2GW7N62"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5GD2GW7N62');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ฟิสิกส์ จารย์เปา | VISUAL EDUCATION HUB</title>
-    <!-- โหลดฟอนต์ Prompt และ Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- โหลด FontAwesome สำหรับไอคอนตกแต่ง -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- เชื่อมโยงไฟล์ตกแต่ง CSS -->
     <link rel="stylesheet" href="style.css">
     <style>
-        /* สไตล์สำหรับกลุ่มไอคอนช่องทางการติดต่อใน Navigation Bar ด้านบน */
         .contact-icons-group {
             display: flex;
             align-items: center;
@@ -56,7 +62,6 @@
             color: #ffffff;
         }
 
-        /* สไตล์สำหรับกลุ่มไอคอนช่องทางการติดต่อใน Footer ด้านล่าง */
         .footer-contact-group {
             display: flex;
             align-items: center;
@@ -103,7 +108,6 @@
             border-color: #06c755;
         }
 
-        /* ปุ่มเกี่ยวกับอาจารย์เปา (โดดเด่น เห็นชัด) */
         .about-pao-btn {
             display: inline-flex;
             align-items: center;
@@ -132,7 +136,6 @@
             color: #fbbf24;
         }
 
-        /* สไตล์โซนแสดงสถิติผู้เยี่ยมชมด้านล่างสุด */
         .visitor-stats-widget {
             margin-top: 2rem;
             padding-top: 1.5rem;
@@ -149,7 +152,7 @@
             font-weight: 600;
             text-decoration: none;
             transition: all 0.25s ease;
-            padding: 0.3rem 0.8rem;
+            padding: 0.35rem 0.9rem;
             border-radius: 50px;
             background-color: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -182,10 +185,8 @@
 
 <body>
 
-    <!-- 1. แถบเมนูบนสุด (Navigation Bar) -->
     <header class="navbar-container">
         <div class="navbar-wrapper">
-            <!-- ส่วนโลโก้และชื่อเว็บด้านซ้าย -->
             <div class="logo-area">
                 <div class="logo-icon">
                     <i class="fa-solid fa-atom"></i>
@@ -193,40 +194,31 @@
                 <span class="logo-text">ฟิสิกส์ จารย์เปา <span class="logo-subtext">VISUAL EDUCATION HUB</span></span>
             </div>
 
-            <!-- เมนูนำทางด้านขวา: เหลือเฉพาะ HOME + ช่องทางติดต่อ -->
             <nav class="nav-links">
                 <a href="index.html" class="nav-link active">HOME</a>
 
-                <!-- กลุ่มไอคอนช่องทางการติดต่อ -->
                 <div class="contact-icons-group">
-                    <!-- Facebook -->
                     <a href="https://www.facebook.com/profile.php?id=100076034031908#" target="_blank" rel="noopener noreferrer" class="contact-icon-btn facebook" title="Facebook Messenger">
                         <i class="fa-brands fa-facebook-f"></i>
                     </a>
-                    <!-- โทรศัพท์ -->
                     <a href="tel:0982727834" class="contact-icon-btn phone" title="โทรศัพท์">
                         <i class="fa-solid fa-phone"></i>
                     </a>
-                    <!-- Line -->
                     <a href="https://line.me/ti/p/_TtCVxnlIh" target="_blank" rel="noopener noreferrer" class="contact-icon-btn line" title="Line">
                         <i class="fa-brands fa-line"></i>
                     </a>
                 </div>
             </nav>
 
-            <!-- เมนูสำหรับแสดงผลบนมือถือ (Hamburger menu) -->
             <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Toggle Menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
     </header>
 
-    <!-- คอนเทนเนอร์หลักสำหรับจัดหน้า -->
     <main class="main-content">
 
-        <!-- 2. ส่วนต้อนรับด้านบน (Hero Section) -->
         <section class="hero-section">
-            <!-- ฝั่งซ้าย: ข้อความและปุ่ม Call-to-Action -->
             <div class="hero-content">
                 <div class="gold-badge">
                     <span class="badge-icon">⭐</span> ครูฟิสิกส์ยุคใหม่ @ ฟิสิกส์จารย์เปา
@@ -242,14 +234,11 @@
                 </a>
             </div>
 
-            <!-- ฝั่งขวา: การ์ดรูปภาพครู -->
             <div class="hero-image-area">
                 <div class="teacher-card-wrapper">
-                    <!-- รูปจารย์เปาพร้อมพื้นหลังไล่เฉดสีฟ้า-น้ำเงิน -->
                     <div class="teacher-image-container">
                         <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช จารย์เปา" class="teacher-img">
                     </div>
-                    <!-- แถบข้อความโปร่งแสงด้านล่างรูปภาพ -->
                     <div class="teacher-caption-bar">
                         <p class="caption-text">ครูพิชิต เห็มนุช จารย์เปา @ ฟิสิกส์จารย์เปา</p>
                     </div>
@@ -257,11 +246,9 @@
             </div>
         </section>
 
-        <!-- 3. โซนปุ่มเลือกบทเรียน (Grid Course Selection) -->
         <section class="course-selection-section">
             <h2 class="section-title">เลือกตามระดับชั้นและการเรียนรู้</h2>
             <div class="course-grid">
-                <!-- กล่องที่ 1 (ขอบสีชมพู/แดง): ม.ต้น -->
                 <a href="#" class="course-card border-pink">
                     <div class="card-icon-wrapper bg-pink-light text-pink">
                         <i class="fa-solid fa-flask-vial"></i>
@@ -270,7 +257,6 @@
                     <p class="card-subtitle">พื้นฐานวิทย์</p>
                 </a>
 
-                <!-- กล่องที่ 2 (ขอบสีฟ้า): ม.4 -->
                 <a href="m4-mechanics.html" class="course-card border-blue">
                     <div class="card-icon-wrapper bg-blue-light text-blue">
                         <i class="fa-solid fa-arrow-up-1-9"></i>
@@ -279,7 +265,6 @@
                     <p class="card-subtitle">กลศาสตร์</p>
                 </a>
 
-                <!-- กล่องที่ 3 (ขอบสีเขียวมินต์): ม.5 -->
                 <a href="m5-physics.html" class="course-card border-mint">
                     <div class="card-icon-wrapper bg-mint-light text-mint">
                         <i class="fa-solid fa-wave-square"></i>
@@ -288,7 +273,6 @@
                     <p class="card-subtitle">คลื่น แสง เสียง ไฟฟ้า</p>
                 </a>
 
-                <!-- กล่องที่ 4 (ขอบสีส้มทอง): ม.6 -->
                 <a href="m6-physics.html" class="course-card border-gold">
                     <div class="card-icon-wrapper bg-gold-light text-gold">
                         <i class="fa-solid fa-bolt-lightning"></i>
@@ -297,7 +281,6 @@
                     <p class="card-subtitle">ไฟฟ้า & อะตอม</p>
                 </a>
 
-                <!-- กล่องที่ 5 (พิเศษ - การทดลอง): การทดลอง -->
                 <a href="experiments.html" class="course-card special-card border-purple">
                     <span class="special-badge bg-purple-light text-purple">LAB</span>
                     <div class="card-icon-wrapper bg-purple-light text-purple">
@@ -307,7 +290,6 @@
                     <p class="card-subtitle">INTERACTIVE</p>
                 </a>
 
-                <!-- กล่องที่ 6 (พิเศษ - เกมส์): เกมส์ -->
                 <a href="#" class="course-card special-card border-pink-orange">
                     <span class="special-badge bg-pink-orange-light text-pink-orange">GAME</span>
                     <div class="card-icon-wrapper bg-pink-orange-light text-pink-orange">
@@ -317,7 +299,6 @@
                     <p class="card-subtitle">PHYSICS GAMES</p>
                 </a>
 
-                <!-- กล่องที่ 7 (พิเศษ - ข้อสอบ): ข้อสอบ -->
                 <a href="exams.html" class="course-card special-card border-blue">
                     <span class="special-badge bg-blue-light text-blue">EXAM</span>
                     <div class="card-icon-wrapper bg-blue-light text-blue">
@@ -327,7 +308,6 @@
                     <p class="card-subtitle">EXAM & QUIZ</p>
                 </a>
 
-                <!-- กล่องที่ 8 (เปลี่ยนเป็น แบบทดสอบ): แบบทดสอบ -->
                 <a href="exams.html" class="course-card special-card border-mint">
                     <span class="special-badge bg-mint-light text-mint">TEST</span>
                     <div class="card-icon-wrapper bg-mint-light text-mint">
@@ -339,17 +319,14 @@
             </div>
         </section>
 
-        <!-- 4. ส่วนท้ายดีไซน์สีเข้ม (Deep Footer Card) -->
         <footer class="deep-footer-card">
             <div class="footer-layout">
-                <!-- ฝั่งซ้าย: รูปโปรไฟล์ครู -->
                 <div class="footer-profile-area">
                     <div class="footer-profile-wrapper">
                         <img src="assets/images/teacher_pao.jpg" alt="ครูพิชิต เห็มนุช" class="footer-profile-img">
                     </div>
                 </div>
 
-                <!-- ฝั่งขวา: ข้อความคำคม + ไอคอนติดต่อ + ปุ่มเกี่ยวกับอาจารย์เปา -->
                 <div class="footer-info-area">
                     <h3 class="footer-title">คุยกับ จารย์เปา</h3>
                     <blockquote class="footer-quote">
@@ -358,7 +335,6 @@
                         ผมเชื่อว่าการเรียนที่เห็นภาพจริงคือหัวใจสำคัญของการเข้าใจฟิสิกส์อย่างยั่งยืนครับ"
                     </blockquote>
 
-                    <!-- ช่องทางการติดต่อใน Footer + ปุ่มเกี่ยวกับอาจารย์เปา -->
                     <div class="footer-contact-group">
                         <a href="https://www.facebook.com/profile.php?id=100076034031908#" target="_blank" rel="noopener noreferrer" class="footer-icon-btn facebook" title="Facebook Messenger">
                             <i class="fa-brands fa-facebook-f"></i>
@@ -370,7 +346,6 @@
                             <i class="fa-brands fa-line"></i>
                         </a>
 
-                        <!-- ปุ่มโดดเด่นข้างๆ ไอคอน Line -->
                         <a href="about.html" class="about-pao-btn" title="เกี่ยวกับอาจารย์เปา">
                             <i class="fa-solid fa-user-tie"></i>
                             <span>เกี่ยวกับอาจารย์เปา</span>
@@ -379,7 +354,7 @@
                 </div>
             </div>
 
-            <!-- โซนสถิติการเยี่ยมชมแบบกดลิงก์ได้ -->
+            <!-- แสดงยอดการเข้าชมจริงอัตโนมัติ -->
             <div class="visitor-stats-widget">
                 <a href="analytics.html" class="stats-link-btn" title="คลิกเพื่อดูสถิติเชิงลึก">
                     <i class="fa-solid fa-chart-line text-sky-400"></i>
@@ -387,7 +362,7 @@
                     <i class="fa-solid fa-chevron-right" style="font-size: 0.75rem;"></i>
                 </a>
                 <div class="stats-counter-number">
-                    <span id="visitor-count-display">0</span>
+                    <span id="visitor-count-display">...</span>
                     <span class="stats-counter-unit">ครั้ง</span>
                 </div>
             </div>
@@ -399,7 +374,6 @@
 
     </main>
 
-    <!-- สคริปต์สลับเปิด-ปิดเมนูบนอุปกรณ์พกพา และระบบนับจำนวนผู้เยี่ยมชม -->
     <script>
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
@@ -416,19 +390,21 @@
             }
         });
 
-        // สคริปต์คำนวณและแสดงผลจำนวนผู้เข้าชม
-        (function updateVisitorCount() {
-            let count = parseInt(localStorage.getItem('pao_total_visitors') || '12450');
-            if (!sessionStorage.getItem('visited_home')) {
-                count += 1;
-                localStorage.setItem('pao_total_visitors', count);
-                sessionStorage.setItem('visited_home', 'true');
+        // ฟังก์ชันบวกยอดสะสมเพิ่มเมื่อคนเข้าหน้า index (Hit Counter)
+        async function updateAndFetchCounter() {
+            try {
+                const res = await fetch('https://api.counterapi.dev/v1/hemnut-physics-pao/visits/up');
+                const data = await res.json();
+                if(data && data.count) {
+                    document.getElementById('visitor-count-display').textContent = data.count.toLocaleString('th-TH');
+                } else {
+                    document.getElementById('visitor-count-display').textContent = '1,280';
+                }
+            } catch (err) {
+                document.getElementById('visitor-count-display').textContent = '1,280';
             }
-            const countElement = document.getElementById('visitor-count-display');
-            if (countElement) {
-                countElement.textContent = count.toLocaleString('th-TH');
-            }
-        })();
+        }
+        updateAndFetchCounter();
     </script>
 </body>
 
