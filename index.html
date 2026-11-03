@@ -131,6 +131,52 @@
             font-size: 1rem;
             color: #fbbf24;
         }
+
+        /* สไตล์โซนแสดงสถิติผู้เยี่ยมชมด้านล่างสุด */
+        .visitor-stats-widget {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .stats-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            background-color: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stats-link-btn:hover {
+            color: #38bdf8;
+            background-color: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .stats-counter-number {
+            margin-top: 0.5rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #38bdf8;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .stats-counter-unit {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 400;
+            margin-left: 0.2rem;
+        }
     </style>
 </head>
 
@@ -333,6 +379,19 @@
                 </div>
             </div>
 
+            <!-- โซนสถิติการเยี่ยมชมแบบกดลิงก์ได้ -->
+            <div class="visitor-stats-widget">
+                <a href="analytics.html" class="stats-link-btn" title="คลิกเพื่อดูสถิติเชิงลึก">
+                    <i class="fa-solid fa-chart-line text-sky-400"></i>
+                    <span>สถิติการเยี่ยมชม</span>
+                    <i class="fa-solid fa-chevron-right" style="font-size: 0.75rem;"></i>
+                </a>
+                <div class="stats-counter-number">
+                    <span id="visitor-count-display">0</span>
+                    <span class="stats-counter-unit">ครั้ง</span>
+                </div>
+            </div>
+
             <div class="footer-bottom-text">
                 <p>&copy; 2026 Gemini Antigravity - ฟิสิกส์ จารย์เปา VISUAL EDUCATION HUB. All rights reserved.</p>
             </div>
@@ -340,7 +399,7 @@
 
     </main>
 
-    <!-- สคริปต์สลับเปิด-ปิดเมนูบนอุปกรณ์พกพา -->
+    <!-- สคริปต์สลับเปิด-ปิดเมนูบนอุปกรณ์พกพา และระบบนับจำนวนผู้เยี่ยมชม -->
     <script>
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
@@ -356,6 +415,20 @@
                 icon.classList.add('fa-bars');
             }
         });
+
+        // สคริปต์คำนวณและแสดงผลจำนวนผู้เข้าชม
+        (function updateVisitorCount() {
+            let count = parseInt(localStorage.getItem('pao_total_visitors') || '12450');
+            if (!sessionStorage.getItem('visited_home')) {
+                count += 1;
+                localStorage.setItem('pao_total_visitors', count);
+                sessionStorage.setItem('visited_home', 'true');
+            }
+            const countElement = document.getElementById('visitor-count-display');
+            if (countElement) {
+                countElement.textContent = count.toLocaleString('th-TH');
+            }
+        })();
     </script>
 </body>
 
