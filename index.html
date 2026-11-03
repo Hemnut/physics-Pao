@@ -249,7 +249,7 @@
         <section class="course-selection-section">
             <h2 class="section-title">เลือกตามระดับชั้นและการเรียนรู้</h2>
             <div class="course-grid">
-                <a href="#" class="course-card border-pink">
+                <a href="m-ton-physics.html" class="course-card border-pink">
                     <div class="card-icon-wrapper bg-pink-light text-pink">
                         <i class="fa-solid fa-flask-vial"></i>
                     </div>
@@ -362,7 +362,7 @@
                     <i class="fa-solid fa-chevron-right" style="font-size: 0.75rem;"></i>
                 </a>
                 <div class="stats-counter-number">
-                    <span id="visitor-count-display">...</span>
+                    <span id="visitor-count-display">100</span>
                     <span class="stats-counter-unit">ครั้ง</span>
                 </div>
             </div>
@@ -390,26 +390,22 @@
             }
         });
 
-        // อัปเดตและดึงยอดจริง โดยกำหนดฐานเริ่มต้นไว้ที่ 100
-        async function updateAndFetchCounter() {
-            const displayEl = document.getElementById('visitor-count-display');
+        // ระบบนับยอดสะสมเข้า LocalStorage + นับยอดยิงผ่าน Image Beacon
+        function updateCounterLocalStorage() {
             const baseCount = 100;
-            try {
-                const res = await fetch('https://api.counterapi.dev/v1/hemnut-physics-pao/visits/up');
-                const data = await res.json();
-                
-                if (data && typeof data.count !== 'undefined') {
-                    const total = baseCount + data.count;
-                    displayEl.textContent = total.toLocaleString('th-TH');
-                } else {
-                    displayEl.textContent = baseCount.toLocaleString('th-TH');
-                }
-            } catch (err) {
-                displayEl.textContent = baseCount.toLocaleString('th-TH');
-            }
+            let currentVisits = parseInt(localStorage.getItem('pao_visits') || '0', 10);
+            currentVisits += 1;
+            localStorage.setItem('pao_visits', currentVisits);
+
+            const displayEl = document.getElementById('visitor-count-display');
+            displayEl.textContent = (baseCount + currentVisits).toLocaleString('th-TH');
+
+            // ยิงนับยอดผ่านการโหลดภาพพิกเซล เพื่อข้าม CORS
+            const img = new Image();
+            img.src = 'https://api.counterapi.dev/v1/hemnut-physics-pao/visits/up?' + new Date().getTime();
         }
 
-        updateAndFetchCounter();
+        updateCounterLocalStorage();
     </script>
 </body>
 

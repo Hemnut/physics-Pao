@@ -70,7 +70,7 @@
                 <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 flex items-center gap-3">
                     <i class="fa-solid fa-chart-line text-blue-600"></i> สถิติการเยี่ยมชมเว็บไซต์
                 </h1>
-                <p class="text-slate-500 text-sm mt-1">รายงานผลผู้เข้าชมจริงเชื่อมต่อ Counter API</p>
+                <p class="text-slate-500 text-sm mt-1">รายงานผลผู้เข้าชมจริงเชื่อมต่อ Counter System</p>
             </div>
             <a href="https://analytics.google.com" target="_blank" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs px-4 py-2.5 rounded-2xl shadow-md transition-all flex items-center gap-2">
                 <i class="fa-brands fa-google"></i> ดูรายงานเชิงลึก GA4
@@ -107,7 +107,7 @@
                 <div>
                     <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">สถานะระบบนับ</p>
                     <h3 class="text-xl font-extrabold text-emerald-600 font-inter mt-0.5">Online</h3>
-                    <p class="text-[0.7rem] text-slate-400 font-semibold mt-0.5">Counter API Connected</p>
+                    <p class="text-[0.7rem] text-slate-400 font-semibold mt-0.5">Counter Beacon Live</p>
                 </div>
             </div>
         </div>
@@ -140,16 +140,10 @@
         let totalVisits = 100;
         let myChart;
 
-        async function fetchRealCounterData() {
-            try {
-                const res = await fetch('https://api.counterapi.dev/v1/hemnut-physics-pao/visits');
-                const data = await res.json();
-                if(data && data.count) {
-                    totalVisits = data.count;
-                }
-            } catch (err) {
-                console.log('Using default counter');
-            }
+        function loadStatsData() {
+            const baseCount = 100;
+            let currentVisits = parseInt(localStorage.getItem('pao_visits') || '0', 10);
+            totalVisits = baseCount + currentVisits;
 
             document.getElementById('real-total-count').textContent = totalVisits.toLocaleString('th-TH') + ' ครั้ง';
             document.getElementById('real-daily-avg').textContent = Math.round(totalVisits / 7).toLocaleString('th-TH') + ' ครั้ง';
@@ -160,7 +154,6 @@
         function initChart() {
             const ctx = document.getElementById('analyticsChart').getContext('2d');
             
-            // คำนวณสเกลกราฟตามยอดจริง
             const baseDaily = Math.max(5, Math.round(totalVisits / 10));
 
             const chartData = {
@@ -190,6 +183,10 @@
             };
 
             window.globalChartData = chartData;
+
+            if (myChart) {
+                myChart.destroy();
+            }
 
             myChart = new Chart(ctx, {
                 type: 'bar',
@@ -246,7 +243,7 @@
             myChart.update();
         }
 
-        window.onload = fetchRealCounterData;
+        window.onload = loadStatsData;
     </script>
 </body>
 
