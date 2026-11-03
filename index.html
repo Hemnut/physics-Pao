@@ -390,32 +390,22 @@
             }
         });
 
-        // ฟังก์ชันดึงและอัปเดตยอดจริงผ่าน Counter API (ไม่ใส่ค่าสำรอง 1,280)
+        // อัปเดตและดึงยอดจริง โดยกำหนดฐานเริ่มต้นไว้ที่ 100
         async function updateAndFetchCounter() {
+            const displayEl = document.getElementById('visitor-count-display');
+            const baseCount = 100;
             try {
                 const res = await fetch('https://api.counterapi.dev/v1/hemnut-physics-pao/visits/up');
                 const data = await res.json();
-                if(data && typeof data.count !== 'undefined') {
-                    document.getElementById('visitor-count-display').textContent = data.count.toLocaleString('th-TH');
+                
+                if (data && typeof data.count !== 'undefined') {
+                    const total = baseCount + data.count;
+                    displayEl.textContent = total.toLocaleString('th-TH');
                 } else {
-                    fetchFallbackCounter();
+                    displayEl.textContent = baseCount.toLocaleString('th-TH');
                 }
             } catch (err) {
-                fetchFallbackCounter();
-            }
-        }
-
-        async function fetchFallbackCounter() {
-            try {
-                const res = await fetch('https://api.counterapi.dev/v1/hemnut-physics-pao/visits');
-                const data = await res.json();
-                if(data && typeof data.count !== 'undefined') {
-                    document.getElementById('visitor-count-display').textContent = data.count.toLocaleString('th-TH');
-                } else {
-                    document.getElementById('visitor-count-display').textContent = '0';
-                }
-            } catch (e) {
-                document.getElementById('visitor-count-display').textContent = '0';
+                displayEl.textContent = baseCount.toLocaleString('th-TH');
             }
         }
 
