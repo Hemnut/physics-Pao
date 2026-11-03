@@ -390,20 +390,35 @@
             }
         });
 
-        // ฟังก์ชันบวกยอดสะสมเพิ่มเมื่อคนเข้าหน้า index (Hit Counter)
+        // ฟังก์ชันดึงและอัปเดตยอดจริงผ่าน Counter API (ไม่ใส่ค่าสำรอง 1,280)
         async function updateAndFetchCounter() {
             try {
                 const res = await fetch('https://api.counterapi.dev/v1/hemnut-physics-pao/visits/up');
                 const data = await res.json();
-                if(data && data.count) {
+                if(data && typeof data.count !== 'undefined') {
                     document.getElementById('visitor-count-display').textContent = data.count.toLocaleString('th-TH');
                 } else {
-                    document.getElementById('visitor-count-display').textContent = '1,280';
+                    fetchFallbackCounter();
                 }
             } catch (err) {
-                document.getElementById('visitor-count-display').textContent = '1,280';
+                fetchFallbackCounter();
             }
         }
+
+        async function fetchFallbackCounter() {
+            try {
+                const res = await fetch('https://api.counterapi.dev/v1/hemnut-physics-pao/visits');
+                const data = await res.json();
+                if(data && typeof data.count !== 'undefined') {
+                    document.getElementById('visitor-count-display').textContent = data.count.toLocaleString('th-TH');
+                } else {
+                    document.getElementById('visitor-count-display').textContent = '0';
+                }
+            } catch (e) {
+                document.getElementById('visitor-count-display').textContent = '0';
+            }
+        }
+
         updateAndFetchCounter();
     </script>
 </body>
