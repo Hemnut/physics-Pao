@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 1: การเคลื่อนที่และแรง | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+    <style>
+        .tab-btn{transition:all 0.2s}.tab-btn.active{background:#db2777;color:white;box-shadow:0 4px 12px rgba(219,39,119,0.3)}
+        .tab-content{display:none}.tab-content.active{display:block}
+        .choice-btn{transition:all 0.2s;cursor:pointer;border:2px solid #e2e8f0}.choice-btn:hover{border-color:#fbcfe8;background:#fdf2f8}
+        .choice-btn.selected{border-color:#db2777;background:#fdf2f8;color:#9d174d}
+        .choice-btn.correct{border-color:#10b981!important;background:#ecfdf5!important;color:#065f46!important}
+        .choice-btn.wrong{border-color:#ef4444!important;background:#fef2f2!important;color:#991b1b!important}
+        .match-select,.fill-input{border:2px solid #e2e8f0;border-radius:0.5rem;padding:0.4rem 0.6rem}.match-select{font-size:0.8rem;width:100%}.fill-input{font-size:0.9rem}
+        .match-select.correct,.fill-input.correct{border-color:#10b981;background:#ecfdf5}.match-select.wrong,.fill-input.wrong{border-color:#ef4444;background:#fef2f2}
+        .answer-key{display:none}.answer-key.show{display:block}
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}.modal-overlay.show{display:flex}
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-pink-500 to-rose-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-pink-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-pink-600">HOME</a>
+            <a href="m-ton-physics.html" class="text-sm font-semibold text-pink-600 border-b-2 border-pink-600">บทเรียน ม.ต้น</a>
+        </nav>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-6">
+        <a href="m-ton-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-pink-600 hover:text-pink-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.ต้น
+        </a>
+        <span class="text-xs text-slate-400 font-inter">M.1-3 CH1 QUIZ ENGINE</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-pink-900 via-rose-800 to-rose-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 bg-pink-500/20 border border-pink-400/30 text-pink-200 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                <i class="fa-solid fa-person-running"></i> บทที่ 1 — วิทย์-ฟิสิกส์ ม.ต้น
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด: การเคลื่อนที่และแรง</h1>
+            <p class="text-pink-100 text-sm max-w-2xl leading-relaxed">
+                ระยะทาง & การกระจัด | อัตราเร็ว & ความเร็ว | แรงเสียดทาน | แรงลอยตัว | โมเมนต์ของแรง<br>
+                ปรนัย 20 | จับคู่ 10 | เติมคำ 5 | อัตนัย 5 &nbsp;|&nbsp; <strong>คะแนนเต็ม 35</strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+        <button onclick="showTab(1)" class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-1"><i class="fa-solid fa-circle-dot mr-1"></i>ส่วนที่ 1 ปรนัย (20)</button>
+        <button onclick="showTab(2)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-2"><i class="fa-solid fa-link mr-1"></i>ส่วนที่ 2 จับคู่ (10)</button>
+        <button onclick="showTab(3)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-3"><i class="fa-solid fa-pen-to-square mr-1"></i>ส่วนที่ 3 เติมคำ (5)</button>
+        <button onclick="showTab(4)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-4"><i class="fa-solid fa-file-pen mr-1"></i>ส่วนที่ 4 อัตนัย (5)</button>
+    </div>
+
+    <div id="tab-1" class="tab-content active"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-pink-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย</h2><p class="text-xs text-slate-500 mb-4">20 ข้อ ข้อละ 1 คะแนน</p><div id="mc-questions" class="space-y-6"></div></div></div>
+    <div id="tab-2" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-pink-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่</h2><p class="text-xs text-slate-500 mb-4">10 ข้อ ข้อละ 1 คะแนน</p><div id="match-questions" class="space-y-3"></div></div></div>
+    <div id="tab-3" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-pink-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำในช่องว่าง</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ ข้อละ 1 คะแนน</p><div id="fill-questions" class="space-y-6"></div></div></div>
+    <div id="tab-4" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-pink-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ | เขียนวิธีทำ แล้วกดดูเฉลย</p><div id="subj-questions" class="space-y-6"></div></div></div>
+
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="submitAll()" class="py-4 px-10 bg-gradient-to-r from-pink-600 to-rose-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม</button>
+        <a href="m-ton-physics.html" class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-list"></i> กลับหน้าหลัก ม.ต้น</a>
+    </div>
+</main>
+
+<div class="modal-overlay" id="score-modal">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+        <div class="bg-gradient-to-r from-pink-600 to-rose-600 p-6 text-white text-center">
+            <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+            <h2 class="text-2xl font-extrabold">ผลการทำแบบฝึกหัด</h2>
+            <p class="text-pink-100 text-sm mt-1">บทที่ 1: การเคลื่อนที่และแรง</p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20)</span><span class="font-bold text-pink-700" id="modal-p1">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (10)</span><span class="font-bold text-pink-700" id="modal-p2">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5)</span><span class="font-bold text-pink-700" id="modal-p3">-</span></div>
+            <div class="bg-pink-50 rounded-xl p-4 text-center mt-2">
+                <p class="text-xs text-pink-600 font-semibold mb-1">คะแนนรวม (ส่วนที่ 1-3)</p>
+                <p class="text-4xl font-extrabold text-pink-700" id="modal-total">0/35</p>
+                <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+            </div>
+        </div>
+        <div class="px-6 pb-6 flex gap-3">
+            <button onclick="closeModal()" class="flex-1 py-3 bg-pink-600 text-white rounded-xl font-bold text-sm hover:bg-pink-700">ดูเฉลยละเอียด</button>
+            <a href="m-ton-physics.html" class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300">กลับหน้าหลัก</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const mcData=[
+    {q:"วัตถุเคลื่อนที่เป็นวงกลมรัศมี 7 เมตร ครบ 1 รอบ ระยะทางและการกระจัดเป็นเท่าใด?",choices:["ระยะทาง 44 m, การกระจัด 0 m","ระยะทาง 0 m, การกระจัด 44 m","ระยะทาง 14 m, การกระจัด 14 m","ระยะทาง 44 m, การกระจัด 14 m"],ans:0},
+    {q:"รถยนต์วิ่งด้วยอัตราเร็วคงตัว 20 m/s ในเวลา 10 วินาที จะได้ระยะทางกี่เมตร?",choices:["200 m","100 m","50 m","20 m"],ans:0},
+    {q:"ปริมาณในข้อใดจัดเป็นปริมาณเวกเตอร์ทั้งหมด?",choices:["ความเร็ว, การกระจัด, แรง","ระยะทาง, อัตราเร็ว, มวล","เวลา, งาน, พลังงาน","อุณหภูมิ, ความหนาแน่น, อัตราเร็ว"],ans:0},
+    {q:"แรงเสียดทานมีทิศทางอย่างไรต่อการเคลื่อนที่ของวัตถุ?",choices:["ตรงข้ามกับทิศทางการเคลื่อนที่","ทิศเดียวกับการเคลื่อนที่","ตั้งฉากกับการเคลื่อนที่","ทำมุม 45 องศา"],ans:0},
+    {q:"แรงลอยตัวที่กระทำต่อวัตถุในของเหลวมีค่าเท่ากับข้อใด?",choices:["น้ำหนักของของเหลวที่มีปริมาตรเท่ากับส่วนที่จม","น้ำหนักทั้งหมดของวัตถุ","ความหนาแน่นของวัตถุ","ความดันบรรยากาศ"],ans:0},
+    {q:"คานยาว 2 เมตร จุดหมุนอยู่ที่ตรงกลาง ออกแรงกดที่ปลายซ้าย 10 N โมเมนต์ของแรงรอบจุดหมุนคือเท่าใด?",choices:["10 N·m","20 N·m","5 N·m","0 N·m"],ans:0},
+    {q:"ข้อใดคือหน่วยมาตรฐาน SI ของแรง?",choices:["นิวตัน (N)","กิโลกรัม (kg)","จูล (J)","พาสคัล (Pa)"],ans:0},
+    {q:"เมื่อวัตถุตกแบบเสรีภายใต้แรงโน้มถ่วง ความเร่ง g มีค่าประมาณเท่าใด?",choices:["9.8 m/s²","0 m/s²","100 m/s²","1 m/s²"],ans:0},
+    {q:"เครื่องอัดไฮดรอลิกทำงานโดยอาศัยหลักการของใคร?",choices:["กฎของพาสคัล","หลักของอาร์คิมีดีส","กฎของนิวตัน","กฎของโอห์ม"],ans:0},
+    {q:"วัตถุมวล 5 kg อยู่บนโลก จะมีน้ำหนักประมาณกี่นิวตัน (g = 10 m/s²)?",choices:["50 N","5 N","0.5 N","500 N"],ans:0},
+    {q:"การกระจัด (Displacement) หมายถึงข้อใด?",choices:["เส้นตรงที่เชื่อมจากจุดเริ่มต้นไปยังจุดสุดท้าย","ความยาวตามเส้นทางที่เคลื่อนที่จริง","อัตราส่วนระหว่างระยะทางต่อเวลา","ความเร็วที่เปลี่ยนแปลงไป"],ans:0},
+    {q:"เมื่อวัตถุมีความเร็วคงตัว ความเร่งของวัตถุมีค่าเท่าใด?",choices:["ศูนย์","คงตัวแต่ไม่เป็นศูนย์","เพิ่มขึ้นเรื่อยๆ","ลดลงเรื่อยๆ"],ans:0},
+    {q:"ข้อใดช่วยลดแรงเสียดทาน?",choices:["การใช้น้ำมันหล่อลื่น","การเพิ่มน้ำหนักวัตถุ","การทำให้ผิวสัมผัสขรุขระ","การใชุยางรถยนต์ที่มีดอกยางลึก"],ans:0},
+    {q:"วัตถุจะจมน้ำเมื่อใด?",choices:["ความหนาแน่นวัตถุ > ความหนาแน่นน้ำ","ความหนาแน่นวัตถุ < ความหนาแน่นน้ำ","ความหนาแน่นวัตถุ = ความหนาแน่นน้ำ","น้ำหนักวัตถุ = แรงลอยตัว"],ans:0},
+    {q:"เครื่องเล่นกระดานหกเป็นตัวอย่างการทำงานของเครื่องกลประเภทใด?",choices:["คาน","รอก","พื้นเอียง","สเกล"],ans:0},
+    {q:"ความดันของเหลวที่ระดับความลึกเดียวกันจะมีค่าเป็นอย่างไร?",choices:["เท่ากันทุกทิศทาง","ด้านบนมากกว่าด้านล่าง","ด้านล่างน้อยกว่าด้านข้าง","แปรผันตามรูปร่างภาชนะ"],ans:0},
+    {q:"ถ้าออกแรง 50 N ดันวัตถุแต่วัตถุไม่เคลื่อนที่ แรงเสียดทานสถิตมีค่ากี่นิวตัน?",choices:["50 N","0 N","มากกว่า 50 N","น้อยกว่า 50 N"],ans:0},
+    {q:"อุปกรณ์ในข้อใดใช้หลักการของโมเมนต์ของแรง?",choices:["กรรไกรตัดกระดาษ","หลอดฉีดยา","เข็มทิศ","บารอมิเตอร์"],ans:0},
+    {q:"ความเร็วเฉลี่ยคำนวณได้จากสูตรใด?",choices:["การกระจัด / เวลาทั้งหมด","ระยะทางทั้งหมด / เวลาทั้งหมด","ความเร็วปลาย - ความเร็วต้น","แรง / มวล"],ans:0},
+    {q:"อัตราส่วนระหว่างมวลต่อปริมาตรเรียกว่าอะไร?",choices:["ความหนาแน่น","ความดัน","โมเมนตัม","ความตึงผิว"],ans:0}
+];
+
+const matchData=[
+    {left:"ระยะทาง",right:"ความยาวตามเส้นทางจริง (สเกลาร์)"},
+    {left:"การกระจัด",right:"เส้นตรงจากจุดเริ่มต้นไปจุดสุดท้าย (เวกเตอร์)"},
+    {left:"อัตราเร็ว",right:"v = s / t"},
+    {left:"ความเร่ง",right:"a = (v - u) / t"},
+    {left:"แรงเสียดทาน",right:"แรงต้านการเคลื่อนที่ของวัตถุ"},
+    {left:"แรงลอยตัว",right:"F_B = ρ_fluid V_sub g"},
+    {left:"โมเมนต์ของแรง",right:"M = F × d"},
+    {left:"ความดันของเหลว",right:"P = ρ g h"},
+    {left:"กฎพาสคัล",right:"ความดันถ่ายทอดในของเหลวปิด"},
+    {left:"น้ำหนัก",right:"W = m g"}
+];
+const matchOptions=["ความยาวตามเส้นทางจริง (สเกลาร์)","เส้นตรงจากจุดเริ่มต้นไปจุดสุดท้าย (เวกเตอร์)","v = s / t","a = (v - u) / t","แรงต้านการเคลื่อนที่ของวัตถุ","F_B = ρ_fluid V_sub g","M = F × d","P = ρ g h","ความดันถ่ายทอดในของเหลวปิด","W = m g"];
+
+const fillData=[
+    {q:"รถวิ่งได้ระยะทาง 100 เมตร ในเวลา 5 วินาที อัตราเร็ว = ___ m/s",unit:"m/s",ans:"20",tol:0.1},
+    {q:"วัตถุมวล 3 kg มีน้ำหนักบนโลก = ___ N (g = 10 m/s²)",unit:"N",ans:"30",tol:0.1},
+    {q:"ออกแรง 15 N กดปลายคานห่างจากจุดหมุน 2 m โมเมนต์ = ___ N·m",unit:"N·m",ans:"30",tol:0.1},
+    {q:"วัตถุมีมวล 200 กรัม ปริมาตร 100 ลบ.ซม. ความหนาแน่น = ___ g/cm³",unit:"g/cm³",ans:"2",tol:0.1},
+    {q:"ความดันใต้น้ำลึก 2 เมตร = ___ Pa (ρ=1000 kg/m³, g=10 m/s²)",unit:"Pa",ans:"20000",tol:100}
+];
+
+const subjData=[
+    {q:"1. รถคันหนึ่งเคลื่อนที่จากหยุดนิ่งจนมีความเร็ว 30 m/s ในเวลา 6 วินาที จงหาความเร่งเฉลี่ยของรถคันนี้",
+    key:"<strong>วิธีทำ:</strong><br>สูตร a = (v - u) / t<br>ความเร็วต้น u = 0 m/s, ความเร็วปลาย v = 30 m/s, เวลา t = 6 s<br>a = (30 - 0) / 6 = <strong>5 m/s²</strong>"},
+    {q:"2. คานยาว 4 เมตร มีจุดหมุนอยู่ตรงกลาง ถ้าแขวนวัตถุหนัก 100 N ที่ปลายซ้าย จะต้องแขวนวัตถุหนักเท่าไรที่ปลายขวาคานจึงจะสมดุล",
+    key:"<strong>วิธีทำ:</strong><br>จากกฎสมดุลโมเมนต์ M_ทวน = M_ตาม<br>ระยะจากจุดหมุนถึงปลายทั้งสองด้าน d₁ = d₂ = 2 m<br>100 × 2 = W × 2 → W = <strong>100 N</strong>"},
+    {q:"3. อธิบายความแตกต่างระหว่าง 'ระยะทาง' และ 'การกระจัด' พร้อมยกตัวอย่าง",
+    key:"<strong>เฉลย:</strong><br>- <strong>ระยะทาง:</strong> เป็นปริมาณสเกลาร์ คือความยาวตามแนวทางที่เคลื่อนที่ได้จริงทั้งหมด<br>- <strong>การกระจัด:</strong> เป็นปริมาณเวกเตอร์ คือเส้นตรงที่ลากจากจุดเริ่มต้นไปยังจุดสุดท้ายมีทิศทางชัดเจน<br><em>ตัวอย่าง:</em> เดินรอบสนามฟุตบอล 1 รอบ ได้ระยะทาง 400 เมตร แต่การกระจัดเป็น 0 เมตร"},
+    {q:"4. วัตถุชิ้นหนึ่งมีปริมาตร 0.005 m³ จมมิดในน้ำ จงหาแรงลอยตัวที่น้ำกระทำต่อวัตถุ (ρ_water = 1000 kg/m³, g = 10 m/s²)",
+    key:"<strong>วิธีทำ:</strong><br>สูตร F_B = ρ_fluid × V_submerged × g<br>F_B = 1000 × 0.005 × 10 = <strong>50 N</strong>"},
+    {q:"5. จงหาความดันเกจใต้น้ำทะเล ณ ระดับความลึก 5 เมตร (ความหนาแน่นน้ำทะเล = 1025 kg/m³, g = 10 m/s²)",
+    key:"<strong>วิธีทำ:</strong><br>สูตร P = ρ × g × h<br>P = 1025 × 10 × 5 = <strong>51,250 Pa (51.25 kPa)</strong>"}
+];
+
+let userAnswers=new Array(20).fill(-1);
+function renderMC(){
+    const c=document.getElementById('mc-questions');
+    mcData.forEach((q,qi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-pink-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi+1}</span>${q.q}</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${q.choices.map((ch,ci)=>`<button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-sm flex items-center gap-3"><span class="w-7 h-7 rounded-full border-2 border-current flex items-center justify-center font-bold font-inter text-xs flex-shrink-0">${ci+1}</span><span>${ch}</span></button>`).join('')}</div>`;
+        c.appendChild(d);
+    });
+}
+function selectMC(qi,ci){
+    if(document.getElementById(`mc-${qi}-0`).classList.contains('correct')||document.getElementById(`mc-${qi}-0`).classList.contains('wrong'))return;
+    const prev=userAnswers[qi];
+    if(prev!==-1)document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+    userAnswers[qi]=ci;
+    document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+}
+function renderMatch(){
+    const c=document.getElementById('match-questions');
+    matchData.forEach((m,mi)=>{
+        const d=document.createElement('div');
+        d.className='flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+        const opts=matchOptions.map(o=>`<option value="${o}">${o}</option>`).join('');
+        d.innerHTML=`<span class="w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">${mi+1}</span><span class="flex-1 text-sm font-medium text-slate-700">${m.left}</span><select class="match-select" id="match-${mi}"><option value="">-- เลือก --</option>${opts}</select>`;
+        c.appendChild(d);
+    });
+}
+function renderFill(){
+    const c=document.getElementById('fill-questions');
+    fillData.forEach((f,fi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-pink-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi+1}</span>${f.q}</p><div class="flex items-center gap-2"><input type="text" class="fill-input flex-1 min-w-0 outline-none" id="fill-${fi}" placeholder="พิมพ์คำตอบ..."><span class="text-sm text-slate-500 whitespace-nowrap">${f.unit}</span><span class="text-sm ml-1" id="fill-icon-${fi}"></span></div>`;
+        c.appendChild(d);
+    });
+}
+function renderSubj(){
+    const c=document.getElementById('subj-questions');
+    subjData.forEach((s,si)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-rose-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si+1}</span>${s.q}</p><textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-pink-400 min-h-[120px] resize-y" id="subj-${si}" placeholder="เขียนวิธีทำที่นี่..."></textarea><div class="answer-key mt-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 leading-relaxed" id="key-${si}">${s.key}</div><button onclick="toggleKey(${si})" class="mt-2 text-xs text-emerald-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}"><i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด</button>`;
+        c.appendChild(d);
+    });
+}
+function toggleKey(si){
+    const k=document.getElementById(`key-${si}`);
+    const b=document.getElementById(`key-btn-${si}`);
+    k.classList.toggle('show');
+    b.innerHTML=k.classList.contains('show')?'<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย':'<i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด';
+}
+function showTab(n){
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById(`tab-${n}`).classList.add('active');
+    document.getElementById(`tab-btn-${n}`).classList.add('active');
+}
+function submitAll(){
+    let p1=0;
+    mcData.forEach((q,qi)=>{
+        const chosen=userAnswers[qi];
+        for(let ci=0;ci<4;ci++){
+            const btn=document.getElementById(`mc-${qi}-${ci}`);
+            btn.classList.remove('selected');
+            if(ci===q.ans)btn.classList.add('correct');
+            else if(ci===chosen&&chosen!==q.ans)btn.classList.add('wrong');
+        }
+        if(chosen===q.ans)p1++;
+    });
+    let p2=0;
+    matchData.forEach((m,mi)=>{
+        const sel=document.getElementById(`match-${mi}`);
+        sel.classList.remove('correct','wrong');
+        if(sel.value===m.right){sel.classList.add('correct');p2++;}else sel.classList.add('wrong');
+    });
+    let p3=0;
+    fillData.forEach((f,fi)=>{
+        const input=document.getElementById(`fill-${fi}`);
+        const icon=document.getElementById(`fill-icon-${fi}`);
+        const val=parseFloat(input.value.trim());
+        const ok=Math.abs(val-parseFloat(f.ans))<=f.tol;
+        input.classList.remove('correct','wrong');
+        if(ok){input.classList.add('correct');icon.textContent='✅';p3++;}else{input.classList.add('wrong');icon.textContent='❌';}
+    });
+    subjData.forEach((_,si)=>document.getElementById(`key-${si}`).classList.add('show'));
+    const total=p1+p2+p3;
+    document.getElementById('modal-p1').textContent=`${p1}/20`;
+    document.getElementById('modal-p2').textContent=`${p2}/10`;
+    document.getElementById('modal-p3').textContent=`${p3}/5`;
+    document.getElementById('modal-total').textContent=`${total}/35`;
+    const pct=Math.round(total/35*100);
+    let grade='',emoji='';
+    if(pct>=80){grade=`ยอดเยี่ยม! (${pct}%)`;emoji='🏆';}
+    else if(pct>=60){grade=`ผ่าน (${pct}%)`;emoji='👍';}
+    else{grade=`ต้องทบทวน (${pct}%)`;emoji='📚';}
+    document.getElementById('modal-grade').textContent=grade;
+    document.getElementById('modal-emoji').textContent=emoji;
+    document.getElementById('score-modal').classList.add('show');
+}
+function closeModal(){document.getElementById('score-modal').classList.remove('show');}
+renderMC();renderMatch();renderFill();renderSubj();
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ 2: พลังงานความร้อน | ฟิสิกส์ จารย์เปา</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','Inter','sans-serif'],inter:['Inter','sans-serif']}}}}</script>
+    <style>
+        .tab-btn{transition:all 0.2s}.tab-btn.active{background:#ea580c;color:white;box-shadow:0 4px 12px rgba(234,88,12,0.3)}
+        .tab-content{display:none}.tab-content.active{display:block}
+        .choice-btn{transition:all 0.2s;cursor:pointer;border:2px solid #e2e8f0}.choice-btn:hover{border-color:#fed7aa;background:#fff7ed}
+        .choice-btn.selected{border-color:#ea580c;background:#fff7ed;color:#c2410c}
+        .choice-btn.correct{border-color:#10b981!important;background:#ecfdf5!important;color:#065f46!important}
+        .choice-btn.wrong{border-color:#ef4444!important;background:#fef2f2!important;color:#991b1b!important}
+        .match-select,.fill-input{border:2px solid #e2e8f0;border-radius:0.5rem;padding:0.4rem 0.6rem}.match-select{font-size:0.8rem;width:100%}.fill-input{font-size:0.9rem}
+        .match-select.correct,.fill-input.correct{border-color:#10b981;background:#ecfdf5}.match-select.wrong,.fill-input.wrong{border-color:#ef4444;background:#fef2f2}
+        .answer-key{display:none}.answer-key.show{display:block}
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}.modal-overlay.show{display:flex}
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-orange-500 to-amber-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg"><i class="fa-solid fa-atom"></i></div>
+            <span class="font-bold text-lg text-slate-900 flex flex-col leading-tight">ฟิสิกส์ จารย์เปา<span class="text-[0.6rem] tracking-widest font-inter text-orange-600">VISUAL EDUCATION HUB</span></span>
+        </div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="index.html" class="text-sm font-medium text-slate-500 hover:text-orange-600">HOME</a>
+            <a href="m-ton-physics.html" class="text-sm font-semibold text-orange-600 border-b-2 border-orange-600">บทเรียน ม.ต้น</a>
+        </nav>
+        <button class="md:hidden text-2xl p-2" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex items-center justify-between mb-6">
+        <a href="m-ton-physics.html" class="inline-flex items-center gap-2 text-sm font-semibold text-orange-600 hover:text-orange-800">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้า ม.ต้น
+        </a>
+        <span class="text-xs text-slate-400 font-inter">M.1-3 CH2 QUIZ ENGINE</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-orange-900 via-amber-800 to-red-950 text-white rounded-3xl p-8 md:p-10 mb-8 shadow-xl relative overflow-hidden">
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-400/30 text-orange-200 px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                <i class="fa-solid fa-fire"></i> บทที่ 2 — วิทย์-ฟิสิกส์ ม.ต้น
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-3">แบบฝึกหัด: พลังงานความร้อน</h1>
+            <p class="text-orange-100 text-sm max-w-2xl leading-relaxed">
+                การขยายตัวของสสาร | ความร้อนจำเพาะ (Q=mcΔT) | ความร้อนแฝง (Q=mL) | สมดุลความร้อน | การถ่ายโอนความร้อน<br>
+                ปรนัย 20 | จับคู่ 10 | เติมคำ 5 | อัตนัย 5 &nbsp;|&nbsp; <strong>คะแนนเต็ม 35</strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-2xl">
+        <button onclick="showTab(1)" class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-1"><i class="fa-solid fa-circle-dot mr-1"></i>ส่วนที่ 1 ปรนัย (20)</button>
+        <button onclick="showTab(2)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-2"><i class="fa-solid fa-link mr-1"></i>ส่วนที่ 2 จับคู่ (10)</button>
+        <button onclick="showTab(3)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-3"><i class="fa-solid fa-pen-to-square mr-1"></i>ส่วนที่ 3 เติมคำ (5)</button>
+        <button onclick="showTab(4)" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-bold text-slate-600" id="tab-btn-4"><i class="fa-solid fa-file-pen mr-1"></i>ส่วนที่ 4 อัตนัย (5)</button>
+    </div>
+
+    <div id="tab-1" class="tab-content active"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-orange-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-circle-dot"></i> ส่วนที่ 1: แบบปรนัย</h2><p class="text-xs text-slate-500 mb-4">20 ข้อ ข้อละ 1 คะแนน</p><div id="mc-questions" class="space-y-6"></div></div></div>
+    <div id="tab-2" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-orange-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-link"></i> ส่วนที่ 2: แบบจับคู่</h2><p class="text-xs text-slate-500 mb-4">10 ข้อ ข้อละ 1 คะแนน</p><div id="match-questions" class="space-y-3"></div></div></div>
+    <div id="tab-3" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-orange-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> ส่วนที่ 3: เติมคำในช่องว่าง</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ ข้อละ 1 คะแนน</p><div id="fill-questions" class="space-y-6"></div></div></div>
+    <div id="tab-4" class="tab-content"><div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm"><h2 class="font-bold text-orange-700 text-base mb-1 flex items-center gap-2"><i class="fa-solid fa-file-pen"></i> ส่วนที่ 4: อัตนัย</h2><p class="text-xs text-slate-500 mb-4">5 ข้อ | เขียนวิธีทำ แล้วกดดูเฉลย</p><div id="subj-questions" class="space-y-6"></div></div></div>
+
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="submitAll()" class="py-4 px-10 bg-gradient-to-r from-orange-600 to-amber-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-xl transition-all text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-check-double"></i> ส่งคำตอบและตรวจคะแนนรวม</button>
+        <a href="m-ton-physics.html" class="py-4 px-10 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-center text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-list"></i> กลับหน้าหลัก ม.ต้น</a>
+    </div>
+</main>
+
+<div class="modal-overlay" id="score-modal">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+        <div class="bg-gradient-to-r from-orange-600 to-amber-600 p-6 text-white text-center">
+            <div class="text-5xl mb-2" id="modal-emoji">🎉</div>
+            <h2 class="text-2xl font-extrabold">ผลการทำแบบฝึกหัด</h2>
+            <p class="text-orange-100 text-sm mt-1">บทที่ 2: พลังงานความร้อน</p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 1 ปรนัย (20)</span><span class="font-bold text-orange-700" id="modal-p1">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 2 จับคู่ (10)</span><span class="font-bold text-orange-700" id="modal-p2">-</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-sm text-slate-600">ส่วนที่ 3 เติมคำ (5)</span><span class="font-bold text-orange-700" id="modal-p3">-</span></div>
+            <div class="bg-orange-50 rounded-xl p-4 text-center mt-2">
+                <p class="text-xs text-orange-600 font-semibold mb-1">คะแนนรวม (ส่วนที่ 1-3)</p>
+                <p class="text-4xl font-extrabold text-orange-700" id="modal-total">0/35</p>
+                <p class="text-sm font-bold mt-1" id="modal-grade">—</p>
+            </div>
+        </div>
+        <div class="px-6 pb-6 flex gap-3">
+            <button onclick="closeModal()" class="flex-1 py-3 bg-orange-600 text-white rounded-xl font-bold text-sm hover:bg-orange-700">ดูเฉลยละเอียด</button>
+            <a href="m-ton-physics.html" class="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm text-center hover:bg-slate-300">กลับหน้าหลัก</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const mcData=[
+    {q:"หน่วยวัดพลังงานความร้อนในระบบ SI คือหน่วยใด?",choices:["จูล (J)","แคลอรี (cal)","องศาเซลเซียส (°C)","เคลวิน (K)"],ans:0},
+    {q:"น้ำมวล 100 กรัม มีอุณหภูมิเพิ่มขึ้นจาก 20 °C เป็น 50 °C จะได้รับความร้อนกี่แคลอรี (กำหนด c_น้ำ = 1 cal/g·°C)?",choices:["3,000 cal","2,000 cal","5,000 cal","100 cal"],ans:0},
+    {q:"ความร้อนที่ทำให้น้ำแข็งมวล 1 กรัม หลอมเหลวเป็นน้ำหมดที่ 0 °C เรียกว่าอะไร?",choices:["ความร้อนแฝงของการหลอมเหลว","ความร้อนจำเพาะ","ความร้อนแฝงของการกลายเป็นไอ","อุณหภูมิสมดุล"],ans:0},
+    {q:"เมื่อหลอดแก้วบรรจุน้ำถูกนำไปเผาไฟจนร้อนจัด จะเกิดการถ่ายโอนความร้อนในน้ำด้วยวิธีใดเป็นหลัก?",choices:["การพาความร้อน","การนำความร้อน","การแผ่รังสี","การสะท้อนความร้อน"],ans:0},
+    {q:"พลังงานความร้อนจากดวงอาทิตย์เดินทางมาถึงโลกด้วยวิธีใด?",choices:["การแผ่รังสีความร้อน","การนำความร้อน","การพาความร้อน","การแพร่ความร้อน"],ans:0},
+    {q:"ข้อใดเป็นตัวนำความร้อนที่ดีที่สุด?",choices:["โลหะทองแดง","แก้ว","ไม้","พลาสติก"],ans:0},
+    {q:"เมื่อวัตถุได้รับความร้อน ปริมาตรของวัตถุส่วนใหญ่จะมีลักษณะอย่างไร?",choices:["ขยายตัว (ปริมาตรเพิ่มขึ้น)","หดตัว (ปริมาตรลดลง)","ปริมาตรเท่าเดิม","มวลเพิ่มขึ้น"],ans:0},
+    {q:"อุณหภูมิ 25 องศาเซลเซียส มีค่าเท่ากับกี่เคลวิน (K)?",choices:["298.15 K","273.15 K","300 K","25 K"],ans:0},
+    {q:"น้ำร้อน 80 °C ผสมกับน้ำเย็น 20 °C อุณหภูมิสุดท้ายหลังสมดุลความร้อนจะเป็นอย่างไร?",choices:["อยู่ระหว่าง 20 °C ถึง 80 °C","มากกว่า 80 °C","น้อยกว่า 20 °C","เท่ากับ 100 °C"],ans:0},
+    {q:"การติดตั้งเครื่องปรับอากาศไว้บริเวณส่วนบนของห้อง อาศัยหลักการถ่ายโอนความร้อนแบบใด?",choices:["การพาความร้อน (อากาศเย็นจมลง อากาศร้อนลอยขึ้น)","การนำความร้อน","การแผ่รังสี","การขยายตัวของอากาศ"],ans:0},
+    {q:"เหตุใดรอยต่อของสะพานคอนกรีตหรือรางรถไฟจึงต้องเว้นช่องว่างไว้เล็กน้อย?",choices:["เพื่อให้รองรับการขยายตัวของวัสดุเมื่อร้อนขึ้น","เพื่อความสวยงาม","เพื่อลดแรงเสียดทาน","เพื่อระบายน้ำฝน"],ans:0},
+    {q:"1 แคลอรี (cal) มีค่าประมาณกี่จูล (J)?",choices:["4.186 J","10 J","100 J","0.24 J"],ans:0},
+    {q:"ความร้อนแฝงของการกลายเป็นไอของน้ำมีค่ากี่ cal/g?",choices:["540 cal/g","80 cal/g","1 cal/g","100 cal/g"],ans:0},
+    {q:"เมื่อต้มน้ำจนเดือดกลายเป็นไอที่ 100 °C ขณะที่กำลังกลายเป็นไอ อุณหภูมิของน้ำจะเป็นอย่างไร?",choices:["คงที่ที่ 100 °C","ค่อยๆ เพิ่มขึ้นเกิน 100 °C","ลดลงเหลือ 90 °C","แปรผันตามขนาดภาชนะ"],ans:0},
+    {q:"ฉนวนความร้อนมีสมบัติอย่างไร?",choices:["นำความร้อนได้ไม่ดี","นำความร้อนได้ดีมาก","แผ่รังสีความร้อนได้เร็วที่สุด","ขยายตัวเมื่อเย็นลง"],ans:0},
+    {q:"ลมบก-ลมทะเล เกิดขึ้นจากการถ่ายโอนความร้อนประเภทใด?",choices:["การพาความร้อนของอากาศ","การนำความร้อนของพื้นดิน","การแผ่รังสีของน้ำทะเล","การกลั่นตัวของไอน้ำ"],ans:0},
+    {q:"ชุดอวกาศของนักบินอวกาศมีสีขาวเงาเพื่อวัตถุประสงค์ใดเป็นหลัก?",choices:["เพื่อลดการดูดกลืนการแผ่รังสีความร้อนจากดวงอาทิตย์","เพื่อให้นำความร้อนได้ดี","เพื่อพาความร้อนออกนอกชุด","เพื่อความสวยงามในอวกาศ"],ans:0},
+    {q:"สูตร Q = mL ใช้คำนวณในกรณีใด?",choices:["การเปลี่ยนสถานะโดยอุณหภูมิคงที่","การเปลี่ยนอุณหภูมิโดยสถานะคงที่","การหาอุณหภูมิสมดุล","การหาการขยายตัวเชิงเส้น"],ans:0},
+    {q:"สิ่งใดไม่ส่งผลต่อปริมาณความร้อนที่วัตถุได้รับเมื่ออุณหภูมิเปลี่ยนไป (Q = mcΔT)?",choices:["สีของวัตถุ","มวลของวัตถุ (m)","ความร้อนจำเพาะ (c)","อุณหภูมิที่เปลี่ยนไป (ΔT)"],ans:0},
+    {q:"เครื่องมือที่ใช้วัดอุณหภูมิเรียกว่าอะไร?",choices:["เทอร์โมมิเตอร์","บารอมิเตอร์","แอมมิเตอร์","โวลต์มิเตอร์"],ans:0}
+];
+
+const matchData=[
+    {left:"Q = mcΔT",right:"ใช้คำนวณความร้อนเมื่ออุณหภูมิเปลี่ยน"},
+    {left:"Q = mL",right:"ใช้คำนวณความร้อนเมื่อเปลี่ยนสถานะ"},
+    {left:"การนำความร้อน",right:"ถ่ายโอนผ่านของแข็งโดยตัวกลางไม่เคลื่อนที่"},
+    {left:"การพาความร้อน",right:"ถ่ายโอนโดยอนุภาคของเหลว/แก๊สเคลื่อนที่ไปด้วย"},
+    {left:"การแผ่รังสี",right:"ถ่ายโอนโดยไม่อาศัยตัวกลาง"},
+    {left:"ความร้อนแฝงการหลอมเหลวของน้ำ",right:"80 cal/g"},
+    {left:"ความร้อนแฝงการกลายเป็นไอของน้ำ",right:"540 cal/g"},
+    {left:"0 องศาเซลเซียส (°C)",right:"273.15 เคลวิน (K)"},
+    {left:"สมดุลความร้อน",right:"Q_ลด = Q_เพิ่ม"},
+    {left:"ความร้อนจำเพาะของน้ำ (c)",right:"1 cal/g·°C (4,186 J/kg·K)"}
+];
+const matchOptions=["ใช้คำนวณความร้อนเมื่ออุณหภูมิเปลี่ยน","ใช้คำนวณความร้อนเมื่อเปลี่ยนสถานะ","ถ่ายโอนผ่านของแข็งโดยตัวกลางไม่เคลื่อนที่","ถ่ายโอนโดยอนุภาคของเหลว/แก๊สเคลื่อนที่ไปด้วย","ถ่ายโอนโดยไม่อาศัยตัวกลาง","80 cal/g","540 cal/g","273.15 เคลวิน (K)","Q_ลด = Q_เพิ่ม","1 cal/g·°C (4,186 J/kg·K)"];
+
+const fillData=[
+    {q:"น้ำ 200 g อุณหภูมิเพิ่มขึ้น 10 °C ได้รับความร้อน Q = ___ cal (c=1 cal/g·°C)",unit:"cal",ans:"2000",tol:10},
+    {q:"น้ำแข็ง 50 g ละลายเป็นน้ำหมดที่ 0 °C ต้องใช้ความร้อน Q = ___ cal (L=80 cal/g)",unit:"cal",ans:"4000",tol:10},
+    {q:"น้ำเดือด 100 g กลายเป็นไอหมดที่ 100 °C ต้องใช้ความร้อน Q = ___ cal (L=540 cal/g)",unit:"cal",ans:"54000",tol:100},
+    {q:"อุณหภูมิ 100 °C มีค่าเท่ากับ ___ K",unit:"K",ans:"373",tol:1},
+    {q:"น้ำร้อน 100 g ที่ 80 °C ผสมน้ำเย็น 100 g ที่ 20 °C อุณหภูมิสมดุล = ___ °C",unit:"°C",ans:"50",tol:1}
+];
+
+const subjData=[
+    {q:"1. ต้องใช้พลังงานความร้อนกี่แคลอรี ในการทำให้น้ำมวล 500 กรัม มีอุณหภูมิเพิ่มขึ้นจาก 25 °C เป็น 75 °C (กำหนด c_น้ำ = 1 cal/g·°C)",
+    key:"<strong>วิธีทำ:</strong><br>สูตร Q = m · c · ΔT<br>มวล m = 500 g, c = 1 cal/g·°C, ΔT = 75 - 25 = 50 °C<br>Q = 500 × 1 × 50 = <strong>25,000 cal (25 kcal)</strong>"},
+    {q:"2. จงหาปริมาณความร้อนทั้งหมดที่ใช้ในการเปลี่ยนน้ำแข็งมวล 100 กรัม อุณหภูมิ 0 °C ให้กลายเป็นน้ำหมดที่อุณหภูมิ 20 °C (กำหนด L_หลอมเหลว = 80 cal/g, c_น้ำ = 1 cal/g·°C)",
+    key:"<strong>วิธีทำ:</strong><br>1) ความร้อนเปลี่ยนสถานะ (0°C น้ำแข็ง → 0°C น้ำ): Q₁ = m·L = 100 × 80 = 8,000 cal<br>2) ความร้อนเปลี่ยนอุณหภูมิ (0°C น้ำ → 20°C น้ำ): Q₂ = m·c·ΔT = 100 × 1 × (20 - 0) = 2,000 cal<br>ความร้อนรวม Q_total = Q₁ + Q₂ = 8,000 + 2,000 = <strong>10,000 cal (10 kcal)</strong>"},
+    {q:"3. ผสมน้ำร้อนมวล 200 กรัม อุณหภูมิ 90 °C เข้ากับน้ำเย็นมวล 300 กรัม อุณหภูมิ 20 °C จงหาอุณหภูมิสุดท้ายหลังสมดุลความร้อน",
+    key:"<strong>วิธีทำ:</strong><br>จากกฎสมดุลความร้อน Q_ลด = Q_เพิ่ม<br>m₁·c·(T_ร้อน - T) = m₂·c·(T - T_เย็น)<br>200 × 1 × (90 - T) = 300 × 1 × (T - 20)<br>18000 - 200T = 300T - 6000<br>24000 = 500T → T = <strong>48 °C</strong>"},
+    {q:"4. อธิบายวิธีการถ่ายโอนความร้อนทั้ง 3 แบบ (การนำ, การพา, การแผ่รังสี) พร้อมยกตัวอย่างในชีวิตประจำวันอย่างละ 1 ตัวอย่าง",
+    key:"<strong>เฉลย:</strong><br>1. <strong>การนำความร้อน:</strong> ถ่ายโอนผ่านของแข็งโดยอนุภาคไม่เคลื่อนที่ เช่น ด้ามช้อนโลหะร้อนเมื่อแช่ในชามแกงร้อน<br>2. <strong>การพาความร้อน:</strong> ถ่ายโอนโดยอนุภาคของไหลเคลื่อนที่ไปด้วย เช่น การต้มน้ำแล้วน้ำร้อนด้านล่างลอยขึ้นด้านบน<br>3. <strong>การแผ่รังสีความร้อน:</strong> ถ่ายโอนไม่อาศัยตัวกลาง เช่น ความร้อนจากดวงอาทิตย์แผ่มายังโลก"},
+    {q:"5. เหตุใดเมื่อเราทาแอลกอฮอล์ลงบนผิวหนังแล้วจึงรู้สึกเย็นสบาย อธิบายตามหลักการทางฟิสิกส์เรื่องความร้อนแฝง",
+    key:"<strong>เฉลย:</strong><br>เนื่องจากแอลกอฮอล์ระเหยได้ง่าย เมื่อทาลงบนผิวหนัง แอลกอฮอล์จะดึงพลังงานความร้อน (ความร้อนแฝงของการกลายเป็นไอ) จากผิวหนังของเราไปใช้ในการเปลี่ยนสถานะจากของเหลวกลายเป็นไอ ทำให้บริเวณผิวหนังเสียความร้อน อุณหภูมิจึงลดลงและรู้สึกเย็นสบาย"}
+];
+
+let userAnswers=new Array(20).fill(-1);
+function renderMC(){
+    const c=document.getElementById('mc-questions');
+    mcData.forEach((q,qi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-orange-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${qi+1}</span>${q.q}</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${q.choices.map((ch,ci)=>`<button onclick="selectMC(${qi},${ci})" id="mc-${qi}-${ci}" class="choice-btn text-left p-3 rounded-xl text-sm flex items-center gap-3"><span class="w-7 h-7 rounded-full border-2 border-current flex items-center justify-center font-bold font-inter text-xs flex-shrink-0">${ci+1}</span><span>${ch}</span></button>`).join('')}</div>`;
+        c.appendChild(d);
+    });
+}
+function selectMC(qi,ci){
+    if(document.getElementById(`mc-${qi}-0`).classList.contains('correct')||document.getElementById(`mc-${qi}-0`).classList.contains('wrong'))return;
+    const prev=userAnswers[qi];
+    if(prev!==-1)document.getElementById(`mc-${qi}-${prev}`).classList.remove('selected');
+    userAnswers[qi]=ci;
+    document.getElementById(`mc-${qi}-${ci}`).classList.add('selected');
+}
+function renderMatch(){
+    const c=document.getElementById('match-questions');
+    matchData.forEach((m,mi)=>{
+        const d=document.createElement('div');
+        d.className='flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200';
+        const opts=matchOptions.map(o=>`<option value="${o}">${o}</option>`).join('');
+        d.innerHTML=`<span class="w-6 h-6 bg-orange-600 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">${mi+1}</span><span class="flex-1 text-sm font-medium text-slate-700">${m.left}</span><select class="match-select" id="match-${mi}"><option value="">-- เลือก --</option>${opts}</select>`;
+        c.appendChild(d);
+    });
+}
+function renderFill(){
+    const c=document.getElementById('fill-questions');
+    fillData.forEach((f,fi)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-orange-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${fi+1}</span>${f.q}</p><div class="flex items-center gap-2"><input type="text" class="fill-input flex-1 min-w-0 outline-none" id="fill-${fi}" placeholder="พิมพ์คำตอบ..."><span class="text-sm text-slate-500 whitespace-nowrap">${f.unit}</span><span class="text-sm ml-1" id="fill-icon-${fi}"></span></div>`;
+        c.appendChild(d);
+    });
+}
+function renderSubj(){
+    const c=document.getElementById('subj-questions');
+    subjData.forEach((s,si)=>{
+        const d=document.createElement('div');
+        d.className='p-4 bg-slate-50 rounded-xl border border-slate-200';
+        d.innerHTML=`<p class="font-semibold text-slate-800 text-sm mb-3"><span class="inline-flex w-7 h-7 bg-amber-600 text-white rounded-full items-center justify-center font-bold font-inter text-xs mr-2">${si+1}</span>${s.q}</p><textarea class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-orange-400 min-h-[120px] resize-y" id="subj-${si}" placeholder="เขียนวิธีทำที่นี่..."></textarea><div class="answer-key mt-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 leading-relaxed" id="key-${si}">${s.key}</div><button onclick="toggleKey(${si})" class="mt-2 text-xs text-emerald-700 font-semibold hover:underline flex items-center gap-1" id="key-btn-${si}"><i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด</button>`;
+        c.appendChild(d);
+    });
+}
+function toggleKey(si){
+    const k=document.getElementById(`key-${si}`);
+    const b=document.getElementById(`key-btn-${si}`);
+    k.classList.toggle('show');
+    b.innerHTML=k.classList.contains('show')?'<i class="fa-solid fa-eye-slash"></i> ซ่อนเฉลย':'<i class="fa-solid fa-eye"></i> แสดงแนวการคิด/เฉลยละเอียด';
+}
+function showTab(n){
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById(`tab-${n}`).classList.add('active');
+    document.getElementById(`tab-btn-${n}`).classList.add('active');
+}
+function submitAll(){
+    let p1=0;
+    mcData.forEach((q,qi)=>{
+        const chosen=userAnswers[qi];
+        for(let ci=0;ci<4;ci++){
+            const btn=document.getElementById(`mc-${qi}-${ci}`);
+            btn.classList.remove('selected');
+            if(ci===q.ans)btn.classList.add('correct');
+            else if(ci===chosen&&chosen!==q.ans)btn.classList.add('wrong');
+        }
+        if(chosen===q.ans)p1++;
+    });
+    let p2=0;
+    matchData.forEach((m,mi)=>{
+        const sel=document.getElementById(`match-${mi}`);
+        sel.classList.remove('correct','wrong');
+        if(sel.value===m.right){sel.classList.add('correct');p2++;}else sel.classList.add('wrong');
+    });
+    let p3=0;
+    fillData.forEach((f,fi)=>{
+        const input=document.getElementById(`fill-${fi}`);
+        const icon=document.getElementById(`fill-icon-${fi}`);
+        const val=parseFloat(input.value.trim());
+        const ok=Math.abs(val-parseFloat(f.ans))<=f.tol;
+        input.classList.remove('correct','wrong');
+        if(ok){input.classList.add('correct');icon.textContent='✅';p3++;}else{input.classList.add('wrong');icon.textContent='❌';}
+    });
+    subjData.forEach((_,si)=>document.getElementById(`key-${si}`).classList.add('show'));
+    const total=p1+p2+p3;
+    document.getElementById('modal-p1').textContent=`${p1}/20`;
+    document.getElementById('modal-p2').textContent=`${p2}/10`;
+    document.getElementById('modal-p3').textContent=`${p3}/5`;
+    document.getElementById('modal-total').textContent=`${total}/35`;
+    const pct=Math.round(total/35*100);
+    let grade='',emoji='';
+    if(pct>=80){grade=`ยอดเยี่ยม! (${pct}%)`;emoji='🏆';}
+    else if(pct>=60){grade=`ผ่าน (${pct}%)`;emoji='👍';}
+    else{grade=`ต้องทบทวน (${pct}%)`;emoji='📚';}
+    document.getElementById('modal-grade').textContent=grade;
+    document.getElementById('modal-emoji').textContent=emoji;
+    document.getElementById('score-modal').classList.add('show');
+}
+function closeModal(){document.getElementById('score-modal').classList.remove('show');}
+renderMC();renderMatch();renderFill();renderSubj();
+</script>
+</body>
+</html>
